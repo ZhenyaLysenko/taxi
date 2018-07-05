@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'ProximaNovaThin';
+}
+@font-face {
+  font-family: "ProximaNovaRegular";
+  src: url(/../../public/fonts/ProximaNovaCondensedRegular.otf);
+}
+@font-face {
+  font-family: "ProximaNovaThin";
+  src: url(/../../public/fonts/ProximaNovaThin.ttf);
+}

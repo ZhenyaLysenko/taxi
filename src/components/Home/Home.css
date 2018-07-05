@@ -1,0 +1,42 @@
+.banner {
+  background-image: url(../../../public/Home/home_bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 700px;
+  max-width: 100%;
+  color: #fff;
+}
+.inner {
+  text-align: center;
+  padding: 100px 0;
+}
+.banner_title {
+  margin: 0;
+  padding: 0;
+  font-size: 7.1rem;
+  font-weight: 300;
+}
+.yellow_span {
+  color: #faa71a;
+}
+.banner_sign {
+  font-size: 1.6rem;
+}
+.bannerBtn {
+  margin: 30px 70px;
+  background: none;
+  border: none;
+  font-size: 3rem;
+  color: #fff;
+  font-family: 'ProximaNovaThin';
+  outline: none;
+  cursor: pointer;
+}
+.rideBtn {
+  color: #faa71a;
+  border: 1px solid #faa71a;
+}
+.driveBtn {
+  border: 1px solid #fff;
+}
