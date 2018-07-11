@@ -58,6 +58,7 @@
 .why__h1 {
   font-size: 3.5rem;
   color: #474747;
+  text-align: center;
 }
 .yellow_border {
   height: 6px;
@@ -87,7 +88,7 @@
   background-position: center;
   min-height: 600px;
   max-width: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.6);
   background-blend-mode: darken;
 }
 .becomeDriver__h2 {
@@ -97,7 +98,85 @@
 .whiteSpan {
   color: #fff;
 }
-
+.slideshow {
+  overflow: hidden;
+  min-height: 100px;
+  width: 728px;
+  margin: 0 auto;
+  text-align: center;
+}
+.slide_wrapper {
+  width: 2912px;
+  -webkit-animation: slide 25s ease infinite;
+}
+.slide {
+  float: left;
+  min-height: 100px;
+  width: 728px;
+}
+.slide_number {
+  margin: 30px;
+}
+.slider__sign {
+  font-family: "ProximaNovaItalicThin";
+}
+.slider__sign_name {
+  font-family: "ProximaNovaItalicReg";
+}
+@-webkit-keyframes slide {
+  20% {margin-left: 0px;}
+  30% {margin-left: -728px;}
+  50% {margin-left: -728px;}
+  60% {margin-left: -1456px;}
+  70% {margin-left: -1456px;}
+  80% {margin-left: -2184px;}
+  90% {margin-left: -2184px;}
+}
+.slide_numberDisplayBlock {
+  display: none;
+  margin: 30px;
+  text-align: center;
+}
+.readMore {
+  background-image: url(../../../public/Home/readMore.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 600px;
+  max-width: 100%;
+  background-color: rgba(0,0,0,0.8);
+  background-blend-mode: darken;
+  text-align: center;
+}
+.readMore__h1 {
+  color: #fff;
+  font-size: 3.5rem;
+  padding-top: 100px;
+}
+.getItOnImg {
+  max-width: 230px;
+  margin: 40px;
+}
+.readMore .flex {
+  justify-content: center;
+  align-items: center;
+}
+.socialImg {
+  width: 30px;
+}
+.socialIcon {
+  margin: 0 15px;
+  padding: 10px;
+  border: 1px solid transparent;
+}
+.socialIcon:hover {
+  border: 1px solid #fff;
+  transition: 0.2s;
+}
+.readMore__h2 {
+  color: #fff;
+  font-size: 2rem;
+}
 
 @media only screen and (max-width: 800px) {
     .flex {
@@ -109,5 +188,11 @@
     }
     .becomeDriver .bannerBtn {
       font-size: 2rem;
+    }
+    .slideshow {
+      display: none;
+    }
+    .slide_numberDisplayBlock {
+      display: block;
     }
 }

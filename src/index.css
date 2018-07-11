@@ -12,3 +12,11 @@ body {
   font-family: "ProximaNovaThin";
   src: url(/../../public/fonts/ProximaNovaThin.ttf);
 }
+@font-face {
+  font-family: "ProximaNovaItalicReg";
+  src: url(/../../public/fonts/Proxima-Nova-Reg-It.otf);
+}
+@font-face {
+  font-family: "ProximaNovaItalicThin";
+  src: url(/../../public/fonts/Proxima-Nova-Thin-It.otf);
+}
