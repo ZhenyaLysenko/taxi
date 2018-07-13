@@ -17,6 +17,7 @@ class Home extends Component {
 
             <div className={style.howItWorks}>
                 <h1 className={style.why__h1}>How <span className={style.yellow_span}>it</span> works ?</h1>
+                <div className={style.yellow_border}></div>
                 <div className={style.flexHowItWorks}>
                     <div className={style.howItWorksFlexItem}>
                         <h2 className={style.howItWorks__h2}>For Riders</h2>
@@ -116,58 +117,8 @@ class Home extends Component {
               </div>
             </div>
 
-            <div className={style.readMore}>
-                <h1 className={style.readMore__h1}>Try more in our <span className={style.yellow_span}>app</span></h1>
-                <div className={style.yellow_border}></div>
-                <div className={style.flex}>
-                    <div>
-                        <a href="#">
-                            <img className={style.getItOnImg} src="../../public/Home/get-it-on-google-play.png" alt="get-it-on-google-play"/>
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#">
-                            <img className={style.getItOnImg} src="../../public/Home/app-store-button.png" alt="get-it-on-google-play"/>
-                        </a>
-                    </div>
-                </div>
-                <h2 className={style.readMore__h2}>Go in<span className={style.yellow_span}> social</span></h2>
-                <div className={style.flexIcons}>
-                    <div className={style.socialIcon}>
-                        <a href="#">
-                            <img className={style.socialImg} src="../../public/Home/twitter.png" alt="twitter"/>
-                        </a>
-                    </div>
-                    <div className={style.socialIcon}>
-                        <a href="#">
-                            <img className={style.socialImg} src="../../public/Home/facebook.png" alt="facebook"/>
-                        </a>
-                    </div>
-                    <div className={style.socialIcon}>
-                        <a href="#">
-                            <img className={style.socialImg} src="../../public/Home/instagram.png" alt="instagram"/>
-                        </a>
-                    </div>
-                    <div className={style.socialIcon}>
-                        <a href="#">
-                            <img className={style.socialImg} src="../../public/Home/linkedin.png" alt="linkedin"/>
-                        </a>
-                    </div>
-                    <div className={style.socialIcon}>
-                        <a href="#">
-                            <img className={style.socialImg} src="../../public/Home/reddit.png" alt="reddit"/>
-                        </a>
-                    </div>
-                    <div className={style.socialIcon}>
-                        <a href="#">
-                            <img className={style.socialImg} src="../../public/Home/telegram.png" alt="telegram"/>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
             <div className={style.review}>
-                <h1 className={style.why__h1}>Read our drivers review</h1>
+                <h1 className={style.why__h1}>Read our drivers reviews</h1>
                 <div className={style.yellow_border}></div>
                 <div className={style.slide_numberDisplayBlock}>
                     <p className={style.slider__p}>
@@ -233,6 +184,57 @@ class Home extends Component {
                   </div>
                 </div>
             </div>
+
+            <div className={style.readMore}>
+                <h1 className={style.readMore__h1}>Try more in our <span className={style.yellow_span}>app</span></h1>
+                <div className={style.yellow_border}></div>
+                <div className={style.flex}>
+                    <div>
+                        <a href="#">
+                            <img className={style.getItOnImg} src="../../public/Home/get-it-on-google-play.png" alt="get-it-on-google-play"/>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#">
+                            <img className={style.getItOnImg} src="../../public/Home/app-store-button.png" alt="get-it-on-google-play"/>
+                        </a>
+                    </div>
+                </div>
+                <h2 className={style.readMore__h2}>Go in<span className={style.yellow_span}> social</span></h2>
+                <div className={style.flexIcons}>
+                    <div className={style.socialIcon}>
+                        <a href="#">
+                            <img className={style.socialImg} src="../../public/Home/twitter.png" alt="twitter"/>
+                        </a>
+                    </div>
+                    <div className={style.socialIcon}>
+                        <a href="#">
+                            <img className={style.socialImg} src="../../public/Home/facebook.png" alt="facebook"/>
+                        </a>
+                    </div>
+                    <div className={style.socialIcon}>
+                        <a href="#">
+                            <img className={style.socialImg} src="../../public/Home/instagram.png" alt="instagram"/>
+                        </a>
+                    </div>
+                    <div className={style.socialIcon}>
+                        <a href="#">
+                            <img className={style.socialImg} src="../../public/Home/linkedin.png" alt="linkedin"/>
+                        </a>
+                    </div>
+                    <div className={style.socialIcon}>
+                        <a href="#">
+                            <img className={style.socialImg} src="../../public/Home/reddit.png" alt="reddit"/>
+                        </a>
+                    </div>
+                    <div className={style.socialIcon}>
+                        <a href="#">
+                            <img className={style.socialImg} src="../../public/Home/telegram.png" alt="telegram"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
           </div>
           );
     }

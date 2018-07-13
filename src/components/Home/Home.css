@@ -13,7 +13,7 @@
 }
 .inner {
   text-align: center;
-  padding: 100px 0;
+  padding: 150px 0;
 }
 .banner_title {
   margin: 0;
@@ -122,6 +122,8 @@
   color: #fff;
 }
 .why {
+  border-bottom: 2px solid #dedede;
+  padding-bottom: 50px;
   text-align: center;
 }
 .why__h1 {
@@ -148,6 +150,31 @@
 }
 .why__p {
   line-height: 1.5;
+}
+.slideshow {
+  overflow: hidden;
+  min-height: 100px;
+  width: 728px;
+  margin: 0 auto;
+  text-align: center;
+}
+.slide_wrapper {
+  width: 2912px;
+  -webkit-animation: slide 25s ease infinite;
+}
+.slide {
+  float: left;
+  min-height: 100px;
+  width: 728px;
+}
+.slide_number {
+  margin: 30px;
+}
+.slider__sign {
+  font-family: "ProximaNovaItalicThin";
+}
+.slider__sign_name {
+  font-family: "ProximaNovaItalicReg";
 }
 .readMore {
   background-image: url(../../../public/Home/readMore.jpg);
@@ -193,31 +220,6 @@
 .readMore__h2 {
   color: #fff;
   font-size: 2rem;
-}
-.slideshow {
-  overflow: hidden;
-  min-height: 100px;
-  width: 728px;
-  margin: 0 auto;
-  text-align: center;
-}
-.slide_wrapper {
-  width: 2912px;
-  -webkit-animation: slide 25s ease infinite;
-}
-.slide {
-  float: left;
-  min-height: 100px;
-  width: 728px;
-}
-.slide_number {
-  margin: 30px;
-}
-.slider__sign {
-  font-family: "ProximaNovaItalicThin";
-}
-.slider__sign_name {
-  font-family: "ProximaNovaItalicReg";
 }
 @-webkit-keyframes slide {
   20% {margin-left: 0px;}

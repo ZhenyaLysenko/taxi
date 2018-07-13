@@ -1,0 +1,73 @@
+.header {
+  min-height: 50px;
+  background-color: #2b2929;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  color: #fff;
+}
+.headerInner {
+  padding: 0 100px;
+}
+.headerFlex {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.logo, .sign_in {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-basis: 30%;
+}
+.rideDrive {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.rideDriveItem {
+  margin: 0 20px;
+  border-bottom: 3px solid transparent;
+}
+.rideDriveItem__a {
+  padding: 20px 0;
+}
+.rideDriveItem__a:hover {
+  border-bottom: 3px solid #fff;
+}
+.active {
+  border-bottom: 3px solid #fff;
+}
+.yellow_span {
+  color: #faa71a;
+}
+.headerLogo__a:hover .toggle_span {
+  color: #faa71a;
+  transition: 0.2s;
+}
+.headerLogo__a:hover .yellow_span {
+  color: #fff;
+  transition: 0.3s;
+}
+.logo a {
+  text-decoration: none;
+  color: #fff;
+}
+.homeBtn, .bannerBtn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: 'ProximaNovaThin';
+  outline: none;
+  cursor: pointer;
+}
+.bannerBtn {
+  font-size: 1.2rem;
+}
+.sign_in__block__a {
+  padding: 20px 0;
+}
+.sign_in__block__a:hover {
+  border-bottom: 3px solid #fff;
+}
