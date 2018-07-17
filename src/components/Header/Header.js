@@ -9,30 +9,69 @@ class Header extends Component {
             <div className={style.headerInner}>
                 <div className={style.headerFlex}>
                     <div className={style.logo}>
-                        <a href="#" className={style.headerLogo__a}>
-                            <Link to="/home"><button className={style.homeBtn}>
-                                <h1><span className={style.yellow_span}>Taxi</span><span className={style.toggle_span}>Coin</span></h1>
-                            </button></Link>
-                        </a>
+                        <Link to="/home" className={style.headerLogo__a}><button className={style.homeBtn}>
+                            <h1><span className={style.yellow_span}>Taxi</span><span className={style.toggle_span}>Coin</span></h1>
+                        </button></Link>
                         <div className={style.rideDrive}>
                             <div className={style.rideDriveItem}>
-                                <NavLink to="/ride" activeClassName={style.active} className={style.rideDriveItem__a}><button className={style.bannerBtn + " " + style.driveBtn}>
-                                    Ride
-                                </button></NavLink>
+                                <NavLink to="/ride" activeClassName={style.active} className={style.rideDriveItem__a}><button className={style.bannerBtn + " " + style.driveBtn}>Ride</button></NavLink>
                             </div>
                             <div className={style.rideDriveItem}>
-                                <a href="#">
-                                    <NavLink to="/drive" activeClassName={style.active} className={style.rideDriveItem__a}><button className={style.bannerBtn + " " + style.driveBtn}>Drive</button></NavLink>
-                                </a>
+                                <NavLink to="/drive" activeClassName={style.active} className={style.rideDriveItem__a}><button className={style.bannerBtn + " " + style.driveBtn}>Drive</button></NavLink>
                             </div>
                         </div>
                     </div>
                     <div className={style.sign_in}>
                         <div className={style.rideDriveItem + " " + style.sign_in__block}>
-                            <a href="#">
-                                <NavLink to="/sign-in" activeClassName={style.active} className={style.sign_in__block__a}><button className={style.bannerBtn + " " + style.driveBtn}>SIGN IN</button></NavLink>
-                            </a>
+                            <NavLink to="/sign-in" activeClassName={style.active} className={style.sign_in__block__a}><button className={style.bannerBtn + " " + style.driveBtn}>SIGN IN</button></NavLink>
                         </div>
+                        <div className={style.rideDriveItem}>
+                            <NavLink to="/"><button className={style.bannerBtn + " " + style.becomeDriverBtn}>BECOME A DRIVER</button></NavLink>
+                        </div>
+                          <div id="menuToggle">
+                            <input type="checkbox" />
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <ul id="menu">
+                              <a href="#"><li>SIGN IN</li></a>
+                              <a href="#"><li>RIDE</li></a>
+                              <a href="#"><li>DRIVE</li></a>
+                              <h2 id="readMore__h2">Go in<span id="yellow_span"> social</span></h2>
+                              <div id="flexIcons">
+                                  <div id="socialIcon">
+                                      <a href="#">
+                                          <img id="socialImg" src="../../public/Home/twitter.png" alt="twitter"/>
+                                      </a>
+                                  </div>
+                                  <div id="socialIcon">
+                                      <a href="#">
+                                          <img id="socialImg" src="../../public/Home/facebook.png" alt="facebook"/>
+                                      </a>
+                                  </div>
+                                  <div id="socialIcon">
+                                      <a href="#">
+                                          <img id="socialImg" src="../../public/Home/instagram.png" alt="instagram"/>
+                                      </a>
+                                  </div>
+                                  <div id="socialIcon">
+                                      <a href="#">
+                                          <img id="socialImg" src="../../public/Home/linkedin.png" alt="linkedin"/>
+                                      </a>
+                                  </div>
+                                  <div id="socialIcon">
+                                      <a href="#">
+                                          <img id="socialImg" src="../../public/Home/reddit.png" alt="reddit"/>
+                                      </a>
+                                  </div>
+                                  <div id="socialIcon">
+                                      <a href="#">
+                                          <img id="socialImg" src="../../public/Home/telegram.png" alt="telegram"/>
+                                      </a>
+                                  </div>
+                              </div>
+                            </ul>
+                          </div>
                     </div>
                 </div>
             </div>
