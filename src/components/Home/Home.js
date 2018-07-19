@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 import style from './Home.css';
+import Header from '../Header/Header';
 
 class Home extends Component {
     render() {
         return(
           <div>
+            <Header></Header>
             <div className={style.banner}>
               <div className={style.inner}>
                 <h1 className={style.banner_title}><span className={style.yellow_span}>TAXI</span> Coin</h1>

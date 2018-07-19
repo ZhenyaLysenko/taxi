@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-around;
 }
+a {
+  text-decoration: none;
+}
 .banner {
   background-image: url(../../../public/Home/home_bg.jpg);
   background-repeat: no-repeat;

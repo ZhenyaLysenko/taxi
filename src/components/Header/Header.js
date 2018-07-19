@@ -34,10 +34,10 @@ class Header extends Component {
                             <span></span>
                             <span></span>
                             <ul id="menu">
-                              <a href="#"><li>SIGN IN</li></a>
-                              <a href="#"><li>RIDE</li></a>
-                              <a href="#"><li>DRIVE</li></a>
-                              <h2 id="readMore__h2">Go in<span id="yellow_span"> social</span></h2>
+                              <NavLink to="/sign-in"><li>SIGN IN</li></NavLink>
+                              <NavLink to="/ride"><li>RIDE</li></NavLink>
+                              <NavLink to="/drive"><li>DRIVE</li></NavLink>
+                              <h2 id="readMore__h2">Go in <span id="yellow_span">social</span></h2>
                               <div id="flexIcons">
                                   <div id="socialIcon">
                                       <a href="#">
