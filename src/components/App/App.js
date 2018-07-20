@@ -7,6 +7,7 @@ import Drive from '../Drive/Drive';
 import SignIn from '../Sign_in/Sign_in';
 import SignInRider from '../Sign_in/Sign_in_rider/Sign_in_rider';
 import SignInDriver from '../Sign_in/Sign_in_driver/Sign_in_driver';
+import SignUpRider from '../Sign_up/Sign_up_rider/Sign_up_rider';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-in-rider" component={SignInRider} />
         <Route path="/sign-in-driver" component={SignInDriver} />
+        <Route path="/sign-up-rider" component={SignUpRider} />
       </div>
     </BrowserRouter>);
   }

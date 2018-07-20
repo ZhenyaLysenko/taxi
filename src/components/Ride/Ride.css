@@ -1,0 +1,50 @@
+.background {
+  background-image: url(../../../public/Rider/rider_main.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 600px;
+  width: 100%;
+  margin-top: 50px;
+}
+.inner {
+  position: relative;
+  padding: 0 9%;
+  min-height: 600px;
+}
+.signUpBigBtn {
+  position: absolute;
+  bottom: 100px;
+  width: 200px;
+  min-height: 200px;
+  background-color: #2b2929;
+  color: #f4f4f4;
+  font-size: 1.8rem;
+  padding: 30px;
+}
+.signUpBigBtn:hover {
+  background-color: #928e8e;
+  transition: 0.3s;
+}
+.signUpBigBtnBlock {
+  position: relative;
+  min-height: 200px;
+}
+.blockStart {
+  font-size: 1.5rem;
+}
+.blockEnd {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+@media only screen and (max-width: 400px) {
+  .background {
+    margin-top: 0;
+  }
+  .signUpBigBtn {
+    width: 150px;
+    min-height: 150px;
+    font-size: 1.3rem;
+  }
+}

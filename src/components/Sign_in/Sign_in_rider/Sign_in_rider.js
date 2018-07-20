@@ -17,10 +17,12 @@ class SignInRider extends Component {
                 </div>
                 <div className={style.signInInner}>
                     <h1 className={styleSignIn.title__h1 + ' ' + style.signInTitle}>Sign <span className={styleHome.yellow_span}>In</span> as rider</h1>
-                    <span>Enter your email adress</span>
+                    <span className={style.inputSpan}>Enter your data</span>
                     <form>
                         <input className={style.signInInput} type="email" placeholder="Your email adress"/>
-                        <input className={style.signInInput + ' ' + style.signInInputSubmit} type="submit" value="Submit"/>
+                        <Link to="/" className={style.forgotPass}><span>Forgot your password ?</span></Link>
+                        <input className={style.signInInput} type="password" placeholder="Your password"/>
+                        <input className={style.signInInputSubmit} type="submit" value="Submit"/>
                     </form>
                     <span>Don't have an account? <NavLink to="/sign-up" className={style.signUpSmallBtn}>Sign up</NavLink></span>
                 </div>
