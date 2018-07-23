@@ -85,6 +85,7 @@ a {
   transition: .3s ease-out;
   font-family: 'ProximaNovaThinReg';
   font-size: 1.5rem;
+  cursor: pointer;
 }
 .howItWorksA:hover {background: #E9E4E0;}
 .howItWorksA:hover:before {transform: rotate(360deg);}

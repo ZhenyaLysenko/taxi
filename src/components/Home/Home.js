@@ -24,20 +24,20 @@ class Home extends Component {
                     <div className={style.howItWorksFlexItem}>
                         <h2 className={style.howItWorks__h2}>For Riders</h2>
                         <ol className={style.howItWorksOl}>
-                            <li><a href="#" className={style.howItWorksA}>Download the app</a></li>
+                            <li><a className={style.howItWorksA}>Download the app</a></li>
                             <p className={style.howItWorksP}>
                                 Get the free Uber app from the App Store or Google Play
                                 on your smartphone. Open the app to create your account.
                             </p>
-                            <li><a href="#" className={style.howItWorksA}>Request the trip</a></li>
+                            <li><a className={style.howItWorksA}>Request the trip</a></li>
                             <p className={style.howItWorksP}>
                                 Enter your destination and choose a ride option. You’ll always see the price up front.
                             </p>
-                            <li><a href="#" className={style.howItWorksA}>Ride</a></li>
+                            <li><a className={style.howItWorksA}>Ride</a></li>
                             <p className={style.howItWorksP}>
                                 You'll see your driver's picture and vehicle details, and can track their arrival on the map.
                             </p>
-                            <li><a href="#" className={style.howItWorksA}>Pay crypto</a></li>
+                            <li><a className={style.howItWorksA}>Pay crypto</a></li>
                             <p className={style.howItWorksP}>
                                 The Taxi Coin Blockchain provides each user paying for the trip by our tokens.
                             </p>
@@ -46,25 +46,25 @@ class Home extends Component {
                     <div className={style.howItWorksFlexItem}>
                         <h2 className={style.howItWorks__h2}>For Drivers</h2>
                             <ol className={style.howItWorksOl}>
-                                <li><a href="#" className={style.howItWorksA}>Register online</a></li>
+                                <li><a className={style.howItWorksA}>Register online</a></li>
                                 <p className={style.howItWorksP}>
                                     Do you have an email address and smartphone? Great, now tell us a
                                     bit more about yourself and we will help you to get started.
                                 </p>
-                                <li><a href="#" className={style.howItWorksA}>Upload your documents</a></li>
+                                <li><a className={style.howItWorksA}>Upload your documents</a></li>
                                 <p className={style.howItWorksP}>
                                     Prepare the necessary documents.
                                 </p>
-                                <li><a href="#" className={style.howItWorksA}>Get a vehicle</a></li>
+                                <li><a className={style.howItWorksA}>Get a vehicle</a></li>
                                 <p className={style.howItWorksP}>
                                     What car do you want to use for riding? Make sure it meets standards in your country.
                                 </p>
-                                <li><a href="#" className={style.howItWorksA}>Activate your account</a></li>
+                                <li><a className={style.howItWorksA}>Activate your account</a></li>
                                 <p className={style.howItWorksP}>
                                     If you have completed all of the steps above, welcome! You are ready to
                                     activate your account and start making money.
                                 </p>
-                                <li><a href="#" className={style.howItWorksA}>Earn tokens for each trip</a></li>
+                                <li><a className={style.howItWorksA}>Earn tokens for each trip</a></li>
                                 <p className={style.howItWorksP}>
                                     The Taxi Coin Blockchain provides each driver earns tokens for the trip
                                     what he can change on whatever currency what he want.

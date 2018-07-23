@@ -11,7 +11,12 @@ class Drive extends Component {
             <Header></Header>
             <div className={style.background}>
                 <div className={style.inner}>
-                    
+                  <Link to="/sign-up-driver" className={style.signUpBigBtn}>
+                      <div className={style.signUpBigBtnBlock}>
+                          <div className={style.blockStart}><span className={styleHome.yellow_span}>Taxi</span>Coin needs partners like you</div>
+                          <div className={style.blockEnd}>SIGN UP</div>
+                      </div>
+                  </Link>
                 </div>
             </div>
           </div>

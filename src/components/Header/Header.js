@@ -26,7 +26,7 @@ class Header extends Component {
                             <NavLink to="/sign-in" activeClassName={style.active} className={style.sign_in__block__a}><button className={style.bannerBtn + " " + style.driveBtn}>SIGN IN</button></NavLink>
                         </div>
                         <div className={style.rideDriveItem}>
-                            <NavLink to="/sign_up_driver"><button className={style.bannerBtn + " " + style.becomeDriverBtn}>BECOME A DRIVER</button></NavLink>
+                            <NavLink to="/sign-up-driver"><button className={style.bannerBtn + " " + style.becomeDriverBtn}>BECOME A DRIVER</button></NavLink>
                         </div>
                           <div id="menuToggle">
                             <input type="checkbox" />
