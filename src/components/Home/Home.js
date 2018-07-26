@@ -99,7 +99,7 @@ class Home extends Component {
                   </p>
                 </div>
                 <div className={style.why__item}>
-                  <img className={style.why__img} src="../../public/Home/bitcoin.jpg" alt="blockchain"/>
+                  <img className={style.why__img} src="../../public/Home/bitcoin.jpg" alt="bitcoin"/>
                   <h2 className={style.why__h2}>PAY CRYPTO</h2>
                   <p className={style.why__p}>
                     With a unique currency, fair compensation, transparent contracts and no intermediaries.
@@ -108,7 +108,7 @@ class Home extends Component {
                   </p>
                 </div>
                 <div className={style.why__item}>
-                  <img className={style.why__img} src="../../public/Home/taxi.jpg" alt="blockchain"/>
+                  <img className={style.why__img} src="../../public/Home/taxi.jpg" alt="taxi"/>
                   <h2 className={style.why__h2}>TAXI OF THE FUTURE</h2>
                   <p className={style.why__p}>
                     Blockchain could have a similarly disruptive effect to the internet, or it could be the next Y2K.

@@ -38,10 +38,47 @@
   bottom: 0;
   right: 0;
 }
+.driveBg {
+  text-align: right;
+  background-image: url(../../../public/Driver/drive_bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position:center;
+  min-height: 350px;
+  width: 100%;
+  background-color: rgba(0,0,0,0.8);
+  background-blend-mode: darken;
+  padding-bottom: 30px;
+  display: flex;
+  align-items: center;
+  margin: 50px 0;
+}
+.signUpToRideSpan {
+  padding: 0;
+}
+.driveBg__p {
+  color: #fff;
+  font-family: 'ProximaNovaThin';
+  line-height: 1.5;
+  width: 50%;
+  float: right;
+}
+.rideBg {
+  background-image: url(../../../public/Driver/drive_bg2.jpg);
+  padding-bottom: 0;
+  margin-top: 0;
+}
 
 @media only screen and (max-width: 980px) {
   .background {
     background-position: 0 -20px;
+  }
+  .driveBg__p {
+    float: none;
+    width: 100%;
+  }
+  .signUpToRideSpan {
+    padding-top: 30px;
   }
 }
 @media only screen and (max-width: 400px) {
