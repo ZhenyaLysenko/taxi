@@ -20,11 +20,11 @@ class SignInRider extends Component {
                     <span className={style.inputSpan}>Enter your data</span>
                     <form>
                         <input className={style.signInInput} type="email" placeholder="Your email adress"/>
-                        <Link to="/" className={style.forgotPass}><span>Forgot your password ?</span></Link>
+                        <Link to="/forgot-password" className={style.forgotPass}><span>Forgot your password ?</span></Link>
                         <input className={style.signInInput} type="password" placeholder="Your password"/>
                         <input className={style.signInInputSubmit} type="submit" value="Submit"/>
                     </form>
-                    <span>Don't have an account? <NavLink to="/sign-up" className={style.signUpSmallBtn}>Sign up</NavLink></span>
+                    <span>Don't have an account? <NavLink to="/sign-up-rider" className={style.signUpSmallBtn}>Sign up</NavLink></span>
                 </div>
             </div>
         );
