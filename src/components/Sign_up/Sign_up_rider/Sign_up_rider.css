@@ -17,6 +17,8 @@
 .policy {
   margin-top: 15px;
   font-size: 12px;
+  line-height: 1.3;
+  text-align: justify;
 }
 .policy a {
   font-family: "ProximaNovaRegular";

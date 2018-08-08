@@ -10,6 +10,7 @@ import SignInDriver from '../Sign_in/Sign_in_driver/Sign_in_driver';
 import SignUpRider from '../Sign_up/Sign_up_rider/Sign_up_rider';
 import SignUpDriver from '../Sign_up/Sign_up_driver/Sign_up_driver';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
+import Policy from '../Policy/Policy';
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
         <Route path="/sign-up-rider" component={SignUpRider} />
         <Route path="/sign-up-driver" component={SignUpDriver} />
         <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/policy" component={Policy} />
       </div>
     </BrowserRouter>);
   }

@@ -48,8 +48,8 @@ class SignUpDriver extends Component {
                           </div>
                           <input className={styleSignInRide.signInInput + ' ' + styleSignInRide.signInInputSubmit} type="submit" value="Sign Up"/>
                           <p className={styleSignUpRide.policy}>
-                            By clicking "Sign Up", you agree to Taxicoin <Link to="/">Terms of Use</Link> and acknowledge
-                            you have read the <Link to="/#">Privacy Policy</Link>
+                            By proceeding, I agree that Uber or its representatives may contact me by email, phone, or SMS (including by automatic telephone dialing system) at
+                            the email address or number I provide, including for marketing purposes. I have read and understand the relevant <Link to="/policy">Privacy Policy</Link>.
                           </p>
                       </form>
                   </div>

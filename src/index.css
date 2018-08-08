@@ -4,6 +4,12 @@ body {
   font-family: 'ProximaNovaThin';
   background-color: #f4f4f4;
 }
+a {
+  outline: none;
+}
+a:active {
+  outline: none;
+}
 @font-face {
   font-family: "ProximaNovaRegular";
   src: url(/../../public/fonts/ProximaNovaCondensedRegular.otf);
