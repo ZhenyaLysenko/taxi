@@ -16,7 +16,10 @@ a {
 }
 .inner {
   text-align: center;
-  padding: 150px 0;
+  padding: 150px 10px;
+}
+.inn {
+  padding: 0 10px;
 }
 .banner_title {
   margin: 0;
@@ -117,6 +120,9 @@ a {
   max-width: 100%;
   background-color: rgba(0,0,0,0.6);
   background-blend-mode: darken;
+}
+.becomeDriver .bannerBtn {
+  margin: 0;
 }
 .becomeDriver__h2 {
   color: #faa71a;

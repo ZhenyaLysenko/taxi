@@ -18,6 +18,7 @@ class Home extends Component {
             </div>
 
             <div className={style.howItWorks}>
+              <div className={style.inn}>
                 <h1 className={style.why__h1}>How <span className={style.yellow_span}>it</span> works ?</h1>
                 <div className={style.yellow_border}></div>
                 <div className={style.flexHowItWorks}>
@@ -72,6 +73,7 @@ class Home extends Component {
                             </ol>
                     </div>
                 </div>
+              </div>
             </div>
 
             <div className={style.becomeDriver}>
