@@ -15,6 +15,7 @@ import SignUpDriver from '../Sign_up/Sign_up_driver/Sign_up_driver';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import Policy from '../Policy/Policy';
 import Profile from '../Profile/Profile';
+import Loading from '../Loading/Loading';
 
 // test connect redux to react
 import { connect } from 'react-redux';
@@ -28,6 +29,12 @@ class App extends Component {
     this.props.runTest('Test is passed');
     this.props.getUser();
   }
+  renderLoading() {
+    if (this.props.userData.loading) {
+      return (<Loading global={true} />)
+    }
+    return null;
+  }
   render() {
     // if redux connect and data mapped we can use it in props
     // react reload component when props is changed
@@ -36,6 +43,8 @@ class App extends Component {
     }
     return (<Router history={this.props.history}>
       <div>
+        {/* {this.renderLoading()} */}
+        <Loading global={true}/>
         <Route exact path="/" component={Home} />
         <Route exact path="/home" component={Home} />
         <Route path="/ride" component={Ride} />
@@ -62,13 +71,15 @@ App.propTypes = {
   runTest: PropTypes.func,
   // history must be a object
   history: PropTypes.object,
-  getDriver: PropTypes.func
+  getDriver: PropTypes.func,
+  userData: PropTypes.object,
 }
 
 // Func which map State to props
 const mapStateToProps = state => ({
   testData: state.testData,
-  history: state.historyData.history
+  history: state.historyData.history,
+  userData: state.userData,
 })
 
 // Func which map actionCreators to props

@@ -175,7 +175,7 @@ export const uploadPhoto = (file) => (dispatch, getState) => {
         })
             .then(res => { return res.json()})
             .then(data => {
-                dispatch(getDriver());
+                dispatch(getUser());
             })
             .catch((error) => dispatch(photoFailed(error.message)));
     } else {

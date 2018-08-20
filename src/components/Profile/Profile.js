@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import style from './Profile.css';
 import Header from '../Header/Header';
+import Loading from '../Loading/Loading';
 
 
 import { connect } from 'react-redux';
@@ -45,13 +46,29 @@ class Profile extends Component {
             this.props.uploadPhoto(this.state.newphoto);
         }
     }
+    renderPhoto() {
+        if (this.props.photoData.url) {
+            return <img src={this.props.photoData.url} alt='photo'/>;
+        }
+        if (this.props.photoData.loading) {
+            return <Loading />
+        }
+        if (this.props.photoData.error) {
+            return "Error";
+        }
+        return null;
+    }
     render() {
         if (this.props.userData.user) {
             return (
                 <div>
                     <Header></Header>
                     <h1>Profile</h1>
-                    <img src={this.props.photoData.url} alt='photo'/>
+                    <div className={style.profilePhoto}>
+                        {/* {this.renderPhoto()} */}
+                        <Loading />
+                    </div>
+
                     <h3>Name: {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
                     <h3>Email: {this.props.userData.user.email}</h3>
                     <h3>Phone: {this.props.userData.user.phoneNumber}</h3>
