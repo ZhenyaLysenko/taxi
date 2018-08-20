@@ -65,8 +65,7 @@ class Profile extends Component {
                     <Header></Header>
                     <h1>Profile</h1>
                     <div className={style.profilePhoto}>
-                        {/* {this.renderPhoto()} */}
-                        <Loading />
+                        {this.renderPhoto()}
                     </div>
 
                     <h3>Name: {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>

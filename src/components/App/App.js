@@ -43,8 +43,7 @@ class App extends Component {
     }
     return (<Router history={this.props.history}>
       <div>
-        {/* {this.renderLoading()} */}
-        <Loading global={true}/>
+        {this.renderLoading()}
         <Route exact path="/" component={Home} />
         <Route exact path="/home" component={Home} />
         <Route path="/ride" component={Ride} />
