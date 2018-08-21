@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './Profile.css';
 import Header from '../Header/Header';
-import Loading from '../Loading/Loading';
-
+// import Loading from '../Loading/Loading';
+import ProfileMain from './ProfileMain/ProfileMain';
+import Settings from './Settings/Settings';
+import Documents from './Documents/Documents';
 
 import { connect } from 'react-redux';
 
@@ -15,8 +17,9 @@ class Profile extends Component {
         this.state = {
             newphoto: null,
             newphotourl: null,
+            show: 'main',
         }
-        this.chooseNewPhoto = this.chooseNewPhoto.bind(this);
+        // this.chooseNewPhoto = this.chooseNewPhoto.bind(this);
     }
     componentDidMount() {
         if (!this.props.userData.user) {
@@ -28,56 +31,33 @@ class Profile extends Component {
             this.props.history.replace('/sign-in');
         }
     }
-    chooseNewPhoto(e) {
-        const file = e.target.files[0];
-        console.log(file);
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                this.setState({ newphotourl: reader.result });
-            };
-            reader.readAsDataURL(file);
-            this.setState({ newphoto: file });
+    renderMain() {
+        switch (this.state.show) {
+            case 'main': return <ProfileMain />;
+            case 'documents': return <Documents />;
+            case 'vehicle': return <b>Vehicle</b>;
+            case 'statistic': return <b>Statistic</b>;
+            case 'settings': return <Settings />;
+            default: return null;
         }
-    }
-    uploadNewPhoto() {
-        if (this.state.newphoto) {
-            console.log('Upload photo');
-            this.props.uploadPhoto(this.state.newphoto);
-        }
-    }
-    renderPhoto() {
-        if (this.props.photoData.url) {
-            return <img src={this.props.photoData.url} alt='photo'/>;
-        }
-        if (this.props.photoData.loading) {
-            return <Loading />
-        }
-        if (this.props.photoData.error) {
-            return "Error";
-        }
-        return null;
     }
     render() {
         if (this.props.userData.user) {
             return (
                 <div>
                     <Header></Header>
-                    <h1>Profile</h1>
-                    <div className={style.profilePhoto}>
-                        {this.renderPhoto()}
+                    <div className={`${style.profileContainer}`}>
+                        <div className={`${style.profileMain}`}>
+                            {this.renderMain()}
+                        </div>
+                        <div className={`${style.profileToolbar}`}>
+                            <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
+                            <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}>Documents</div>
+                            <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}>Vehicle</div>
+                            <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
+                            <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
+                        </div>
                     </div>
-
-                    <h3>Name: {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
-                    <h3>Email: {this.props.userData.user.email}</h3>
-                    <h3>Phone: {this.props.userData.user.phoneNumber}</h3>
-                    <h3>City: {this.props.userData.user.city}</h3>
-
-                    <button onClick={this.props.logout}>Logout</button>
-
-                    <h1>Change Photo</h1>
-                    <input type='file' accept='image/*' onChange={(e) => { this.chooseNewPhoto(e) }} />
-                    <button onClick={this.uploadNewPhoto.bind(this)}>Apply</button>
                 </div>
             );
         }
@@ -89,20 +69,20 @@ class Profile extends Component {
 Profile.propTypes = {
     history: PropTypes.object,
     userData: PropTypes.object,
-    uploadPhoto: PropTypes.func,
-    logout: PropTypes.func,
-    photoData: PropTypes.object,
+    // uploadPhoto: PropTypes.func,
+    // logout: PropTypes.func,
+    // photoData: PropTypes.object,
 }
 
 const mapStateToProps = state => ({
     history: state.historyData.history,
     userData: state.userData,
-    photoData: state.photoData
+    // photoData: state.photoData
 })
 
 const mapDispatchtoProps = dispatch => ({
-    uploadPhoto: (file) => { dispatch(uploadPhoto(file)) },
-    logout: () => { dispatch(logout()) }
+    // uploadPhoto: (file) => { dispatch(uploadPhoto(file)) },
+    // logout: () => { dispatch(logout()) }
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Profile);

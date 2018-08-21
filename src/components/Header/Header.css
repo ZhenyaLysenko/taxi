@@ -9,6 +9,8 @@
 }
 .headerInner {
   padding: 0 100px;
+  /* max-width: 1140px;
+  margin: auto; */
 }
 .headerFlex {
   display: flex;

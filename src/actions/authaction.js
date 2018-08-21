@@ -65,6 +65,14 @@ export const checkAndGetToken = (getState) => {
     return null;
 }
 
+export const checkAuth = (res, dispatch) => {
+    if (res.status === 401) {
+        dispatch(logout());
+    } else {
+        return res.json();
+    }
+}
+
 // TODO: ActionCreator refresh token
 export const refreshToken = () => (dispatch, getState) => {
 
@@ -118,7 +126,7 @@ export const getDriver = (token) => (dispatch, getState) => {
                 'Authorization': `Bearer ${token.auth_token}`
             })
         })
-            .then(res => res.json())
+            .then(res => checkAuth(res, dispatch))
             .then(data => {
                 data.role = 'driver';
                 dispatch(userSuccess(data));
@@ -146,7 +154,13 @@ export const getPhoto = (token, photoid) => (dispatch, getState) => {
                 'Authorization': `Bearer ${token.auth_token}`
             })
         })
-            .then(res => res.blob())
+            .then(res => {
+                if (res.status === 401) {
+                    dispatch(logout());
+                } else {
+                    return res.blob();
+                }
+            })
             .then(blob => {
                 const url = URL.createObjectURL(blob);
                 dispatch(photoSuccess(blob, url));
@@ -173,7 +187,7 @@ export const uploadPhoto = (file) => (dispatch, getState) => {
             }),
             body: data
         })
-            .then(res => { return res.json()})
+            .then(res => checkAuth(res, dispatch))
             .then(data => {
                 dispatch(getUser());
             })
