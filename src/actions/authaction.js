@@ -66,10 +66,12 @@ export const checkAndGetToken = (getState) => {
 }
 
 export const checkAuth = (res, dispatch) => {
-    if (res.status === 401) {
+    if (res.status === 200 || res.status === 204) {
+        return res.json();
+    } else if (res.status === 401) {
         dispatch(logout());
     } else {
-        return res.json();
+        throw new Error(res.statusText);
     }
 }
 
@@ -105,7 +107,13 @@ export const loginDriver = (logdata) => (dispatch, getState) => {
         }),
         body: JSON.stringify(logdata)
     })
-        .then(res => res.json())
+        .then(res => {
+            if (res.status !== 200) {
+                throw new Error(res.statusText);
+            } else {
+                return res.json();
+            }
+        })
         .then(token => {
             token.role = 'driver';
             dispatch(tokenSuccess(token));
@@ -113,7 +121,7 @@ export const loginDriver = (logdata) => (dispatch, getState) => {
         })
         .catch(error => {
             dispatch(userFailed(error.message));
-            dispatch(logout());
+            // dispatch(logout());
         });
 }
 

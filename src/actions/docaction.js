@@ -54,13 +54,17 @@ export const uploadDocument = (data, file) => (dispatch, getState) => {
                 }),
                 body: JSON.stringify(data)
             })
-                .then(res => checkAuth(res, dispatch))
-                .then(data => {
-                    console.log(data);
-                    // dispatch(uploadDocPhoto(file, token));
+                .then(res => {
+                    if (res.status === 204 || res.status === 200) {
+                        dispatch(uploadDocPhoto(file, token));
+                    } else if (res.status === 401) {
+                        dispatch(logout());
+                    } else {
+                        throw new Error(res.statusText);
+                    }
                 })
                 .catch(error => dispatch(docFailed(error.message)));
-                dispatch(uploadDocPhoto(file, token));
+                
         } else {
             dispatch(logout);
         }
@@ -84,7 +88,7 @@ export const uploadDocPhoto = (file, token) => (dispatch, getState) => {
             })
                 .then(res => checkAuth(res, dispatch))
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     dispatch(getDocument());
                 })
                 .catch(error => dispatch(docphotoFailed(error.message)));
@@ -96,7 +100,7 @@ export const uploadDocPhoto = (file, token) => (dispatch, getState) => {
 
 // TODO: actionCreator get Document info 
 export const getDocument = () => (dispatch, getState) => {
-    docStart();
+    dispatch(docStart());
     const token = checkAndGetToken(getState);
     if (token) {
         fetch(`${apiurl}/api/documents/driverlicense`, {
@@ -107,7 +111,7 @@ export const getDocument = () => (dispatch, getState) => {
         })
         .then(res => checkAuth(res, dispatch))
         .then(data => {
-            console.log(data);
+            // console.log(data);
             dispatch(docSuccess(data));
             dispatch(getDocPhoto());
         })
@@ -119,7 +123,7 @@ export const getDocument = () => (dispatch, getState) => {
 
 // TODO: actionCreator get Document phoho
 export const getDocPhoto = () => (dispatch, getState) => {
-    docphotoStart();
+    dispatch(docphotoStart());
     const token = checkAndGetToken(getState); 
     if (token) {
         fetch(`${apiurl}/api/documents/driverlicense/image`, {
