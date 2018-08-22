@@ -101,7 +101,7 @@ export const registerDriver = (regdata, file) => (dispatch, getState) => {
 // actionCreator login driver
 export const loginDriver = (logdata) => (dispatch, getState) => {
     dispatch(userStart());
-    fetch(`${apiurl}/api/Auth/driver/signuptoken`, {
+    fetch(`${apiurl}/api/Auth/driver`, {
         method: 'POST',
         headers: new Headers({
             'Content-Type': 'application/json'

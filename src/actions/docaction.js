@@ -66,7 +66,7 @@ export const uploadDocument = (data, file) => (dispatch, getState) => {
                 .catch(error => dispatch(docFailed(error.message)));
                 
         } else {
-            dispatch(logout);
+            dispatch(logout());
         }
     }
 }

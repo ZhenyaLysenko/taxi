@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 import { uploadPhoto } from '../../../actions/authaction';
 import { uploadDocument } from '../../../actions/docaction';
+import { chengeName } from '../../../actions/chengeaction';
 
 class Settings extends Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class Settings extends Component {
             dayTo: "",
             yearTo: "",
             monthTo: "",
+            firstName: "",
         }
         this.chooseNewPhoto = this.chooseNewPhoto.bind(this);
     }
@@ -35,6 +37,12 @@ class Settings extends Component {
             reader.readAsDataURL(file);
             this.setState({ newphoto: file });
         }
+    }
+    updateName(){
+        this.props.chengeName({
+            firstName: this.state.firstName,
+        })
+
     }
     uploadNewPhoto() {
         if (this.state.newphoto) {
@@ -72,6 +80,11 @@ class Settings extends Component {
                         <button onClick={this.uploadNewPhoto.bind(this)}>Apply</button>
                     </div>
                     <div>
+                        <h1>Change Name</h1>
+                        <input type='text' placeholder="new name" required onChange={(e) => {this.setState({firstName: e.target.value})}} />
+                        <button onClick={this.updateName.bind(this)}>Apply</button>
+                    </div>
+                    <div>
                         <h1>Add Documents</h1>
                         <input type='file' accept='image/*' onChange={(e) => { this.chooseDocPhoto(e) }} />
                         <input type='text' placeholder="dayFrom" required onChange={(e) => {this.setState({dayFrom: e.target.value})}}/>
@@ -95,6 +108,7 @@ Settings.propTypes = {
     photoData: PropTypes.object,
     uploadPhoto: PropTypes.func,
     uploadDocument: PropTypes.func,
+    chengeName: PropTypes.func,
 }
 
 const mapStateToProps = state => ({
@@ -104,7 +118,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchtoProps = dispatch => ({
     uploadPhoto: (file) => { dispatch(uploadPhoto(file)) },
-    uploadDocument: (data, file) => { dispatch(uploadDocument(data, file)) }
+    uploadDocument: (data, file) => { dispatch(uploadDocument(data, file)) },
+    chengeName: (data) => {dispatch(chengeName(data))}
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Settings);

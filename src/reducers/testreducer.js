@@ -21,7 +21,7 @@ const testData = (state = initState, action) => {
             // 2nd way call Object.assign (if data in state is huge and reducer change 1 or 2 props )
             return Object.assign({}, state, { message: action.message })
         }
-        default: return state
+        default: return state;
     }
 }
 
