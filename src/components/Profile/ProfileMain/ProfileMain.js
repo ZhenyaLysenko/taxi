@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import style from './ProfileMain.css';
 import Loading from '../../Loading/Loading';
 
+import defaultphoto from '../../../assets/default-user.png';
+
 
 import { connect } from 'react-redux';
 
@@ -20,7 +22,7 @@ class ProfileMain extends Component {
         if (this.props.photoData.error) {
             return "Error";
         }
-        return null;
+        return <img src={defaultphoto} alt='photo' />;
     }
     render() {
         if (this.props.userData.user) {

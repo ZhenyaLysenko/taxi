@@ -23,6 +23,7 @@ class SignUpDriver extends Component {
             city: null,
             firstName: null,
             lastName: null,
+            privateKey: null,
         }
     }
     componentDidMount() {
@@ -76,6 +77,10 @@ class SignUpDriver extends Component {
                             <div className={styleSignUpRide.marginBot}>
                                 <span className={styleSignInRide.inputSpan}>Enter your city (required)</span>
                                 <input className={styleSignInRide.signInInput} type="text" placeholder="City" onChange={(e) => { this.setState({ city: e.target.value }) }} />
+                            </div>
+                            <div className={styleSignUpRide.marginBot}>
+                                <span className={styleSignInRide.inputSpan}>Enter your privat key (required)</span>
+                                <input className={styleSignInRide.signInInput} type="text" placeholder="Privat key" onChange={(e) => { this.setState({ privateKey: e.target.value }) }} />
                             </div>
                             <input className={styleSignInRide.signInInput + ' ' + styleSignInRide.signInInputSubmit} type="button" value="Sign Up" onClick={this.submit.bind(this)}/>
                             <p className={styleSignUpRide.policy}>

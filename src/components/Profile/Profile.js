@@ -35,7 +35,7 @@ class Profile extends Component {
         switch (this.state.show) {
             case 'main': return <ProfileMain />;
             case 'documents': return <Documents />;
-            case 'vehicle': return <b>Vehicle</b>;
+            case 'vehicle': return <b>Vehicle</b>;F
             case 'statistic': return <b>Statistic</b>;
             case 'settings': return <Settings />;
             default: return null;

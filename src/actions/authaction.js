@@ -92,7 +92,8 @@ export const registerDriver = (regdata, file) => (dispatch, getState) => {
     })
         .then(res => res.json())
         .then(data => {
-            loginDriver({ userName: regdata.userName, password: regdata.password });
+            console.log(data);
+            dispatch(loginDriver({ userName: regdata.userName, password: regdata.password }));
         })
         .catch(error => { dispatch(userFailed(error.message)) });
 }
