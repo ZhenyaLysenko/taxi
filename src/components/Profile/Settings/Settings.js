@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { uploadPhoto } from '../../../actions/authaction';
 import { uploadDocument } from '../../../actions/docaction';
 import { chengeName } from '../../../actions/chengeaction';
+import { uploadVehicle } from '../../../actions/vehiclesaction';
 
 class Settings extends Component {
     constructor(props) {
@@ -24,6 +25,12 @@ class Settings extends Component {
             yearTo: "",
             monthTo: "",
             firstName: "",
+            vehphoto: null,
+            vehphotourl: null,
+            number: "",
+            model: "",
+            brand: "",
+            color: "",
         }
         this.chooseNewPhoto = this.chooseNewPhoto.bind(this);
     }
@@ -38,7 +45,7 @@ class Settings extends Component {
             this.setState({ newphoto: file });
         }
     }
-    updateName(){
+    updateName() {
         this.props.chengeName({
             firstName: this.state.firstName,
         })
@@ -70,6 +77,25 @@ class Settings extends Component {
             monthTo: this.state.monthTo,
         }, this.state.docphoto);
     }
+    chooseVehPhoto(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                this.setState({ vehphotourl: reader.result });
+            };
+            reader.readAsDataURL(file);
+            this.setState({ vehphoto: file });
+        }
+    }
+    uploadVeh() {
+        this.props.uploadVehicle({
+            number: this.state.number,
+            model: this.state.model,
+            brand: this.state.brand,
+            color: this.state.color,
+        }, this.state.vehphoto)
+    }
     render() {
         if (this.props.userData.user) {
             return (
@@ -81,19 +107,28 @@ class Settings extends Component {
                     </div>
                     <div>
                         <h1>Change Name</h1>
-                        <input type='text' placeholder="new name" required onChange={(e) => {this.setState({firstName: e.target.value})}} />
+                        <input type='text' placeholder="new name" required onChange={(e) => { this.setState({ firstName: e.target.value }) }} />
                         <button onClick={this.updateName.bind(this)}>Apply</button>
                     </div>
                     <div>
                         <h1>Add Documents</h1>
                         <input type='file' accept='image/*' onChange={(e) => { this.chooseDocPhoto(e) }} />
-                        <input type='text' placeholder="dayFrom" required onChange={(e) => {this.setState({dayFrom: e.target.value})}}/>
-                        <input type='text' placeholder="yearFrom" required onChange={(e) => {this.setState({yearFrom: e.target.value})}}/>
-                        <input type='text' placeholder="monthFrom" required onChange={(e) => {this.setState({monthFrom: e.target.value})}}/>
-                        <input type='text' placeholder="dayTo" required onChange={(e) => {this.setState({dayTo: e.target.value})}}/>
-                        <input type='text' placeholder="yearTo" required onChange={(e) => {this.setState({yearTo: e.target.value})}}/>
-                        <input type='text' placeholder="monthTo" required onChange={(e) => {this.setState({monthTo: e.target.value})}}/>
+                        <input type='text' placeholder="dayFrom" required onChange={(e) => { this.setState({ dayFrom: e.target.value }) }} />
+                        <input type='text' placeholder="yearFrom" required onChange={(e) => { this.setState({ yearFrom: e.target.value }) }} />
+                        <input type='text' placeholder="monthFrom" required onChange={(e) => { this.setState({ monthFrom: e.target.value }) }} />
+                        <input type='text' placeholder="dayTo" required onChange={(e) => { this.setState({ dayTo: e.target.value }) }} />
+                        <input type='text' placeholder="yearTo" required onChange={(e) => { this.setState({ yearTo: e.target.value }) }} />
+                        <input type='text' placeholder="monthTo" required onChange={(e) => { this.setState({ monthTo: e.target.value }) }} />
                         <button onClick={this.uploadDoc.bind(this)}>Apply</button>
+                    </div>
+                    <div>
+                        <h1>Add Vehicle</h1>
+                        <input type='file' accept='image/*' onChange={(e) => { this.chooseVehPhoto(e) }} />
+                        <input type='text' placeholder="Number" required onChange={(e) => { this.setState({ number: e.target.value }) }} />
+                        <input type='text' placeholder="Model" required onChange={(e) => { this.setState({ model: e.target.value }) }} />
+                        <input type='text' placeholder="Brand" required onChange={(e) => { this.setState({ brand: e.target.value }) }} />
+                        <input type='text' placeholder="Color" required onChange={(e) => { this.setState({ color: e.target.value }) }} />
+                        <button onClick={this.uploadVeh.bind(this)}>Apply</button>
                     </div>
                 </div>
             );
@@ -119,7 +154,8 @@ const mapStateToProps = state => ({
 const mapDispatchtoProps = dispatch => ({
     uploadPhoto: (file) => { dispatch(uploadPhoto(file)) },
     uploadDocument: (data, file) => { dispatch(uploadDocument(data, file)) },
-    chengeName: (data) => {dispatch(chengeName(data))}
+    chengeName: (data) => { dispatch(chengeName(data)) },
+    uploadVehicle: (data, file) => { dispatch(uploadVehicle(data, file)) },
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Settings);

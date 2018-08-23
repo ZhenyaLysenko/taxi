@@ -55,7 +55,7 @@ export const uploadDocument = (data, file) => (dispatch, getState) => {
                 body: JSON.stringify(data)
             })
                 .then(res => {
-                    if (res.status === 204 || res.status === 200) {
+                    if (res.status === 200 || res.status === 204 || res.status === 201 || res.status === 202) {
                         dispatch(uploadDocPhoto(file, token));
                     } else if (res.status === 401) {
                         dispatch(logout());
@@ -135,8 +135,10 @@ export const getDocPhoto = () => (dispatch, getState) => {
             .then(res => {
                 if (res.status === 401) {
                     dispatch(logout());
-                } else {
+                } else if (res.status === 200 || res.status === 204 || res.status === 201 || res.status === 202) {
                     return res.blob();
+                } else {
+                    throw new Error(res.statusText);
                 }
             })
             .then(blob => {

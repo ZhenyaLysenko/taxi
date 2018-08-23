@@ -1,19 +1,35 @@
 // TODO: import action's types
+import {
+    VEHICLE_FETCH_START,
+    VEHICLE_FETCH_SUCCESS,
+    VEHICLE_FETCH_FAILED,
+    VEHPHOTO_FETCH_START,
+    VEHPHOTO_FETCH_SUCCESS,
+    VEHPHOTO_FETCH_FAILED,
+} from '../actions/vehiclesaction';
+
 
 const initState = {
-    loading: false,
-    vehicle: null,
-    error: null,
-    photo: null,
+    loadveh: false,
+    loadphoto: false,
+    veh: null,
+    errorveh: null,
+    errorphoto: null,
+    blob: null,
     url: null,
 }
 
 // TODO: create reducer docData
-const vehicleData = (state = initState, action) => {
-    switch(action.type) {
-
+const vehData = (state = initState, action) => {
+    switch (action.type) {
+        case VEHICLE_FETCH_START: return Object.assign({}, state, { loadveh: true });
+        case VEHICLE_FETCH_SUCCESS: return Object.assign({}, state, { loadveh: false, veh: action.veh });
+        case VEHICLE_FETCH_FAILED: return Object.assign({}, state, { loadveh: false, errorveh: action.error });
+        case VEHPHOTO_FETCH_START: return Object.assign({}, state, { loadphoto: true });
+        case VEHPHOTO_FETCH_SUCCESS: return Object.assign({}, state, { loadphoto: false, blob: action.blob, url: action.url });
+        case VEHPHOTO_FETCH_FAILED: return Object.assign({}, state, { loadphoto: false, errorphoto: action.error });
         default: return state;
     }
 }
 
-export { vehicleData };
+export { vehData };

@@ -83,6 +83,7 @@ export const refreshToken = () => (dispatch, getState) => {
 // actionCreator register driver
 export const registerDriver = (regdata, file) => (dispatch, getState) => {
     dispatch(userStart());
+    console.log(regdata);
     fetch(`${apiurl}/api/accounts/drivers`, {
         method: 'POST',
         headers: new Headers({
@@ -90,7 +91,13 @@ export const registerDriver = (regdata, file) => (dispatch, getState) => {
         }),
         body: JSON.stringify(regdata)
     })
-        .then(res => res.json())
+        .then(res => {
+            if (res.status === 200 || res.status === 204) {
+                return res.json();
+            } else {
+                throw new Error(res.statusText);
+            }
+        })
         .then(data => {
             console.log(data);
             dispatch(loginDriver({ userName: regdata.userName, password: regdata.password }));
@@ -155,28 +162,32 @@ export const logout = () => (dispatch, getState) => {
 
 // actionCreator get user photo
 export const getPhoto = (token, photoid) => (dispatch, getState) => {
-    dispatch(photoStart());
-    if (token) {
-        fetch(`${apiurl}/api/images/${photoid}`, {
-            method: 'GET',
-            headers: new Headers({
-                'Authorization': `Bearer ${token.auth_token}`
+    if (photoid) {
+        dispatch(photoStart());
+        if (token) {
+            fetch(`${apiurl}/api/images/${photoid}`, {
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': `Bearer ${token.auth_token}`
+                })
             })
-        })
-            .then(res => {
-                if (res.status === 401) {
-                    dispatch(logout());
-                } else {
-                    return res.blob();
-                }
-            })
-            .then(blob => {
-                const url = URL.createObjectURL(blob);
-                dispatch(photoSuccess(blob, url));
-            })
-            .catch(error => dispatch(photoFailed(error.message)));
-    } else {
-        dispatch(logout());
+                .then(res => {
+                    if (res.status === 401) {
+                        dispatch(logout());
+                    } else if (res.status === 200 || res.status === 204) {
+                        return res.blob();
+                    } else {
+                        throw new Error(res.statusText);
+                    }
+                })
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    dispatch(photoSuccess(blob, url));
+                })
+                .catch(error => dispatch(photoFailed(error.message)));
+        } else {
+            dispatch(logout());
+        }
     }
 }
 

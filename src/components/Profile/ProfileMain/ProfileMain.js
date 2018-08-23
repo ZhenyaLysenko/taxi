@@ -22,7 +22,7 @@ class ProfileMain extends Component {
         if (this.props.photoData.error) {
             return "Error";
         }
-        return <img src={defaultphoto} alt='photo' />;
+        return <img src={defaultphoto} className={style.profilePhoto} alt='photo' />;
     }
     render() {
         if (this.props.userData.user) {

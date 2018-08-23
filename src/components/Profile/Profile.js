@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import ProfileMain from './ProfileMain/ProfileMain';
 import Settings from './Settings/Settings';
 import Documents from './Documents/Documents';
+import Vehicle from './Vehicle/Vehicle';
 
 import { connect } from 'react-redux';
 
@@ -35,7 +36,7 @@ class Profile extends Component {
         switch (this.state.show) {
             case 'main': return <ProfileMain />;
             case 'documents': return <Documents />;
-            case 'vehicle': return <b>Vehicle</b>;F
+            case 'vehicle': return <Vehicle />;
             case 'statistic': return <b>Statistic</b>;
             case 'settings': return <Settings />;
             default: return null;
