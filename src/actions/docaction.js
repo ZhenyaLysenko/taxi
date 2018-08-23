@@ -78,7 +78,7 @@ export const uploadDocument = (data, file) => (dispatch, getState) => {
                         if (file) {
                             dispatch(uploadDocPhoto(file, token));
                         } else {
-                            dispatch(updatesuccess());
+                            dispatch(updatesuccess('Documents is update'));
                             dispatch(getDocument());
                         }
                     } else if (res.status === 401) {
@@ -120,7 +120,7 @@ export const uploadDocPhoto = (file, token) => (dispatch, getState) => {
             })
                 .then(res => {
                     if (res.status === 200 || res.status === 204 || res.status === 201 || res.status === 202) {
-                        dispatch(updatesuccess());
+                        dispatch(updatesuccess('Documents is update'));
                         dispatch(getDocument());
                     } else if (res.status === 401) {
                         dispatch(logout());

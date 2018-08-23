@@ -1,0 +1,63 @@
+.alertcontainer {
+    position: fixed;
+    top: 15%;
+    left: 20%;
+    right: 20%;
+    max-width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s ease-out;
+    animation: anim-container 1s ease-out;
+}
+
+.alertmain {
+    position: relative;
+    width: 100%;
+    background: #2b2929;
+    display: flex;
+    padding: 40px 20px;
+}
+
+.alerttext {
+    color: white;
+    font-weight: bold;
+    font-size: 18pt;
+}
+
+.alertclose {
+    cursor: pointer;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    width: 32px;
+    height: 32px;
+}
+
+.alertclose:hover {
+    opacity: 0.7;
+}
+
+.alertclose > img {
+    width: 32px;
+    height: 32px;
+}
+
+@keyframes anim-container {
+    0% {
+        top: 10%;
+    }
+    100% {
+        top: 15%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .alertcontainer {
+        max-width: 90%;
+        left: 5%;
+        right: 5%;
+    }
+}

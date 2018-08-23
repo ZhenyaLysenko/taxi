@@ -11,7 +11,11 @@ export const TOKEN_SUCCESS = 'TOKEN_SUCCESS';
 // export const TOKEN_FAILED = 'TOKEN_FAILED';
 export const TOKEN_DELETE = 'TOKEN_DELETE';
 
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+
 import { apiurl } from '../appconfig';
+
+import { updatestart, updatesuccess, updatefailed } from './chengeaction';
 
 import { vehClear } from './vehiclesaction';
 import { docClear } from './docaction';
@@ -57,6 +61,10 @@ const photoFailed = (error) => ({
     type: USERPHOTO_FETCH_FAILED,
     error
 });
+
+export const clearErrors = () => ({
+    type: CLEAR_ERRORS
+})
 
 export const checkAndGetToken = (getState) => {
     if (getState().tokenData.token) {
@@ -148,8 +156,12 @@ export const getDriver = (token) => (dispatch, getState) => {
             .then(res => checkAuth(res, dispatch))
             .then(data => {
                 data.role = 'driver';
-                dispatch(userSuccess(data));
-                dispatch(getPhoto(token, data.profilePictureId));
+                if (!getState().photoData.url || (getState().userData.user && data.profilePictureId !== getState().userData.user.profilePictureId)) {
+                    dispatch(userSuccess(data));
+                    dispatch(getPhoto(token, data.profilePictureId));
+                } else {
+                    dispatch(userSuccess(data));
+                }
             })
             .catch(error => dispatch(userFailed(error.message)));
     } else {
@@ -200,25 +212,34 @@ export const getPhoto = (token, photoid) => (dispatch, getState) => {
 export const uploadPhoto = (file) => (dispatch, getState) => {
     dispatch(photoStart());
     const token = checkAndGetToken(getState);
-    if (token && file) {
-        const data = new FormData();
-        data.append('files', file);
+    if (file) {
+        dispatch(updatestart());
+        if (token) {
+            const data = new FormData();
+            data.append('files', file);
 
-        fetch(`${apiurl}/api/profilepicture`, {
-            method: 'POST',
-            headers: new Headers({
-                'Authorization': `Bearer ${token.auth_token}`,
-                // 'Content-Type': 'multipart/form-data'
-            }),
-            body: data
-        })
-            .then(res => checkAuth(res, dispatch))
-            .then(data => {
-                dispatch(getUser());
+            fetch(`${apiurl}/api/profilepicture`, {
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': `Bearer ${token.auth_token}`,
+                    // 'Content-Type': 'multipart/form-data'
+                }),
+                body: data
             })
-            .catch((error) => dispatch(photoFailed(error.message)));
+                .then(res => checkAuth(res, dispatch))
+                .then(data => {
+                    dispatch(updatesuccess('Photo is updated'))
+                    dispatch(getUser());
+                })
+                .catch((error) => {
+                    dispatch(updatefailed(error.message));
+                    dispatch(photoFailed(error.message));
+                });
+        } else {
+            dispatch(logout());
+        }
     } else {
-        dispatch(logout());
+        dispatch(updatefailed('No file choosed'));
     }
 }
 
@@ -230,7 +251,7 @@ export const registerCustomer = () => (dispatch, getState) => {
 // TODO: actionCreator login Customer
 export const loginCustomer = () => (dispatch, getState) => {
 
-} 
+}
 
 // TODO: actionCreator get Customer profile
 export const getCustomer = (token) => (dispatch, getState) => {
@@ -245,7 +266,7 @@ export const registerAdmin = () => (dispatch, getState) => {
 // TODO: actionCreator login Admin
 export const loginAdmin = () => (dispatch, getState) => {
 
-} 
+}
 
 // TODO: actionCreator get Admin profile
 export const getAdmin = (token) => (dispatch, getState) => {
@@ -256,7 +277,7 @@ export const getAdmin = (token) => (dispatch, getState) => {
 export const getUser = () => (dispatch, getState) => {
     const token = checkAndGetToken(getState);
     if (token) {
-        switch(token.role) {
+        switch (token.role) {
             case 'admin': dispatch(getAdmin(token));
             case 'driver': dispatch(getDriver(token));
             case 'customer': dispatch(getCustomer(token));
@@ -268,7 +289,7 @@ export const getUser = () => (dispatch, getState) => {
 
 // TODO: create ActionCreator update Driver profile
 export const updateDriver = (data) => (dispatch, getState) => {
-    
+
 }
 
 // TODO: create ActionCreator update Customer profile

@@ -74,7 +74,7 @@ export const uploadVehicle = (data, file) => (dispatch, getState) => {
                         if (file) {
                             dispatch(uploadVehPhoto(file, token));
                         } else {
-                            dispatch(updatesuccess());
+                            dispatch(updatesuccess('Vehicle is update'));
                             dispatch(getVehicle());
                         }
                     } else if (res.status === 401) {
@@ -113,7 +113,7 @@ export const uploadVehPhoto = (file, token) => (dispatch, getState) => {
             })
                 .then(res => {
                     if (res.status === 200 || res.status === 204 || res.status === 201 || res.status === 202) {
-                        dispatch(updatesuccess());
+                        dispatch(updatesuccess('Vehicle is update'));
                         dispatch(getVehicle());
                     } else if (res.status === 401) {
                         dispatch(logout());

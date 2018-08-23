@@ -8,6 +8,7 @@ import {
     USERPHOTO_FETCH_START,
     USERPHOTO_FETCH_SUCCESS,
     USERPHOTO_FETCH_FAILED,
+    CLEAR_ERRORS,
 } from '../actions/authaction';
 
 const initUserData = {
@@ -18,16 +19,11 @@ const initUserData = {
 
 const userData = (state = initUserData, action) => {
     switch (action.type) {
-        case USER_FETCH_START:
-            return { user: null, error: null, loading: true };
-        case USER_FETCH_SUCCESS:
-            return { user: action.user, error: null, loading: false }
-        case USER_FETCH_FAILED: {
-            console.log(action.error);
-            return { user: null, error: action.error, loading: false }
-        }
-        case USER_DELETE:
-            return initUserData;
+        case USER_FETCH_START: return { user: null, error: null, loading: true };
+        case USER_FETCH_SUCCESS: return { user: action.user, error: null, loading: false };
+        case USER_FETCH_FAILED: return { user: null, error: action.error, loading: false };
+        case USER_DELETE: return initUserData;
+        case CLEAR_ERRORS: return Object.assign({}, state, { error: null });
         default: return state;
     }
 }
@@ -62,7 +58,7 @@ const photoData = (state = initPhotoState, action) => {
         case USERPHOTO_FETCH_START: return { blob: null, url: null, loading: true, error: null };
         case USERPHOTO_FETCH_SUCCESS: return { blob: action.blob, url: action.url, loading: false, error: null };
         case USERPHOTO_FETCH_FAILED: return { blob: null, url: null, loading: false, error: action.error }
-        default: return  state;
+        default: return state;
     }
 }
 

@@ -9,6 +9,8 @@ import {
     DOCUMENT_CLEAR
 } from '../actions/docaction';
 
+import { CLEAR_ERRORS } from '../actions/authaction';
+
 const initState = {
     loaddoc: false,
     loadphoto: false,
@@ -29,6 +31,7 @@ const docData = (state = initState, action) => {
         case DOCPHOTO_FETCH_SUCCESS: return Object.assign({}, state, { loadphoto: false, blob: action.blob, url: action.url });
         case DOCPHOTO_FETCH_FAILED: return Object.assign({}, state, { loadphoto: false, errorphoto: action.error });
         case DOCUMENT_CLEAR: return Object.assign({}, initState);
+        case CLEAR_ERRORS: return Object.assign({}, state, { errordoc: null });
         default: return state;
     }
 }

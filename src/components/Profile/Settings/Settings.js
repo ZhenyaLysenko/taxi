@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './Settings.css';
 // import Loading from '../../Loading/Loading';
+import Alert from '../../Alert/Alert';
 
 import { connect } from 'react-redux';
 
-import { uploadPhoto } from '../../../actions/authaction';
+import { uploadPhoto, clearErrors } from '../../../actions/authaction';
 import { uploadDocument } from '../../../actions/docaction';
-import { chengeName } from '../../../actions/chengeaction';
+import { chengeName, clearSuccess } from '../../../actions/chengeaction';
 import { uploadVehicle } from '../../../actions/vehiclesaction';
 
 class Settings extends Component {
@@ -52,9 +53,7 @@ class Settings extends Component {
 
     }
     uploadNewPhoto() {
-        if (this.state.newphoto) {
-            this.props.uploadPhoto(this.state.newphoto);
-        }
+        this.props.uploadPhoto(this.state.newphoto);
     }
     chooseDocPhoto(e) {
         const file = e.target.files[0];
@@ -96,10 +95,24 @@ class Settings extends Component {
             color: this.state.color,
         }, this.state.vehphoto)
     }
+    renderUpdateInfo() {
+        if (this.props.changedData.success) {
+            return (
+                <Alert global={true} success={this.props.changedData.success} click={this.props.clearSuccess} />
+            );
+        }
+        if (this.props.changedData.error) {
+            return (
+                <Alert global={true} error={this.props.changedData.error} click={this.props.clearErrors}/>
+            );
+        }
+        return null;
+    }
     render() {
         if (this.props.userData.user) {
             return (
                 <div>
+                    {this.renderUpdateInfo()}
                     <div>
                         <h1>Change Photo</h1>
                         <input type='file' accept='image/*' onChange={(e) => { this.chooseNewPhoto(e) }} />
@@ -144,11 +157,15 @@ Settings.propTypes = {
     uploadPhoto: PropTypes.func,
     uploadDocument: PropTypes.func,
     chengeName: PropTypes.func,
+    changedData: PropTypes.object,
+    clearErrors: PropTypes.func,
+    clearSuccess: PropTypes.func,
 }
 
 const mapStateToProps = state => ({
     userData: state.userData,
-    photoData: state.photoData
+    photoData: state.photoData,
+    changedData: state.chengeddata
 })
 
 const mapDispatchtoProps = dispatch => ({
@@ -156,6 +173,8 @@ const mapDispatchtoProps = dispatch => ({
     uploadDocument: (data, file) => { dispatch(uploadDocument(data, file)) },
     chengeName: (data) => { dispatch(chengeName(data)) },
     uploadVehicle: (data, file) => { dispatch(uploadVehicle(data, file)) },
+    clearErrors: () => { dispatch(clearErrors()) },
+    clearSuccess: () => { dispatch(clearSuccess()) },
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Settings);

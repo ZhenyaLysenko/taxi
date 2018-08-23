@@ -9,6 +9,7 @@ import {
     VEHICLE_CLEAR
 } from '../actions/vehiclesaction';
 
+import { CLEAR_ERRORS } from '../actions/authaction';
 
 const initState = {
     loadveh: false,
@@ -30,6 +31,7 @@ const vehData = (state = initState, action) => {
         case VEHPHOTO_FETCH_SUCCESS: return Object.assign({}, state, { loadphoto: false, blob: action.blob, url: action.url });
         case VEHPHOTO_FETCH_FAILED: return Object.assign({}, state, { loadphoto: false, errorphoto: action.error });
         case VEHICLE_CLEAR: return Object.assign({}, initState);
+        case CLEAR_ERRORS: return Object.assign({}, state, { errorveh: null });
         default: return state;
     }
 }

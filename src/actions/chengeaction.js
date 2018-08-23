@@ -5,18 +5,24 @@ import { checkAndGetToken, logout, getUser } from './authaction';
 export const UPDATE_FETCH_START = 'UPDATE_FETCH_START';
 export const UPDATE_FETCH_SUCCESS = 'UPDATE_FETCH_SUCCESS';
 export const UPDATE_FETCH_FAILED = 'UPDATE_FETCH_FAILED';
+export const CLEAR_UPDATE_SUCCESS = 'CLEAR_UPDATE_SUCCESS';
 
 export const updatestart = () => ({
     type: UPDATE_FETCH_START
 });
 
-export const updatesuccess = () => ({
-    type: UPDATE_FETCH_SUCCESS
+export const updatesuccess = (success) => ({
+    type: UPDATE_FETCH_SUCCESS,
+    success
 });
 
 export const updatefailed = (error) => ({
     type: UPDATE_FETCH_FAILED,
     error
+});
+
+export const clearSuccess = () => ({
+    type: CLEAR_UPDATE_SUCCESS
 });
 
 export const chengeName = (data) => (dispatch, getState) => {
@@ -33,9 +39,8 @@ export const chengeName = (data) => (dispatch, getState) => {
                 body: JSON.stringify(data)
             })
                 .then(res => {
-                    console.log(res);
                     if (res.status === 204) {
-                        dispatch(updatesuccess());
+                        dispatch(updatesuccess('Name is update'));
                         dispatch(getUser());
                     }
                     else {

@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './Documents.css';
 import Loading from '../../Loading/Loading';
-
+import Alert from '../../Alert/Alert';
 
 import { connect } from 'react-redux';
 
 import { getDocument } from '../../../actions/docaction';
+import { clearErrors } from '../../../actions/authaction';
 
 class Documents extends Component {
     constructor(props) {
@@ -48,8 +49,8 @@ class Documents extends Component {
         if (this.props.docData.errordoc) {
             return (
                 <div>
+                    <Alert global={true} error={this.props.docData.errordoc} close={this.props.clearErrors} />
                     <h1>Documents</h1>
-                    Error
                 </div>
             );
         }
@@ -61,6 +62,7 @@ class Documents extends Component {
 Documents.propTypes = {
     docData: PropTypes.object,
     getDoc: PropTypes.func,
+    clearErrors: PropTypes.func,
 }
 
 const mapStateToProps = state => ({
@@ -68,7 +70,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchtoProps = dispatch => ({
-    getDoc: () => { dispatch(getDocument()) }
+    getDoc: () => { dispatch(getDocument()) },
+    clearErrors: () => { dispatch(clearErrors()) }
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Documents);
