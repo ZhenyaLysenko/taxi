@@ -13,6 +13,9 @@ export const TOKEN_DELETE = 'TOKEN_DELETE';
 
 import { apiurl } from '../appconfig';
 
+import { vehClear } from './vehiclesaction';
+import { docClear } from './docaction';
+
 const userStart = () => ({
     type: USER_FETCH_START
 });
@@ -158,6 +161,8 @@ export const getDriver = (token) => (dispatch, getState) => {
 export const logout = () => (dispatch, getState) => {
     dispatch(userDelete());
     dispatch(tokenDelete());
+    dispatch(docClear());
+    dispatch(vehClear());
 }
 
 // actionCreator get user photo

@@ -30,7 +30,7 @@ class App extends Component {
     this.props.getUser();
   }
   renderLoading() {
-    if (this.props.userData.loading) {
+    if (this.props.userData.loading || this.props.changeData.loading) {
       return (<Loading global={true} />)
     }
     return null;
@@ -72,6 +72,7 @@ App.propTypes = {
   history: PropTypes.object,
   getDriver: PropTypes.func,
   userData: PropTypes.object,
+  changeData: PropTypes.object
 }
 
 // Func which map State to props
@@ -79,6 +80,7 @@ const mapStateToProps = state => ({
   testData: state.testData,
   history: state.historyData.history,
   userData: state.userData,
+  changeData: state.chengeddata
 })
 
 // Func which map actionCreators to props

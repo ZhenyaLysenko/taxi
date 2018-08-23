@@ -6,15 +6,15 @@ export const UPDATE_FETCH_START = 'UPDATE_FETCH_START';
 export const UPDATE_FETCH_SUCCESS = 'UPDATE_FETCH_SUCCESS';
 export const UPDATE_FETCH_FAILED = 'UPDATE_FETCH_FAILED';
 
-const updatestart = () => ({
+export const updatestart = () => ({
     type: UPDATE_FETCH_START
 });
 
-const updatesuccess = () => ({
+export const updatesuccess = () => ({
     type: UPDATE_FETCH_SUCCESS
 });
 
-const updatefailed = () => ({
+export const updatefailed = (error) => ({
     type: UPDATE_FETCH_FAILED,
     error
 });

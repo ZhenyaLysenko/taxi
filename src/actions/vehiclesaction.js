@@ -2,12 +2,15 @@ import { apiurl } from '../appconfig';
 // Need to take token
 import { checkAndGetToken, checkAuth, logout } from './authaction';
 
+import { updatestart, updatesuccess, updatefailed } from './chengeaction';
+
 export const VEHICLE_FETCH_START = 'DOCUMENT_FETCH_START';
 export const VEHICLE_FETCH_SUCCESS = 'VEHICLE_FETCH_SUCCESS';
 export const VEHICLE_FETCH_FAILED = 'VEHICLE_FETCH_FAILED';
 export const VEHPHOTO_FETCH_START = 'VEHPHOTO_FETCH_START';
 export const VEHPHOTO_FETCH_SUCCESS = 'VEHPHOTO_FETCH_SUCCESS';
 export const VEHPHOTO_FETCH_FAILED = 'VEHPHOTO_FETCH_FAILED';
+export const VEHICLE_CLEAR = 'VEHICLE_CLEAR';
 // TODO: create all action's types
 
 
@@ -41,11 +44,22 @@ const vehphotoFailed = (error) => ({
     error
 })
 
+export const vehClear = () => ({
+    type: VEHICLE_CLEAR
+})
+
 // TODO: actionCreator upload Vehicle info
 export const uploadVehicle = (data, file) => (dispatch, getState) => {
-    dispatch(vehicleStart());
+    // dispatch(vehicleStart());
     const token = checkAndGetToken(getState);
-    if (data && file) {
+    const checkdata = (data) => {
+        if (data.number && data.model && data.brand && data.color) {
+            return true;
+        }
+        return false;
+    }
+    if (checkdata(data)) {
+        dispatch(updatestart());
         if (token) {
             fetch(`${apiurl}/api/vehicles`, {
                 method: 'PUT',
@@ -56,19 +70,31 @@ export const uploadVehicle = (data, file) => (dispatch, getState) => {
                 body: JSON.stringify(data)
             })
                 .then(res => {
-                    console.log(res);
                     if (res.status === 200 || res.status === 204 || res.status === 201 || res.status === 202) {
-                        dispatch(uploadVehPhoto(file, token));
+                        if (file) {
+                            dispatch(uploadVehPhoto(file, token));
+                        } else {
+                            dispatch(updatesuccess());
+                            dispatch(getVehicle());
+                        }
                     } else if (res.status === 401) {
                         dispatch(logout());
                     } else {
                         throw new Error(res.statusText);
                     }
                 })
-                .catch(error => dispatch(vehicleFailed(error.message)));
+                .catch(error => {
+                    dispatch(updatefailed(error.message));
+                    dispatch(vehicleFailed(error.message));
+                });
         } else {
             dispatch(logout());
         }
+    } else if (file) {
+        dispatch(updatestart());
+        dispatch(uploadVehPhoto(file, token));
+    } else {
+        dispatch(updatefailed('No data and photo'));
     }
 }
 
@@ -78,7 +104,6 @@ export const uploadVehPhoto = (file, token) => (dispatch, getState) => {
         if (token) {
             const data = new FormData();
             data.append('files', file);
-
             fetch(`${apiurl}/api/vehicles/images`, {
                 method: 'PUT',
                 headers: new Headers({
@@ -88,6 +113,7 @@ export const uploadVehPhoto = (file, token) => (dispatch, getState) => {
             })
                 .then(res => {
                     if (res.status === 200 || res.status === 204 || res.status === 201 || res.status === 202) {
+                        dispatch(updatesuccess());
                         dispatch(getVehicle());
                     } else if (res.status === 401) {
                         dispatch(logout());
@@ -95,7 +121,10 @@ export const uploadVehPhoto = (file, token) => (dispatch, getState) => {
                         throw new Error(res.statusText);
                     }
                 })
-                .catch(error => dispatch(error.message));
+                .catch(error => {
+                    dispatch(updatefailed(error.message));
+                    dispatch(vehicleFailed(error.message));
+                });
         } else {
             dispatch(logout());
         }

@@ -2,12 +2,15 @@ import { apiurl } from '../appconfig';
 // Need to take token
 import { checkAndGetToken, logout, checkAuth } from './authaction';
 
+import { updatestart, updatesuccess, updatefailed } from './chengeaction';
+
 export const DOCUMENT_FETCH_START = 'DOCUMENT_FETCH_START';
 export const DOCUMENT_FETCH_SUCCESS = 'DOCUMENT_FETCH_SUCCESS';
 export const DOCUMENT_FETCH_FAILED = 'DOCUMENT_FETCH_FAILED';
 export const DOCPHOTO_FETCH_START = 'DOCPHOTO_FETCH_START';
 export const DOCPHOTO_FETCH_SUCCESS = 'DOCPHOTO_FETCH_SUCCESS';
 export const DOCPHOTO_FETCH_FAILED = 'DOCPHOTO_FETCH_FAILED';
+export const DOCUMENT_CLEAR = 'DOCUMENT_CLEAR';
 // TODO: create all action's types
 
 // TODO: create all action's
@@ -36,15 +39,31 @@ const docphotoSuccess = (blob, url) => ({
 });
 
 const docphotoFailed = (error) => ({
-    type: DOCPHOTO_FETCH_START,
+    type: DOCPHOTO_FETCH_FAILED,
     error
+});
+
+export const docClear = (error) => ({
+
 });
 
 // TODO: actionCreator upload Document info
 export const uploadDocument = (data, file) => (dispatch, getState) => {
-    dispatch(docStart());
+    // dispatch(docStart());
     const token = checkAndGetToken(getState);
-    if (data && file) {
+    const checkData = (data) => {
+        if (data.dayFrom &&
+            data.yearFrom &&
+            data.monthFrom &&
+            data.dayTo &&
+            data.yearTo &&
+            data.monthTo) {
+            return true
+        }
+        return false
+    }
+    if (checkData(data)) {
+        dispatch(updatestart());
         if (token) {
             fetch(`${apiurl}/api/documents/driverlicense`, {
                 method: 'PUT',
@@ -56,24 +75,37 @@ export const uploadDocument = (data, file) => (dispatch, getState) => {
             })
                 .then(res => {
                     if (res.status === 200 || res.status === 204 || res.status === 201 || res.status === 202) {
-                        dispatch(uploadDocPhoto(file, token));
+                        if (file) {
+                            dispatch(uploadDocPhoto(file, token));
+                        } else {
+                            dispatch(updatesuccess());
+                            dispatch(getDocument());
+                        }
                     } else if (res.status === 401) {
                         dispatch(logout());
                     } else {
                         throw new Error(res.statusText);
                     }
                 })
-                .catch(error => dispatch(docFailed(error.message)));
-                
+                .catch(error => {
+                    dispatch(updatefailed(error.message));
+                    dispatch(docFailed(error.message));
+                });
+
         } else {
             dispatch(logout());
         }
+    } else if (file) {
+        dispatch(updatestart());
+        dispatch(uploadDocPhoto(file, token));
+    } else {
+        dispatch(updatefailed('No data and photo'));
     }
 }
 
 // TODO: actionCreator upload Document Photo
 export const uploadDocPhoto = (file, token) => (dispatch, getState) => {
-    dispatch(docphotoStart());
+    // dispatch(docphotoStart());
     if (file) {
         if (token) {
             const data = new FormData();
@@ -86,12 +118,20 @@ export const uploadDocPhoto = (file, token) => (dispatch, getState) => {
                 }),
                 body: data
             })
-                .then(res => checkAuth(res, dispatch))
-                .then(data => {
-                    // console.log(data);
-                    dispatch(getDocument());
+                .then(res => {
+                    if (res.status === 200 || res.status === 204 || res.status === 201 || res.status === 202) {
+                        dispatch(updatesuccess());
+                        dispatch(getDocument());
+                    } else if (res.status === 401) {
+                        dispatch(logout());
+                    } else {
+                        throw new Error(res.statusText);
+                    }
                 })
-                .catch(error => dispatch(docphotoFailed(error.message)));
+                .catch(error => {
+                    dispatch(updatefailed(error.message));
+                    dispatch(docphotoFailed(error.message));
+                });
         } else {
             dispatch(logout());
         }
@@ -109,13 +149,13 @@ export const getDocument = () => (dispatch, getState) => {
                 'Authorization': `Bearer ${token.auth_token}`
             })
         })
-        .then(res => checkAuth(res, dispatch))
-        .then(data => {
-            // console.log(data);
-            dispatch(docSuccess(data));
-            dispatch(getDocPhoto());
-        })
-        .catch(error => dispatch(docFailed(error.message)));
+            .then(res => checkAuth(res, dispatch))
+            .then(data => {
+                // console.log(data);
+                dispatch(docSuccess(data));
+                dispatch(getDocPhoto());
+            })
+            .catch(error => dispatch(docFailed(error.message)));
     } else {
         dispatch(logout());
     }
@@ -124,7 +164,7 @@ export const getDocument = () => (dispatch, getState) => {
 // TODO: actionCreator get Document phoho
 export const getDocPhoto = () => (dispatch, getState) => {
     dispatch(docphotoStart());
-    const token = checkAndGetToken(getState); 
+    const token = checkAndGetToken(getState);
     if (token) {
         fetch(`${apiurl}/api/documents/driverlicense/image`, {
             method: 'GET',

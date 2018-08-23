@@ -6,6 +6,7 @@ import {
     VEHPHOTO_FETCH_START,
     VEHPHOTO_FETCH_SUCCESS,
     VEHPHOTO_FETCH_FAILED,
+    VEHICLE_CLEAR
 } from '../actions/vehiclesaction';
 
 
@@ -28,6 +29,7 @@ const vehData = (state = initState, action) => {
         case VEHPHOTO_FETCH_START: return Object.assign({}, state, { loadphoto: true });
         case VEHPHOTO_FETCH_SUCCESS: return Object.assign({}, state, { loadphoto: false, blob: action.blob, url: action.url });
         case VEHPHOTO_FETCH_FAILED: return Object.assign({}, state, { loadphoto: false, errorphoto: action.error });
+        case VEHICLE_CLEAR: return Object.assign({}, initState);
         default: return state;
     }
 }
