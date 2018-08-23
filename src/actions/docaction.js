@@ -43,8 +43,8 @@ const docphotoFailed = (error) => ({
     error
 });
 
-export const docClear = (error) => ({
-
+export const docClear = () => ({
+    type: DOCUMENT_CLEAR
 });
 
 // TODO: actionCreator upload Document info
@@ -139,10 +139,10 @@ export const uploadDocPhoto = (file, token) => (dispatch, getState) => {
 }
 
 // TODO: actionCreator get Document info 
-export const getDocument = () => (dispatch, getState) => {
-    dispatch(docStart());
-    const token = checkAndGetToken(getState);
+export const getDocument = (tok) => (dispatch, getState) => {
+    const token = (tok) ? tok : checkAndGetToken(getState);
     if (token) {
+        dispatch(docStart());
         fetch(`${apiurl}/api/documents/driverlicense`, {
             method: 'GET',
             headers: new Headers({
@@ -153,7 +153,7 @@ export const getDocument = () => (dispatch, getState) => {
             .then(data => {
                 // console.log(data);
                 dispatch(docSuccess(data));
-                dispatch(getDocPhoto());
+                dispatch(getDocPhoto(token));
             })
             .catch(error => dispatch(docFailed(error.message)));
     } else {
@@ -162,10 +162,10 @@ export const getDocument = () => (dispatch, getState) => {
 }
 
 // TODO: actionCreator get Document phoho
-export const getDocPhoto = () => (dispatch, getState) => {
-    dispatch(docphotoStart());
-    const token = checkAndGetToken(getState);
+export const getDocPhoto = (tok) => (dispatch, getState) => {
+    const token = (tok) ? tok : checkAndGetToken(getState);
     if (token) {
+        dispatch(docphotoStart());
         fetch(`${apiurl}/api/documents/driverlicense/image`, {
             method: 'GET',
             headers: new Headers({

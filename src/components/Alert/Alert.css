@@ -45,6 +45,40 @@
     height: 32px;
 }
 
+.alertlocalcontainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alertlocalmain {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.alertlocaltext {
+    color: #2b2929;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.alertlocalclose {
+    background: #2b2929;
+    color: white;
+    font-size: 18px;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.alertlocalclose:hover {
+    opacity: 0.7;
+}
+
 @keyframes anim-container {
     0% {
         top: 10%;

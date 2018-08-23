@@ -38,11 +38,25 @@ class Alert extends Component {
                 );
             }
             return null;
-        } else {
-            return (
-                "Not yet local alert"
-            );
         }
+        if (this.props.local) {
+            if (this.props.message) {
+                return (
+                    <div className={style.alertlocalcontainer}>
+                        <div className={style.alertlocalmain}>
+                            <div className={style.alertlocaltext}>
+                                {this.props.message}
+                            </div>
+                        </div>
+                        <div className={style.alertlocalclose} onClick={this.props.click}>
+                            Try agin
+                        </div>
+                    </div>
+                );
+            }
+            return null;
+        }
+        return null;
     }
 }
 

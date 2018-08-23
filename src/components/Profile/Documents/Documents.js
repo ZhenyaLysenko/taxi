@@ -6,7 +6,7 @@ import Alert from '../../Alert/Alert';
 
 import { connect } from 'react-redux';
 
-import { getDocument } from '../../../actions/docaction';
+import { getDocument, getDocPhoto } from '../../../actions/docaction';
 import { clearErrors } from '../../../actions/authaction';
 
 class Documents extends Component {
@@ -26,7 +26,7 @@ class Documents extends Component {
             return <Loading />
         }
         if (this.props.docData.errorphoto) {
-            return "Error";
+            return <Alert local={true} message='Photo dont load' click={this.props.getDocPhoto} />
         }
         return null;
     }
@@ -36,7 +36,7 @@ class Documents extends Component {
         }
         if (this.props.docData.doc) {
             return (
-                <div>
+                <div className="container">
                     <h1>Documents</h1>
                     <div className={style.docPhoto}>
                         {this.renderPhoto()}
@@ -48,9 +48,9 @@ class Documents extends Component {
         }
         if (this.props.docData.errordoc) {
             return (
-                <div>
+                <div className="container">
                     <Alert global={true} error={this.props.docData.errordoc} close={this.props.clearErrors} />
-                    <h1>Documents</h1>
+                    <Alert local={true} message='Data dont load' click={this.props.getDoc} />
                 </div>
             );
         }
@@ -63,6 +63,7 @@ Documents.propTypes = {
     docData: PropTypes.object,
     getDoc: PropTypes.func,
     clearErrors: PropTypes.func,
+    getDocPhoto: PropTypes.func,
 }
 
 const mapStateToProps = state => ({
@@ -71,7 +72,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchtoProps = dispatch => ({
     getDoc: () => { dispatch(getDocument()) },
-    clearErrors: () => { dispatch(clearErrors()) }
+    clearErrors: () => { dispatch(clearErrors()) },
+    getDocPhoto: () => { dispatch(getDocPhoto()) }
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Documents);

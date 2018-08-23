@@ -5,7 +5,7 @@ import Loading from '../../Loading/Loading';
 
 import { connect } from 'react-redux';
 
-import { getVehicle } from '../../../actions/vehiclesaction';
+import { getVehicle, getVehPhoto } from '../../../actions/vehiclesaction';
 
 class Vehicle extends Component {
     constructor(props) {
@@ -24,14 +24,14 @@ class Vehicle extends Component {
             return <Loading />
         }
         if (this.props.vehData.errorphoto) {
-            return "Error";
+            return <Alert local={true} message='Photo dont load' click={this.props.getVehPhoto} />
         }
-        return "VEHICLE";
+        return null;
     }
     render() {
         if (this.props.vehData.veh) {
             return (
-                <div>
+                <div className="container">
                     <h1>Profile</h1>
                     <div className={style.vehPhoto}>
                         {this.renderPhoto()}
@@ -45,9 +45,9 @@ class Vehicle extends Component {
         }
         if (this.props.vehData.errorveh) {
             return (
-                <div>
-                    <h1>Vehilce</h1>
-                    Error
+                <div className="container">
+                    <Alert global={true} error={this.props.docData.errorveh} close={this.props.clearErrors} />
+                    <Alert local={true} message='Data dont load' click={this.props.getVehicle} />
                 </div>
             );
         }
@@ -66,7 +66,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchtoProps = dispatch => ({
-    getVehicle: () => { dispatch(getVehicle()) }
+    getVehicle: () => { dispatch(getVehicle()) },
+    getVehPhoto: () => { dispatch(getVehPhoto()) }
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Vehicle);

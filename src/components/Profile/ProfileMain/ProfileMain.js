@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './ProfileMain.css';
 import Loading from '../../Loading/Loading';
+import Alert from '../../Alert/Alert';
 
 import defaultphoto from '../../../assets/default-user.png';
 
-
 import { connect } from 'react-redux';
+
+import { getUser, getPhoto } from '../../../actions/authaction';
 
 class ProfileMain extends Component {
     constructor(props) {
@@ -20,7 +22,7 @@ class ProfileMain extends Component {
             return <Loading />
         }
         if (this.props.photoData.error) {
-            return "Error";
+            return <Alert local={true} message='Photo dont load' click={this.props.getPhoto} />
         }
         return <img src={defaultphoto} className={style.profilePhoto} alt='photo' />;
     }
@@ -39,6 +41,9 @@ class ProfileMain extends Component {
                 </div>
             );
         }
+        if (this.props.userData.error) {
+            return <Alert local={true} message='Data dont load' click={this.props.getUser} />
+        }
         return null;
     }
 }
@@ -55,6 +60,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchtoProps = dispatch => ({
+    getPhoto: () => { dispatch(getPhoto()) },
+    getUser: () => { dispatch(getUser()) }
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(ProfileMain);

@@ -94,7 +94,7 @@ export const refreshToken = () => (dispatch, getState) => {
 // actionCreator register driver
 export const registerDriver = (regdata, file) => (dispatch, getState) => {
     dispatch(userStart());
-    console.log(regdata);
+    // console.log(regdata);
     fetch(`${apiurl}/api/accounts/drivers`, {
         method: 'POST',
         headers: new Headers({
@@ -110,7 +110,7 @@ export const registerDriver = (regdata, file) => (dispatch, getState) => {
             }
         })
         .then(data => {
-            console.log(data);
+            // console.log(data);
             dispatch(loginDriver({ userName: regdata.userName, password: regdata.password }));
         })
         .catch(error => { dispatch(userFailed(error.message)) });
@@ -178,10 +178,12 @@ export const logout = () => (dispatch, getState) => {
 }
 
 // actionCreator get user photo
-export const getPhoto = (token, photoid) => (dispatch, getState) => {
+export const getPhoto = (tok, id) => (dispatch, getState) => {
+    const token = (tok) ? tok : checkAndGetToken(getState);
+    const photoid = (id) ? id : getState().userData.user.profilePictureId;
     if (photoid) {
-        dispatch(photoStart());
         if (token) {
+            dispatch(photoStart());
             fetch(`${apiurl}/api/images/${photoid}`, {
                 method: 'GET',
                 headers: new Headers({
@@ -210,11 +212,11 @@ export const getPhoto = (token, photoid) => (dispatch, getState) => {
 
 // actionCreator upload user photo
 export const uploadPhoto = (file) => (dispatch, getState) => {
-    dispatch(photoStart());
     const token = checkAndGetToken(getState);
     if (file) {
         dispatch(updatestart());
         if (token) {
+            dispatch(photoStart());
             const data = new FormData();
             data.append('files', file);
 

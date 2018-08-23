@@ -26,10 +26,10 @@ export const clearSuccess = () => ({
 });
 
 export const chengeName = (data) => (dispatch, getState) => {
-    dispatch(updatestart());
     const token = checkAndGetToken(getState);
     if (data) {
         if (token) {
+            dispatch(updatestart());
             fetch(`${apiurl}/api/accounts/drivers/${token.id}`, {
                 method: 'PUT',
                 headers: new Headers({

@@ -75,7 +75,7 @@ export const uploadVehicle = (data, file) => (dispatch, getState) => {
                             dispatch(uploadVehPhoto(file, token));
                         } else {
                             dispatch(updatesuccess('Vehicle is update'));
-                            dispatch(getVehicle());
+                            dispatch(getVehicle(token));
                         }
                     } else if (res.status === 401) {
                         dispatch(logout());
@@ -114,7 +114,7 @@ export const uploadVehPhoto = (file, token) => (dispatch, getState) => {
                 .then(res => {
                     if (res.status === 200 || res.status === 204 || res.status === 201 || res.status === 202) {
                         dispatch(updatesuccess('Vehicle is update'));
-                        dispatch(getVehicle());
+                        dispatch(getVehicle(token));
                     } else if (res.status === 401) {
                         dispatch(logout());
                     } else {
@@ -132,10 +132,10 @@ export const uploadVehPhoto = (file, token) => (dispatch, getState) => {
 }
 
 // TODO: actionCreator get Document info 
-export const getVehicle = () => (dispatch, getState) => {
-    dispatch(vehicleStart());
-    const token = checkAndGetToken(getState);
+export const getVehicle = (tok) => (dispatch, getState) => {
+    const token = (tok) ? tok : checkAndGetToken(getState);
     if (token) {
+        dispatch(vehicleStart());
         fetch(`${apiurl}/api/vehicles`, {
             method: 'GET',
             headers: new Headers({
@@ -146,7 +146,7 @@ export const getVehicle = () => (dispatch, getState) => {
             .then(data => {
                 // console.log(data);
                 dispatch(vehicleSuccess(data));
-                dispatch(getVehPhoto());
+                dispatch(getVehPhoto(token));
             })
             .catch(error => dispatch(vehicleFailed(error.message)));
     } else {
@@ -155,12 +155,12 @@ export const getVehicle = () => (dispatch, getState) => {
 }
 
 // TODO: actionCreator get Document phoho
-export const getVehPhoto = () => (dispatch, getState) => {
+export const getVehPhoto = (tok) => (dispatch, getState) => {
     const id = getState().vehData.veh.pictures[0];
     if (id) {
-        dispatch(vehphotoStart());
-        const token = checkAndGetToken(getState);
+        const token = (tok) ? tok : checkAndGetToken(getState);
         if (token) {
+            dispatch(vehphotoStart());
             fetch(`${apiurl}/api/images/${id}`, {
                 method: 'GET',
                 headers: new Headers({
