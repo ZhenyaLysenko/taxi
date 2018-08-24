@@ -7,10 +7,11 @@ import ProfileMain from './ProfileMain/ProfileMain';
 import Settings from './Settings/Settings';
 import Documents from './Documents/Documents';
 import Vehicle from './Vehicle/Vehicle';
+import Statistic from './Statistic/Statistic';
 
 import { connect } from 'react-redux';
 
-import { uploadPhoto, logout } from '../../actions/authaction';
+// import { uploadPhoto, logout } from '../../actions/authaction';
 
 class Profile extends Component {
     constructor(props) {
@@ -37,7 +38,7 @@ class Profile extends Component {
             case 'main': return <ProfileMain />;
             case 'documents': return <Documents />;
             case 'vehicle': return <Vehicle />;
-            case 'statistic': return <b>Statistic</b>;
+            case 'statistic': return <Statistic />;
             case 'settings': return <Settings />;
             default: return null;
         }
