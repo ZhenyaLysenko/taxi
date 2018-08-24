@@ -7,11 +7,13 @@ import styleHome from '../../Home/Home.css';
 import styleHeader from '../../Header/Header.css';
 import styleSignUpRide from '../Sign_up_rider/Sign_up_rider.css';
 
+import Alert from '../../Alert/Alert';
+
 // connect to redux
 import { connect } from 'react-redux';
 
 // import actionCreators
-import { registerDriver } from '../../../actions/authaction';
+import { registerDriver, clearErrors } from '../../../actions/authaction';
 
 class SignUpDriver extends Component {
     constructor(props) {
@@ -39,9 +41,16 @@ class SignUpDriver extends Component {
     submit() {
         this.props.register(this.state);
     }
+    renderError() {
+        if (this.props.userData.error) {
+            return <Alert global={true} error={this.props.userData.error} click={this.props.clearErrors} />
+        }
+        return null;
+    }
     render() {
         return (
             <div>
+                {this.renderError()}
                 <div className={styleSignInRide.signInBackground}>
                     <div className={styleSignInRide.orangeBackground + ' ' + styleSignUpRide.orangeBackground}></div>
                     <div className={styleHeader.logo}>
@@ -82,7 +91,7 @@ class SignUpDriver extends Component {
                                 <span className={styleSignInRide.inputSpan}>Enter your privat key (required)</span>
                                 <input className={styleSignInRide.signInInput} type="text" placeholder="Privat key" onChange={(e) => { this.setState({ privateKey: e.target.value }) }} />
                             </div>
-                            <input className={styleSignInRide.signInInput + ' ' + styleSignInRide.signInInputSubmit} type="button" value="Sign Up" onClick={this.submit.bind(this)}/>
+                            <input className={styleSignInRide.signInInput + ' ' + styleSignInRide.signInInputSubmit} type="button" value="Sign Up" onClick={this.submit.bind(this)} />
                             <p className={styleSignUpRide.policy}>
                                 By proceeding, I agree that Uber or its representatives may contact me by email, phone, or SMS (including by automatic telephone dialing system) at
                             the email address or number I provide, including for marketing purposes. I have read and understand the relevant <Link to="/policy">Privacy Policy</Link>.
@@ -99,6 +108,7 @@ SignUpDriver.propTypes = {
     userData: PropTypes.object,
     register: PropTypes.func,
     history: PropTypes.object,
+    clearErrors: PropTypes.func,
 }
 
 const mapStateToProps = state => ({
@@ -108,7 +118,8 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchtoProps = dispatch => ({
-    register: (data) => { dispatch(registerDriver(data)) }
+    register: (data) => { dispatch(registerDriver(data)) },
+    clearErrors: () => { dispatch(clearErrors()) }
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(SignUpDriver);

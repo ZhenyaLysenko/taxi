@@ -4,6 +4,8 @@ import style from './Documents.css';
 import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
 
+import defaultphoto from '../../../assets/default-license.png';
+
 import { connect } from 'react-redux';
 
 import { getDocument, getDocPhoto } from '../../../actions/docaction';
@@ -15,6 +17,7 @@ class Documents extends Component {
     }
     componentDidMount() {
         if (!this.props.docData.doc) {
+            console.log(this.props.docData.doc);
             this.props.getDoc();
         }
     }
@@ -28,7 +31,7 @@ class Documents extends Component {
         if (this.props.docData.errorphoto) {
             return <Alert local={true} message='Photo dont load' click={this.props.getDocPhoto} />
         }
-        return null;
+        return <img src={defaultphoto} alt='photo' />;
     }
     render() {
         if (this.props.docData.loaddoc) {
@@ -49,7 +52,7 @@ class Documents extends Component {
         if (this.props.docData.errordoc) {
             return (
                 <div className="container">
-                    <Alert global={true} error={this.props.docData.errordoc} close={this.props.clearErrors} />
+                    {/* <Alert global={true} error={this.props.docData.errordoc} click={this.props.clearErrors} /> */}
                     <Alert local={true} message='Data dont load' click={this.props.getDoc} />
                 </div>
             );

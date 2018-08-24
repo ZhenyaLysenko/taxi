@@ -6,8 +6,10 @@ import styleHome from '../../Home/Home.css';
 import styleHeader from '../../Header/Header.css';
 import styleSignInRider from '../Sign_in_rider/Sign_in_rider.css';
 
+import Alert from '../../Alert/Alert';
+
 import { connect } from 'react-redux';
-import { loginDriver } from '../../../actions/authaction';
+import { loginDriver, clearErrors, resendLetter } from '../../../actions/authaction';
 
 class SignInDriver extends Component {
     constructor(props) {
@@ -31,9 +33,23 @@ class SignInDriver extends Component {
         this.props.login(this.state);
         return false;
     }
+    renderError() {
+        if (this.props.userData.error) {
+            switch (this.props.userData.error) {
+                case 'Email not confirmed':
+                    return <Alert global={true} email={this.props.userData.error} click={this.props.clearErrors} send={() => { this.props.resendLetter(this.state) }} />;
+                case 'Email send':
+                    return <Alert global={true} success={this.props.userData.error} click={this.props.clearErrors} />;
+                default:
+                    return <Alert global={true} error={this.props.userData.error} click={this.props.clearErrors} />;
+            }
+        }
+        return null;
+    }
     render() {
         return (
             <div className={styleSignInRider.signInBackground}>
+                {this.renderError()}
                 <div className={styleSignInRider.orangeBackground}></div>
                 <div className={styleHeader.logo}>
                     <Link to="/home" className={styleHeader.headerLogo__a + ' ' + styleSignInRider.signInLogo}><button className={styleHeader.homeBtn}>
@@ -60,6 +76,8 @@ SignInDriver.propTypes = {
     userData: PropTypes.object,
     login: PropTypes.func,
     history: PropTypes.object,
+    clearErrors: PropTypes.func,
+    resendLetter: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -69,7 +87,9 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchtoProps = dispatch => ({
-    login: (data) => { dispatch(loginDriver(data)) }
+    login: (data) => { dispatch(loginDriver(data)) },
+    clearErrors: () => { dispatch(clearErrors()) },
+    resendLetter: (data) => { dispatch(resendLetter(data)) },
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(SignInDriver);

@@ -17,7 +17,7 @@ class Alert extends Component {
                         </div>
                         <div className={style.alertmain}>
                             <div className={style.alerttext}>
-                                WARN: {this.props.error}
+                                <strong className={style.alertlabel}>Warn:</strong> {this.props.error}
                             </div>
                         </div>
                     </div>
@@ -31,8 +31,23 @@ class Alert extends Component {
                         </div>
                         <div className={style.alertmain}>
                             <div className={style.alerttext}>
-                                Success: {this.props.success}
+                                <strong className={style.alertlabel}>Success:</strong> {this.props.success}
                             </div>
+                        </div>
+                    </div>
+                );
+            }
+            if (this.props.email) {
+                return (
+                    <div className={style.alertcontainer}>
+                        <div className={style.alertclose} onClick={this.props.click}>
+                            <img src={close} alt="close" />
+                        </div>
+                        <div className={style.alertmain}>
+                            <div className={style.alerttext}>
+                                <strong className={style.alertlabel}>Warn:</strong> {this.props.email}
+                            </div>
+                            <div className={style.resendBtn} onClick={this.props.send}>Resend letter</div>
                         </div>
                     </div>
                 );
@@ -49,7 +64,7 @@ class Alert extends Component {
                             </div>
                         </div>
                         <div className={style.alertlocalclose} onClick={this.props.click}>
-                            Try agin
+                            Try again
                         </div>
                     </div>
                 );

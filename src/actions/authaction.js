@@ -103,15 +103,20 @@ export const registerDriver = (regdata, file) => (dispatch, getState) => {
         body: JSON.stringify(regdata)
     })
         .then(res => {
-            if (res.status === 200 || res.status === 204) {
+            if (res.status === 200 || res.status === 204 || res.status === 201) {
+                return res.json();
+            } else if (res.status === 400) {
                 return res.json();
             } else {
                 throw new Error(res.statusText);
             }
         })
         .then(data => {
-            // console.log(data);
-            dispatch(loginDriver({ userName: regdata.userName, password: regdata.password }));
+            if (Array.isArray(data[Object.keys(data)[0]])) {
+                dispatch(userFailed(data[Object.keys(data)[0]][0]));
+            } else {
+                dispatch(loginDriver({ userName: regdata.userName, password: regdata.password }));
+            }
         })
         .catch(error => { dispatch(userFailed(error.message)) });
 }
@@ -127,16 +132,23 @@ export const loginDriver = (logdata) => (dispatch, getState) => {
         body: JSON.stringify(logdata)
     })
         .then(res => {
-            if (res.status !== 200) {
-                throw new Error(res.statusText);
-            } else {
+            if (res.status === 200 || res.status === 201 || res.status === 204) {
                 return res.json();
+            } else if (res.status === 400) {
+                return res.json();
+            } else {
+                throw new Error(res.statusText);
             }
         })
         .then(token => {
-            token.role = 'driver';
-            dispatch(tokenSuccess(token));
-            dispatch(getDriver(token));
+            if (token.auth_token) {
+                token.role = 'driver';
+                dispatch(tokenSuccess(token));
+                dispatch(getDriver(token));
+            } else {
+                console.log(token[Object.keys(token)[0]][0]);
+                dispatch(userFailed(token[Object.keys(token)[0]][0]));
+            }
         })
         .catch(error => {
             dispatch(userFailed(error.message));
@@ -193,7 +205,9 @@ export const getPhoto = (tok, id) => (dispatch, getState) => {
                 .then(res => {
                     if (res.status === 401) {
                         dispatch(logout());
-                    } else if (res.status === 200 || res.status === 204) {
+                    } else if (res.status === 404) {
+                        dispatch(photoSuccess(null, null));
+                    } else if (res.status === 200 || res.status === 204 || res.status === 201) {
                         return res.blob();
                     } else {
                         throw new Error(res.statusText);
@@ -304,4 +318,22 @@ export const updateAdmin = (data) => (dispatch, getState) => {
 
 }
 
+export const resendLetter = (data) => (dispatch, getState) => {
+    dispatch(userStart());
+    fetch(`${apiurl}/api/Auth/resendemail`, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(data)
+    })
+        .then(res => {
+            if (res.status === 204) {
+                dispatch(userFailed('Email send'));
+            } else {
+                throw new Error(res.statusText);
+            }
+        })
+        .catch(error => dispatch(userFailed(error.message)));
+}
 

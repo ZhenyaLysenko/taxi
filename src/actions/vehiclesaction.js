@@ -4,7 +4,7 @@ import { checkAndGetToken, checkAuth, logout } from './authaction';
 
 import { updatestart, updatesuccess, updatefailed } from './chengeaction';
 
-export const VEHICLE_FETCH_START = 'DOCUMENT_FETCH_START';
+export const VEHICLE_FETCH_START = 'VEHICLE_FETCH_START';
 export const VEHICLE_FETCH_SUCCESS = 'VEHICLE_FETCH_SUCCESS';
 export const VEHICLE_FETCH_FAILED = 'VEHICLE_FETCH_FAILED';
 export const VEHPHOTO_FETCH_START = 'VEHPHOTO_FETCH_START';
@@ -170,6 +170,8 @@ export const getVehPhoto = (tok) => (dispatch, getState) => {
                 .then(res => {
                     if (res.status === 401) {
                         dispatch(logout());
+                    } else if (res.status === 404) {
+                        dispatch(vehphotoSuccess(null, null));
                     } else if (res.status === 200 || res.status === 204 || res.status === 201 || res.status === 202) {
                         return res.blob();
                     } else {
@@ -184,5 +186,7 @@ export const getVehPhoto = (tok) => (dispatch, getState) => {
         } else {
             dispatch(logout());
         }
-    } 
+    } else {
+        dispatch(vehphotoSuccess(null, null));
+    }
 }

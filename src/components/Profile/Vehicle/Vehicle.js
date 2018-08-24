@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './Vehicle.css';
 import Loading from '../../Loading/Loading';
+import Alert from '../../Alert/Alert';
+
+import defaultphoto from '../../../assets/default-vehicle.png'
 
 import { connect } from 'react-redux';
 
 import { getVehicle, getVehPhoto } from '../../../actions/vehiclesaction';
+import { clearErrors } from '../../../actions/authaction';
 
 class Vehicle extends Component {
     constructor(props) {
@@ -26,7 +30,7 @@ class Vehicle extends Component {
         if (this.props.vehData.errorphoto) {
             return <Alert local={true} message='Photo dont load' click={this.props.getVehPhoto} />
         }
-        return null;
+        return <img src={defaultphoto} alt='photo' />;
     }
     render() {
         if (this.props.vehData.veh) {
@@ -46,7 +50,7 @@ class Vehicle extends Component {
         if (this.props.vehData.errorveh) {
             return (
                 <div className="container">
-                    <Alert global={true} error={this.props.docData.errorveh} close={this.props.clearErrors} />
+                    {/* <Alert global={true} error={this.props.vehData.errorveh} click={this.props.clearErrors} /> */}
                     <Alert local={true} message='Data dont load' click={this.props.getVehicle} />
                 </div>
             );
@@ -59,6 +63,7 @@ class Vehicle extends Component {
 Vehicle.propTypes = {
     vehData: PropTypes.object,
     getVehicle: PropTypes.func,
+    clearErrors: PropTypes.func,
 }
 
 const mapStateToProps = state => ({
@@ -67,7 +72,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchtoProps = dispatch => ({
     getVehicle: () => { dispatch(getVehicle()) },
-    getVehPhoto: () => { dispatch(getVehPhoto()) }
+    getVehPhoto: () => { dispatch(getVehPhoto()) },
+    clearErrors: () => { dispatch(clearErrors()) },
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Vehicle);

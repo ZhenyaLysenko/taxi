@@ -12,14 +12,17 @@
 }
 
 .alertmain {
+    z-index: 11;
     position: relative;
     width: 100%;
     background: #2b2929;
     display: flex;
+    flex-flow: row wrap;
     padding: 40px 20px;
 }
 
 .alerttext {
+    flex-grow: 1;
     color: white;
     font-weight: bold;
     font-size: 18pt;
@@ -28,7 +31,7 @@
 .alertclose {
     cursor: pointer;
     position: absolute;
-    z-index: 10;
+    z-index: 12;
     top: 0;
     right: 0;
     padding: 5px;
@@ -64,6 +67,7 @@
     font-size: 18px;
     font-weight: bold;
     padding: 10px;
+    margin: 5px 0;
 }
 
 .alertlocalclose {
@@ -77,6 +81,26 @@
 
 .alertlocalclose:hover {
     opacity: 0.7;
+}
+.alertlabel {
+    color: #faa71a;
+}
+
+.resendBtn {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background: #2b2929;
+    border: 2px solid white;
+    padding: 5px;
+    margin: 5px 5px;
+    transition: all .3s ease-out;
+}
+
+.resendBtn:hover {
+    color: #2b2929;
+    background: white;
 }
 
 @keyframes anim-container {

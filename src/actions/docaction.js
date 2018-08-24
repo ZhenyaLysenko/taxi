@@ -151,7 +151,6 @@ export const getDocument = (tok) => (dispatch, getState) => {
         })
             .then(res => checkAuth(res, dispatch))
             .then(data => {
-                // console.log(data);
                 dispatch(docSuccess(data));
                 dispatch(getDocPhoto(token));
             })
@@ -175,6 +174,9 @@ export const getDocPhoto = (tok) => (dispatch, getState) => {
             .then(res => {
                 if (res.status === 401) {
                     dispatch(logout());
+                } else if (res.status === 404) {
+                    dispatch(docphotoSuccess(null, null));
+                    return null
                 } else if (res.status === 200 || res.status === 204 || res.status === 201 || res.status === 202) {
                     return res.blob();
                 } else {
@@ -182,8 +184,10 @@ export const getDocPhoto = (tok) => (dispatch, getState) => {
                 }
             })
             .then(blob => {
-                const url = URL.createObjectURL(blob);
-                dispatch(docphotoSuccess(blob, url));
+                if (blob) {
+                    const url = URL.createObjectURL(blob);
+                    dispatch(docphotoSuccess(blob, url));
+                }
             })
             .catch(error => dispatch(docphotoFailed(error.message)));
     } else {
