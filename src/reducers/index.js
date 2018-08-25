@@ -10,6 +10,7 @@ import { docData } from './docreducer';
 import { vehData } from './vehiclereducer';
 import { chengeddata } from './chengereducer';
 import { statData } from './statreducer';
+import { resetData } from "./resetreducer";
 // Here combine custom reducers
 export default combineReducers({
     testData,
@@ -21,4 +22,5 @@ export default combineReducers({
     vehData,
     chengeddata,
     statData,
+    resetData,
 });

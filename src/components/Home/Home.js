@@ -46,19 +46,19 @@ class Home extends Component {
                                     <p className={style.howItWorksP}>
                                         Get the free Uber app from the App Store or Google Play
                                         on your smartphone. Open the app to create your account.
-                            </p>
+                                    </p>
                                     <li><a className={style.howItWorksA}>Request the trip</a></li>
                                     <p className={style.howItWorksP}>
                                         Enter your destination and choose a ride option. You’ll always see the price up front.
-                            </p>
+                                    </p>
                                     <li><a className={style.howItWorksA}>Ride</a></li>
                                     <p className={style.howItWorksP}>
                                         You'll see your driver's picture and vehicle details, and can track their arrival on the map.
-                            </p>
+                                    </p>
                                     <li><a className={style.howItWorksA}>Pay crypto</a></li>
                                     <p className={style.howItWorksP}>
                                         The Taxi Coin Blockchain provides each user paying for the trip by our tokens.
-                            </p>
+                                    </p>
                                 </ol>
                             </div>
                             <div className={style.howItWorksFlexItem}>
@@ -68,25 +68,25 @@ class Home extends Component {
                                     <p className={style.howItWorksP}>
                                         Do you have an email address and smartphone? Great, now tell us a
                                         bit more about yourself and we will help you to get started.
-                                </p>
+                                    </p>
                                     <li><a className={style.howItWorksA}>Upload your documents</a></li>
                                     <p className={style.howItWorksP}>
                                         Prepare the necessary documents.
-                                </p>
+                                    </p>
                                     <li><a className={style.howItWorksA}>Get a vehicle</a></li>
                                     <p className={style.howItWorksP}>
                                         What car do you want to use for riding? Make sure it meets standards in your country.
-                                </p>
+                                    </p>
                                     <li><a className={style.howItWorksA}>Activate your account</a></li>
                                     <p className={style.howItWorksP}>
                                         If you have completed all of the steps above, welcome! You are ready to
                                         activate your account and start making money.
-                                </p>
+                                    </p>
                                     <li><a className={style.howItWorksA}>Earn tokens for each trip</a></li>
                                     <p className={style.howItWorksP}>
                                         The Taxi Coin Blockchain provides each driver earns tokens for the trip
                                         what he can change on whatever currency what he want.
-                                </p>
+                                    </p>
                                 </ol>
                             </div>
                         </div>
@@ -98,7 +98,7 @@ class Home extends Component {
                         <h2 className={style.becomeDriver__h2}>
                             <span className={style.whiteSpan}>Drive when you want</span> <br />
                             Make what you need
-                </h2>
+                        </h2>
                         <Link to="/drive"><button className={style.bannerBtn + " " + style.driveBtn}>BECOME A DRIVER</button></Link>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ class Home extends Component {
                                 Network participants have their own private keys that are assigned
                                 to the transactions they make and act as a personal digital signature.
                                 All trips will be recorded.
-                  </p>
+                            </p>
                         </div>
                         <div className={style.why__item}>
                             <img className={style.why__img} src="../../public/Home/bitcoin.jpg" alt="bitcoin" />
@@ -124,7 +124,7 @@ class Home extends Component {
                                 With a unique currency, fair compensation, transparent contracts and no intermediaries.
                                 Taxi Coin is revolutionizing the creation and distribution of value for taxi activity.
                                 The Taxi Coin Blockchain provides each user paying for the trip by our tokens.
-                  </p>
+                            </p>
                         </div>
                         <div className={style.why__item}>
                             <img className={style.why__img} src="../../public/Home/taxi.jpg" alt="taxi" />
@@ -133,7 +133,7 @@ class Home extends Component {
                                 Blockchain could have a similarly disruptive effect to the internet, or it could be the next Y2K.
                                 It’ll be up to innovators, disruptors, and visionaries to accept, or address the “status quo” and
                                 ultimately, create a better financial system for all people.
-                  </p>
+                            </p>
                         </div>
                     </div>
                 </div>

@@ -15,6 +15,7 @@ import SignUpDriver from '../Sign_up/Sign_up_driver/Sign_up_driver';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
 import Policy from '../Policy/Policy';
 import Profile from '../Profile/Profile';
+import ResetPassword from '../ResetPassword/ResetPassword';
 import Loading from '../Loading/Loading';
 
 // test connect redux to react
@@ -56,6 +57,7 @@ class App extends Component {
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/policy" component={Policy} />
         <Route path='/profile' component={Profile} />
+        <Route path='/reset-password' component={ResetPassword} />
       </div>
     </Router>);
   }
