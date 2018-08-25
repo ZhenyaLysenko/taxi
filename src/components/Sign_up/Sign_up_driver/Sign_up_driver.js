@@ -60,7 +60,7 @@ class SignUpDriver extends Component {
                     </div>
                     <div className={styleSignInRide.signInInner}>
                         <h1 className={styleSignIn.title__h1 + ' ' + styleSignInRide.signInTitle}>Sign <span className={styleHome.yellow_span}>Up</span> as driver</h1>
-                        <form>
+                        <form onSubmit={(e) => { e.preventDefault() }}>
                             <div className={styleSignUpRide.flexInput + ' ' + styleSignUpRide.marginBot}>
                                 <div className={styleSignUpRide.width50}>
                                     <span className={styleSignInRide.inputSpan}>First name (required)</span>
@@ -91,7 +91,7 @@ class SignUpDriver extends Component {
                                 <span className={styleSignInRide.inputSpan}>Enter your privat key (required)</span>
                                 <input className={styleSignInRide.signInInput} type="text" placeholder="Privat key" onChange={(e) => { this.setState({ privateKey: e.target.value }) }} />
                             </div>
-                            <input className={styleSignInRide.signInInput + ' ' + styleSignInRide.signInInputSubmit} type="button" value="Sign Up" onClick={this.submit.bind(this)} />
+                            <input className={styleSignInRide.signInInput + ' ' + styleSignInRide.signInInputSubmit} type="submit" value="Sign Up" onClick={this.submit.bind(this)} />
                             <p className={styleSignUpRide.policy}>
                                 By proceeding, I agree that Uber or its representatives may contact me by email, phone, or SMS (including by automatic telephone dialing system) at
                             the email address or number I provide, including for marketing purposes. I have read and understand the relevant <Link to="/policy">Privacy Policy</Link>.

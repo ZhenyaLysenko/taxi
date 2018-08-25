@@ -59,11 +59,11 @@ class SignInDriver extends Component {
                 <div className={styleSignInRider.signInInner}>
                     <h1 className={styleSignIn.title__h1 + ' ' + styleSignInRider.signInTitle}>Sign <span className={styleHome.yellow_span}>In</span> as driver</h1>
                     <span className={styleSignInRider.inputSpan}>Enter your data</span>
-                    <form>
+                    <form onSubmit={(e) => { e.preventDefault() }}>
                         <input className={styleSignInRider.signInInput} type="email" placeholder="Your email adress" onChange={(e) => { this.setState({ userName: e.target.value }) }} />
                         <Link to="/forgot-password" className={styleSignInRider.forgotPass}><span>Forgot your password ?</span></Link>
                         <input className={styleSignInRider.signInInput} type="password" placeholder="Your password" onChange={(e) => { this.setState({ password: e.target.value }) }} />
-                        <input className={styleSignInRider.signInInput + ' ' + styleSignInRider.signInInputSubmit} type="button" value="Submit" onClick={this.submit.bind(this)} />
+                        <input className={styleSignInRider.signInInput + ' ' + styleSignInRider.signInInputSubmit} type="submit" value="Submit" onClick={this.submit.bind(this)} />
                     </form>
                     <span>Don't have an account? <NavLink to="/sign-up-driver" className={styleSignInRider.signUpSmallBtn}>Sign up</NavLink></span>
                 </div>
