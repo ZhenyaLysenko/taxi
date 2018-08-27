@@ -144,7 +144,7 @@ export const loginDriver = (logdata) => (dispatch, getState) => {
         })
         .then(token => {
             if (token.auth_token) {
-                token.role = 'driver';
+                token.role = 'drivers';
                 dispatch(tokenSuccess(token));
                 dispatch(getDriver(token));
             } else {
@@ -180,10 +180,12 @@ export const getDriver = (token) => (dispatch, getState) => {
                 }
             })
             .then(data => {
-                data.role = 'driver';
-                dispatch(userSuccess(data));
-                if (!getState().photoData.url || (getState().userData.user && data.profilePictureId !== getState().userData.user.profilePictureId)) {
-                    dispatch(getPhoto(token, data.profilePictureId));
+                if (data) {
+                    data.role = 'drivers';
+                    dispatch(userSuccess(data));
+                    if (!getState().photoData.url || (getState().userData.user && data.profilePictureId !== getState().userData.user.profilePictureId)) {
+                        dispatch(getPhoto(token, data.profilePictureId));
+                    }
                 }
             })
             .catch(error => dispatch(userFailed(error.message)));
@@ -323,7 +325,7 @@ export const loginCustomer = (logdata) => (dispatch, getState) => {
         })
         .then(token => {
             if (token.auth_token) {
-                token.role = 'customer';
+                token.role = 'customers';
                 dispatch(tokenSuccess(token));
                 dispatch(getCustomer(token));
             } else {
@@ -359,10 +361,12 @@ export const getCustomer = (token) => (dispatch, getState) => {
                 }
             })
             .then(data => {
-                data.role = 'customer';
-                dispatch(userSuccess(data));
-                if (!getState().photoData.url || (getState().userData.user && data.profilePictureId !== getState().userData.user.profilePictureId)) {
-                    dispatch(getPhoto(token, data.profilePictureId));
+                if (data) {
+                    data.role = 'customers';
+                    dispatch(userSuccess(data));
+                    if (!getState().photoData.url || (getState().userData.user && data.profilePictureId !== getState().userData.user.profilePictureId)) {
+                        dispatch(getPhoto(token, data.profilePictureId));
+                    }
                 }
             })
             .catch(error => dispatch(userFailed(error.message)));
@@ -391,28 +395,22 @@ export const getUser = () => (dispatch, getState) => {
     const token = checkAndGetToken(getState);
     if (token && token.role) {
         switch (token.role) {
-            case 'admin': dispatch(getAdmin(token));
-            case 'driver': dispatch(getDriver(token));
-            case 'customer': dispatch(getCustomer(token));
+            case 'admins': {
+                dispatch(getAdmin(token));
+                break;
+            }
+            case 'drivers': {
+                dispatch(getDriver(token));
+                break;
+            }
+            case 'customers': {
+                dispatch(getCustomer(token));
+                break;
+            }
         }
     } else {
         dispatch(logout());
     }
-}
-
-// TODO: create ActionCreator update Driver profile
-export const updateDriver = (data) => (dispatch, getState) => {
-
-}
-
-// TODO: create ActionCreator update Customer profile
-export const updateCustomer = (data) => (dispatch, getState) => {
-
-}
-
-// TODO: create ActionCreator update Admin profile
-export const updateAdmin = (data) => (dispatch, getState) => {
-
 }
 
 export const resendLetter = (data) => (dispatch, getState) => {

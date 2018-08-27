@@ -19,7 +19,7 @@ const initUserData = {
 
 const userData = (state = initUserData, action) => {
     switch (action.type) {
-        case USER_FETCH_START: return { user: null, error: null, loading: true };
+        case USER_FETCH_START: return { user: state.user, error: null, loading: true };
         case USER_FETCH_SUCCESS: return { user: action.user, error: null, loading: false };
         case USER_FETCH_FAILED: return { user: null, error: action.error, loading: false };
         case USER_DELETE: return initUserData;

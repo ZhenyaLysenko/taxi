@@ -30,12 +30,12 @@ export const clearUpdate = () => ({
     type: CLEAR_UPDATE
 });
 
-export const chengeName = (data) => (dispatch, getState) => {
+export const changeProfile = (data) => (dispatch, getState) => {
     const token = checkAndGetToken(getState);
     if (data) {
         if (token) {
             dispatch(updatestart());
-            fetch(`${apiurl}/api/accounts/drivers/${token.id}`, {
+            fetch(`${apiurl}/api/accounts/${token.role}/${token.id}`, {
                 method: 'PUT',
                 headers: new Headers({
                     'Content-Type': 'application/json',
@@ -45,14 +45,14 @@ export const chengeName = (data) => (dispatch, getState) => {
             })
                 .then(res => {
                     if (res.status === 204) {
-                        dispatch(updatesuccess('Name is update'));
+                        dispatch(updatesuccess('Proile was updated'));
                         dispatch(getUser());
                     }
                     else {
                         throw new Error(res.statusText)
                     }
                 })
-                .catch(error => dispatch(updatefailed(error.massege)));
+                .catch(error => dispatch(updatefailed(error.message)));
 
         }
         else {
