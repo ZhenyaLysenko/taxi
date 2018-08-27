@@ -115,7 +115,7 @@ export const registerDriver = (regdata, file) => (dispatch, getState) => {
             if (Array.isArray(data[Object.keys(data)[0]])) {
                 dispatch(userFailed(data[Object.keys(data)[0]][0]));
             } else {
-                dispatch(loginDriver({ userName: regdata.userName, password: regdata.password }));
+                dispatch(loginDriver({ userName: regdata.email, password: regdata.password }));
             }
         })
         .catch(error => { dispatch(userFailed(error.message)) });
