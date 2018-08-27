@@ -146,7 +146,7 @@ export const loginDriver = (logdata) => (dispatch, getState) => {
                 dispatch(tokenSuccess(token));
                 dispatch(getDriver(token));
             } else {
-                console.log(token[Object.keys(token)[0]][0]);
+                // console.log(token[Object.keys(token)[0]][0]);
                 dispatch(userFailed(token[Object.keys(token)[0]][0]));
             }
         })
@@ -168,11 +168,9 @@ export const getDriver = (token) => (dispatch, getState) => {
             .then(res => checkAuth(res, dispatch))
             .then(data => {
                 data.role = 'driver';
+                dispatch(userSuccess(data));
                 if (!getState().photoData.url || (getState().userData.user && data.profilePictureId !== getState().userData.user.profilePictureId)) {
-                    dispatch(userSuccess(data));
                     dispatch(getPhoto(token, data.profilePictureId));
-                } else {
-                    dispatch(userSuccess(data));
                 }
             })
             .catch(error => dispatch(userFailed(error.message)));
@@ -260,18 +258,91 @@ export const uploadPhoto = (file) => (dispatch, getState) => {
 }
 
 // TODO: actionCreator register Customer
-export const registerCustomer = () => (dispatch, getState) => {
-
+export const registerCustomer = (regdata, file) => (dispatch, getState) => {
+    dispatch(userStart());
+    // console.log(regdata);
+    fetch(`${apiurl}/api/accounts/customers`, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(regdata)
+    })
+        .then(res => {
+            if (res.status === 200 || res.status === 204 || res.status === 201) {
+                return res.json();
+            } else if (res.status === 400) {
+                return res.json();
+            } else {
+                throw new Error(res.statusText);
+            }
+        })
+        .then(data => {
+            if (Array.isArray(data[Object.keys(data)[0]])) {
+                dispatch(userFailed(data[Object.keys(data)[0]][0]));
+            } else {
+                dispatch(loginCustomer({ userName: regdata.email, password: regdata.password }));
+            }
+        })
+        .catch(error => { dispatch(userFailed(error.message)) });
 }
 
 // TODO: actionCreator login Customer
-export const loginCustomer = () => (dispatch, getState) => {
-
+export const loginCustomer = (logdata) => (dispatch, getState) => {
+    dispatch(userStart());
+    fetch(`${apiurl}/api/Auth/customer`, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(logdata)
+    })
+        .then(res => {
+            if (res.status === 200 || res.status === 201 || res.status === 204) {
+                return res.json();
+            } else if (res.status === 400) {
+                return res.json();
+            } else {
+                throw new Error(res.statusText);
+            }
+        })
+        .then(token => {
+            if (token.auth_token) {
+                token.role = 'customer';
+                dispatch(tokenSuccess(token));
+                dispatch(getDriver(token));
+            } else {
+                // console.log(token[Object.keys(token)[0]][0]);
+                dispatch(userFailed(token[Object.keys(token)[0]][0]));
+            }
+        })
+        .catch(error => {
+            dispatch(userFailed(error.message));
+            // dispatch(logout());
+        });
 }
 
 // TODO: actionCreator get Customer profile
 export const getCustomer = (token) => (dispatch, getState) => {
-
+    if (token) {
+        fetch(`${apiurl}/api/accounts/customers/${token.id}`, {
+            method: 'GET',
+            headers: new Headers({
+                'Authorization': `Bearer ${token.auth_token}`
+            })
+        })
+            .then(res => checkAuth(res, dispatch))
+            .then(data => {
+                data.role = 'customer';
+                dispatch(userSuccess(data));
+                if (!getState().photoData.url || (getState().userData.user && data.profilePictureId !== getState().userData.user.profilePictureId)) {
+                    dispatch(getPhoto(token, data.profilePictureId));
+                }
+            })
+            .catch(error => dispatch(userFailed(error.message)));
+    } else {
+        dispatch(logout());
+    }
 }
 
 // TODO: actionCreator register Admin
