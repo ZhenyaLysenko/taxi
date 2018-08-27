@@ -41,10 +41,17 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg)$/,
-        loader: 'url-loader'
-      },
-      
+        test: /\.(png|jpg|svg|otf|ttf)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: 'assets/[name].[ext]'
+            }
+          }
+        ]
+      }
     ]
   },
   devServer: {

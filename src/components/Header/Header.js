@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter, Route, NavLink, Link } from 'react-router-dom';
 import style from './Header.css';
+import burger from './burger.css';
 
 import { connect } from 'react-redux';
 
@@ -11,35 +12,35 @@ class Header extends Component {
 
     renderSocial() {
         return (
-            <div id="flexIcons">
-                <div id="socialIcon">
+            <div id={burger.flexIcons}>
+                <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id="socialImg" src="../../public/Home/twitter.png" alt="twitter" />
+                        <img id={burger.socialImg} src="../../public/Home/twitter.png" alt="twitter" />
                     </a>
                 </div>
-                <div id="socialIcon">
+                <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id="socialImg" src="../../public/Home/facebook.png" alt="facebook" />
+                        <img id={burger.socialImg} src="../../public/Home/facebook.png" alt="facebook" />
                     </a>
                 </div>
-                <div id="socialIcon">
+                <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id="socialImg" src="../../public/Home/instagram.png" alt="instagram" />
+                        <img id={burger.socialImg} src="../../public/Home/instagram.png" alt="instagram" />
                     </a>
                 </div>
-                <div id="socialIcon">
+                <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id="socialImg" src="../../public/Home/linkedin.png" alt="linkedin" />
+                        <img id={burger.socialImg} src="../../public/Home/linkedin.png" alt="linkedin" />
                     </a>
                 </div>
-                <div id="socialIcon">
+                <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id="socialImg" src="../../public/Home/reddit.png" alt="reddit" />
+                        <img id={burger.socialImg} src="../../public/Home/reddit.png" alt="reddit" />
                     </a>
                 </div>
-                <div id="socialIcon">
+                <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id="socialImg" src="../../public/Home/telegram.png" alt="telegram" />
+                        <img id={burger.socialImg} src="../../public/Home/telegram.png" alt="telegram" />
                     </a>
                 </div>
             </div>
@@ -48,28 +49,28 @@ class Header extends Component {
     renderToggle() {
         if (!this.props.userData.user) {
             return (
-                <div id="menuToggle">
+                <div id={burger.menuToggle}>
                     <input type="checkbox" />
                     <span></span>
                     <span></span>
                     <span></span>
-                    <ul id="menu">
+                    <ul id={burger.menu}>
                         <NavLink to="/sign-in"><li>SIGN IN</li></NavLink>
                         <NavLink to="/ride"><li>RIDE</li></NavLink>
                         <NavLink to="/drive"><li>DRIVE</li></NavLink>
-                        <h2 id="readMore__h2">Go in <span id="yellow_span">social</span></h2>
+                        <h2 id={burger.readMore__h2}>Go in <span id="yellow_span">social</span></h2>
                         {this.renderSocial()}
                     </ul>
                 </div>
             );
         } else {
             return (
-                <div id="menuToggle">
+                <div id={burger.menuToggle}>
                     <input type="checkbox" />
                     <span></span>
                     <span></span>
                     <span></span>
-                    <ul id="menu">
+                    <ul id={burger.menu}>
                         <NavLink to="/profile"><li>Profile</li></NavLink>
                         <NavLink to="/ride"><li>RIDE</li></NavLink>
                         <NavLink to="/drive"><li>DRIVE</li></NavLink>
