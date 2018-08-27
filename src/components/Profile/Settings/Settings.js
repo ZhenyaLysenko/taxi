@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import style from './Settings.css';
 // import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
+import Changes from './Changes/Changes';
 
 import { connect } from 'react-redux';
 
@@ -10,6 +11,7 @@ import { uploadPhoto, clearErrors } from '../../../actions/authaction';
 import { uploadDocument } from '../../../actions/docaction';
 import { chengeName, clearSuccess } from '../../../actions/chengeaction';
 import { uploadVehicle } from '../../../actions/vehiclesaction';
+
 
 class Settings extends Component {
     constructor(props) {
@@ -26,6 +28,11 @@ class Settings extends Component {
             yearTo: "",
             monthTo: "",
             firstName: "",
+            lastName: "",
+            phoneNumber: "",
+            city: "",
+            currentPassword: "",
+            newPassword: "",
             vehphoto: null,
             vehphotourl: null,
             number: "",
@@ -45,12 +52,6 @@ class Settings extends Component {
             reader.readAsDataURL(file);
             this.setState({ newphoto: file });
         }
-    }
-    updateName() {
-        this.props.chengeName({
-            firstName: this.state.firstName,
-        })
-
     }
     uploadNewPhoto() {
         this.props.uploadPhoto(this.state.newphoto);
@@ -118,11 +119,7 @@ class Settings extends Component {
                         <input type='file' accept='image/*' onChange={(e) => { this.chooseNewPhoto(e) }} />
                         <button onClick={this.uploadNewPhoto.bind(this)}>Apply</button>
                     </div>
-                    <div>
-                        <h1>Change Name</h1>
-                        <input type='text' placeholder="new name" required onChange={(e) => { this.setState({ firstName: e.target.value }) }} />
-                        <button onClick={this.updateName.bind(this)}>Apply</button>
-                    </div>
+                    <Changes />
                     <div>
                         <h1>Add Documents</h1>
                         <input type='file' accept='image/*' onChange={(e) => { this.chooseDocPhoto(e) }} />
@@ -156,7 +153,6 @@ Settings.propTypes = {
     photoData: PropTypes.object,
     uploadPhoto: PropTypes.func,
     uploadDocument: PropTypes.func,
-    chengeName: PropTypes.func,
     changedData: PropTypes.object,
     clearErrors: PropTypes.func,
     clearSuccess: PropTypes.func,
@@ -171,7 +167,6 @@ const mapStateToProps = state => ({
 const mapDispatchtoProps = dispatch => ({
     uploadPhoto: (file) => { dispatch(uploadPhoto(file)) },
     uploadDocument: (data, file) => { dispatch(uploadDocument(data, file)) },
-    chengeName: (data) => { dispatch(chengeName(data)) },
     uploadVehicle: (data, file) => { dispatch(uploadVehicle(data, file)) },
     clearErrors: () => { dispatch(clearErrors()) },
     clearSuccess: () => { dispatch(clearSuccess()) },
