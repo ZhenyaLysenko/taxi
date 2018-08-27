@@ -57,7 +57,8 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: './dist'
+    contentBase: './dist',
+    port: process.env.PORT || 8080
   },
   plugins: [htmlWebpackPlugin]
 };
