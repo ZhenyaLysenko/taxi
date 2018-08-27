@@ -35,7 +35,7 @@ export const changeProfile = (data) => (dispatch, getState) => {
     if (data) {
         if (token) {
             dispatch(updatestart());
-            fetch(`${apiurl}/api/accounts/${token.role}/${token.id}`, {
+            fetch(`${apiurl}/api/accounts/${token.role}s/${token.id}`, {
                 method: 'PUT',
                 headers: new Headers({
                     'Content-Type': 'application/json',

@@ -144,7 +144,7 @@ export const loginDriver = (logdata) => (dispatch, getState) => {
         })
         .then(token => {
             if (token.auth_token) {
-                token.role = 'drivers';
+                token.role = 'driver';
                 dispatch(tokenSuccess(token));
                 dispatch(getDriver(token));
             } else {
@@ -181,7 +181,7 @@ export const getDriver = (token) => (dispatch, getState) => {
             })
             .then(data => {
                 if (data) {
-                    data.role = 'drivers';
+                    data.role = 'driver';
                     dispatch(userSuccess(data));
                     if (!getState().photoData.url || (getState().userData.user && data.profilePictureId !== getState().userData.user.profilePictureId)) {
                         dispatch(getPhoto(token, data.profilePictureId));
@@ -325,7 +325,7 @@ export const loginCustomer = (logdata) => (dispatch, getState) => {
         })
         .then(token => {
             if (token.auth_token) {
-                token.role = 'customers';
+                token.role = 'customer';
                 dispatch(tokenSuccess(token));
                 dispatch(getCustomer(token));
             } else {
@@ -362,7 +362,7 @@ export const getCustomer = (token) => (dispatch, getState) => {
             })
             .then(data => {
                 if (data) {
-                    data.role = 'customers';
+                    data.role = 'customer';
                     dispatch(userSuccess(data));
                     if (!getState().photoData.url || (getState().userData.user && data.profilePictureId !== getState().userData.user.profilePictureId)) {
                         dispatch(getPhoto(token, data.profilePictureId));
@@ -395,15 +395,15 @@ export const getUser = () => (dispatch, getState) => {
     const token = checkAndGetToken(getState);
     if (token && token.role) {
         switch (token.role) {
-            case 'admins': {
+            case 'admin': {
                 dispatch(getAdmin(token));
                 break;
             }
-            case 'drivers': {
+            case 'driver': {
                 dispatch(getDriver(token));
                 break;
             }
-            case 'customers': {
+            case 'customer': {
                 dispatch(getCustomer(token));
                 break;
             }
