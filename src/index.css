@@ -18,17 +18,17 @@ a:active {
 
 @font-face {
   font-family: "ProximaNovaRegular";
-  src: url(/../../public/fonts/ProximaNovaCondensedRegular.otf);
+  src: url('../public/fonts/ProximaNovaCondensedRegular.otf');
 }
 @font-face {
   font-family: "ProximaNovaThin";
-  src: url(/../../public/fonts/ProximaNovaThin.ttf);
+  src: url('../public/fonts/ProximaNovaThin.ttf');
 }
 @font-face {
   font-family: "ProximaNovaItalicReg";
-  src: url(/../../public/fonts/Proxima-Nova-Reg-It.otf);
+  src: url('../public/fonts/Proxima-Nova-Reg-It.otf');
 }
 @font-face {
   font-family: "ProximaNovaItalicThin";
-  src: url(/../../public/fonts/Proxima-Nova-Thin-It.otf);
+  src: url('../public/fonts/Proxima-Nova-Thin-It.otf');
 }

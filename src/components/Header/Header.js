@@ -4,6 +4,13 @@ import { BrowserRouter, Route, NavLink, Link } from 'react-router-dom';
 import style from './Header.css';
 import burger from './burger.css';
 
+import telegram from '../../../public/Home/telegram.png';
+import reddit from '../../../public/Home/reddit.png';
+import facebook from '../../../public/Home/facebook.png';
+import linkedin from '../../../public/Home/linkedin.png';
+import twitter from '../../../public/Home/twitter.png';
+import instagram from '../../../public/Home/instagram.png';
+
 import { connect } from 'react-redux';
 
 import { logout } from '../../actions/authaction';
@@ -15,32 +22,32 @@ class Header extends Component {
             <div id={burger.flexIcons}>
                 <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id={burger.socialImg} src="../../public/Home/twitter.png" alt="twitter" />
+                        <img id={burger.socialImg} src={twitter} alt="twitter" />
                     </a>
                 </div>
                 <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id={burger.socialImg} src="../../public/Home/facebook.png" alt="facebook" />
+                        <img id={burger.socialImg} src={facebook} alt="facebook" />
                     </a>
                 </div>
                 <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id={burger.socialImg} src="../../public/Home/instagram.png" alt="instagram" />
+                        <img id={burger.socialImg} src={instagram} alt="instagram" />
                     </a>
                 </div>
                 <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id={burger.socialImg} src="../../public/Home/linkedin.png" alt="linkedin" />
+                        <img id={burger.socialImg} src={linkedin} alt="linkedin" />
                     </a>
                 </div>
                 <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id={burger.socialImg} src="../../public/Home/reddit.png" alt="reddit" />
+                        <img id={burger.socialImg} src={reddit} alt="reddit" />
                     </a>
                 </div>
                 <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id={burger.socialImg} src="../../public/Home/telegram.png" alt="telegram" />
+                        <img id={burger.socialImg} src={telegram} alt="telegram" />
                     </a>
                 </div>
             </div>

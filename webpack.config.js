@@ -12,7 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js',
-    publicPath: '/'
+    // publicPath: '/'
   },
   module: {
     rules: [
@@ -48,7 +48,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 8192,
-              name: 'assets/[name].[ext]'
+              name: 'assets/[hash].[ext]'
             }
           }
         ]
@@ -57,6 +57,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+    contentBase: './dist'
   },
   plugins: [htmlWebpackPlugin]
 };

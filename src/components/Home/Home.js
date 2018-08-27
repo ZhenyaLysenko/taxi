@@ -6,6 +6,18 @@ import style from './Home.css';
 import Header from '../Header/Header';
 import Alert from '../Alert/Alert';
 
+import telegram from '../../../public/Home/telegram.png';
+import reddit from '../../../public/Home/reddit.png';
+import facebook from '../../../public/Home/facebook.png';
+import linkedin from '../../../public/Home/linkedin.png';
+import twitter from '../../../public/Home/twitter.png';
+import instagram from '../../../public/Home/instagram.png';
+import googleplay from '../../../public/Home/get-it-on-google-play.png';
+import appstore from '../../../public/Home/app-store-button.png';
+import taxi from '../../../public/Home/taxi.jpg';
+import blockchain from '../../../public/Home/blockchain.jpg';
+import bitcoin from '../../../public/Home/bitcoin.jpg';
+
 import { connect } from 'react-redux';
 
 class Home extends Component {
@@ -108,7 +120,7 @@ class Home extends Component {
                     <div className={style.yellow_border}></div>
                     <div className={style.flex}>
                         <div className={style.why__item}>
-                            <img className={style.why__img} src="../../public/Home/blockchain.jpg" alt="blockchain" />
+                            <img className={style.why__img} src={blockchain} alt="blockchain" />
                             <h2 className={style.why__h2}>BLOCKCHAIN IS SECURE</h2>
                             <p className={style.why__p}>
                                 The records on a blockchain are secured through cryptography.
@@ -118,7 +130,7 @@ class Home extends Component {
                             </p>
                         </div>
                         <div className={style.why__item}>
-                            <img className={style.why__img} src="../../public/Home/bitcoin.jpg" alt="bitcoin" />
+                            <img className={style.why__img} src={bitcoin} alt="bitcoin" />
                             <h2 className={style.why__h2}>PAY CRYPTO</h2>
                             <p className={style.why__p}>
                                 With a unique currency, fair compensation, transparent contracts and no intermediaries.
@@ -127,7 +139,7 @@ class Home extends Component {
                             </p>
                         </div>
                         <div className={style.why__item}>
-                            <img className={style.why__img} src="../../public/Home/taxi.jpg" alt="taxi" />
+                            <img className={style.why__img} src={taxi} alt="taxi" />
                             <h2 className={style.why__h2}>TAXI OF THE FUTURE</h2>
                             <p className={style.why__p}>
                                 Blockchain could have a similarly disruptive effect to the internet, or it could be the next Y2K.
@@ -212,12 +224,12 @@ class Home extends Component {
                     <div className={style.flex}>
                         <div>
                             <a href="#">
-                                <img className={style.getItOnImg} src="../../public/Home/get-it-on-google-play.png" alt="get-it-on-google-play" />
+                                <img className={style.getItOnImg} src={googleplay} alt="get-it-on-google-play" />
                             </a>
                         </div>
                         <div>
                             <a href="#">
-                                <img className={style.getItOnImg} src="../../public/Home/app-store-button.png" alt="get-it-on-google-play" />
+                                <img className={style.getItOnImg} src={appstore} alt="get-it-on-google-play" />
                             </a>
                         </div>
                     </div>
@@ -225,32 +237,32 @@ class Home extends Component {
                     <div className={style.flexIcons}>
                         <div className={style.socialIcon}>
                             <a href="#">
-                                <img className={style.socialImg} src="../../public/Home/twitter.png" alt="twitter" />
+                                <img className={style.socialImg} src={twitter} alt="twitter" />
                             </a>
                         </div>
                         <div className={style.socialIcon}>
                             <a href="#">
-                                <img className={style.socialImg} src="../../public/Home/facebook.png" alt="facebook" />
+                                <img className={style.socialImg} src={facebook} alt="facebook" />
                             </a>
                         </div>
                         <div className={style.socialIcon}>
                             <a href="#">
-                                <img className={style.socialImg} src="../../public/Home/instagram.png" alt="instagram" />
+                                <img className={style.socialImg} src={instagram} alt="instagram" />
                             </a>
                         </div>
                         <div className={style.socialIcon}>
                             <a href="#">
-                                <img className={style.socialImg} src="../../public/Home/linkedin.png" alt="linkedin" />
+                                <img className={style.socialImg} src={linkedin} alt="linkedin" />
                             </a>
                         </div>
                         <div className={style.socialIcon}>
                             <a href="#">
-                                <img className={style.socialImg} src="../../public/Home/reddit.png" alt="reddit" />
+                                <img className={style.socialImg} src={reddit} alt="reddit" />
                             </a>
                         </div>
                         <div className={style.socialIcon}>
                             <a href="#">
-                                <img className={style.socialImg} src="../../public/Home/telegram.png" alt="telegram" />
+                                <img className={style.socialImg} src={telegram} alt="telegram" />
                             </a>
                         </div>
                     </div>
