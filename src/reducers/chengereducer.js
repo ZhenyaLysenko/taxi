@@ -2,7 +2,8 @@ import {
     UPDATE_FETCH_START,
     UPDATE_FETCH_SUCCESS,
     UPDATE_FETCH_FAILED,
-    CLEAR_UPDATE_SUCCESS
+    CLEAR_UPDATE_SUCCESS,
+    CLEAR_UPDATE
 } from '../actions/chengeaction.js'
 
 import { CLEAR_ERRORS } from '../actions/authaction';
@@ -20,6 +21,7 @@ const chengeddata = (state = initState, action ) =>{
         case UPDATE_FETCH_FAILED: return Object.assign({}, state, { loading: false, error: action.error });
         case CLEAR_ERRORS: return Object.assign({}, state, { error: null });
         case CLEAR_UPDATE_SUCCESS: return Object.assign({}, state, { success: null });
+        case CLEAR_UPDATE: return Object.assign({}, initState);
         default: return state;
     }
     

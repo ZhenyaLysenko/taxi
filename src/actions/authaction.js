@@ -19,6 +19,8 @@ import { updatestart, updatesuccess, updatefailed } from './chengeaction';
 
 import { vehClear } from './vehiclesaction';
 import { docClear } from './docaction';
+import { clearUpdate } from './chengeaction';
+import { statClear } from './stataction';
 
 const userStart = () => ({
     type: USER_FETCH_START
@@ -159,13 +161,24 @@ export const loginDriver = (logdata) => (dispatch, getState) => {
 // actionCreator get driver profile
 export const getDriver = (token) => (dispatch, getState) => {
     if (token) {
+        dispatch(userStart());
         fetch(`${apiurl}/api/accounts/drivers/${token.id}`, {
             method: 'GET',
             headers: new Headers({
                 'Authorization': `Bearer ${token.auth_token}`
             })
         })
-            .then(res => checkAuth(res, dispatch))
+            .then(res => {
+                if (res.status === 200 || res.status === 204 || res.status === 201) {
+                    return res.json();
+                } else if (res.status === 400) {
+                    return res.json();
+                } else if (res.status === 404) {
+                    dispatch(userSuccess(null));
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
             .then(data => {
                 data.role = 'driver';
                 dispatch(userSuccess(data));
@@ -185,6 +198,8 @@ export const logout = () => (dispatch, getState) => {
     dispatch(tokenDelete());
     dispatch(docClear());
     dispatch(vehClear());
+    dispatch(clearUpdate());
+    dispatch(statClear());
 }
 
 // actionCreator get user photo
@@ -310,7 +325,7 @@ export const loginCustomer = (logdata) => (dispatch, getState) => {
             if (token.auth_token) {
                 token.role = 'customer';
                 dispatch(tokenSuccess(token));
-                dispatch(getDriver(token));
+                dispatch(getCustomer(token));
             } else {
                 // console.log(token[Object.keys(token)[0]][0]);
                 dispatch(userFailed(token[Object.keys(token)[0]][0]));
@@ -325,13 +340,24 @@ export const loginCustomer = (logdata) => (dispatch, getState) => {
 // TODO: actionCreator get Customer profile
 export const getCustomer = (token) => (dispatch, getState) => {
     if (token) {
+        dispatch(userStart());
         fetch(`${apiurl}/api/accounts/customers/${token.id}`, {
             method: 'GET',
             headers: new Headers({
                 'Authorization': `Bearer ${token.auth_token}`
             })
         })
-            .then(res => checkAuth(res, dispatch))
+            .then(res => {
+                if (res.status === 200 || res.status === 204 || res.status === 201) {
+                    return res.json();
+                } else if (res.status === 400) {
+                    return res.json();
+                } else if (res.status === 404) {
+                    dispatch(userSuccess(null));
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
             .then(data => {
                 data.role = 'customer';
                 dispatch(userSuccess(data));
@@ -363,7 +389,7 @@ export const getAdmin = (token) => (dispatch, getState) => {
 // ActionCreator get User by Role
 export const getUser = () => (dispatch, getState) => {
     const token = checkAndGetToken(getState);
-    if (token) {
+    if (token && token.role) {
         switch (token.role) {
             case 'admin': dispatch(getAdmin(token));
             case 'driver': dispatch(getDriver(token));

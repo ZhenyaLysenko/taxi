@@ -6,6 +6,7 @@ export const UPDATE_FETCH_START = 'UPDATE_FETCH_START';
 export const UPDATE_FETCH_SUCCESS = 'UPDATE_FETCH_SUCCESS';
 export const UPDATE_FETCH_FAILED = 'UPDATE_FETCH_FAILED';
 export const CLEAR_UPDATE_SUCCESS = 'CLEAR_UPDATE_SUCCESS';
+export const CLEAR_UPDATE = 'CLEAR_UPDATE';
 
 export const updatestart = () => ({
     type: UPDATE_FETCH_START
@@ -23,6 +24,10 @@ export const updatefailed = (error) => ({
 
 export const clearSuccess = () => ({
     type: CLEAR_UPDATE_SUCCESS
+});
+
+export const clearUpdate = () => ({
+    type: CLEAR_UPDATE
 });
 
 export const chengeName = (data) => (dispatch, getState) => {
