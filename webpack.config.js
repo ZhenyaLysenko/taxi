@@ -1,18 +1,27 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 var path = require('path');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+const devMode = process.env.NODE_ENV !== 'production';
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
-  template: "./public/index.html",
-  filename: "./index.html"
+  template: path.resolve(__dirname, 'public', 'index.html'),
+  filename: "index.html",
+  favicon: path.resolve(__dirname, 'public', 'favicon.ico')
+});
+
+const miniCssExtractPlugin = new MiniCssExtractPlugin({
+  filename: devMode ? '[name].css' : '[name].[hash].css',
+  // chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
 });
 
 module.exports = {
-  entry: './src/index.js',
+  entry: path.resolve(__dirname, 'src', 'index.js'),
   context: this.rootContext || this.context,
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js',
-    //publicPath: '/'
+    // publicPath: '/'
   },
   module: {
     rules: [
@@ -27,7 +36,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: "style-loader"
+            loader: (devMode) ? "style-loader" : MiniCssExtractPlugin.loader
           },
           {
             loader: "css-loader",
@@ -60,5 +69,17 @@ module.exports = {
     contentBase: './dist',
     port: process.env.PORT || 8080
   },
-  plugins: [htmlWebpackPlugin]
+  plugins: [htmlWebpackPlugin, miniCssExtractPlugin],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    }
+  }
 };
