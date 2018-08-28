@@ -10,6 +10,7 @@ import Drive from '../Drive/Drive';
 import SignIn from '../Sign_in/Sign_in';
 import SignInRider from '../Sign_in/Sign_in_rider/Sign_in_rider';
 import SignInDriver from '../Sign_in/Sign_in_driver/Sign_in_driver';
+import SignInAdmin from '../Sign_in/Sign_in_admin/Sign_in_admin';
 import SignUpRider from '../Sign_up/Sign_up_rider/Sign_up_rider';
 import SignUpDriver from '../Sign_up/Sign_up_driver/Sign_up_driver';
 import ForgotPassword from '../ForgotPassword/ForgotPassword';
@@ -17,6 +18,7 @@ import Policy from '../Policy/Policy';
 import Profile from '../Profile/Profile';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import Loading from '../Loading/Loading';
+import Admin from '../Admin/Admin';
 
 // test connect redux to react
 import { connect } from 'react-redux';
@@ -52,12 +54,14 @@ class App extends Component {
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-in-rider" component={SignInRider} />
         <Route path="/sign-in-driver" component={SignInDriver} />
+        <Route path="/sign-in-admin" component={SignInAdmin}/>
         <Route path="/sign-up-rider" component={SignUpRider} />
         <Route path="/sign-up-driver" component={SignUpDriver} />
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/policy" component={Policy} />
         <Route path='/profile' component={Profile} />
         <Route path='/reset-password' component={ResetPassword} />
+        <Route path='/admin' component={Admin}/>
       </div>
     </Router>);
   }

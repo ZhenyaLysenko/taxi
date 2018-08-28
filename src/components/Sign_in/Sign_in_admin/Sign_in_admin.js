@@ -11,7 +11,7 @@ import Alert from '../../Alert/Alert';
 import { connect } from 'react-redux';
 import { loginUser, clearErrors, resendLetter } from '../../../actions/authaction';
 
-class SignInDriver extends Component {
+class SignInAdmin extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -30,7 +30,7 @@ class SignInDriver extends Component {
         }
     }
     submit() {
-        this.props.login(this.state, 'driver');
+        this.props.login(this.state, 'admin');
         return false;
     }
     renderError() {
@@ -57,22 +57,22 @@ class SignInDriver extends Component {
                     </button></Link>
                 </div>
                 <div className={styleSignInRider.signInInner}>
-                    <h1 className={styleSignIn.title__h1 + ' ' + styleSignInRider.signInTitle}>Sign <span className={styleHome.yellow_span}>In</span> as driver</h1>
+                    <h1 className={styleSignIn.title__h1 + ' ' + styleSignInRider.signInTitle}>Sign <span className={styleHome.yellow_span}>In</span> as admin</h1>
                     <span className={styleSignInRider.inputSpan}>Enter your data</span>
                     <form onSubmit={(e) => { e.preventDefault() }}>
-                        <input className={styleSignInRider.signInInput} type="email" placeholder="Your email adress" onChange={(e) => { this.setState({ userName: e.target.value }) }} />
+                        <input className={styleSignInRider.signInInput} type="text" placeholder="Your email adress" onChange={(e) => { this.setState({ userName: e.target.value }) }} />
                         <Link to="/forgot-password" className={styleSignInRider.forgotPass}><span>Forgot your password ?</span></Link>
                         <input className={styleSignInRider.signInInput} type="password" placeholder="Your password" onChange={(e) => { this.setState({ password: e.target.value }) }} />
                         <input className={styleSignInRider.signInInput + ' ' + styleSignInRider.signInInputSubmit} type="submit" value="Submit" onClick={this.submit.bind(this)} />
                     </form>
-                    <span>Don't have an account? <NavLink to="/sign-up-driver" className={styleSignInRider.signUpSmallBtn}>Sign up</NavLink></span>
+                    {/* <span>Don't have an account? <NavLink to="/sign-up-driver" className={styleSignInRider.signUpSmallBtn}>Sign up</NavLink></span> */}
                 </div>
             </div>
         );
     }
 }
 
-SignInDriver.propTypes = {
+SignInAdmin.propTypes = {
     userData: PropTypes.object,
     login: PropTypes.func,
     history: PropTypes.object,
@@ -85,10 +85,11 @@ const mapStateToProps = state => ({
     history: state.historyData.history
 })
 
+
 const mapDispatchtoProps = dispatch => ({
-    login: (data,role) => { dispatch(loginUser(data,role)) },
+    login: (data, role) => { dispatch(loginUser(data, role)) },
     clearErrors: () => { dispatch(clearErrors()) },
     resendLetter: (data) => { dispatch(resendLetter(data)) },
 })
 
-export default connect(mapStateToProps, mapDispatchtoProps)(SignInDriver);
+export default connect(mapStateToProps, mapDispatchtoProps)(SignInAdmin);

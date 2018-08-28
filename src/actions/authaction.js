@@ -123,6 +123,77 @@ export const registerDriver = (regdata, file) => (dispatch, getState) => {
         .catch(error => { dispatch(userFailed(error.message)) });
 }
 
+export const loginUser = (logdata, role) => (dispatch, getState) => {
+    dispatch(userStart());
+    fetch(`${apiurl}/api/Auth/${role}`, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(logdata)
+    })
+        .then(res => {
+            if (res.status === 200 || res.status === 201 || res.status === 204) {
+                return res.json();
+            } else if (res.status === 400) {
+                return res.json();
+            } else {
+                throw new Error(res.statusText);
+            }
+        })
+        .then(token => {
+            if (token.auth_token) {
+                token.role = role;
+                dispatch(tokenSuccess(token));
+                dispatch(getUser(token));
+            } else {
+                // console.log(token[Object.keys(token)[0]][0]);
+                dispatch(userFailed(token[Object.keys(token)[0]][0]));
+            }
+        })
+        .catch(error => {
+            dispatch(userFailed(error.message));
+            // dispatch(logout());
+        });
+}
+
+export const getUser = (tok) => (dispatch, getState) => {
+    const token = (tok) ? tok : checkAndGetToken(getState);
+    if (token) {
+        dispatch(userStart());
+        const url = (token.role === 'admin') ? `${apiurl}/api/admins/${token.id}` : `${apiurl}/api/accounts/${token.role}s/${token.id}`;
+        fetch(url, {
+            method: 'GET',
+            headers: new Headers({
+                'Authorization': `Bearer ${token.auth_token}`
+            })
+        })
+            .then(res => {
+                if (res.status === 200 || res.status === 204 || res.status === 201) {
+                    return res.json();
+                } else if (res.status === 400) {
+                    return res.json();
+                } else if (res.status === 404) {
+                    dispatch(userSuccess(null));
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
+            .then(data => {
+                if (data) {
+                    data.role = token.role;
+                    dispatch(userSuccess(data));
+                    if (!getState().photoData.url || (getState().userData.user && data.profilePictureId !== getState().userData.user.profilePictureId)) {
+                        dispatch(getPhoto(token, data.profilePictureId));
+                    }
+                }
+            })
+            .catch(error => dispatch(userFailed(error.message)));
+    } else {
+        dispatch(logout());
+    }
+}
+
 // actionCreator login driver
 export const loginDriver = (logdata) => (dispatch, getState) => {
     dispatch(userStart());
@@ -382,7 +453,37 @@ export const registerAdmin = () => (dispatch, getState) => {
 
 // TODO: actionCreator login Admin
 export const loginAdmin = () => (dispatch, getState) => {
-
+    dispatch(userStart());
+    fetch(`${apiurl}/api/Auth/driver`, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(logdata)
+    })
+        .then(res => {
+            if (res.status === 200 || res.status === 201 || res.status === 204) {
+                return res.json();
+            } else if (res.status === 400) {
+                return res.json();
+            } else {
+                throw new Error(res.statusText);
+            }
+        })
+        .then(token => {
+            if (token.auth_token) {
+                token.role = 'driver';
+                dispatch(tokenSuccess(token));
+                dispatch(getDriver(token));
+            } else {
+                // console.log(token[Object.keys(token)[0]][0]);
+                dispatch(userFailed(token[Object.keys(token)[0]][0]));
+            }
+        })
+        .catch(error => {
+            dispatch(userFailed(error.message));
+            // dispatch(logout());
+        });
 }
 
 // TODO: actionCreator get Admin profile
@@ -391,8 +492,8 @@ export const getAdmin = (token) => (dispatch, getState) => {
 }
 
 // ActionCreator get User by Role
-export const getUser = () => (dispatch, getState) => {
-    const token = checkAndGetToken(getState);
+export const getUserV2 = (tok) => (dispatch, getState) => {
+    const token = (tok) ? tok : checkAndGetToken(getState);
     if (token && token.role) {
         switch (token.role) {
             case 'admin': {

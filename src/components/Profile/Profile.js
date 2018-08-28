@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import style from './Profile.css';
 import Header from '../Header/Header';
@@ -43,6 +44,12 @@ class Profile extends Component {
             default: return null;
         }
     }
+    renderAdmin() {
+        if (this.props.userData.user.role === 'admin') {
+            return <Link to='/admin'><div className={`${style.profileToolItem}`}>Admin Panel</div></Link>
+        } 
+        return null;
+    }
     render() {
         if (this.props.userData.user) {
             return (
@@ -53,6 +60,7 @@ class Profile extends Component {
                             {this.renderMain()}
                         </div>
                         <div className={`${style.profileToolbar}`}>
+                            {this.renderAdmin()}
                             <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
                             <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}>Documents</div>
                             <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}>Vehicle</div>

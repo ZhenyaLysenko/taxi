@@ -9,7 +9,7 @@ import Alert from '../../Alert/Alert';
 
 import { connect } from 'react-redux';
 
-import { loginCustomer, clearErrors, resendLetter } from "../../../actions/authaction";
+import { loginUser, clearErrors, resendLetter } from "../../../actions/authaction";
 
 class SignInRider extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class SignInRider extends Component {
         }
     }
     submit() {
-        this.props.login(this.state);
+        this.props.login(this.state, 'customer');
         return false;
     }
     renderError() {
@@ -86,7 +86,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchtoProps = dispatch => ({
-    login: (data) => { dispatch(loginCustomer(data)) },
+    login: (data, role) => { dispatch(loginUser(data, role)) },
     clearErrors: () => { dispatch(clearErrors()) },
     resendLetter: (data) => { dispatch(resendLetter(data)) },
 });
