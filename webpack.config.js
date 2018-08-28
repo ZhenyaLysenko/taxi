@@ -1,6 +1,7 @@
 var path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -15,7 +16,19 @@ const miniCssExtractPlugin = new MiniCssExtractPlugin({
   // chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
 });
 
+const uglifyJsPlugin = new UglifyJsPlugin({
+  cache: true,
+  parallel: true,
+  uglifyOptions: {
+    compress: false,
+    ecma: 6,
+    mangle: true
+  },
+  sourceMap: true
+});
+
 module.exports = {
+  mode: process.env.NODE_ENV || 'development',
   entry: path.resolve(__dirname, 'src', 'index.js'),
   context: this.rootContext || this.context,
   output: {
@@ -71,6 +84,7 @@ module.exports = {
   },
   plugins: [htmlWebpackPlugin, miniCssExtractPlugin],
   optimization: {
+    minimizer: [uglifyJsPlugin],
     splitChunks: {
       cacheGroups: {
         styles: {
