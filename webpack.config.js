@@ -70,7 +70,11 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 8192,
+<<<<<<< Updated upstream
               name: 'assets/[hash].[ext]'
+=======
+              name: 'assets/[name].[ext]'
+>>>>>>> Stashed changes
             }
           }
         ]

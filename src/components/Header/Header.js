@@ -42,7 +42,7 @@ class Header extends Component {
                 </div>
                 <div id={burger.socialIcon}>
                     <a href="#">
-                        <img id={burger.socialImg} src={reddit} alt="reddit" />
+                        <img id={burger.socialImg} src={reddit}alt="reddit" />
                     </a>
                 </div>
                 <div id={burger.socialIcon}>
