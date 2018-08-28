@@ -49,7 +49,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: (devMode) ? "style-loader" : MiniCssExtractPlugin.loader
+            loader: (this.mode === 'development') ? "style-loader" : MiniCssExtractPlugin.loader
           },
           {
             loader: "css-loader",
@@ -80,7 +80,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     contentBase: './dist',
-    port: process.env.PORT || 8080
+    port: (this.mode === 'production') ? (process.env.PORT || 8080) : 8081,
   },
   plugins: [htmlWebpackPlugin, miniCssExtractPlugin],
   optimization: {
@@ -94,6 +94,8 @@ module.exports = {
           enforce: true
         }
       }
-    }
+    },
+    namedModules: (this.mode === 'development') ? true : false,
+    namedChunks: (this.mode === 'development') ? true : false,
   }
 };
