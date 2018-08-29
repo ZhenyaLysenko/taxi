@@ -6,6 +6,7 @@ export const USERLIST_FETCH_SUCCESS = 'USERLIST_FETCH_SUCCESS';
 export const USERLIST_FETCH_FAILED = 'USERLIST_FETCH_FAILED';
 export const USERLIST_ERROR_CLEAR = 'USERLIST_ERROR_CLEAR';
 export const USERLIST_CLEAR = 'USERLIST_CLEAR';
+export const USERLIST_ALL = 'USERLIST_ALL';
 
 export const ADMIN_CHANGE_START = 'ADMIN_CHANGE_START';
 export const ADMIN_CHANGE_SUCCESS = 'ADMIN_CHANGE_SUCCESS';
@@ -28,11 +29,15 @@ const userListFailed = (error) => ({
     error
 });
 
+const userListAll = () => ({
+    type: USERLIST_ALL
+});
+
 const userListErrorClear = () => ({
     type: USERLIST_ERROR_CLEAR
 });
 
-const userListClear = () => ({
+export const userListClear = () => ({
     type: USERLIST_CLEAR
 });
 
@@ -63,20 +68,12 @@ const adminChangeClear = () => ({
     type: ADMIN_CHANGE_CLEAR
 });
 
-export const getUserList = (page, size, search, option = {
-    Rol: 'customer_access',
-    SearchQuery: null,
-    EmailConfirmed: true,
-}) => (dispatch, getState) => {
+export const getUserList = (search) => (dispatch, getState) => {
     const token = checkAndGetToken(dispatch, getState);
     if (token) {
-        // console.log('List fetched');
+        const page = getState().userlistData.page;
         dispatch(userListStart());
-        fetch(`${apiurl}/api/admins/getusers?
-        ${(page) ? `&PageNumber=${page}&` : ''}
-        ${(page) ? `&PageSize=${size}&` : ''}
-        ${(search) ? `&SearchQuery=${search}&` : ''}
-        PageSize=${size}`, {
+        fetch(`${apiurl}/api/admins/getusers?PageNumber=${page}&PageSize=${10}&${(search) ? `&SearchQuery=${search}&` : ''}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Authorization': `Bearer ${token.auth_token}`
@@ -92,8 +89,12 @@ export const getUserList = (page, size, search, option = {
                 }
             })
             .then(list => {
-                if (list) {
-                    dispatch(userListSuccess(list));
+                if (Array.isArray(list)) {
+                    if (list.length === 0) {
+                        dispatch(userListAll());
+                    } else {
+                        dispatch(userListSuccess(list));
+                    }
                 }
             })
             .catch(error => dispatch(userListFailed(error.message)));

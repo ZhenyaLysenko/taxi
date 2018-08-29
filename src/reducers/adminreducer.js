@@ -4,6 +4,7 @@ import {
     USERLIST_FETCH_FAILED,
     USERLIST_ERROR_CLEAR,
     USERLIST_CLEAR,
+    USERLIST_ALL,
     ADMIN_CHANGE_START,
     ADMIN_CHANGE_SUCCESS,
     ADMIN_CHANGE_FAILED,
@@ -17,15 +18,18 @@ const initUserListState = {
     list: [],
     loading: false,
     error: null,
+    all: false,
+    page: 1,
 }
 
 const userlistData = (state = initUserListState, action) => {
     switch (action.type) {
         case USERLIST_FETCH_START: return Object.assign({}, state, { loading: true });
-        case USERLIST_FETCH_SUCCESS: return Object.assign({}, state, { loading: false, list: action.list });
+        case USERLIST_FETCH_SUCCESS: return Object.assign({}, state, { loading: false, page: ++state.page, list: action.list });
         case USERLIST_FETCH_FAILED: return Object.assign({}, state, { loading: false, error: action.error });
         case USERLIST_ERROR_CLEAR: return Object.assign({}, state, { error: null });
         case USERLIST_CLEAR: return Object.assign({}, initUserListState);
+        case USERLIST_ALL: return Object.assign({}, state, { all: true });
         case CLEAR_ERRORS: return Object.assign({}, state, { error: null });
         case CLEAR_ALL: return Object.assign({}, initUserListState);
         default: return state;
