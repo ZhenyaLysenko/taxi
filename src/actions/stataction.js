@@ -25,7 +25,7 @@ export const statClear = () => ({
 });
 
 export const getStatistic = (page, size) => (dispatch, getState) => {
-    const token = checkAndGetToken(getState);
+    const token = checkAndGetToken(dispatch, getState);
     if (token) {
         dispatch(statStart());
         fetch(`${apiurl}/api/tripshistory/${token.role}?PageNumber=${page}&PageSize=${size}`, {

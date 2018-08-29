@@ -50,7 +50,7 @@ export const docClear = () => ({
 // TODO: actionCreator upload Document info
 export const uploadDocument = (data, file) => (dispatch, getState) => {
     // dispatch(docStart());
-    const token = checkAndGetToken(getState);
+    const token = checkAndGetToken(dispatch, getState);
     const checkData = (data) => {
         if (data.dayFrom &&
             data.yearFrom &&
@@ -140,7 +140,7 @@ export const uploadDocPhoto = (file, token) => (dispatch, getState) => {
 
 // TODO: actionCreator get Document info 
 export const getDocument = (tok) => (dispatch, getState) => {
-    const token = (tok) ? tok : checkAndGetToken(getState);
+    const token = (tok) ? tok : checkAndGetToken(dispatch, getState);
     if (token) {
         dispatch(docStart());
         fetch(`${apiurl}/api/documents/driverlicense`, {
@@ -162,7 +162,7 @@ export const getDocument = (tok) => (dispatch, getState) => {
 
 // TODO: actionCreator get Document phoho
 export const getDocPhoto = (tok) => (dispatch, getState) => {
-    const token = (tok) ? tok : checkAndGetToken(getState);
+    const token = (tok) ? tok : checkAndGetToken(dispatch, getState);
     if (token) {
         dispatch(docphotoStart());
         fetch(`${apiurl}/api/documents/driverlicense/image`, {

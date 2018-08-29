@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 //import style from './Admin.css';
 import Loading  from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
+import AdminUserItem from '../AdminUserItem/AdminUserItem';
 
 import { connect } from 'react-redux';
 import { getUserList } from '../../../actions/adminaction';
@@ -13,7 +14,7 @@ class AdminUserList extends Component {
         super(props);
         this.state = {
             page: 1,
-            size: 10
+            size: 20
         }
     }
     componentDidMount() {
@@ -27,8 +28,8 @@ class AdminUserList extends Component {
         this.props.getUserList(this.state.page, this.state.size);
     }
     renderList(list) {
-        return list.map((item) => {
-            return <UserListItem item={item}/>
+        return list.map((item, index) => {
+            return <li key={index}><AdminUserItem data={item}/></li>
         });
     }
     render() {
@@ -65,17 +66,5 @@ const mapDispatchtoProps = dispatch => ({
     getUserList: (page, size, option) => { dispatch(getUserList(page,size,option)) }
 })
 
-const UserListItem = (props) => {
-    return (
-        <li>
-            <p>ID: {props.item.id}</p>
-            <p>ROLE: {props.item.roles[0]}</p>
-            <p>Name: {props.item.firstName} {props.item.lastName}</p>
-            <p>Email: {props.item.email}</p>
-            <p>EmailConfirmed: {(props.item.emailConfirmed) ? 'Yes': 'No'}</p>
-            <p>Phone: {props.item.phoneNumber}</p>
-        </li>
-    );
-}
 
 export default connect(mapStateToProps, mapDispatchtoProps)(AdminUserList);

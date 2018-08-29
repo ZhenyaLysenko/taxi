@@ -51,7 +51,7 @@ export const vehClear = () => ({
 // TODO: actionCreator upload Vehicle info
 export const uploadVehicle = (data, file) => (dispatch, getState) => {
     // dispatch(vehicleStart());
-    const token = checkAndGetToken(getState);
+    const token = checkAndGetToken(dispatch, getState);
     const checkdata = (data) => {
         if (data.number && data.model && data.brand && data.color) {
             return true;
@@ -133,7 +133,7 @@ export const uploadVehPhoto = (file, token) => (dispatch, getState) => {
 
 // TODO: actionCreator get Document info 
 export const getVehicle = (tok) => (dispatch, getState) => {
-    const token = (tok) ? tok : checkAndGetToken(getState);
+    const token = (tok) ? tok : checkAndGetToken(dispatch, getState);
     if (token) {
         dispatch(vehicleStart());
         fetch(`${apiurl}/api/vehicles`, {
@@ -158,7 +158,7 @@ export const getVehicle = (tok) => (dispatch, getState) => {
 export const getVehPhoto = (tok) => (dispatch, getState) => {
     const id = getState().vehData.veh.pictures[0];
     if (id) {
-        const token = (tok) ? tok : checkAndGetToken(getState);
+        const token = (tok) ? tok : checkAndGetToken(dispatch, getState);
         if (token) {
             dispatch(vehphotoStart());
             fetch(`${apiurl}/api/images/${id}`, {

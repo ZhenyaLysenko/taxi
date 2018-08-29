@@ -11,7 +11,7 @@ import { vehData } from './vehiclereducer';
 import { chengeddata } from './chengereducer';
 import { statData } from './statreducer';
 import { resetData } from "./resetreducer";
-import { userlistData } from './adminreducer';
+import { userlistData, adminChangeData } from './adminreducer';
 // Here combine custom reducers
 export default combineReducers({
     testData,
@@ -24,5 +24,6 @@ export default combineReducers({
     chengeddata,
     statData,
     resetData,
-    userlistData
+    userlistData,
+    adminChangeData
 });

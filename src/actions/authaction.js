@@ -68,12 +68,14 @@ export const clearErrors = () => ({
     type: CLEAR_ERRORS
 })
 
-export const checkAndGetToken = (getState) => {
+export const checkAndGetToken = (dispatch, getState) => {
     if (getState().tokenData.token) {
         return getState().tokenData.token;
     }
     if (localStorage.getItem('Taxi_Token')) {
-        return (JSON.parse(localStorage.getItem('Taxi_Token')));
+        const token = JSON.parse(localStorage.getItem('Taxi_Token'));
+        dispatch(tokenSuccess(token));
+        return token;
     }
     return null;
 }
@@ -158,7 +160,7 @@ export const loginUser = (logdata, role) => (dispatch, getState) => {
 }
 
 export const getUser = (tok) => (dispatch, getState) => {
-    const token = (tok) ? tok : checkAndGetToken(getState);
+    const token = (tok) ? tok : checkAndGetToken(dispatch, getState);
     if (token) {
         dispatch(userStart());
         const url = (token.role === 'admin') ? `${apiurl}/api/admins/${token.id}` : `${apiurl}/api/accounts/${token.role}s/${token.id}`;
@@ -277,7 +279,7 @@ export const logout = () => (dispatch, getState) => {
 
 // actionCreator get user photo
 export const getPhoto = (tok, id) => (dispatch, getState) => {
-    const token = (tok) ? tok : checkAndGetToken(getState);
+    const token = (tok) ? tok : checkAndGetToken(dispatch, getState);
     const photoid = (id) ? id : getState().userData.user.profilePictureId;
     if (photoid) {
         if (token) {
@@ -312,7 +314,7 @@ export const getPhoto = (tok, id) => (dispatch, getState) => {
 
 // actionCreator upload user photo
 export const uploadPhoto = (file) => (dispatch, getState) => {
-    const token = checkAndGetToken(getState);
+    const token = checkAndGetToken(dispatch, getState);
     if (file) {
         dispatch(updatestart());
         if (token) {
@@ -493,7 +495,7 @@ export const getAdmin = (token) => (dispatch, getState) => {
 
 // ActionCreator get User by Role
 export const getUserV2 = (tok) => (dispatch, getState) => {
-    const token = (tok) ? tok : checkAndGetToken(getState);
+    const token = (tok) ? tok : checkAndGetToken(dispatch, getState);
     if (token && token.role) {
         switch (token.role) {
             case 'admin': {

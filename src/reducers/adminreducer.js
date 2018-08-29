@@ -3,7 +3,12 @@ import {
     USERLIST_FETCH_SUCCESS,
     USERLIST_FETCH_FAILED,
     USERLIST_ERROR_CLEAR,
-    USERLIST_CLEAR
+    USERLIST_CLEAR,
+    ADMIN_CHANGE_START,
+    ADMIN_CHANGE_SUCCESS,
+    ADMIN_CHANGE_FAILED,
+    ADMIN_CHANGE_CLEARERROR,
+    ADMIN_CHANGE_CLEAR,
 } from '../actions/adminaction';
 
 const initUserListState = {
@@ -23,4 +28,21 @@ const userlistData = (state= initUserListState, action) => {
     }
 }
 
-export { userlistData };
+const initAdminChangeState = {
+    loading: false,
+    success: null,
+    error: null,
+}
+
+const adminChangeData = (state = initAdminChangeState, action) => {
+    switch(action.type) {
+        case ADMIN_CHANGE_START: return Object.assign({}, state, {loading: true});
+        case ADMIN_CHANGE_SUCCESS: return Object.assign({}, state, {loading: false, success: action.mess});
+        case ADMIN_CHANGE_FAILED: return Object.assign({}, state, {loading:false, error:action.error});
+        case ADMIN_CHANGE_CLEARERROR: return Object.assign({}, state, { error: null, success: null });
+        case ADMIN_CHANGE_CLEAR: return Object.assign({}, initAdminChangeState);
+        default: return state;
+    }
+}
+
+export { userlistData, adminChangeData };

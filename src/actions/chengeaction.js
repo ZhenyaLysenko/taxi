@@ -31,7 +31,7 @@ export const clearUpdate = () => ({
 });
 
 export const changeProfile = (data) => (dispatch, getState) => {
-    const token = checkAndGetToken(getState);
+    const token = checkAndGetToken(dispatch, getState);
     if (data) {
         if (token) {
             dispatch(updatestart());
