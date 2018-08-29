@@ -45,11 +45,7 @@ export const getStatistic = (page, size) => (dispatch, getState) => {
             })
             .then(data => {
                 if (Array.isArray(data)) {
-                    if (data.length === 0) {
-                        dispatch(statFailed('No statistic'));
-                    } else {
-                        dispatch(statSuccess(data));
-                    }
+                    dispatch(statSuccess(data));
                 } else {
                     dispatch(statFailed('No array'));
                 }  

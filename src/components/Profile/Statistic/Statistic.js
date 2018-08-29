@@ -21,6 +21,11 @@ class Statistic extends Component {
             this.props.getStatistic(this.state.page, this.state.size);
         }
     }
+    renderList() {
+        return this.props.statData.stat.map((item, key) => {
+            return <li key={key}>Item</li>;
+        });
+    }
     render() {
         if (this.props.statData.loading) {
             return <Loading />
@@ -29,6 +34,9 @@ class Statistic extends Component {
             return (
                 <div>
                     <h1>Statistic</h1>
+                    <ul>
+                        {this.renderList()}
+                    </ul>
                 </div>
             );
         }

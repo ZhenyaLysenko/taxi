@@ -41,7 +41,7 @@ class AdminUserList extends Component {
             return <Alert global={true} error={this.props.changeData.error} click={this.props.changeClearError} />
         }
         if (this.props.changeData.success) {
-            return <Alert global={true} success={this.props.changeData.error} click={this.props.changeClearError} />
+            return <Alert global={true} success={this.props.changeData.success} click={this.props.changeClearError} />
         }
         return null;
     }

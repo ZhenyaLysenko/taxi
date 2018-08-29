@@ -12,6 +12,7 @@ export const ADMIN_CHANGE_SUCCESS = 'ADMIN_CHANGE_SUCCESS';
 export const ADMIN_CHANGE_FAILED = 'ADMIN_CHANGE_FAILED';
 export const ADMIN_CHANGE_CLEARERROR = 'ADMIN_CHANGE_CLEARERROR';
 export const ADMIN_CHANGE_CLEAR = 'ADMIN_CHANGE_CLEAR';
+export const ADMIN_CHANGE_UPDATE = 'ADMIN_CHANGE_UPDATE';
 
 const userListStart = () => ({
     type: USERLIST_FETCH_START
@@ -48,6 +49,11 @@ const changeFailed = (error) => ({
     type: ADMIN_CHANGE_FAILED,
     error
 });
+
+const changeUpdate = (id) => ({
+    type: ADMIN_CHANGE_UPDATE,
+    id
+})
 
 export const changeClearError = () => ({
     type: ADMIN_CHANGE_CLEARERROR
@@ -150,6 +156,33 @@ export const deleteUser = (id) => (dispatch, getState) => {
                 }
             })
             .catch(error => dispatch(changeFailed(error.message)));
+        } else {
+            dispatch(logout());
+        }
+    }
+}
+
+export const approveLicense = (id) => (dispatch, getState) => {
+    if (id) {
+        const token = checkAndGetToken(dispatch, getState);
+        if (token) {
+            dispatch(changeStart());
+            fetch(`${apiurl}/api/admins/driverlicenses/${id}/approve`, {
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': `Bearer ${token.auth_token}`
+                })
+            })
+            .then(res => {
+                if (res.status === 200 || res.status === 201 || res.status === 204) {
+                    dispatch(changeSuccess('License was approved'));
+                } else if (res.status === 401) {
+                    dispatch(refreshToken(token, approveLicense, id));
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
+            .catch(error => dispatch(changeFailed(error.message)))
         } else {
             dispatch(logout());
         }

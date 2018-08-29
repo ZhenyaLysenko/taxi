@@ -10,7 +10,7 @@ import defaultphoto from '../../../assets/default-user.png';
 import defaultlicense from '../../../assets/default-license.png';
 
 import { connect } from 'react-redux';
-import { setUserToAdmin, deleteAdmin, deleteUser } from '../../../actions/adminaction';
+import { setUserToAdmin, deleteAdmin, deleteUser, approveLicense } from '../../../actions/adminaction';
 import { apiurl } from '../../../appconfig';
 
 class AdminUserItem extends Component {
@@ -190,8 +190,16 @@ class AdminUserItem extends Component {
                     <p>Licensed From: {this.state.licensedata.licensedFrom}</p>
                     <p>Licensed To: {this.state.licensedata.licensedTo}</p>
                     <p>Approved: {(this.state.licensedata.isApproved) ? 'YES' : 'NO'}</p>
+                    {this.renderLicenseApproveBtn()}
                 </div>
             )
+        }
+        return null;
+    }
+    renderLicenseApproveBtn() {
+        if (this.props.userData.user.role === 'admin'
+            && !this.props.data.roles.includes('admin_access')) {
+                return <button onClick={() => {this.props.approveLicense(this.props.data.ids.driverId)}}>Aprrove</button>
         }
         return null;
     }
@@ -278,7 +286,8 @@ AdminUserItem.propTypes = {
     tokenData: PropTypes.object,
     setAdmin: PropTypes.func,
     deleteAdmin: PropTypes.func,
-    deleteUser: PropTypes.func
+    deleteUser: PropTypes.func,
+    approveLicense: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -289,7 +298,8 @@ const mapStateToProps = state => ({
 const mapDispatchtoProps = dispatch => ({
     setAdmin: (id) => { dispatch(setUserToAdmin(id)) },
     deleteAdmin: (id) => { dispatch(deleteAdmin(id)) },
-    deleteUser: (id) => { dispatch(deleteUser(id)) }
+    deleteUser: (id) => { dispatch(deleteUser(id)) },
+    approveLicense: (id) => {dispatch(approveLicense(id))}
 })
 
 
