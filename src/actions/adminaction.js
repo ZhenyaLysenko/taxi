@@ -49,7 +49,7 @@ const changeFailed = (error) => ({
     error
 });
 
-const changeClerError = () => ({
+export const changeClearError = () => ({
     type: ADMIN_CHANGE_CLEARERROR
 });
 
@@ -57,7 +57,7 @@ const adminChangeClear = () => ({
     type: ADMIN_CHANGE_CLEAR
 });
 
-export const getUserList = (page, size, option = {
+export const getUserList = (page, size, search, option = {
     Rol: 'customer_access',
     SearchQuery: null,
     EmailConfirmed: true,
@@ -67,29 +67,91 @@ export const getUserList = (page, size, option = {
         // console.log('List fetched');
         dispatch(userListStart());
         fetch(`${apiurl}/api/admins/getusers?
-        &PageNumber=${page}
-        &PageSize=${size}`, {
-            method: 'GET',
-            headers: new Headers({
-                'Authorization': `Bearer ${token.auth_token}`
+        ${(page) ? `&PageNumber=${page}&` : ''}
+        ${(page) ? `&PageSize=${size}&` : ''}
+        ${(search) ? `&SearchQuery=${search}&` : ''}
+        PageSize=${size}`, {
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': `Bearer ${token.auth_token}`
+                })
             })
-        })
-        .then(res => {
-            if (res.status === 200 || res.status === 201 || res.status === 204) {
-                return res.json();
-            } else if (res.status === 401) {
-                dispatch(refreshToken(token, getUserList, page, size, option));
-            } else {
-                throw new Error(res.statusText);
-            }
-        })
-        .then(list => {
-            if (list) {
-                dispatch(userListSuccess(list));
-            }
-        })
-        .catch(error => dispatch(userListFailed(error.message)));
+            .then(res => {
+                if (res.status === 200 || res.status === 201 || res.status === 204) {
+                    return res.json();
+                } else if (res.status === 401) {
+                    dispatch(refreshToken(token, getUserList, page, size, search, option));
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
+            .then(list => {
+                if (list) {
+                    dispatch(userListSuccess(list));
+                }
+            })
+            .catch(error => dispatch(userListFailed(error.message)));
     } else {
         dispatch(logout());
+    }
+}
+
+export const setUserToAdmin = (id) => (dispatch, getState) => {
+    if (id) {
+        const token = checkAndGetToken(dispatch, getState);
+        if (token) {
+            dispatch(changeStart());
+            fetch(`${apiurl}/api/admins/root/userToAdmin/${id}`, {
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': `Bearer ${token.auth_token}`
+                })
+            })
+                .then(res => {
+                    if (res.status === 200 || res.status === 201 || res.status === 204) {
+                        dispatch(changeSuccess('User is admin now'));
+                        dispatch(getUserList(1, 20));
+                    } else if (res.status === 401) {
+                        dispatch(refreshToken(token, setUserToAdmin, id));
+                    } else {
+                        throw new Error(res.statusText);
+                    }
+                })
+                .catch(error => dispatch(changeFailed(error.message)));
+        } else {
+            dispatch(logout());
+        }
+    }
+}
+// Not done yet
+export const deleteAdmin = (id) => (dispatch, getState) => {
+   console.log('Delete admin dont done yet');
+}
+
+export const deleteUser = (id) => (dispatch, getState) => {
+    if (id) {
+        const token = checkAndGetToken(dispatch, getState);
+        if (token) {
+            dispatch(changeStart());
+            fetch(`${apiurl}/api/admins/removeuser/${id}`, {
+                method: 'DELETE',
+                headers: new Headers({
+                    'Authorization': `Bearer ${token.auth_token}`
+                })
+            })
+            .then(res => {
+                if (res.status === 200 || res.status === 201 || res.status === 204) {
+                    dispatch(changeSuccess('User was deleted'));
+                    dispatch(getUserList(1, 20));
+                } else if (res.status === 401) {
+                    dispatch(refreshToken(token, deleteAdmin, id));
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
+            .catch(error => dispatch(changeFailed(error.message)));
+        } else {
+            dispatch(logout());
+        }
     }
 }
