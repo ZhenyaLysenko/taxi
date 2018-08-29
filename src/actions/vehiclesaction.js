@@ -1,6 +1,6 @@
 import { apiurl } from '../appconfig';
 // Need to take token
-import { checkAndGetToken, checkAuth, logout } from './authaction';
+import { checkAndGetToken, logout, refreshToken } from './authaction';
 
 import { updatestart, updatesuccess, updatefailed } from './chengeaction';
 
@@ -78,7 +78,7 @@ export const uploadVehicle = (data, file) => (dispatch, getState) => {
                             dispatch(getVehicle(token));
                         }
                     } else if (res.status === 401) {
-                        dispatch(logout());
+                        dispatch(refreshToken(token, uploadVehicle, data, file));
                     } else {
                         throw new Error(res.statusText);
                     }
@@ -116,7 +116,7 @@ export const uploadVehPhoto = (file, token) => (dispatch, getState) => {
                         dispatch(updatesuccess('Vehicle is update'));
                         dispatch(getVehicle(token));
                     } else if (res.status === 401) {
-                        dispatch(logout());
+                        dispatch(refreshToken(token, uploadVehPhoto, file, data));
                     } else {
                         throw new Error(res.statusText);
                     }
@@ -142,7 +142,15 @@ export const getVehicle = (tok) => (dispatch, getState) => {
                 'Authorization': `Bearer ${token.auth_token}`
             })
         })
-            .then(res => checkAuth(res, dispatch))
+            .then(res => {
+                if (res.status === 200 || res.status === 201 ||res.status === 204) {
+                    return res.json();
+                } else if (res.status === 401) {
+                    dispatch(refreshToken(token, getVehicle));
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
             .then(data => {
                 // console.log(data);
                 dispatch(vehicleSuccess(data));
@@ -169,7 +177,7 @@ export const getVehPhoto = (tok) => (dispatch, getState) => {
             })
                 .then(res => {
                     if (res.status === 401) {
-                        dispatch(logout());
+                        dispatch(refreshToken(token, getVehPhoto));
                     } else if (res.status === 404) {
                         dispatch(vehphotoSuccess(null, null));
                     } else if (res.status === 200 || res.status === 204 || res.status === 201 || res.status === 202) {

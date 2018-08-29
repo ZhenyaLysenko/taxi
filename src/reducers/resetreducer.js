@@ -9,6 +9,7 @@ import {
     RESET_CLEAR_SUCCESS,
     RESET_CLEAR_ERROR
 } from '../actions/resetaction';
+import { CLEAR_ALL } from '../actions/authaction';
 
 const initState = {
     sendsuccess: null,
@@ -30,6 +31,7 @@ const resetData = (state = initState, action) => {
         case RESET_CLEAR_ERROR: return Object.assign({}, state, { reseterror: null, senderror: null });
         case RESET_CLEAR_SUCCESS: return Object.assign({}, state, { resetsuccess: false, sendsuccess: false });
         case RESET_CLEAR: return Object.assign({}, initState);
+        case CLEAR_ALL: return Object.assign({}, initState);
         default: return state;
     }
 }

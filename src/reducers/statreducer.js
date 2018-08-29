@@ -5,7 +5,7 @@ import {
     STATISTIC_CLEAR
 } from '../actions/stataction';
 
-import { CLEAR_ERRORS } from '../actions/authaction';
+import { CLEAR_ERRORS, CLEAR_ALL } from '../actions/authaction';
 
 const initState = {
     stat: null,
@@ -20,6 +20,7 @@ const statData = (state = initState, action) => {
         case STATISTIC_FETCH_FAILED: return Object.assign({}, state, { loading: false, error: action.error });
         case STATISTIC_CLEAR: return Object.assign({}, initState);
         case CLEAR_ERRORS: return Object.assign({}, state, { error: null });
+        case CLEAR_ALL: return Object.assign({}, initState);
         default: return state;
     }
 }

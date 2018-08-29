@@ -25,12 +25,12 @@ class Profile extends Component {
         // this.chooseNewPhoto = this.chooseNewPhoto.bind(this);
     }
     componentDidMount() {
-        if (!this.props.userData.user) {
+        if (!this.props.userData.user && !this.props.userData.loading) {
             this.props.history.replace('/sign-in');
         }
     }
     componentDidUpdate() {
-        if (!this.props.userData.user) {
+        if (!this.props.userData.user && !this.props.userData.loading) {
             this.props.history.replace('/sign-in');
         }
     }

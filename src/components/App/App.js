@@ -92,7 +92,7 @@ const mapStateToProps = state => ({
 // Func which map actionCreators to props
 const mapDispatchtoProps = dispatch => ({
   runTest: (mess) => { dispatch(testRun(mess)) },
-  getUser: () => { dispatch(getUser()) }
+  getUser: () => { dispatch(getUser()) },
 })
 
 // Finally connect react component to redux (use connect tool)

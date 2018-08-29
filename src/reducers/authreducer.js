@@ -9,6 +9,7 @@ import {
     USERPHOTO_FETCH_SUCCESS,
     USERPHOTO_FETCH_FAILED,
     CLEAR_ERRORS,
+    CLEAR_ALL,
 } from '../actions/authaction';
 
 const initUserData = {
@@ -19,11 +20,12 @@ const initUserData = {
 
 const userData = (state = initUserData, action) => {
     switch (action.type) {
-        case USER_FETCH_START: return { user: state.user, error: null, loading: true };
-        case USER_FETCH_SUCCESS: return { user: action.user, error: null, loading: false };
-        case USER_FETCH_FAILED: return { user: null, error: action.error, loading: false };
-        case USER_DELETE: return initUserData;
+        case USER_FETCH_START: return Object.assign({}, state, { loading: true });
+        case USER_FETCH_SUCCESS: return Object.assign({}, state, { user: action.user, loading: false });
+        case USER_FETCH_FAILED: return Object.assign({}, state, { error: action.error, loading: false });
+        case USER_DELETE: return Object.assign({}, initUserData);
         case CLEAR_ERRORS: return Object.assign({}, state, { error: null });
+        case CLEAR_ALL: return Object.assign({}, initUserData);
         default: return state;
     }
 }
@@ -55,9 +57,10 @@ const initPhotoState = {
 
 const photoData = (state = initPhotoState, action) => {
     switch (action.type) {
-        case USERPHOTO_FETCH_START: return { blob: null, url: null, loading: true, error: null };
-        case USERPHOTO_FETCH_SUCCESS: return { blob: action.blob, url: action.url, loading: false, error: null };
-        case USERPHOTO_FETCH_FAILED: return { blob: null, url: null, loading: false, error: action.error }
+        case USERPHOTO_FETCH_START: return Object.assign({}, state, { loading: true });
+        case USERPHOTO_FETCH_SUCCESS: return Object.assign({}, state, { blob: action.blob, url: action.url, loading: false });
+        case USERPHOTO_FETCH_FAILED: return Object.assign({}, state, { error: action.error, loading: false });
+        case CLEAR_ALL: return Object.assign({}, initPhotoState);
         default: return state;
     }
 }

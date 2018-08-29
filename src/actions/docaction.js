@@ -1,6 +1,6 @@
 import { apiurl } from '../appconfig';
 // Need to take token
-import { checkAndGetToken, logout, checkAuth } from './authaction';
+import { checkAndGetToken, logout, refreshToken } from './authaction';
 
 import { updatestart, updatesuccess, updatefailed } from './chengeaction';
 
@@ -82,7 +82,7 @@ export const uploadDocument = (data, file) => (dispatch, getState) => {
                             dispatch(getDocument());
                         }
                     } else if (res.status === 401) {
-                        dispatch(logout());
+                        dispatch(refreshToken(token, uploadDocument, data, file));
                     } else {
                         throw new Error(res.statusText);
                     }
@@ -104,9 +104,10 @@ export const uploadDocument = (data, file) => (dispatch, getState) => {
 }
 
 // TODO: actionCreator upload Document Photo
-export const uploadDocPhoto = (file, token) => (dispatch, getState) => {
+export const uploadDocPhoto = (file, tok) => (dispatch, getState) => {
     // dispatch(docphotoStart());
     if (file) {
+        const token = (tok) ? tok :checkAndGetToken(dispatch, getState);
         if (token) {
             const data = new FormData();
             data.append('files', file);
@@ -123,7 +124,7 @@ export const uploadDocPhoto = (file, token) => (dispatch, getState) => {
                         dispatch(updatesuccess('Documents is update'));
                         dispatch(getDocument());
                     } else if (res.status === 401) {
-                        dispatch(logout());
+                        dispatch(refreshToken(token, uploadDocPhoto, file));
                     } else {
                         throw new Error(res.statusText);
                     }
@@ -149,7 +150,15 @@ export const getDocument = (tok) => (dispatch, getState) => {
                 'Authorization': `Bearer ${token.auth_token}`
             })
         })
-            .then(res => checkAuth(res, dispatch))
+            .then(res => {
+                if (res.status === 200 || res.status === 201 || res.status === 204) {
+                    return res.json();
+                } else if (res.status === 401) {
+                    dispatch(refreshToken(token, getDocument));
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
             .then(data => {
                 dispatch(docSuccess(data));
                 dispatch(getDocPhoto(token));
@@ -173,7 +182,7 @@ export const getDocPhoto = (tok) => (dispatch, getState) => {
         })
             .then(res => {
                 if (res.status === 401) {
-                    dispatch(logout());
+                    dispatch(refreshToken(token, getDocPhoto));
                 } else if (res.status === 404) {
                     dispatch(docphotoSuccess(null, null));
                     return null

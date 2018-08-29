@@ -1,4 +1,4 @@
-import { logout, checkAuth, checkAndGetToken } from './authaction';
+import { logout, checkAndGetToken, refreshToken } from './authaction';
 import { apiurl } from '../appconfig';
 
 export const STATISTIC_FETCH_START = 'STATISTIC_FETCH_START';
@@ -34,9 +34,16 @@ export const getStatistic = (page, size) => (dispatch, getState) => {
                 'Authorization': `Bearer ${token.auth_token}`,
             })
         })
-            .then(res => checkAuth(res, dispatch))
+            .then(res => {
+                if (res.status === 200 || res.status === 201 ||res.status === 204) {
+                    return res.json();
+                } else if (res.status === 401) {
+                    dispatch(refreshToken(token, getStatistic, page, size));
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
             .then(data => {
-                console.log(data);
                 if (Array.isArray(data)) {
                     if (data.length === 0) {
                         dispatch(statFailed('No statistic'));

@@ -1,4 +1,4 @@
-import { checkAndGetToken, logout } from './authaction';
+import { checkAndGetToken, logout, refreshToken } from './authaction';
 import { apiurl } from '../appconfig';
 
 export const USERLIST_FETCH_START = 'USERLIST_FETCH_START';
@@ -75,11 +75,10 @@ export const getUserList = (page, size, option = {
             })
         })
         .then(res => {
-            console.log(res);
-            if (res.status === 200) {
+            if (res.status === 200 || res.status === 201 || res.status === 204) {
                 return res.json();
             } else if (res.status === 401) {
-                dispatch(logout());
+                dispatch(refreshToken(token, getUserList, page, size, option));
             } else {
                 throw new Error(res.statusText);
             }
