@@ -13,13 +13,11 @@ class Statistic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            page: 1,
-            size: 10,
         }
     }
     componentDidMount() {
         // if (!this.props.statData.stat) {
-            this.props.getStatistic(this.state.page, this.state.size);
+            this.props.getStatistic();
         //}
     }
     renderList() {
@@ -66,7 +64,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchtoProps = dispatch => ({
-    getStatistic: (page, size) => { dispatch(getStatistic(page, size)) }
+    getStatistic: () => { dispatch(getStatistic()) }
 })
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Statistic);

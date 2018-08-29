@@ -29,7 +29,7 @@ export const statClear = () => ({
     type: STATISTIC_CLEAR
 });
 
-export const getStatistic = (page, size) => (dispatch, getState) => {
+export const getStatistic = () => (dispatch, getState) => {
     const token = checkAndGetToken(dispatch, getState);
     if (token) {
         const page = getState().statData.page;
@@ -63,7 +63,7 @@ export const getStatistic = (page, size) => (dispatch, getState) => {
             })
             .then(data => {
                 if (Array.isArray(data)) {
-                    if (daya.length === 0) {
+                    if (data.length === 0) {
                         dispatch(statAll());
                     } else {
                         dispatch(statSuccess(data));

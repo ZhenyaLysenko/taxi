@@ -44,10 +44,36 @@ class Profile extends Component {
             default: return null;
         }
     }
-    renderAdmin() {
+    renderToolBar() {
         if (this.props.userData.user.role === 'admin') {
-            return <Link to='/admin'><div className={`${style.profileToolItem}`}>Admin Panel</div></Link>
-        } 
+            return (
+                <div className={`${style.profileToolbar}`}>
+                    <Link to='/admin'><div className={`${style.profileToolItem}`}>Admin Panel</div></Link>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
+                </div>
+            );
+        }
+        if (this.props.userData.user.role === 'customer') {
+            return (
+                <div className={`${style.profileToolbar}`}>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
+                </div>
+            );
+        }
+        if (this.props.userData.user.role === 'driver') {
+            return (
+                <div className={`${style.profileToolbar}`}>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}>Documents</div>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}>Vehicle</div>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
+                </div>
+            );
+        }
         return null;
     }
     render() {
@@ -59,14 +85,7 @@ class Profile extends Component {
                         <div className={`${style.profileMain}`}>
                             {this.renderMain()}
                         </div>
-                        <div className={`${style.profileToolbar}`}>
-                            {this.renderAdmin()}
-                            <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
-                            <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}>Documents</div>
-                            <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}>Vehicle</div>
-                            <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
-                            <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
-                        </div>
+                        {this.renderToolBar()}
                     </div>
                 </div>
             );

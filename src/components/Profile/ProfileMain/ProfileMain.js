@@ -14,6 +14,8 @@ class ProfileMain extends Component {
     constructor(props) {
         super(props);
     }
+    componentDidMount() {
+    }
     renderPhoto() {
         if (this.props.photoData.url) {
             return <img src={this.props.photoData.url} alt='photo' />;
@@ -26,8 +28,21 @@ class ProfileMain extends Component {
         }
         return <img src={defaultphoto} className={style.profilePhoto} alt='photo' />;
     }
-    render() {
-        if (this.props.userData.user) {
+    renderProfile() {
+        if (this.props.userData.user.role === 'admin') {
+            return (
+                <div>
+                    <h1>Profile</h1>
+                    <div className={style.profilePhoto}>
+                        {this.renderPhoto()}
+                    </div>
+                    <h3>Name: {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
+                    <h3>Status: {this.props.userData.user.role}</h3>
+                    <h3>Aprroved: {(this.props.userData.user.isApproved) ? 'Yes' : 'No'}</h3>
+                </div>
+            )
+        }
+        if (this.props.userData.user.role === 'driver') {
             return (
                 <div>
                     <h1>Profile</h1>
@@ -39,7 +54,26 @@ class ProfileMain extends Component {
                     <h3>Phone: {this.props.userData.user.phoneNumber}</h3>
                     <h3>City: {this.props.userData.user.city}</h3>
                 </div>
-            );
+            )
+        }
+        if (this.props.userData.user.role === 'customer') {
+            return (
+                <div>
+                    <h1>Profile</h1>
+                    <div className={style.profilePhoto}>
+                        {this.renderPhoto()}
+                    </div>
+                    <h3>Name: {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
+                    <h3>Email: {this.props.userData.user.email}</h3>
+                    <h3>Phone: {this.props.userData.user.phoneNumber}</h3>
+                </div>
+            )
+        }
+        return null;
+    }
+    render() {
+        if (this.props.userData.user) {
+            return this.renderProfile();
         }
         if (this.props.userData.error) {
             return <Alert local={true} message='Data dont load' click={this.props.getUser} />

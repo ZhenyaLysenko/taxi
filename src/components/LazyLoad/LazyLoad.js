@@ -17,7 +17,7 @@ class LazyLoad extends Component {
             let tC = this.state.comp.getBoundingClientRect().top;
             // console.log(wY - tC, this.props.loading);
             if (wY - tC > 10 && this.props.do && !this.props.loading) {
-                console.log('Lazy');
+                // console.log('Lazy');
                 this.props.do();
             }
         }
