@@ -16,3 +16,14 @@
     width: 300px;
     height: auto;
 }
+.form > h3 {
+    margin-left: 18px;
+    margin-bottom: 12px;
+    font-size: 150%;
+
+  }
+.form > h1 {
+    color: #fca420;
+    text-shadow:  2px 2px 5px rgb(99, 98, 98);
+
+  }

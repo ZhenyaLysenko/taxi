@@ -44,12 +44,13 @@ class ProfileMain extends Component {
         }
         if (this.props.userData.user.role === 'driver') {
             return (
-                <div>
+                <div className={style.form}>
                     <h1>Profile</h1>
                     <div className={style.profilePhoto}>
                         {this.renderPhoto()}
                     </div>
-                    <h3>Name: {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
+                    <h3>Welcome {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
+                    <h1>Your contact information</h1>
                     <h3>Email: {this.props.userData.user.email}</h3>
                     <h3>Phone: {this.props.userData.user.phoneNumber}</h3>
                     <h3>City: {this.props.userData.user.city}</h3>
