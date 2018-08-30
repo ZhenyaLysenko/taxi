@@ -109,7 +109,7 @@ class Header extends Component {
                         <NavLink to="/profile" activeClassName={style.active} className={style.sign_in__block__a}><button className={style.bannerBtn + " " + style.driveBtn}>Profile</button></NavLink>
                     </div>
                     <div className={style.rideDriveItem}>
-                        <div className={`${style.sign_in__block__a}`}><button className={style.bannerBtn + " " + style.driveBtn } onClick={this.props.logout}>Log out</button></div>
+                        <Link to="/home" activeclassname={style.active} className={style.sign_in__block__a}><button className={style.bannerBtn + " " + style.driveBtn}  onClick={this.props.logout}>Log out</button></Link>
                     </div>
                     {this.renderToggle()}
                 </div>

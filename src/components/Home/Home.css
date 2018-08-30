@@ -86,7 +86,7 @@ a {
   text-decoration: none;
   border-radius: .3em;
   transition: .3s ease-out;
-  font-family: 'ProximaNovaThinReg';
+  font-family: 'ProximaNovaRegular';
   font-size: 1.5rem;
   cursor: pointer;
 }

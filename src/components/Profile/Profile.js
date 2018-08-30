@@ -12,6 +12,9 @@ import Statistic from './Statistic/Statistic';
 
 import { connect } from 'react-redux';
 
+import defaultphoto from '../../assets/default-user.png';
+import { getUser, getPhoto } from '../../actions/authaction';
+
 // import { uploadPhoto, logout } from '../../actions/authaction';
 
 class Profile extends Component {
@@ -47,8 +50,20 @@ class Profile extends Component {
     renderAdmin() {
         if (this.props.userData.user.role === 'admin') {
             return <Link to='/admin'><div className={`${style.profileToolItem}`}>Admin Panel</div></Link>
-        } 
+        }
         return null;
+    }
+    renderPhoto() {
+        if (this.props.photoData.url) {
+            return <img src={this.props.photoData.url} alt='photo' />;
+        }
+        if (this.props.photoData.loading) {
+            return <Loading />
+        }
+        if (this.props.photoData.error) {
+            return <Alert local={true} message='Photo dont load' click={this.props.getPhoto} />
+        }
+        return <img src={defaultphoto} className={style.profilePhoto} alt='photo' />;
     }
     render() {
         if (this.props.userData.user) {
@@ -56,16 +71,22 @@ class Profile extends Component {
                 <div>
                     <Header></Header>
                     <div className={`${style.profileContainer}`}>
-                        <div className={`${style.profileMain}`}>
-                            {this.renderMain()}
-                        </div>
                         <div className={`${style.profileToolbar}`}>
+                            <div className={style.photoName}>
+                                <div className={style.profilePhoto}>
+                                    {this.renderPhoto()}
+                                </div>
+                                <h3 className={style.profileName}>{this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
+                            </div>
                             {this.renderAdmin()}
                             <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
                             <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}>Documents</div>
                             <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}>Vehicle</div>
                             <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
                             <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
+                        </div>
+                        <div className={`${style.profileMain}`}>
+                            {this.renderMain()}
                         </div>
                     </div>
                 </div>
@@ -75,6 +96,20 @@ class Profile extends Component {
     }
 }
 
+ProfileMain.propTypes = {
+    userData: PropTypes.object,
+    photoData: PropTypes.object,
+}
+
+const mapStateToProps = state => ({
+    userData: state.userData,
+    photoData: state.photoData
+})
+
+const mapDispatchtoProps = dispatch => ({
+    getPhoto: () => { dispatch(getPhoto()) },
+    getUser: () => { dispatch(getUser()) }
+})
 // Check props type
 Profile.propTypes = {
     history: PropTypes.object,
@@ -83,16 +118,5 @@ Profile.propTypes = {
     // logout: PropTypes.func,
     // photoData: PropTypes.object,
 }
-
-const mapStateToProps = state => ({
-    history: state.historyData.history,
-    userData: state.userData,
-    // photoData: state.photoData
-})
-
-const mapDispatchtoProps = dispatch => ({
-    // uploadPhoto: (file) => { dispatch(uploadPhoto(file)) },
-    // logout: () => { dispatch(logout()) }
-})
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Profile);

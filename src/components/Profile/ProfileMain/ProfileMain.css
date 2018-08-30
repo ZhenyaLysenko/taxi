@@ -1,18 +1,29 @@
-.profilePhoto {
-    width: 300px;
-    height: 300px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+.heading {
+  text-align: center;
+  color: #000;
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 100%;
+  border-bottom: 2px solid #dedede;
+  margin: 0;
+  padding: 15px 0;
+  letter-spacing: 4px;
 }
-
-.profilePhoto > img {
-    position: absolute;
-    margin: auto;
-    min-height: 300px;
-    min-width: 300px;
-    width: 300px;
-    height: auto;
+.main h3 {
+  font-size: 1.6rem;
+}
+.main>div {
+  padding: 20px;
+}
+.main span {
+  font-family: 'ProximaNovaRegular';
+}
+@media only screen and (max-width: 500px) {
+    .heading {
+        position: static;
+    }
+    .main h3 {
+      text-align: center;
+    }
 }
