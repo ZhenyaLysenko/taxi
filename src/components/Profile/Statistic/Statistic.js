@@ -36,7 +36,7 @@ class Statistic extends Component {
             return <Loading />
         } */
         if (this.props.statData.error) {
-            return <Alert local={true} message='Data dont load' click={() => { this.props.getStatistic(this.state.page, this.state.size) }} />
+            return <Alert local={true} message='Data dont load' click={() => { this.props.getStatistic() }} />
         }
         if (this.props.statData.stat) {
             return (

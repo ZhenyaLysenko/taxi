@@ -9,6 +9,7 @@ import Settings from './Settings/Settings';
 import Documents from './Documents/Documents';
 import Vehicle from './Vehicle/Vehicle';
 import Statistic from './Statistic/Statistic';
+import ResponseList from './ResponseList/ResponseList';
 
 import { connect } from 'react-redux';
 
@@ -69,6 +70,7 @@ class Profile extends Component {
             case 'vehicle': return <Vehicle />;
             case 'statistic': return <Statistic />;
             case 'settings': return <Settings />;
+            case 'response': return <ResponseList />;
             default: return null;
         }
     }
@@ -78,6 +80,7 @@ class Profile extends Component {
                 <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
                     <Link to='/admin'><div className={`${style.profileToolItem}`}>Admin Panel</div></Link>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}>Your responses</div>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
                 </div>
             );
@@ -87,6 +90,7 @@ class Profile extends Component {
                 <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}>Your responses</div>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
                 </div>
             );
@@ -98,6 +102,7 @@ class Profile extends Component {
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}>Documents</div>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}>Vehicle</div>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
+                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}>Your responses</div>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
                 </div>
             );

@@ -55,7 +55,7 @@ export const getStatistic = () => (dispatch, getState) => {
                     if (res.status === 200 || res.status === 201 || res.status === 204) {
                         return res.json();
                     } else if (res.status === 401) {
-                        dispatch(refreshToken(token, getStatistic, page, size));
+                        dispatch(refreshToken(token, getStatistic));
                     } else if (res.status === 404) {
                         dispatch(statAll());
                     } else {
