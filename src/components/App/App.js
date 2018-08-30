@@ -44,7 +44,8 @@ class App extends Component {
     if (this.props.testData) {
       console.log(this.props.testData.message);
     }
-    return (<Router history={this.props.history}>
+    return (
+    <Router history={this.props.history}>
       <div>
         {this.renderLoading()}
         <Route exact path="/" component={Home} />

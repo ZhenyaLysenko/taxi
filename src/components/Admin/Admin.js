@@ -4,6 +4,8 @@ import style from './Admin.css';
 import profilestyle from "../Profile/Profile.css";
 import Header from '../Header/Header';
 import AdminUserList from './AdminUserList/AdminUserList';
+import AdminRefundList from './AdminRefundList/AdminRefundList';
+import AdminComissionTool from './AdminComissionTool/AdminComissionTool';
 
 import { connect } from 'react-redux';
 
@@ -27,37 +29,50 @@ class Profile extends Component {
     renderMain() {
         switch (this.state.show) {
             case 'main': return <Main />;
-            case 'userlist': return <AdminUserList />
+            case 'userlist': return <AdminUserList />;
+            case 'refundlist': return <AdminRefundList />;
+            case 'comission': return <AdminComissionTool />;
             default: return null;
         }
+    }
+    renderComissionTool() {
+        const rootid = '1eb67299-3eea-400e-a72c-0ef7c1e3246d';
+        if (this.props.userData.user.id === rootid) {
+            return <div className={`${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'comission' }) }}>Manage comission</div>
+        }
+        return null;
     }
     render() {
         if (this.props.userData.user) {
             if (this.props.userData.user.role === 'admin') {
                 return (
-                <div>
-                    <Header></Header>
-                    <div className={`${profilestyle.profileContainer}`}>
-                        <div className={`${profilestyle.profileMain}`}>
-                            {this.renderMain()}
-                        </div>
-                        <div className={`${profilestyle.profileToolbar}`}>
-                            <div className={`${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
-                            <div className={`${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'userlist' }) }}>Manage users</div>
+                    <div>
+                        <Header></Header>
+                        <div className={`${profilestyle.profileContainer}`}>
+                            <div className={`${profilestyle.profileMain}`}>
+                                {this.renderMain()}
+                            </div>
+                            <div className={`${profilestyle.profileToolbar}`}>
+                                <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
+                                    <div className={`${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
+                                    <div className={`${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'userlist' }) }}>Manage users</div>
+                                    <div className={`${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'refundlist' }) }}>Manage requests</div>
+                                    {this.renderComissionTool()}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
                 );
             } else {
                 return (
-                <div>
-                    <Header></Header>
-                    <div className={`${profilestyle.profileContainer}`}>  
-                        <div className={`${profilestyle.profileMain}`}>
-                            You are not admin
+                    <div>
+                        <Header></Header>
+                        <div className={`${profilestyle.profileContainer}`}>
+                            <div className={`${profilestyle.profileMain}`}>
+                                You are not admin
+                        </div>
                         </div>
                     </div>
-                </div>
                 );
             }
         }

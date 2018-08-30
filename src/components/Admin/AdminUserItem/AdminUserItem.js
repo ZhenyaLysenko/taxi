@@ -234,7 +234,7 @@ class AdminUserItem extends Component {
     }
     renderToAdminBtn() {
         const rootid = '1eb67299-3eea-400e-a72c-0ef7c1e3246d';
-        if (this.props.userData.user.id === rootid && this.props.data !== rootid) {
+        if (this.props.userData.user.id === rootid && this.props.data.id !== rootid) {
             if (!this.props.data.roles.includes('admin_access')) {
                 return <button onClick={() => { this.props.setAdmin(this.props.data.id) }}>Up to admin</button>
             } else {

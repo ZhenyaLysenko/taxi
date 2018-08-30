@@ -18,6 +18,9 @@ class ChangeProfile extends Component {
             city: "",
             currentPassword: "",
             newPassword: "",
+            newphotourl: null,
+            newphoto: null,
+            newphotoname: null,
         }
     }
     chooseNewPhoto(e) {

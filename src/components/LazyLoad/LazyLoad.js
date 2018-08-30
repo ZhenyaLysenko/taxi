@@ -12,25 +12,26 @@ class LazyLoad extends Component {
     }
     componentDidMount() {
         const comp = document.getElementById('lazyload');
-        window.onscroll = () => {
-            let wY = window.scrollY + window.innerHeight;
-            let tC = this.state.comp.getBoundingClientRect().top;
-            // console.log(wY - tC, this.props.loading);
-            if (wY - tC > 10 && this.props.do && !this.props.loading) {
-                // console.log('Lazy');
-                this.props.do();
-            }
-        }
+        window.addEventListener = ('scroll', this.scroll.bind(this));
         this.setState({ comp }, () => {
-            window.onscroll();
+            // window.onscroll();
         });
 
     }
+    scroll() {
+        let wY = window.scrollY + window.innerHeight;
+        let tC = this.state.comp.getBoundingClientRect().top;
+        // console.log(wY - tC, this.props.loading);
+        if (wY - tC > 10 && this.props.do && !this.props.loading) {
+            // console.log('Lazy');
+            this.props.do();
+        }
+    }
     componentDidUpdate() {
-        window.onscroll();
+        // window.onscroll();
     }
     componentWillUnmount() {
-        window.onscroll = () => { };
+        window.removeEventListener('scroll', this.scroll);
     }
     render() {
         return <div id="lazyload" className={style.LazyLoad}><Loading /></div>

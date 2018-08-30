@@ -28,10 +28,38 @@ class Profile extends Component {
         if (!this.props.userData.user && !this.props.userData.loading) {
             this.props.history.replace('/sign-in');
         }
+        // window.addEventListener('scroll', this.scrollToolBar);
     }
     componentDidUpdate() {
         if (!this.props.userData.user && !this.props.userData.loading) {
             this.props.history.replace('/sign-in');
+        }
+    }
+    componentWillUnmount() {
+        // window.removeEventListener('scroll', this.scrollToolBar);
+    }
+    scrollToolBar() {
+        // console.log('Scroll');
+        const toolbar = document.getElementById("toolbar");
+        if (toolbar) {
+            const Y = toolbar.offsetTop;
+            const WY = window.pageYOffset;
+            console.log(WY , Y);
+            if (WY > Y) {
+                console.log(true);
+                if (!toolbar.classList.contains(`${style.Toolbarfixed}`)) {
+                    toolbar.classList.add(`${style.Toolbarfixed}`);
+                    console.log('Fixed');
+                } 
+            }
+            
+            /* if (WY < Y) {
+                console.log(false);
+                if (toolbar.classList.contains(`${style.Toolbarfixed}`)) {
+                    toolbar.classList.remove(`${style.Toolbarfixed}`);
+                    console.log('Remove');
+                }
+            } */
         }
     }
     renderMain() {
@@ -47,7 +75,7 @@ class Profile extends Component {
     renderToolBar() {
         if (this.props.userData.user.role === 'admin') {
             return (
-                <div className={`${style.profileToolbar}`}>
+                <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
                     <Link to='/admin'><div className={`${style.profileToolItem}`}>Admin Panel</div></Link>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
@@ -56,7 +84,7 @@ class Profile extends Component {
         }
         if (this.props.userData.user.role === 'customer') {
             return (
-                <div className={`${style.profileToolbar}`}>
+                <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
@@ -65,7 +93,7 @@ class Profile extends Component {
         }
         if (this.props.userData.user.role === 'driver') {
             return (
-                <div className={`${style.profileToolbar}`}>
+                <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}>Documents</div>
                     <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}>Vehicle</div>
@@ -85,7 +113,9 @@ class Profile extends Component {
                         <div className={`${style.profileMain}`}>
                             {this.renderMain()}
                         </div>
-                        {this.renderToolBar()}
+                        <div className={`${style.profileToolbar}`}>
+                            {this.renderToolBar()}
+                        </div>
                     </div>
                 </div>
             );
