@@ -102,37 +102,39 @@ export const refundListClear = () => ({
 });
 
 export const getUserList = (search) => (dispatch, getState) => {
-    const token = checkAndGetToken(dispatch, getState);
-    if (token) {
-        const page = getState().userlistData.page;
-        dispatch(userListStart());
-        fetch(`${apiurl}/api/admins/getusers?PageNumber=${page}&PageSize=${10}&${(search) ? `&SearchQuery=${search}&` : ''}`, {
-            method: 'GET',
-            headers: new Headers({
-                'Authorization': `Bearer ${token.auth_token}`
+    if (!getState().userlistData.loading) {
+        const token = checkAndGetToken(dispatch, getState);
+        if (token) {
+            const page = getState().userlistData.page;
+            dispatch(userListStart());
+            fetch(`${apiurl}/api/admins/getusers?PageNumber=${page}&PageSize=${5}&${(search) ? `&SearchQuery=${search}&` : ''}`, {
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': `Bearer ${token.auth_token}`
+                })
             })
-        })
-            .then(res => {
-                if (res.status === 200 || res.status === 201 || res.status === 204) {
-                    return res.json();
-                } else if (res.status === 401) {
-                    dispatch(refreshToken(token, getUserList, page, size, search, option));
-                } else {
-                    throw new Error(res.statusText);
-                }
-            })
-            .then(list => {
-                if (Array.isArray(list)) {
-                    if (list.length === 0) {
-                        dispatch(userListAll());
+                .then(res => {
+                    if (res.status === 200 || res.status === 201 || res.status === 204) {
+                        return res.json();
+                    } else if (res.status === 401) {
+                        dispatch(refreshToken(token, getUserList, search));
                     } else {
-                        dispatch(userListSuccess(list));
+                        throw new Error(res.statusText);
                     }
-                }
-            })
-            .catch(error => dispatch(userListFailed(error.message)));
-    } else {
-        dispatch(logout());
+                })
+                .then(list => {
+                    if (Array.isArray(list)) {
+                        if (list.length === 0) {
+                            dispatch(userListAll());
+                        } else {
+                            dispatch(userListSuccess(list));
+                        }
+                    }
+                })
+                .catch(error => dispatch(userListFailed(error.message)));
+        } else {
+            dispatch(logout());
+        }
     }
 }
 
@@ -165,37 +167,39 @@ export const setUserToAdmin = (id) => (dispatch, getState) => {
 }
 
 export const getRefundList = (issolved) => (dispatch, getState) => {
-    const token = checkAndGetToken(dispatch, getState);
-    if (token) {
-        const page = getState().refundlistData.page;
-        dispatch(refundListStart());
-        fetch(`${apiurl}/api/admins/refundRequests?PageNumber=${page}&PageSize=${10}&IsSolved=${issolved}`, {
-            method: 'GET',
-            headers: new Headers({
-                'Authorization': `Bearer ${token.auth_token}`
+    if (!getState().refundlistData.loading) {
+        const token = checkAndGetToken(dispatch, getState);
+        if (token) {
+            const page = getState().refundlistData.page;
+            dispatch(refundListStart());
+            fetch(`${apiurl}/api/admins/refundRequests?PageNumber=${page}&PageSize=${5}&IsSolved=${issolved}`, {
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': `Bearer ${token.auth_token}`
+                })
             })
-        })
-            .then(res => {
-                if (res.status === 200 || res.status === 201 || res.status === 204) {
-                    return res.json();
-                } else if (res.status === 401) {
-                    dispatch(refreshToken(token, getUserList, page, size, search, option));
-                } else {
-                    throw new Error(res.statusText);
-                }
-            })
-            .then(list => {
-                if (Array.isArray(list)) {
-                    if (list.length === 0) {
-                        dispatch(refundListAll());
+                .then(res => {
+                    if (res.status === 200 || res.status === 201 || res.status === 204) {
+                        return res.json();
+                    } else if (res.status === 401) {
+                        dispatch(refreshToken(token, getRefundList, issolved));
                     } else {
-                        dispatch(refundListSuccess(list));
+                        throw new Error(res.statusText);
                     }
-                }
-            })
-            .catch(error => dispatch(refundListFailed(error.message)));
-    } else {
-        dispatch(logout());
+                })
+                .then(list => {
+                    if (Array.isArray(list)) {
+                        if (list.length === 0) {
+                            dispatch(refundListAll());
+                        } else {
+                            dispatch(refundListSuccess(list));
+                        }
+                    }
+                })
+                .catch(error => dispatch(refundListFailed(error.message)));
+        } else {
+            dispatch(logout());
+        }
     }
 }
 
@@ -260,7 +264,7 @@ export const approveLicense = (id) => (dispatch, getState) => {
 }
 
 export const setComission = (value) => (dispatch, getState) => {
-    if (typeof value  === 'number') {
+    if (typeof value === 'number') {
         const token = checkAndGetToken(dispatch, getState);
         if (token) {
             dispatch(changeStart());
@@ -270,7 +274,7 @@ export const setComission = (value) => (dispatch, getState) => {
                     'Authorization': `Bearer ${token.auth_token}`,
                     'Content-Type': 'application/json'
                 }),
-                body: JSON.stringify({value})
+                body: JSON.stringify({ value })
             })
                 .then(res => {
                     if (res.status === 200 || res.status === 201 || res.status === 204) {
@@ -299,18 +303,47 @@ export const resolveRequest = (id, message) => (dispatch, getState) => {
                     'Authorization': `Bearer ${token.auth_token}`,
                     'Content-Type': 'application/json'
                 }),
-                body: JSON.stringify({toRefund: true, message})
+                body: JSON.stringify({ toRefund: true, message })
+            })
+                .then(res => {
+                    if (res.status === 200 || res.status === 201 || res.status === 204) {
+                        dispatch(changeSuccess('Request was resolved'));
+                    } else if (res.status === 401) {
+                        dispatch(refreshToken(token, resolveRequest, id, message));
+                    } else {
+                        throw new Error(res.statusText);
+                    }
+                })
+                .catch(error => dispatch(error.message));
+        } else {
+            dispatch(logout());
+        }
+    }
+}
+
+export const sendResponse = (identityId, message) => (dispatch, getState) => {
+    if (identityId && message) {
+        const token = checkAndGetToken(dispatch, getState);
+        if (token) {
+            dispatch(changeStart());
+            fetch(`${apiurl}/api/admins/response`, {
+                method: 'POST',
+                headers: new Headers({
+                    'Authorization': `Bearer ${token.auth_token}`,
+                    'Content-Type': 'application/json'
+                }),
+                body: JSON.stringify({ message, identityId })
             })
             .then(res => {
                 if (res.status === 200 || res.status === 201 || res.status === 204) {
-                    dispatch(changeSuccess('Request was resolved'));
+                    dispatch(changeSuccess('Response was send'));
                 } else if (res.status === 401) {
-                    dispatch(refreshToken(token, resolveRequest, id, message));
+                    dispatch(refreshToken(token, sendResponse, identityId, message));
                 } else {
                     throw new Error(res.statusText);
                 }
             })
-            .catch(error => dispatch(error.message));
+            .catch(error => dispatch(changeFailed(error.message)));
         } else {
             dispatch(logout());
         }

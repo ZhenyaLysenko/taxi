@@ -18,7 +18,7 @@ class AdminUserList extends Component {
         }
     }
     componentDidMount() {
-        this.props.getUserList();
+        // this.props.getUserList();
     }
     componentDidUpdate() {
     }

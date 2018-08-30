@@ -12,19 +12,21 @@ class LazyLoad extends Component {
     }
     componentDidMount() {
         const comp = document.getElementById('lazyload');
-        window.addEventListener = ('scroll', this.scroll.bind(this));
+        window.addEventListener('scroll', this.scroll.bind(this));
         this.setState({ comp }, () => {
-            // window.onscroll();
+            this.scroll();
         });
-
+    }
+    componentDidUpdate() {
+        this.scroll();
     }
     scroll() {
-        let wY = window.scrollY + window.innerHeight;
-        let tC = this.state.comp.getBoundingClientRect().top;
-        // console.log(wY - tC, this.props.loading);
-        if (wY - tC > 10 && this.props.do && !this.props.loading) {
-            // console.log('Lazy');
-            this.props.do();
+        if (!this.props.loading) {
+            let wY = window.scrollY + window.innerHeight;
+            let tC = this.state.comp.getBoundingClientRect().top;
+            if (wY - tC > 10) {
+                this.props.do();
+            }
         }
     }
     componentDidUpdate() {
@@ -34,7 +36,7 @@ class LazyLoad extends Component {
         window.removeEventListener('scroll', this.scroll);
     }
     render() {
-        return <div id="lazyload" className={style.LazyLoad}><Loading /></div>
+        return <div id="lazyload" className={style.LazyLoad} onClick={this.props.do}><Loading /></div>
     }
 }
 
@@ -42,6 +44,7 @@ class LazyLoad extends Component {
 LazyLoad.propTypes = {
     do: PropTypes.func,
     loading: PropTypes.bool,
+    active: PropTypes.bool,
 }
 
 export default LazyLoad;

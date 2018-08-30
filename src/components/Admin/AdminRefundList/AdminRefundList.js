@@ -18,7 +18,7 @@ class AdminRefundList extends Component {
         }
     }
     componentDidMount() {
-        this.props.getRefundList(this.state.issolved);
+        // this.props.getRefundList(this.state.issolved);
     }
     componentDidUpdate() {
     }
@@ -56,6 +56,7 @@ class AdminRefundList extends Component {
         if (!this.props.listData.all) {
             return <LazyLoad loading={this.props.listData.loading} do={() => { this.props.getRefundList(this.state.issolved) }} />
         }
+        return null;
     }
     render() {
         /* if (this.props.listData.loading) {
@@ -68,12 +69,14 @@ class AdminRefundList extends Component {
             return (
                 <div>
                     {this.renderAlert()}
-                    <h3>Refund Requests List</h3> 
+                    <h3>Refund Requests List</h3>
                     <button onClick={this.refresh.bind(this)}>Refresh</button>
-                    <div><input type="checkbox" value={this.state.issolved} onClick = {(e) => { this.setState({ issolved: e.target.checked })}}/>Only solved</div>
-                    <ol>
-                        {this.renderList(this.props.listData.list)}
-                    </ol>
+                    <div><input type="checkbox" value={this.state.issolved} onClick={(e) => { this.setState({ issolved: e.target.checked }) }} />Only solved</div>
+                    <div>
+                        <ol>
+                            {this.renderList(this.props.listData.list)}
+                        </ol>
+                    </div>
                     {this.renderLazyLoad()}
                 </div>);
         }

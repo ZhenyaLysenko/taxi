@@ -31,7 +31,7 @@ const initUserListState = {
 const userlistData = (state = initUserListState, action) => {
     switch (action.type) {
         case USERLIST_FETCH_START: return Object.assign({}, state, { loading: true });
-        case USERLIST_FETCH_SUCCESS: return Object.assign({}, state, { loading: false, page: ++state.page, list: action.list });
+        case USERLIST_FETCH_SUCCESS: return Object.assign({}, state, { loading: false, page: ++state.page, list: [...state.list, ...action.list] });
         case USERLIST_FETCH_FAILED: return Object.assign({}, state, { loading: false, error: action.error });
         case USERLIST_ERROR_CLEAR: return Object.assign({}, state, { error: null });
         case USERLIST_CLEAR: return Object.assign({}, initUserListState);
@@ -53,7 +53,7 @@ const initRefundListState = {
 const refundlistData = (state = initRefundListState, action) => {
     switch (action.type) {
         case REFUNDLIST_FETCH_START: return Object.assign({}, state, { loading: true });
-        case REFUNDLIST_FETCH_SUCCESS: return Object.assign({}, state, { loading: false, page: ++state.page, list: action.list });
+        case REFUNDLIST_FETCH_SUCCESS: return Object.assign({}, state, { loading: false, page: ++state.page, list: [...state.list, ...action.list] });
         case REFUNDLIST_FETCH_FAILED: return Object.assign({}, state, { loading: false, error: action.error });
         case REFUNDLIST_ERROR_CLEAR: return Object.assign({}, state, { error: null });
         case REFUNDLIST_CLEAR: return Object.assign({}, initUserListState);
