@@ -67,6 +67,43 @@
     font-size: 1.5rem;
 }
 
+.contentList {
+    margin: 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: stretch;
+    transition: all .3s ease-out;
+}
+
+.contentListItem {
+    width: 100%;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+}
+
+.refreshBtn {
+    cursor: pointer;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 0 5px;
+    width: 32px;
+    position: relative;
+    transition: background-color .3s ease-out;
+}
+
+
+.refreshBtn > img {
+    width: inherit;
+    max-width: 64px;
+    max-height: 64px;
+    height: inherit;
+}
+
+.refreshBtn > img:hover {
+    animation: refreshanim .3s ease-out;
+}
+
 @media only screen and (max-width: 1140px) {
     .profileToolbar {
         border-left: none;
@@ -89,5 +126,14 @@
     }
     .profileMain {
         box-shadow: none;
+    }
+}
+
+@keyframes refreshanim {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
     }
 }

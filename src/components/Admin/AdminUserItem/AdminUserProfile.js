@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
 
-import profilestyle from '../../Profile/ProfileMain/ProfileMain.css';
-
+import profilestyle from '../../Profile/Profile.css';
+import style from './AdminUserItem.css'
 import defaultphoto from '../../../assets/default-user.png';
 
 import { connect } from 'react-redux';
@@ -28,7 +28,7 @@ class AdminUserProfile extends Component {
     }
     fetchProfilePhoto() {
         if (this.props.tokenData.token
-            && this.props.data.profilePictureId 
+            && this.props.data.profilePictureId
             && !this.state.loadphoto
             && !this.state.photourl) {
             const token = this.props.tokenData.token;
@@ -74,17 +74,21 @@ class AdminUserProfile extends Component {
     renderProfile() {
         this.fetchProfilePhoto();
         return (
-            <div>
-                <div className={profilestyle.profilePhoto}>
-                    {this.renderProfilePhoto()}
+            <div className={`${style.adminUserContent} ${style.adminUserProfile}`}>
+                <div className={style.adminUserProfilePhoto}>
+                    <div className={profilestyle.profilePhoto}>
+                        {this.renderProfilePhoto()}
+                    </div>
                 </div>
-                <p>ID: {this.props.data.id}</p>
-                <p>ROLE: {this.props.data.roles[0]}</p>
-                <p>Name: {this.props.data.firstName} {this.props.data.lastName}</p>
-                <p>Email: {this.props.data.email}</p>
-                <p>EmailConfirmed: {(this.props.data.emailConfirmed) ? 'Yes' : 'No'}</p>
-                <p>Phone: {this.props.data.phoneNumber}</p>
-                <p>PhotoId: {this.props.data.profilePictureId}</p>
+                <div className={style.adminUserProfileInfo}>
+                    <div className={style.adminUserProfileText}><span>ID:</span> {this.props.data.id}</div>
+                    <div className={style.adminUserProfileText}><span>Role:</span> {this.props.data.roles[0]}</div>
+                    <div className={style.adminUserProfileText}><span>Name:</span> {this.props.data.firstName} {this.props.data.lastName}</div>
+                    <div className={style.adminUserProfileText}><span>Email:</span> {this.props.data.email}</div>
+                    <div className={style.adminUserProfileText}><span>EmailConfirmed:</span> {(this.props.data.emailConfirmed) ? 'Yes' : 'No'}</div>
+                    <div className={style.adminUserProfileText}><span>Phone:</span> {this.props.data.phoneNumber}</div>
+                    <div className={style.adminUserProfileText}><span>PhotoId:</span> {this.props.data.profilePictureId}</div>
+                </div>
             </div>
         )
     }

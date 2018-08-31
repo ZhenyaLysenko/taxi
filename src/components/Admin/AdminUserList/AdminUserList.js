@@ -27,7 +27,7 @@ class AdminUserList extends Component {
     }
     renderList(list) {
         return list.map((item, index) => {
-            return <li key={index}><AdminUserItem data={item} /></li>
+            return <div className={profilestyle.contentListItem} key={index}><AdminUserItem data={item}/></div>
         });
     }
     renderAlert() {
@@ -79,9 +79,9 @@ class AdminUserList extends Component {
                         />
                         <button className={style.searchButton} onClick={this.searchInList.bind(this)}>Search</button>
                     </div>
-                    <ol>
+                    <div className={profilestyle.contentList}>
                         {this.renderList(this.props.listData.list)}
-                    </ol>
+                    </div>
                     {this.renderLazyLoad()}
                 </div>);
         }

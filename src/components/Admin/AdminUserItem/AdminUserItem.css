@@ -1,0 +1,187 @@
+.adminUserContainer {
+}
+
+.adminUserMain {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.adminUserText {
+    cursor: pointer;
+    flex-grow: 1;
+    padding: 20px 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: background-color .3s ease-out;
+}
+
+.adminUserText:hover {
+    background: rgba(0,0,0,0.2);
+}
+
+.adminUserText > span {
+    font-size: inherit;
+    font-weight: bold;
+    color: #faa71a;
+}
+
+.adminSettingsBtn {
+    cursor: pointer;
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 0 5px;
+    width: 48px;
+    position: relative;
+    transition: background-color .3s ease-out;
+}
+
+
+.adminSettingsBtn > img {
+    width: inherit;
+    max-width: 64px;
+    max-height: 64px;
+    height: inherit;
+}
+
+.adminSettingsBtn:hover {
+    background: rgba(0,0,0,0.2);
+}
+
+.settingsContainer {
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    z-index: 5;
+}
+
+.settingsMain {
+    background: white;
+    min-width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+.settingsMainItem {
+    background: white;
+    cursor: pointer;
+    border: none;
+    padding: 5px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.settingsMainItem:hover {
+    background: #faa71a;
+}
+
+.adminUserContent {
+    border-top: 2px solid rgba(0,0,0,0.2);
+}
+
+.adminUserProfile {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+   /*  overflow: hidden;
+    animation: profileanim .3s ease-out;
+    transition: height .3s ease-out; */
+}
+
+.adminUserProfilePhoto {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 10px;
+}
+
+.adminUserProfileInfo {
+    flex-grow: 3;
+    padding: 10px;
+}
+
+.adminUserProfileText {
+    font-size: 1.2rem;
+    overflow: hidden;
+}
+
+.adminUserProfileText > span {
+    font-weight: bold;
+    color: #faa71a;
+}
+
+.adminUserLicensePhoto {
+    border-radius: 5px;
+}
+
+.adminUserLicenseAprrove {
+    cursor: pointer;
+    padding: 10px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 3px;
+    background: #2b2929;
+    color: white;
+    font-size: 1rem;
+    transition: background-color, color .3s ease-out;
+}
+
+.adminUserLicenseAprrove:hover {
+    background: #1a1a1a;
+    color: #faa71a;
+}
+
+.adminUserResForm {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    padding: 20px 10px;
+}
+
+.adminUserResForm > h3 {
+    margin: 5px 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.adminUserResForm > textarea {
+    border: 1px solid rgba(0,0,0,0.2);
+    padding: 10px;
+    height: 100px;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+.adminUserResForm > input[type=submit] {
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    background: #2b2929;
+    width: auto;
+    margin: auto;
+    color: white;
+    font-size: 1rem;
+    transition: background-color, color .3s ease-out;
+}
+
+.adminUserResForm > input[type=submit]:hover {
+    background: #1a1a1a;
+    color: #faa71a;
+}
+
+/* @keyframes profileanim {
+    0% {
+        height: 0px;
+    }
+    100% {
+        opacity: 1;
+        height: 100px; 
+    }
+} */

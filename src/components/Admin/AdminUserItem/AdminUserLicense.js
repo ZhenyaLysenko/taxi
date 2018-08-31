@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
 
-import profilestyle from '../../Profile/ProfileMain/ProfileMain.css';
-
+import profilestyle from '../../Profile/Profile.css';
+import style from './AdminUserItem.css';
 import defaultlicense from '../../../assets/default-license.png';
 
 import { connect } from 'react-redux';
@@ -110,7 +110,11 @@ class AdminUserLicense extends Component {
             this.fetchLicense();
         }
         if (this.state.loadlicense) {
-            return <Loading />
+            return (
+                <div className={`${style.adminUserContent} ${style.adminUserProfile}`}>
+                    <Loading />
+                </div>
+            )
         }
         if (this.state.licenseerror) {
             return <Alert local={true}
@@ -119,14 +123,20 @@ class AdminUserLicense extends Component {
         }
         if (this.state.licensedata) {
             return (
-                <div>
-                    <div className={profilestyle.profilePhoto}>
-                        {this.renderLicensePhoto()}
+                <div className={`${style.adminUserContent} ${style.adminUserProfile}`}>
+                    <div className={style.adminUserProfilePhoto}>
+                        <div className={`${profilestyle.profilePhoto} ${style.adminUserLicensePhoto}`}>
+                            {this.renderLicensePhoto()}
+                        </div>
                     </div>
-                    <p>Licensed From: {this.state.licensedata.licensedFrom}</p>
-                    <p>Licensed To: {this.state.licensedata.licensedTo}</p>
-                    <p>Approved: {(this.state.licensedata.isApproved) ? 'YES' : 'NO'}</p>
-                    {this.renderLicenseApproveBtn()}
+                    <div className={style.adminUserProfileInfo}>
+                        <div className={style.adminUserProfileText}><span>Licensed From:</span> {this.state.licensedata.licensedFrom}</div>
+                        <div className={style.adminUserProfileText}><span>Licensed To:</span> {this.state.licensedata.licensedTo}</div>
+                        <div className={style.adminUserProfileText}><span>Approved:</span> {(this.state.licensedata.isApproved) ? 'YES' : 'NO'}
+                                {this.renderLicenseApproveBtn()}
+                        </div>
+                        
+                    </div>
                 </div>
             )
         }
@@ -135,7 +145,7 @@ class AdminUserLicense extends Component {
     renderLicenseApproveBtn() {
         if (this.props.userData.user.role === 'admin'
             && !this.props.data.roles.includes('admin_access')) {
-            return <button onClick={() => { this.props.approveLicense(this.props.data.ids.driverId) }}>Approve</button>
+            return <button className={style.adminUserLicenseAprrove}onClick={() => { this.props.approveLicense(this.props.data.ids.driverId) }}>Approve</button>
         }
         return null;
     }
