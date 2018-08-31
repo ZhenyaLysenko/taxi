@@ -13,7 +13,7 @@
     border-right: 2px solid #dedede;
     position: relative;
     box-shadow: -3px 2px 5px 0px rgba(222,222,222,1);
-    align-items: center;
+    align-items: stretch;
 }
 .profileToolbar {
     flex: 1 0 25%;
@@ -35,7 +35,9 @@
 }
 
 .photoName {
-    text-align: center;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
     border-bottom: 2px solid #dedede;
     margin-top: 30px;
     padding: 0 20px;

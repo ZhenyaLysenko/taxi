@@ -49,9 +49,6 @@ class Profile extends Component {
                     <div>
                         <Header></Header>
                         <div className={`${profilestyle.profileContainer}`}>
-                            <div className={`${profilestyle.profileMain}`}>
-                                {this.renderMain()}
-                            </div>
                             <div className={`${profilestyle.profileToolbar}`}>
                                 <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
                                     <div className={`${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
@@ -60,6 +57,7 @@ class Profile extends Component {
                                     {this.renderComissionTool()}
                                 </div>
                             </div>
+                            {this.renderMain()}
                         </div>
                     </div>
                 );
@@ -70,7 +68,7 @@ class Profile extends Component {
                         <div className={`${profilestyle.profileContainer}`}>
                             <div className={`${profilestyle.profileMain}`}>
                                 You are not admin
-                        </div>
+                            </div>
                         </div>
                     </div>
                 );
@@ -81,7 +79,7 @@ class Profile extends Component {
 }
 
 const Main = (props) => {
-    return 'This is admin panel';
+    return <div className={`${profilestyle.profileMain}`}>'This is admin panel'</div>;
 }
 
 // Check props type

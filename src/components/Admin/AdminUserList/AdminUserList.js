@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-//import style from './Admin.css';
+import style from '../Admin.css';
+import profilemainstyle from '../../Profile/ProfileMain/ProfileMain.css'
+import profilestyle from '../../Profile/Profile.css';
+
 import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
 import LazyLoad from '../../LazyLoad/LazyLoad';
@@ -63,12 +66,19 @@ class AdminUserList extends Component {
         }
         if (this.props.listData.list) {
             return (
-                <div>
+                <div className={`${profilestyle.profileMain}`}>
                     {this.renderAlert()}
-                    <h3>User List</h3>
+                    <h3 className={profilemainstyle.heading}>User List</h3>
                     {/* <button onClick={() => { this.state.page++; this.props.getUserList(this.state.page, this.state.size) }}>Get More Users</button> */}
-                    <input type="text" value={this.state.search} placeholder="Search" onChange={(e) => { this.setState({ search: e.target.value }) }} />
-                    <button onClick={this.searchInList.bind(this)}>Search</button>
+                    <div className={style.searchContainer}>
+                        <input className={style.searchInput}
+                            type="text"
+                            value={this.state.search}
+                            placeholder="Search"
+                            onChange={(e) => { this.setState({ search: e.target.value }) }}
+                        />
+                        <button className={style.searchButton} onClick={this.searchInList.bind(this)}>Search</button>
+                    </div>
                     <ol>
                         {this.renderList(this.props.listData.list)}
                     </ol>
