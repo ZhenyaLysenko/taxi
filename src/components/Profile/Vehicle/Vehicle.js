@@ -28,7 +28,7 @@ class Vehicle extends Component {
             return <Loading />
         }
         if (this.props.vehData.errorphoto) {
-            return <Alert local={true} message='Photo dont load' click={this.props.getVehPhoto} />
+            return <Alert local={true} message='Photo don`t load' click={this.props.getVehPhoto} />
         }
         return <img src={defaultphoto} alt='photo' />;
     }
@@ -36,14 +36,14 @@ class Vehicle extends Component {
         if (this.props.vehData.veh) {
             return (
                 <div className="container">
-                    <h1>Profile</h1>
+                    <h1 className={style.yourCar}>Your car</h1>
                     <div className={style.vehPhoto}>
                         {this.renderPhoto()}
                     </div>
-                    <h3>Number: {this.props.vehData.veh.number}</h3>
-                    <h3>Model: {this.props.vehData.veh.model}</h3>
-                    <h3>Brand: {this.props.vehData.veh.brand}</h3>
-                    <h3>Color: {this.props.vehData.veh.color}</h3>
+                    <h3 className={style.vehicle__h3}>Number: {this.props.vehData.veh.number}</h3>
+                    <h3 className={style.vehicle__h3}>Model: {this.props.vehData.veh.model}</h3>
+                    <h3 className={style.vehicle__h3}>Brand: {this.props.vehData.veh.brand}</h3>
+                    <h3 className={style.vehicle__h3}>Color: {this.props.vehData.veh.color}</h3>
                 </div>
             );
         }
@@ -51,7 +51,7 @@ class Vehicle extends Component {
             return (
                 <div className="container">
                     {/* <Alert global={true} error={this.props.vehData.errorveh} click={this.props.clearErrors} /> */}
-                    <Alert local={true} message='Data dont load' click={this.props.getVehicle} />
+                    <Alert local={true} message='Data don`t load' click={this.props.getVehicle} />
                 </div>
             );
         }

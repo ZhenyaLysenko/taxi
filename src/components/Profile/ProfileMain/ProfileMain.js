@@ -25,7 +25,7 @@ class ProfileMain extends Component {
         if (this.props.userData.user.role === 'driver') {
             return (
                 <div>
-                    <h3>Name {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
+                    <h3>Name: {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
                     <h3>Email: {this.props.userData.user.email}</h3>
                     <h3>Phone: {this.props.userData.user.phoneNumber}</h3>
                     <h3>City: {this.props.userData.user.city}</h3>
@@ -35,7 +35,7 @@ class ProfileMain extends Component {
         if (this.props.userData.user.role === 'customer') {
             return (
                 <div>
-                    <h3>Name {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
+                    <h3>Name: {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
                     <h3>Email: {this.props.userData.user.email}</h3>
                     <h3>Phone: {this.props.userData.user.phoneNumber}</h3>
                 </div>

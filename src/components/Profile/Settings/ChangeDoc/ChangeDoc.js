@@ -47,21 +47,27 @@ class ChangeDoc extends Component {
     render() {
         if (this.props.userData.user) {
             return (
-                <div>
-                    <h1>Add Documents</h1>
-                    <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseDocPhoto(e) }} />
-                    <label for="pfotoloader" ><span><strong>{this.state.fileName}</strong></span></label>
-                    <div className={style.docForm}>
-                        <h1 className={style.Label}>Lending date</h1>
-                        <input type='text' placeholder=" dayFrom" required onChange={(e) => { this.setState({ dayFrom: e.target.value }) }} />
-                        <input type='text' placeholder=" yearFrom" required onChange={(e) => { this.setState({ yearFrom: e.target.value }) }} />
-                        <input type='text' placeholder=" monthFrom" required onChange={(e) => { this.setState({ monthFrom: e.target.value }) }} />
-                        <h1 className={style.Label}>Fit to</h1>
-                        <input type='text' placeholder=" dayTo" required onChange={(e) => { this.setState({ dayTo: e.target.value }) }} />
-                        <input type='text' placeholder=" yearTo" required onChange={(e) => { this.setState({ yearTo: e.target.value }) }} />
-                        <input type='text' placeholder=" monthTo" required onChange={(e) => { this.setState({ monthTo: e.target.value }) }} />
+                <div className={style.changeDoc}>
+                    <div className={style.changePhoto}>
+                      <h1>Add Documents</h1>
+                      <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseDocPhoto(e) }} />
+                      <label for="pfotoloader" ><span><strong>{this.state.fileName}</strong></span></label>
                     </div>
-                    <button className={style.Button} onClick={this.uploadDoc.bind(this)}>confirm</button>
+                    <div className={style.docForm}>
+                        <h1>Date of issue</h1>
+                        <div className={style.date}>
+                            <input className={style.signInInput} type='text' placeholder="Day" required onChange={(e) => { this.setState({ dayFrom: e.target.value }) }} />
+                            <input className={style.signInInput} type='text' placeholder="Month" required onChange={(e) => { this.setState({ monthFrom: e.target.value }) }} />
+                            <input className={style.signInInput} type='text' placeholder="Year" required onChange={(e) => { this.setState({ yearFrom: e.target.value }) }} />
+                        </div>
+                        <h1>Valid until</h1>
+                        <div className={style.date}>
+                            <input className={style.signInInput} type='text' placeholder="Day" required onChange={(e) => { this.setState({ dayTo: e.target.value }) }} />
+                            <input className={style.signInInput} type='text' placeholder="Month" required onChange={(e) => { this.setState({ monthTo: e.target.value }) }} />
+                            <input className={style.signInInput} type='text' placeholder="Year" required onChange={(e) => { this.setState({ yearTo: e.target.value }) }} />
+                        </div>
+                    </div>
+                    <button className={style.signInInputSubmit} onClick={this.uploadDoc.bind(this)}>SUBMIT</button>
                 </div>
             );
         }

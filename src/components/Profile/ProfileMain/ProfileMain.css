@@ -1,18 +1,17 @@
+.main {
+  width: 100%;
+  text-align: center;
+}
 .main h3 {
   font-size: 1.6rem;
 }
-
 .heading {
   color: #000;
-  /* position: absolute; */
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-self: stretch;
   border-bottom: 2px solid #dedede;
-  margin: 0 20px;
+  margin: 0;
   padding: 15px 0;
   letter-spacing: 4px;
+  text-align: center;
 }
 .main > div {
   padding: 20px;
@@ -21,10 +20,10 @@
   font-family: 'ProximaNovaRegular';
 }
 @media only screen and (max-width: 500px) {
-    .heading {
-        position: static;
-    }
-    .main h3 {
-      text-align: center;
-    }
+  .heading {
+    position: static;
+  }
+   .main h3 {
+    text-align: center;
+  }
 }

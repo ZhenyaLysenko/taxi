@@ -1,10 +1,9 @@
-.showForm > div > input{
-    height: 30px;
-    margin-right: 15px;
+.active {
+  border-bottom: 5px solid #faa71a;
 }
-.showForm > div {
-    margin-right: 20px;
-    margin-bottom: 15px; 
+.showForm h1, .docForm h1, .changePhoto h1 {
+  margin: 0;
+  padding: 0;
 }
 .SettingsToolbar{
     flex: 1 0 25%;
@@ -13,21 +12,13 @@
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    font-size: 130%;
-    border-bottom: 1px solid rgb(0, 0, 0, 0.1);
+    margin-bottom: 30px;
 }
 .SettingsToolItem{
     padding: 5px 10px;
     cursor: pointer;
-    font-size: 30px;
-    border-bottom: 5px solid #fda21a00  ;
-}
-.SettingsToolItem:hover{
-    border-bottom: 5px solid #fda21a  ;
-}
-.Label {
-    color: rgb(131, 130, 130);
-    font-size: 18px;
+    font-size: 1.5rem;
+    text-align: center;
 }
 .pfotoinput {
     width: 0.1px;
@@ -38,68 +29,125 @@
     z-index: -1;
 }
 .pfotoinput + label {
-    margin:  10px ;
+    margin-left: 20px;
     color: black;
-    font-size: 30px;
+    font-size: 1.4rem;
     font-family: 'ProximaNovaThin';
-    padding: 4px;
-    border: 4px solid rgb(107, 105, 105);
+    background: none;
+    border: 3px solid #2b2929;
     cursor: pointer;
+    padding: 5px 10px;
+}
+.button {
+  border: none;
+  background: none;
+  background-color: #2b2929;
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 8px 20px;
+  text-decoration: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-sizing: border-box;
+}
+.button:hover {
+  background-color: #928e8e;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.changePhoto {
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.showForm, .changeDoc, .vehForm {
+  max-width: 80%;
+  margin: 0 auto;
+}
+.signInInput {
+   display: block;
+   border: 1px solid #2b2929;
+   font: 16px 'ProximaNovaRegular';
+   color: #2b2929;
+   padding: 5px 20px;
+   padding-left: 10px;
+   outline: none;
+   box-sizing: border-box;
+}
+.signInInput::placeholder {
+  font-family: 'ProximaNovaThin';
+  color: #2b2929;
+}
+.marginRight {
+  margin-right: 10px;
+}
+.signInInputSubmit {
+   width: 100%;
+   margin-bottom: 30px;
+   padding: 15px 10px;
+   font: 1.5rem 'ProximaNovaThin';
+   background: none;
+   border: none;
+   background-color: #2b2929;
+   color: #f4f4f4;
+   outline: none;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}
+.signInInputSubmit:hover {
+  background-color: #928e8e;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.docForm input {
+  width: 65px;
+}
+.docForm input::placeholder {
+  text-align: center;
+}
+.date {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+}
+.vehForm .signInInput {
+  margin-bottom: 10px;
+}
+.vehForm .signInInputSubmit {
+  margin-top: 20px;
+}
 
 
+@media only screen and (max-width: 700px) {
+  .SettingsToolItem{
+      padding: 5px;
+      font-size: 1.1rem;
+  }
+  .changePhoto {
+    display: block;
+  }
+  .pfotoinput + label {
+    margin-left: 0;
+  }
+  .docForm h1:first-child, .changePhoto h1:first-child {
+    margin-bottom: 10px;
+  }
 }
-.pfotoinput:focus + label,
-.pfotoinput + label :hover{
-    background-color: rgb(107, 105, 105);
-    
-}
-.Button{
-    background-color: rgb(0, 0, 0);
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 25px;
-    font-family: 'ProximaNovaThin';
-    margin: 4px 2px;
-    cursor: pointer;  
-}
-.Button:hover {
-    background-color: rgb(39, 38, 38);
-    color: #fca420;
-}
-.showForm > button:hover{
-    background-color: rgb(39, 38, 38);
-    color: #fca420;
-}
-.names{
-    display: flex;
-    margin-right: 15px;
-}
-.names > div > input{
-    height: 30px;
-    margin-right: 20px;
-}
-.docForm {
-    margin: 30px 0px 0px 0px;
-}
-.docForm > input{
-    height: 30px;
-    margin: 2px 20px 15px 2px;
-}
-.vehForm > div {
-    margin: 30px 0px 0px 0px;
-}
-.vehForm >div > input{
-    height: 30px;
-    margin: 2px 20px 15px 2px;
-}
-
 @media only screen and (max-width: 500px) {
     .SettingsToolbar {
         flex-flow: column nowrap;
         align-items: stretch;
+    }
+    .SettingsToolItem{
+        padding: 5px 10px;
+        font-size: 1.8rem;
+    }
+    .active {
+      border: 5px solid #faa71a;
     }
 }

@@ -3,24 +3,22 @@
     margin: 0 auto;
     padding-top: 70px;
     display: flex;
-    min-height: 90vh;
-    background: white;
+    background-color: #fff;
+    height: 100%;
 }
 .profileMain {
     flex: 1 1 60%;
     display: flex;
-    flex-flow: column nowrap;
-    border-right: 2px solid #dedede;
-    position: relative;
     box-shadow: -3px 2px 5px 0px rgba(222,222,222,1);
-    align-items: stretch;
+    align-content: center;
+    justify-content: center;
+    position: relative;
 }
 .profileToolbar {
     flex: 1 0 25%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: stretch;
-    border-left: 2px solid #dedede;
     border-right: 2px solid #dedede;
     height: 100%;
 }
@@ -30,10 +28,9 @@
     padding: 15px 20px;
     cursor: pointer;
 }
-.profileToolItem:hover {
-    background: #faa71a;
+.active {
+    background-color: #faa71a;
 }
-
 .photoName {
     display: flex;
     flex-flow: column nowrap;
@@ -42,7 +39,6 @@
     margin-top: 30px;
     padding: 0 20px;
 }
-
 .profilePhoto {
     width: 150px;
     height: 150px;
@@ -53,7 +49,6 @@
     position: relative;
     border-radius: 50%;
 }
-
 .profilePhoto > img {
     position: absolute;
     margin: auto;
@@ -62,9 +57,9 @@
     width: 150px;
     height: auto;
 }
-
 .profileName {
     font-size: 1.5rem;
+    text-align: center;
 }
 
 @media only screen and (max-width: 1140px) {
@@ -84,10 +79,11 @@
         text-align: center;
     }
     .profileToolbar {
-        border-right: none;
         border-bottom: 2px solid #dedede;
+        border-right: none;
     }
     .profileMain {
         box-shadow: none;
+        display: block;
     }
 }

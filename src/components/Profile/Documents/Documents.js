@@ -40,12 +40,12 @@ class Documents extends Component {
         if (this.props.docData.doc) {
             return (
                 <div className="container">
-                    <h1>Documents</h1>
+                    <h1 className={style.documents__h1}>Documents</h1>
                     <div className={style.docPhoto}>
                         {this.renderPhoto()}
                     </div>
-                    <p>Licensed from: {this.props.docData.doc.licensedFrom}</p>
-                    <p>Licensed to: {this.props.docData.doc.licensedTo}</p>
+                    <p className={style.vehicle__h3}>Licensed from: {this.props.docData.doc.licensedFrom}</p>
+                    <p className={style.vehicle__h3}>Licensed to: {this.props.docData.doc.licensedTo}</p>
                 </div>
             );
         }

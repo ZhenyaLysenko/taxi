@@ -1,0 +1,20 @@
+.refresh {
+  border: none;
+  background: none;
+  background-color: #2b2929;
+  color: #fff;
+  font-size: 1rem;
+  padding: 5px 20px;
+  text-decoration: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  margin: 0 auto;
+}
+.refresh:hover {
+  background-color: #928e8e;
+  transition: 0.3s;
+  cursor: pointer;
+}

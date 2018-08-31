@@ -45,13 +45,13 @@ class ResponseList extends Component {
             return <Loading />
         } */
         if (this.props.listData.error) {
-            return <Alert local={true} message='Data dont load' click={() => { this.props.getResponseList() }} />
+            return <Alert local={true} message='Data don`t load' click={() => { this.props.getResponseList() }} />
         }
         if (this.props.listData.ress) {
             return (
                 <div>
                     <h1>Responses list</h1>
-                    <button onClick={this.refresh.bind(this)}>Refresh</button>
+                    <button className={style.refresh} onClick={this.refresh.bind(this)}>Refresh</button>
                     <ul>
                         {this.renderList()}
                     </ul>

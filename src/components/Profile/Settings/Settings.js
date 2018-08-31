@@ -45,13 +45,13 @@ class Settings extends Component {
             return (
                 <div>
                     <div className={`${style.SettingsToolbar}`}>
-                            <div className={`${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'ch-prof' }) }}><strong>ch-prof</strong></div>
-                            <div className={`${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'adddoc' }) }}><strong>adddoc</strong></div>
-                            <div className={`${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'addvehicle' }) }}><strong>addvehicle</strong></div>
+                        <div className={this.state.show === 'ch-prof' ? `${style.active} + ${style.SettingsToolItem}` : `${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'ch-prof' }) }}><strong>Profile Changes</strong></div>
+                        <div className={this.state.show === 'adddoc' ? `${style.active} + ${style.SettingsToolItem}` : `${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'adddoc' }) }}><strong>Add documents</strong></div>
+                        <div className={this.state.show === 'addvehicle' ? `${style.active} + ${style.SettingsToolItem}` : `${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'addvehicle' }) }}><strong>Add vehicle</strong></div>
                     </div>
                     {this.renderUpdateInfo()}
                     {this.renderMain()}
-                    
+
                 </div>
             );
         }

@@ -6,13 +6,25 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    margin: 0 auto;
 }
-
 .docPhoto > img {
     position: absolute;
-    margin: auto;
     min-height: 300px;
-    min-width: 300px;
-    width: 300px;
+    min-width: 400px;
+    width: 500px;
     height: auto;
+}
+.documents__h1 {
+    text-align: center;
+}
+.vehicle__h3 {
+    text-align: center;
+    font-size: 1.6rem;
+}
+@media only screen and (max-width: 500px) {
+    .docPhoto {
+        width: 80%;
+        margin: 0 auto;
+    }
 }

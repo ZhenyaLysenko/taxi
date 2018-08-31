@@ -53,9 +53,9 @@ class Profile extends Component {
                 if (!toolbar.classList.contains(`${style.Toolbarfixed}`)) {
                     toolbar.classList.add(`${style.Toolbarfixed}`);
                     console.log('Fixed');
-                } 
+                }
             }
-            
+
             /* if (WY < Y) {
                 console.log(false);
                 if (toolbar.classList.contains(`${style.Toolbarfixed}`)) {
@@ -81,31 +81,31 @@ class Profile extends Component {
             return (
                 <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
                     <Link to='/admin'><div className={`${style.profileToolItem}`}>Admin Panel</div></Link>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}>Your responses</div>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
+                    <div className={this.state.show === 'main' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
+                    <div className={this.state.show === 'response' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}>Your responses</div>
+                    <div className={this.state.show === 'settings' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
                 </div>
             );
         }
         if (this.props.userData.user.role === 'customer') {
             return (
                 <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}>Your responses</div>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
+                    <div className={this.state.show === 'main' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
+                    <div className={this.state.show === 'statistic' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
+                    <div className={this.state.show === 'response' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}>Your responses</div>
+                    <div className={this.state.show === 'settings' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
                 </div>
             );
         }
         if (this.props.userData.user.role === 'driver') {
             return (
                 <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}>Documents</div>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}>Vehicle</div>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}>Your responses</div>
-                    <div className={`${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
+                    <div className={this.state.show === 'main' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
+                    <div className={this.state.show === 'documents' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}>Documents</div>
+                    <div className={this.state.show === 'vehicle' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}>Vehicle</div>
+                    <div className={this.state.show === 'statistic' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
+                    <div className={this.state.show === 'response' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}>Your responses</div>
+                    <div className={this.state.show === 'settings' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
                 </div>
             );
         }

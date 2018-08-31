@@ -4,6 +4,10 @@
 }
 a {
   text-decoration: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 .banner {
   background-image: url(../../../public/Home/home_bg.jpg);

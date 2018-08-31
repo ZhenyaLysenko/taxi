@@ -45,18 +45,16 @@ class ChangeVeh extends Component {
         if (this.props.userData.user) {
             return (
                 <div className={style.vehForm}>
-                    <h1>Add Vehicle</h1>
-                    <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseVehPhoto(e) }} />
-                    <label for="pfotoloader" ><span><strong>{this.state.fileName}</strong></span></label>
-                    <div>
-                        <input type='text' placeholder="Number" required onChange={(e) => { this.setState({ number: e.target.value }) }} />
-                        <input type='text' placeholder="Model" required onChange={(e) => { this.setState({ model: e.target.value }) }} />
+                    <div className={style.changePhoto}>
+                        <h1>Add Vehicle</h1>
+                        <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseVehPhoto(e) }} />
+                        <label for="pfotoloader"><span><strong>{this.state.fileName}</strong></span></label>
                     </div>
-                    <div>
-                        <input type='text' placeholder="Brand" required onChange={(e) => { this.setState({ brand: e.target.value }) }} />
-                        <input type='text' placeholder="Color" required onChange={(e) => { this.setState({ color: e.target.value }) }} />
-                    </div>
-                    <button className={style.Button} onClick={this.uploadVeh.bind(this)}>confirm</button>
+                        <input className={style.signInInput} type='text' placeholder="Number" required onChange={(e) => { this.setState({ number: e.target.value }) }} />
+                        <input className={style.signInInput} type='text' placeholder="Model" required onChange={(e) => { this.setState({ model: e.target.value }) }} />
+                        <input className={style.signInInput} type='text' placeholder="Brand" required onChange={(e) => { this.setState({ brand: e.target.value }) }} />
+                        <input className={style.signInInput} type='text' placeholder="Color" required onChange={(e) => { this.setState({ color: e.target.value }) }} />
+                    <button className={style.signInInputSubmit} onClick={this.uploadVeh.bind(this)}>SUBMIT</button>
                 </div>
             );
         }

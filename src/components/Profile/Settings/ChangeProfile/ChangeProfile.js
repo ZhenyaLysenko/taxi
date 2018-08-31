@@ -23,12 +23,12 @@ class ChangeProfile extends Component {
             newphotoname: null,
             lock: "",
             fileName: "Choose file"
-            
+
         }
     }
     formVisibility(){
         console.log('ok');
-        
+
     }
     chooseNewPhoto(e) {
         const file = e.target.files[0];
@@ -51,25 +51,25 @@ class ChangeProfile extends Component {
             this.props.changeProfile({
                 firstName: this.state.firstName,
             });
-    
+
         }
         if (this.state.lastName) {
             this.props.changeProfile({
                 lastName: this.state.lastName,
             });
-    
+
         }
         if (this.state.phoneNumber) {
             this.props.changeProfile({
                 phoneNumber: this.state.phoneNumber,
             });
-    
+
         }
         if (this.state.city) {
             this.props.changeProfile({
                 city: this.state.city,
             });
-    
+
         }
         if (this.state.currentPassword && this.state.newPassword) {
             if (this.state.currentPassword === this.state.newPassword) {
@@ -78,7 +78,7 @@ class ChangeProfile extends Component {
                     newPassword: this.state.newPassword,
                 })
             }
-    
+
         }
 
     }
@@ -86,42 +86,45 @@ class ChangeProfile extends Component {
         if (this.props.userData.user){
             return (
                 <div>
-                    <div onClick={this.formVisibility.bind(this)}> 
-                        <h1>Change Profile details</h1>
+                    <div onClick={this.formVisibility.bind(this)}>
                     </div>
                     {this.formVisibility()}
                     <div className={style.showForm}  hidden = {false} >
-                        <div>
-                            <h1>Change Photo</h1>
-                            <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseNewPhoto(e)}} />
-                            <label for="pfotoloader" ><span><strong>{this.state.fileName}</strong></span></label>
-                            <button className={style.Button} onClick={this.uploadNewPhoto.bind(this)}>confirm</button>
-                        </div>
-                        <h1 className={style.Label}>Change Name</h1>
-                        <div className={style.names}>
+                        <div className={style.changePhoto}>
+                            <h1>Photo</h1>
                             <div>
-                                <input type='text'   placeholder=" First Name" required onChange={(e) => { this.setState({ firstName: e.target.value }) }} />
-                                
-                            </div>
-                            <div>
-
-                                <input type='text' placeholder=" Last Name" required onChange={(e) => { this.setState({ lastName: e.target.value }) }} />
+                                <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseNewPhoto(e)}} />
+                                <label for="pfotoloader" ><span><strong>{this.state.fileName}</strong></span></label>
+                                <button className={style.button} onClick={this.uploadNewPhoto.bind(this)}>submit</button>
                             </div>
                         </div>
-                        <div>
-                            <h1 className={style.Label}>Change Phone Number</h1>
-                            <input type='text' placeholder=" Phone Number" required onChange={(e) => { this.setState({ phoneNumber: e.target.value }) }} />
+                        <h1>Name</h1>
+                        <div className={style.changePhoto}>
+                            <div className={style.marginRight}>
+                                <input className={style.signInInput} type='text' placeholder="First Name" required onChange={(e) => { this.setState({ firstName: e.target.value }) }} />
+                            </div>
+                            <div>
+                                <input className={style.signInInput} type='text' placeholder="Last Name" required onChange={(e) => { this.setState({ lastName: e.target.value }) }} />
+                            </div>
                         </div>
-                        <div>
-                            <h1 className={style.Label}>Change City</h1>
-                            <input type='text' placeholder=" City" required onChange={(e) => { this.setState({ city: e.target.value }) }} />
+                        <h1>Phone Number</h1>
+                        <div className={style.changePhoto}>
+                            <input className={style.signInInput} type='text' placeholder="Enter new phone" required onChange={(e) => { this.setState({ phoneNumber: e.target.value }) }} />
                         </div>
-                        <div>
-                            <h1 className={style.Label}>Change Passwaord</h1>
-                            <input type='text' placeholder=" current Password" required onChange={(e) => { this.setState({ currentPassword: e.target.value }) }} />
-                            <input type='text' placeholder=" new Password" required onChange={(e) => { this.setState({ newPassword: e.target.value }) }} />
+                        <h1 className={style.Label}>City</h1>
+                        <div className={style.changePhoto}>
+                            <input className={style.signInInput} type='text' placeholder="Enter new city" required onChange={(e) => { this.setState({ city: e.target.value }) }} />
                         </div>
-                        <button className={style.Button} onClick={this.confirmChange.bind(this)}>confirm</button>
+                        <h1 className={style.Label}>Password</h1>
+                        <div className={style.changePhoto}>
+                            <div className={style.marginRight}>
+                                <input className={style.signInInput} type='text' placeholder="Current password" required onChange={(e) => { this.setState({ currentPassword: e.target.value }) }} />
+                            </div>
+                            <div>
+                                <input className={style.signInInput} type='text' placeholder="New password" required onChange={(e) => { this.setState({ newPassword: e.target.value }) }} />
+                            </div>
+                        </div>
+                        <button className={style.signInInputSubmit} onClick={this.confirmChange.bind(this)}>SUBMIT</button>
                     </div>
                 </div>
             );
