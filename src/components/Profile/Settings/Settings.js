@@ -16,6 +16,7 @@ class Settings extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            show : 'ch-prof',
         }
     }
     renderUpdateInfo() {
@@ -31,14 +32,26 @@ class Settings extends Component {
         }
         return null;
     }
+    renderMain() {
+        switch (this.state.show) {
+            case 'ch-prof': return <ChangeProfile />;
+            case 'adddoc': return <ChangeDoc />;
+            case 'addvehicle': return <ChangeVeh />;
+            default: return null;
+        }
+    }
     render() {
         if (this.props.userData.user) {
             return (
                 <div>
+                    <div className={`${style.SettingsToolbar}`}>
+                            <div className={`${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'ch-prof' }) }}><strong>ch-prof</strong></div>
+                            <div className={`${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'adddoc' }) }}><strong>adddoc</strong></div>
+                            <div className={`${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'addvehicle' }) }}><strong>addvehicle</strong></div>
+                    </div>
                     {this.renderUpdateInfo()}
-                    <ChangeProfile />
-                    <ChangeDoc />
-                    <ChangeVeh />
+                    {this.renderMain()}
+                    
                 </div>
             );
         }

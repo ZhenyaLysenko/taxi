@@ -1,19 +1,20 @@
+.main h3 {
+  font-size: 1.6rem;
+}
+
 .heading {
-  text-align: center;
   color: #000;
-  position: absolute;
+  /* position: absolute; */
   top: 0;
-  display: block;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex: 1 1 100%;
   border-bottom: 2px solid #dedede;
   margin: 0;
   padding: 15px 0;
   letter-spacing: 4px;
 }
-.main h3 {
-  font-size: 1.6rem;
-}
-.main>div {
+.main > div {
   padding: 20px;
 }
 .main span {

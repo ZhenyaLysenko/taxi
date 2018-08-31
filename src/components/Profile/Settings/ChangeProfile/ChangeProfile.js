@@ -18,7 +18,17 @@ class ChangeProfile extends Component {
             city: "",
             currentPassword: "",
             newPassword: "",
+            newphotourl: null,
+            newphoto: null,
+            newphotoname: null,
+            lock: "",
+            fileName: "Choose file"
+            
         }
+    }
+    formVisibility(){
+        console.log('ok');
+        
     }
     chooseNewPhoto(e) {
         const file = e.target.files[0];
@@ -28,78 +38,90 @@ class ChangeProfile extends Component {
                 this.setState({ newphotourl: reader.result });
             };
             reader.readAsDataURL(file);
-            this.setState({ newphoto: file });
+            this.setState({ newphoto: file,
+                            fileName: file.name,
+            });
         }
     }
     uploadNewPhoto() {
         this.props.uploadPhoto(this.state.newphoto);
     }
-    updateFirstName() {
-        this.props.changeProfile({
-            firstName: this.state.firstName,
-        });
-
-    }
-    updateLastName() {
-        this.props.changeProfile({
-            lastName: this.state. lastName,
-        })
-
-    }
-    updatePhoneNumber() {
-        this.props.changeProfile({
-            phoneNumber: this.state.phoneNumber,
-        })
-
-    }
-    updateCity() {
-        this.props.changeProfile({
-            city: this.state.city,
-        })
-
-    }
-    updatePassword() {
-        if (this.state.currentPassword === this.state.newPassword) {
+    confirmChange() {
+        if (this.state.firstName) {
             this.props.changeProfile({
-                currentPassword: this.state.currentPassword,
-                newPassword: this.state.newPassword,
-            })
+                firstName: this.state.firstName,
+            });
+    
         }
+        if (this.state.lastName) {
+            this.props.changeProfile({
+                lastName: this.state.lastName,
+            });
+    
+        }
+        if (this.state.phoneNumber) {
+            this.props.changeProfile({
+                phoneNumber: this.state.phoneNumber,
+            });
+    
+        }
+        if (this.state.city) {
+            this.props.changeProfile({
+                city: this.state.city,
+            });
+    
+        }
+        if (this.state.currentPassword && this.state.newPassword) {
+            if (this.state.currentPassword === this.state.newPassword) {
+                this.props.changeProfile({
+                    currentPassword: this.state.currentPassword,
+                    newPassword: this.state.newPassword,
+                })
+            }
+    
+        }
+
     }
     render(){
         if (this.props.userData.user){
             return (
                 <div>
-                    <div>
-                        <h1>Change Photo</h1>
-                        <input type='file' accept='image/*' onChange={(e) => { this.chooseNewPhoto(e) }} />
-                        <button onClick={this.uploadNewPhoto.bind(this)}>Apply</button>
+                    <div onClick={this.formVisibility.bind(this)}> 
+                        <h1>Change Profile details</h1>
                     </div>
-                    <div>
-                        <h1>Change First Name</h1>
-                        <input type='text' placeholder="new name" required onChange={(e) => { this.setState({ firstName: e.target.value }) }} />
-                        <button onClick={this.updateFirstName.bind(this)}>Apply</button>
-                    </div>
-                    <div>
-                        <h1>Change Last Name</h1>
-                        <input type='text' placeholder="new name" required onChange={(e) => { this.setState({ lastName: e.target.value }) }} />
-                        <button onClick={this.updateLastName.bind(this)}>Apply</button>
-                    </div>
-                    <div>
-                        <h1>Change Phone Number</h1>
-                        <input type='text' placeholder="new name" required onChange={(e) => { this.setState({ phoneNumber: e.target.value }) }} />
-                        <button onClick={this.updatePhoneNumber.bind(this)}>Apply</button>
-                    </div>
-                    <div>
-                        <h1>Change City</h1>
-                        <input type='text' placeholder="new name" required onChange={(e) => { this.setState({ city: e.target.value }) }} />
-                        <button onClick={this.updateCity.bind(this)}>Apply</button>
-                    </div>
-                    <div>
-                        <h1>Change Passwaord</h1>
-                        <input type='text' placeholder="current Password" required onChange={(e) => { this.setState({ currentPassword: e.target.value }) }} />
-                        <input type='text' placeholder="new Password" required onChange={(e) => { this.setState({ newPassword: e.target.value }) }} />
-                        <button onClick={this.updatePassword.bind(this)}>Apply</button>
+                    {this.formVisibility()}
+                    <div className={style.showForm}  hidden = {false} >
+                        <div>
+                            <h1>Change Photo</h1>
+                            <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseNewPhoto(e)}} />
+                            <label for="pfotoloader" ><span><strong>{this.state.fileName}</strong></span></label>
+                            <button className={style.Button} onClick={this.uploadNewPhoto.bind(this)}>confirm</button>
+                        </div>
+                        <h1 className={style.Label}>Change Name</h1>
+                        <div className={style.names}>
+                            <div>
+                                <input type='text'   placeholder=" First Name" required onChange={(e) => { this.setState({ firstName: e.target.value }) }} />
+                                
+                            </div>
+                            <div>
+
+                                <input type='text' placeholder=" Last Name" required onChange={(e) => { this.setState({ lastName: e.target.value }) }} />
+                            </div>
+                        </div>
+                        <div>
+                            <h1 className={style.Label}>Change Phone Number</h1>
+                            <input type='text' placeholder=" Phone Number" required onChange={(e) => { this.setState({ phoneNumber: e.target.value }) }} />
+                        </div>
+                        <div>
+                            <h1 className={style.Label}>Change City</h1>
+                            <input type='text' placeholder=" City" required onChange={(e) => { this.setState({ city: e.target.value }) }} />
+                        </div>
+                        <div>
+                            <h1 className={style.Label}>Change Passwaord</h1>
+                            <input type='text' placeholder=" current Password" required onChange={(e) => { this.setState({ currentPassword: e.target.value }) }} />
+                            <input type='text' placeholder=" new Password" required onChange={(e) => { this.setState({ newPassword: e.target.value }) }} />
+                        </div>
+                        <button className={style.Button} onClick={this.confirmChange.bind(this)}>confirm</button>
                     </div>
                 </div>
             );
@@ -112,7 +134,9 @@ class ChangeProfile extends Component {
 ChangeProfile.propTypes = {
     userData: PropTypes.object,
     chengeName: PropTypes.func,
+    confirmChange: PropTypes.func,
     uploadPhoto: PropTypes.func,
+    formVisibility: PropTypes.func,
 }
 const mapStateToProps = state => ({
     userData: state.userData,

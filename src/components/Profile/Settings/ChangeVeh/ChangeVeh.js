@@ -17,6 +17,7 @@ class ChangeVeh extends Component {
             model: "",
             brand: "",
             color: "",
+            fileName: "Choose file",
         }
         this.chooseVehPhoto = this.chooseVehPhoto.bind(this);
     }
@@ -28,7 +29,8 @@ class ChangeVeh extends Component {
                 this.setState({ vehphotourl: reader.result });
             };
             reader.readAsDataURL(file);
-            this.setState({ vehphoto: file });
+            this.setState({ vehphoto: file,
+                            fileName: file.name, });
         }
     }
     uploadVeh() {
@@ -42,14 +44,19 @@ class ChangeVeh extends Component {
     render() {
         if (this.props.userData.user) {
             return (
-                <div>
+                <div className={style.vehForm}>
                     <h1>Add Vehicle</h1>
-                    <input type='file' accept='image/*' onChange={(e) => { this.chooseVehPhoto(e) }} />
-                    <input type='text' placeholder="Number" required onChange={(e) => { this.setState({ number: e.target.value }) }} />
-                    <input type='text' placeholder="Model" required onChange={(e) => { this.setState({ model: e.target.value }) }} />
-                    <input type='text' placeholder="Brand" required onChange={(e) => { this.setState({ brand: e.target.value }) }} />
-                    <input type='text' placeholder="Color" required onChange={(e) => { this.setState({ color: e.target.value }) }} />
-                    <button onClick={this.uploadVeh.bind(this)}>Apply</button>
+                    <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseVehPhoto(e) }} />
+                    <label for="pfotoloader" ><span><strong>{this.state.fileName}</strong></span></label>
+                    <div>
+                        <input type='text' placeholder="Number" required onChange={(e) => { this.setState({ number: e.target.value }) }} />
+                        <input type='text' placeholder="Model" required onChange={(e) => { this.setState({ model: e.target.value }) }} />
+                    </div>
+                    <div>
+                        <input type='text' placeholder="Brand" required onChange={(e) => { this.setState({ brand: e.target.value }) }} />
+                        <input type='text' placeholder="Color" required onChange={(e) => { this.setState({ color: e.target.value }) }} />
+                    </div>
+                    <button className={style.Button} onClick={this.uploadVeh.bind(this)}>confirm</button>
                 </div>
             );
         }

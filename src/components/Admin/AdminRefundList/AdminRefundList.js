@@ -4,27 +4,27 @@ import PropTypes from 'prop-types';
 import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
 import LazyLoad from '../../LazyLoad/LazyLoad';
-import AdminUserItem from '../AdminUserItem/AdminUserItem';
+import AdminRefundItem from '../AdminRefundItem/AdminRefundItem';
 
 import { connect } from 'react-redux';
-import { getUserList, changeClearError, userListClear } from '../../../actions/adminaction';
+import { getRefundList, changeClearError, refundListClear } from '../../../actions/adminaction';
 
 
-class AdminUserList extends Component {
+class AdminRefundList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: ""
+            issolved: false,
         }
     }
     componentDidMount() {
-        // this.props.getUserList();
+        // this.props.getRefundList(this.state.issolved);
     }
     componentDidUpdate() {
     }
     renderList(list) {
         return list.map((item, index) => {
-            return <li key={index}><AdminUserItem data={item} /></li>
+            return <li key={index}><AdminRefundItem data={item} /></li>
         });
     }
     renderAlert() {
@@ -39,8 +39,11 @@ class AdminUserList extends Component {
         }
         return null;
     }
-
-    searchInList() {
+    refresh() {
+        this.props.clearlist();
+        this.props.getRefundList(this.state.issolved);
+    }
+    /* searchInList() {
         if (this.state.search) {
             this.props.clearlist();
             this.props.getUserList(this.state.search);
@@ -48,30 +51,32 @@ class AdminUserList extends Component {
             this.props.clearlist();
             this.props.getUserList();
         }
-    }
+    } */
     renderLazyLoad() {
         if (!this.props.listData.all) {
-            return <LazyLoad loading={this.props.listData.loading} do={() => { this.props.getUserList(this.state.search) }} />
+            return <LazyLoad loading={this.props.listData.loading} do={() => { this.props.getRefundList(this.state.issolved) }} />
         }
+        return null;
     }
     render() {
         /* if (this.props.listData.loading) {
             return <Loading />
         } */
         if (this.props.listData.error) {
-            return <Alert local={true} message={`Data dont load (${this.props.listData.error})`} click={this.getList} />
+            return <Alert local={true} message={`Data dont load (${this.props.listData.error})`} click={() => { this.props.getRefundList(this.state.issolved) }} />
         }
         if (this.props.listData.list) {
             return (
                 <div>
                     {this.renderAlert()}
-                    <h3>User List</h3>
-                    {/* <button onClick={() => { this.state.page++; this.props.getUserList(this.state.page, this.state.size) }}>Get More Users</button> */}
-                    <input type="text" value={this.state.search} placeholder="Search" onChange={(e) => { this.setState({ search: e.target.value }) }} />
-                    <button onClick={this.searchInList.bind(this)}>Search</button>
-                    <ol>
-                        {this.renderList(this.props.listData.list)}
-                    </ol>
+                    <h3>Refund Requests List</h3>
+                    <button onClick={this.refresh.bind(this)}>Refresh</button>
+                    <div><input type="checkbox" value={this.state.issolved} onClick={(e) => { this.setState({ issolved: e.target.checked }) }} />Only solved</div>
+                    <div>
+                        <ol>
+                            {this.renderList(this.props.listData.list)}
+                        </ol>
+                    </div>
                     {this.renderLazyLoad()}
                 </div>);
         }
@@ -80,23 +85,23 @@ class AdminUserList extends Component {
 }
 
 // Check props type
-AdminUserList.propTypes = {
+AdminRefundList.propTypes = {
     listData: PropTypes.object,
-    getUserList: PropTypes.func,
+    getRefundList: PropTypes.func,
     changeData: PropTypes.object,
     changeClearError: PropTypes.func,
     clearlist: PropTypes.func
 }
 
 const mapStateToProps = state => ({
-    listData: state.userlistData,
+    listData: state.refundlistData,
     changeData: state.adminChangeData
 })
 
 const mapDispatchtoProps = dispatch => ({
-    getUserList: (page, size, search, option) => { dispatch(getUserList(page, size, search, option)) },
+    getRefundList: (issolved) => { dispatch(getRefundList(issolved)) },
     changeClearError: () => { dispatch(changeClearError()) },
-    clearlist: () => { dispatch(userListClear()) }
+    clearlist: () => { dispatch(refundListClear()) }
 })
 
-export default connect(mapStateToProps, mapDispatchtoProps)(AdminUserList);
+export default connect(mapStateToProps, mapDispatchtoProps)(AdminRefundList);
