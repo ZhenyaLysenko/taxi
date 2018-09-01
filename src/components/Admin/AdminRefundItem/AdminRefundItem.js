@@ -6,6 +6,8 @@ import Alert from '../../Alert/Alert'; */
 
 import userstyle from '../AdminUserItem/AdminUserItem.css'
 
+import AdminUserProfile from '../AdminUserItem/AdminUserProfile';
+
 import { connect } from 'react-redux';
 import { resolveRequest } from "../../../actions/adminaction";
 
@@ -36,6 +38,9 @@ class AdminRefundItem extends Component {
                 </div>
             );
         }
+        if (this.state.show === 'profile') {
+            return <AdminUserProfile id={this.props.data.identityId}/>
+        }
         return null;
     }
     renderResolveBtn() {
@@ -43,11 +48,16 @@ class AdminRefundItem extends Component {
             return <button className={userstyle.adminUserLicenseAprrove}
                     onClick={() => { this.setState({ show: 'close' }) }}>Close</button>
         }
-        if (this.state.show === 'close') {
+        return <button className={userstyle.adminUserLicenseAprrove}
+                onClick={() => { this.setState({ show: 'resolve' }) }}>Resolve it</button>
+    }
+    renderProfiliBtn() {
+        if (this.state.show === 'profile') {
             return <button className={userstyle.adminUserLicenseAprrove}
-                    onClick={() => { this.setState({ show: 'resolve' }) }}>Resolve it</button>
+                    onClick={() => { this.setState({ show: 'close' }) }}>Close</button>
         }
-        return null;
+        return <button className={userstyle.adminUserLicenseAprrove}
+                    onClick={() => { this.setState({ show: 'profile' }) }}>Show profile</button>
     }
     render() {
         if (this.props.data) {
@@ -56,12 +66,12 @@ class AdminRefundItem extends Component {
                     <div className={userstyle.adminUserProfile}>
                         <div className={userstyle.adminUserProfileInfo}>
                             <div className={userstyle.adminUserProfileText}><span>Id:</span> {this.props.data.id}</div>
-                            <div className={userstyle.adminUserProfileText}><span>Identity Id:</span> {this.props.data.identityId}</div>
-                            <div className={userstyle.adminUserProfileText}><span>CustomerId:</span> {this.props.data.customerId}</div>
-                            <div className={userstyle.adminUserProfileText}><span>TripHistoryId:</span> {this.props.data.tripHistoryId}</div>
-                            <div className={userstyle.adminUserProfileText}><span>CreationTime:</span> {this.props.data.creationTime}</div>
-                            <div className={userstyle.adminUserProfileText}><span>Message:</span> {this.props.data.message}</div>
-                            <div className={userstyle.adminUserProfileText}><span>Solved:</span> {(this.props.data.solved) ? 'Yes' : 'No'}
+                            <div className={userstyle.adminUserProfileText}><span>Identity Id:</span> <p>{this.props.data.identityId}</p> {this.renderProfiliBtn()}</div>
+                            <div className={userstyle.adminUserProfileText}><span>CustomerId:</span> <p>{this.props.data.customerId}</p></div>
+                            <div className={userstyle.adminUserProfileText}><span>TripHistoryId:</span> <p>{this.props.data.tripHistoryId}</p></div>
+                            <div className={userstyle.adminUserProfileText}><span>CreationTime:</span> <p>{this.props.data.creationTime}</p></div>
+                            <div className={userstyle.adminUserProfileText}><span>Message:</span> <p>{this.props.data.message}</p></div>
+                            <div className={userstyle.adminUserProfileText}><span>Solved:</span> <p>{(this.props.data.solved) ? 'Yes' : 'No'}</p>
                                 {this.renderResolveBtn()}
                             </div>
                         </div>

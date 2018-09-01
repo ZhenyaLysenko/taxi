@@ -86,7 +86,7 @@ class AdminUserItem extends Component {
     renderShow() {
         switch (this.state.show) {
             case 'profile': return <AdminUserProfile data={this.props.data} />;
-            case 'license': return <AdminUserLicense data={this.props.data} />;
+            case 'license': return <AdminUserLicense id={this.props.data.ids.driverId} roles={this.props.data.roles} />;
             case 'response': return <AdminUserResponse data={this.props.data} />;
             default: return null;
         }
@@ -110,7 +110,7 @@ class AdminUserItem extends Component {
                 <div className={style.adminUserContainer}>
                     <div className={style.adminUserMain}>
                         <div className={style.adminUserText}
-                            onClick={() => { this.setState({show: (this.state.show === 'close') ? 'profile' : 'close'}) }}>
+                            onClick={() => { this.setState({ show: (this.state.show === 'close') ? 'profile' : 'close' }) }}>
                             <span>Email:</span> {this.props.data.email}
                         </div>
                         {this.renderCloseBtn()}

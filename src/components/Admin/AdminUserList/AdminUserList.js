@@ -68,7 +68,7 @@ class AdminUserList extends Component {
             return (
                 <div className={`${profilestyle.profileMain}`}>
                     {this.renderAlert()}
-                    <h3 className={profilemainstyle.heading}>User List</h3>
+                    <h3 className={profilemainstyle.heading}>Users List</h3>
                     {/* <button onClick={() => { this.state.page++; this.props.getUserList(this.state.page, this.state.size) }}>Get More Users</button> */}
                     <div className={style.searchContainer}>
                         <input className={style.searchInput}

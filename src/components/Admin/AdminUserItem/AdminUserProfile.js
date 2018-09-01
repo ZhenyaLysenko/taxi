@@ -18,22 +18,73 @@ class AdminUserProfile extends Component {
             photourl: null,
             loadphoto: false,
             photoerror: null,
+            loaduser: false,
+            userdata: null,
+            usererror: null,
         }
     }
     componentDidMount() {
-
+        if (this.props.data) {
+            this.setState({userdata: this.props.data}, () => {
+                if (this.state.userdata.profilePictureId) {
+                    this.fetchProfilePhoto();
+                }
+            });
+        }
+        if (this.props.id) {
+            this.fetchUserProfile();
+        }
     }
     componentDidUpdate() {
-
+        if (!this.state.photourl && this.state.userdata) {
+            this.fetchProfilePhoto();
+        }
     }
     fetchProfilePhoto() {
         if (this.props.tokenData.token
-            && this.props.data.profilePictureId
             && !this.state.loadphoto
             && !this.state.photourl) {
             const token = this.props.tokenData.token;
-            this.setState({ loadphoto: true });
-            fetch(`${apiurl}/api/images/${this.props.data.profilePictureId}`, {
+            const id = (this.state.userdata)
+                ? this.state.userdata.profilePictureId
+                : (this.props.data)
+                    ? this.props.data.profilePictureId
+                    : null;
+            if (id) {
+                this.setState({ loadphoto: true });
+                fetch(`${apiurl}/api/images/${id}`, {
+                    method: 'GET',
+                    headers: new Headers({
+                        'Authorization': `Bearer ${token.auth_token}`
+                    })
+                })
+                    .then(res => {
+                        if (res.status === 200) {
+                            return res.blob();
+                        } else if (res.status === 404) {
+                            this.setState({ photourl: defaultphoto });
+                        } else {
+                            throw new Error(res.statusText);
+                        }
+                    })
+                    .then(blob => {
+                        if (blob) {
+                            const url = URL.createObjectURL(blob);
+                            this.setState({ photourl: url, loadphoto: false });
+                        }
+                    })
+                    .catch(error => this.setState({ photoerror: error.message, loadphoto: false }));
+            }
+        }
+    }
+    fetchUserProfile() {
+        if (this.props.tokenData.token
+            && this.props.id
+            && !this.state.loaduser
+            && !this.state.userdata) {
+            const token = this.props.tokenData.token;
+            this.setState({ loaduser: true });
+            fetch(`${apiurl}/api/admins/getuser/${this.props.id}`, {
                 method: 'GET',
                 headers: new Headers({
                     'Authorization': `Bearer ${token.auth_token}`
@@ -41,20 +92,21 @@ class AdminUserProfile extends Component {
             })
                 .then(res => {
                     if (res.status === 200) {
-                        return res.blob();
-                    } else if (res.status === 404) {
-                        this.setState({ photourl: defaultphoto });
+                        return res.json();
                     } else {
                         throw new Error(res.statusText);
                     }
                 })
-                .then(blob => {
-                    if (blob) {
-                        const url = URL.createObjectURL(blob);
-                        this.setState({ photourl: url, loadphoto: false });
+                .then(data => {
+                    if (data) {
+                        this.setState({ userdata: data, loaduser: false }, () => {
+                            if (data.profilePictureId) {
+                                this.fetchProfilePhoto(data.profilePictureId);
+                            }
+                        });
                     }
                 })
-                .catch(error => this.setState({ photoerror: error.message, loadphoto: false }));
+                .catch(error => this.setState({ usererror: error.message, loaduser: false }))
         }
     }
     renderProfilePhoto() {
@@ -71,30 +123,38 @@ class AdminUserProfile extends Component {
         }
         return <img src={defaultphoto} alt='photo' />
     }
-    renderProfile() {
-        this.fetchProfilePhoto();
-        return (
-            <div className={`${style.adminUserContent} ${style.adminUserProfile}`}>
-                <div className={style.adminUserProfilePhoto}>
-                    <div className={profilestyle.profilePhoto}>
-                        {this.renderProfilePhoto()}
+    render() {
+        if (this.state.loaduser) {
+            return (
+                <div className={`${style.adminUserContent} ${style.adminUserProfile}`}>
+                    <Loading />
+                </div>
+            );
+        }
+        if (this.state.usererror) {
+            return <Alert local={true}
+                message={`Profile dont load (${this.state.usererror})`}
+                click={() => { this.fetchUserProfile() }} />
+        }
+        if (this.state.userdata) {
+            return (
+                <div className={`${style.adminUserContent} ${style.adminUserProfile}`}>
+                    <div className={style.adminUserProfilePhoto}>
+                        <div className={profilestyle.profilePhoto}>
+                            {this.renderProfilePhoto()}
+                        </div>
+                    </div>
+                    <div className={style.adminUserProfileInfo}>
+                        <div className={style.adminUserProfileText}><span>ID:</span> {this.state.userdata.id}</div>
+                        <div className={style.adminUserProfileText}><span>Role:</span> {this.state.userdata.roles[0]}</div>
+                        <div className={style.adminUserProfileText}><span>Name:</span> {this.state.userdata.firstName} {this.state.userdata.lastName}</div>
+                        <div className={style.adminUserProfileText}><span>Email:</span> {this.state.userdata.email}</div>
+                        <div className={style.adminUserProfileText}><span>EmailConfirmed:</span> {(this.state.userdata.emailConfirmed) ? 'Yes' : 'No'}</div>
+                        <div className={style.adminUserProfileText}><span>Phone:</span> {this.state.userdata.phoneNumber}</div>
+                        <div className={style.adminUserProfileText}><span>PhotoId:</span> {this.state.userdata.profilePictureId}</div>
                     </div>
                 </div>
-                <div className={style.adminUserProfileInfo}>
-                    <div className={style.adminUserProfileText}><span>ID:</span> {this.props.data.id}</div>
-                    <div className={style.adminUserProfileText}><span>Role:</span> {this.props.data.roles[0]}</div>
-                    <div className={style.adminUserProfileText}><span>Name:</span> {this.props.data.firstName} {this.props.data.lastName}</div>
-                    <div className={style.adminUserProfileText}><span>Email:</span> {this.props.data.email}</div>
-                    <div className={style.adminUserProfileText}><span>EmailConfirmed:</span> {(this.props.data.emailConfirmed) ? 'Yes' : 'No'}</div>
-                    <div className={style.adminUserProfileText}><span>Phone:</span> {this.props.data.phoneNumber}</div>
-                    <div className={style.adminUserProfileText}><span>PhotoId:</span> {this.props.data.profilePictureId}</div>
-                </div>
-            </div>
-        )
-    }
-    render() {
-        if (this.props.data) {
-            return this.renderProfile();
+            );
         }
         return null;
     }
