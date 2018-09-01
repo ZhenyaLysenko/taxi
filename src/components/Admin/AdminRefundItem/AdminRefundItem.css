@@ -1,0 +1,17 @@
+.refundMain {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+}
+
+.refundMessage {
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.refundMessage > p {
+    font-size: 1.2rem;
+    padding: 20px;
+    margin: 0;
+}
