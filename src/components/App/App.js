@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { Router, Route, Link } from 'react-router-dom';
-import './App.css';
+// import style from './App.css';
 import Home from '../Home/Home';
 import Ride from '../Ride/Ride';
 import Drive from '../Drive/Drive';
@@ -19,6 +19,8 @@ import Profile from '../Profile/Profile';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import Loading from '../Loading/Loading';
 import Admin from '../Admin/Admin';
+
+import GlobalView from '../GlobalView/GlobalView';
 
 // test connect redux to react
 import { connect } from 'react-redux';
@@ -48,6 +50,7 @@ class App extends Component {
     <Router history={this.props.history}>
       <div>
         {this.renderLoading()}
+        <GlobalView />
         <Route exact path="/" component={Home} />
         <Route exact path="/home" component={Home} />
         <Route path="/ride" component={Ride} />

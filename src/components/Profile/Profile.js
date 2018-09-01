@@ -152,7 +152,7 @@ class Profile extends Component {
 ProfileMain.propTypes = {
     userData: PropTypes.object,
     photoData: PropTypes.object,
-    getPhoto: PropTypes.func
+    getPhoto: PropTypes.func,
 }
 
 const mapStateToProps = state => ({
@@ -163,10 +163,5 @@ const mapStateToProps = state => ({
 const mapDispatchtoProps = dispatch => ({
     getPhoto: () => { dispatch(getPhoto()) },
 })
-// Check props type
-Profile.propTypes = {
-    history: PropTypes.object,
-    userData: PropTypes.object,
-}
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Profile);

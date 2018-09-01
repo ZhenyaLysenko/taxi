@@ -12,6 +12,7 @@ import { chengeddata } from './chengereducer';
 import { statData } from './statreducer';
 import { resetData } from "./resetreducer";
 import { userlistData, adminChangeData, refundlistData } from './adminreducer';
+import { globalviewData } from './globalviewreducer';
 import { reslistData } from './reslistreducer';
 // Here combine custom reducers
 export default combineReducers({
@@ -29,4 +30,5 @@ export default combineReducers({
     adminChangeData,
     refundlistData,
     reslistData,
+    globalviewData,
 });

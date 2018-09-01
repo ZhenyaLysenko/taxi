@@ -9,6 +9,7 @@ import style from "./AdminRefundItem.css";
 
 import { connect } from 'react-redux';
 import { apiurl } from '../../../appconfig';
+import { openGoogleMap } from '../../../actions/globalviewaction';
 
 class AdminRefundItem extends Component {
     constructor(props) {
@@ -55,6 +56,23 @@ class AdminRefundItem extends Component {
                 .catch(error => this.setState({ triperror: error.message, loadtrip: false }))
         }
     }
+    renderMap() {
+        const center = {
+            lat: this.state.trip.from.latitude,
+            lng: this.state.trip.from.longitude
+        }
+        const labels = [{
+            lat: this.state.trip.from.latitude,
+            lng: this.state.trip.from.longitude,
+            text: 'Start'
+        },
+        {
+            lat: this.state.trip.to.latitude,
+            lng: this.state.trip.to.longitude,
+            text: 'End'
+        }];
+        this.props.openGoogleMap(center, labels);
+    }
     render() {
         if (this.state.loadtrip) {
             return (
@@ -65,14 +83,20 @@ class AdminRefundItem extends Component {
         }
         if (this.state.triperror) {
             return <Alert local={true}
-                message={`Profile dont load (${this.state.triperror})`}
+                message={`Trip dont load (${this.state.triperror})`}
                 click={() => { this.fetchTrip() }} />
         }
-        if (true/* this.state.trip */) {
+        if (this.state.trip) {
             return (
                 <div className={`${userstyle.adminUserContent} ${userstyle.adminUserProfile}`}>
-                    <div className={style.adminUserProfileInfo}>
-                        <div className={style.adminUserProfileText}><span>Trip:</span> This is trip</div>
+                    <div className={userstyle.adminUserProfileInfo}>
+                        <div className={userstyle.adminUserProfileText}><span>Created:</span> {this.state.trip.creationTime}</div>
+                        <div className={userstyle.adminUserProfileText}><span>Taken:</span> {this.state.trip.driverTakeTripTime}</div>
+                        <div className={userstyle.adminUserProfileText}><span>Started:</span> {this.state.trip.startTime}</div>
+                        <div className={userstyle.adminUserProfileText}><span>Ended:</span> {this.state.trip.finishTime}</div>
+                        <div className={userstyle.adminUserProfileText}><span>Distance:</span> {this.state.trip.distance}</div>
+                        <div className={userstyle.adminUserProfileText}><span>Price:</span> {this.state.trip.price}</div>
+                        <div className={userstyle.adminUserProfileText}><button className={userstyle.adminUserBtn} onClick={this.renderMap.bind(this)}>Open Map</button></div>
                     </div>
                 </div>
             );
@@ -93,6 +117,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchtoProps = dispatch => ({
+    openGoogleMap: (center, labels) => { dispatch(openGoogleMap(center, labels)) }
 });
 
 export default connect(mapStateToProps, mapDispatchtoProps)(AdminRefundItem);

@@ -10,6 +10,7 @@ import defaultlicense from '../../../assets/default-license.png';
 
 import { connect } from 'react-redux';
 import { approveLicense } from '../../../actions/adminaction';
+import { openImage } from '../../../actions/globalviewaction';
 import { apiurl } from '../../../appconfig';
 
 class AdminUserLicense extends Component {
@@ -69,7 +70,7 @@ class AdminUserLicense extends Component {
     fetchLicense() {
         if (this.props.tokenData.token
             && this.props.id
-            && !this.state.loadlicense 
+            && !this.state.loadlicense
             && !this.state.licensedata) {
             const id = this.props.id;
             const token = this.props.tokenData.token;
@@ -110,7 +111,7 @@ class AdminUserLicense extends Component {
     }
     renderLicensePhoto() {
         if (this.state.licensephotourl) {
-            return <img src={this.state.licensephotourl} alt='photo' />
+            return <img src={this.state.licensephotourl} alt='photo' onClick={() => {this.props.openImage(this.state.licensephotourl)}}/>
         }
         if (this.state.loadphoto) {
             return <Loading />
@@ -120,13 +121,13 @@ class AdminUserLicense extends Component {
                 message={`Photo dont load (${this.state.photoerror})`}
                 click={() => { this.fetchLicensePhoto() }} />
         }
-        return <img src={defaultlicense} alt='photo' />
+        return <img src={defaultlicense} alt='photo' onClick={() => {this.props.openImage(defaultlicense)}}/>
     }
     renderLicenseApproveBtn() {
         if (this.props.userData.user.role === 'admin'
             && this.props.roles
             && !this.props.roles.includes('admin_access')) {
-            return <button className={style.adminUserLicenseAprrove} onClick={() => { this.props.approveLicense(this.props.data.ids.driverId) }}>Approve</button>
+            return <button className={style.adminUserBtn} onClick={() => { this.props.approveLicense(this.props.data.ids.driverId) }}>Approve</button>
         }
         return null;
     }
@@ -152,12 +153,11 @@ class AdminUserLicense extends Component {
                         </div>
                     </div>
                     <div className={style.adminUserProfileInfo}>
-                        <div className={style.adminUserProfileText}><span>Licensed From:</span> {this.state.licensedata.licensedFrom}</div>
-                        <div className={style.adminUserProfileText}><span>Licensed To:</span> {this.state.licensedata.licensedTo}</div>
-                        <div className={style.adminUserProfileText}><span>Approved:</span> {(this.state.licensedata.isApproved) ? 'YES' : 'NO'}
+                        <div className={style.adminUserProfileText}><span>Licensed From:</span> <p>{this.state.licensedata.licensedFrom}</p></div>
+                        <div className={style.adminUserProfileText}><span>Licensed To:</span> <p>{this.state.licensedata.licensedTo}</p></div>
+                        <div className={style.adminUserProfileText}><span>Approved:</span> <p>{(this.state.licensedata.isApproved) ? 'YES' : 'NO'}</p>
                             {this.renderLicenseApproveBtn()}
                         </div>
-
                     </div>
                 </div>
             )
@@ -171,7 +171,8 @@ AdminUserLicense.propTypes = {
     tokenData: PropTypes.object,
     userData: PropTypes.object,
     data: PropTypes.object,
-    approveLicense: PropTypes.func
+    approveLicense: PropTypes.func,
+    openImage: PropTypes.func,
 }
 
 const mapStateToProps = state => ({
@@ -180,7 +181,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchtoProps = dispatch => ({
-    approveLicense: (id) => { dispatch(approveLicense(id)) }
+    approveLicense: (id) => { dispatch(approveLicense(id)) },
+    openImage: (url) => { dispatch(openImage(url)) }
 });
 
 export default connect(mapStateToProps, mapDispatchtoProps)(AdminUserLicense);

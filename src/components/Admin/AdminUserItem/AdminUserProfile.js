@@ -9,6 +9,7 @@ import style from './AdminUserItem.css'
 import defaultphoto from '../../../assets/default-user.png';
 
 import { connect } from 'react-redux';
+import { openImage } from '../../../actions/globalviewaction';
 import { apiurl } from '../../../appconfig';
 
 class AdminUserProfile extends Component {
@@ -25,7 +26,7 @@ class AdminUserProfile extends Component {
     }
     componentDidMount() {
         if (this.props.data) {
-            this.setState({userdata: this.props.data}, () => {
+            this.setState({ userdata: this.props.data }, () => {
                 if (this.state.userdata.profilePictureId) {
                     this.fetchProfilePhoto();
                 }
@@ -111,7 +112,7 @@ class AdminUserProfile extends Component {
     }
     renderProfilePhoto() {
         if (this.state.photourl) {
-            return <img src={this.state.photourl} alt='photo' />
+            return <img src={this.state.photourl} alt='photo' onClick={() => { this.props.openImage(this.state.photourl) }} />
         }
         if (this.state.loadphoto) {
             return <Loading />
@@ -121,7 +122,7 @@ class AdminUserProfile extends Component {
                 message={`Photo dont load (${this.state.photoerror})`}
                 click={() => { this.fetchProfilePhoto() }} />
         }
-        return <img src={defaultphoto} alt='photo' />
+        return <img src={defaultphoto} alt='photo' onClick={() => { this.props.openImage(defaultphoto) }} />
     }
     render() {
         if (this.state.loaduser) {
@@ -145,13 +146,12 @@ class AdminUserProfile extends Component {
                         </div>
                     </div>
                     <div className={style.adminUserProfileInfo}>
-                        <div className={style.adminUserProfileText}><span>ID:</span> {this.state.userdata.id}</div>
-                        <div className={style.adminUserProfileText}><span>Role:</span> {this.state.userdata.roles[0]}</div>
-                        <div className={style.adminUserProfileText}><span>Name:</span> {this.state.userdata.firstName} {this.state.userdata.lastName}</div>
-                        <div className={style.adminUserProfileText}><span>Email:</span> {this.state.userdata.email}</div>
-                        <div className={style.adminUserProfileText}><span>EmailConfirmed:</span> {(this.state.userdata.emailConfirmed) ? 'Yes' : 'No'}</div>
-                        <div className={style.adminUserProfileText}><span>Phone:</span> {this.state.userdata.phoneNumber}</div>
-                        <div className={style.adminUserProfileText}><span>PhotoId:</span> {this.state.userdata.profilePictureId}</div>
+                        <div className={style.adminUserProfileText}><span>ID:</span> <p>{this.state.userdata.id}</p></div>
+                        <div className={style.adminUserProfileText}><span>Role:</span> <p>{this.state.userdata.roles[0]}</p></div>
+                        <div className={style.adminUserProfileText}><span>Name:</span> <p>{this.state.userdata.firstName} {this.state.userdata.lastName}</p></div>
+                        <div className={style.adminUserProfileText}><span>Email:</span> <p>{this.state.userdata.email}</p></div>
+                        <div className={style.adminUserProfileText}><span>EmailConfirmed:</span> <p>{(this.state.userdata.emailConfirmed) ? 'Yes' : 'No'}</p></div>
+                        <div className={style.adminUserProfileText}><span>Phone:</span> <p>{this.state.userdata.phoneNumber}</p></div>
                     </div>
                 </div>
             );
@@ -164,6 +164,7 @@ class AdminUserProfile extends Component {
 AdminUserProfile.propTypes = {
     tokenData: PropTypes.object,
     userData: PropTypes.object,
+    openImage: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -172,6 +173,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchtoProps = dispatch => ({
+    openImage: (url) => { dispatch(openImage(url)) }
 });
 
 export default connect(mapStateToProps, mapDispatchtoProps)(AdminUserProfile);
