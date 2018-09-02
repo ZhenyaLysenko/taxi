@@ -7,6 +7,8 @@ import Alert from '../../Alert/Alert';
 import profilestyle from '../../Profile/Profile.css';
 import style from './AdminUserItem.css';
 import defaultlicense from '../../../assets/default-license.png';
+import yessvg from '../../../assets/yes.svg';
+import nosvg from '../../../assets/no.svg';
 
 import { connect } from 'react-redux';
 import { approveLicense } from '../../../actions/adminaction';
@@ -31,7 +33,6 @@ class AdminUserLicense extends Component {
         }
     }
     componentDidUpdate() {
-
     }
     fetchLicensePhoto() {
         if (this.props.tokenData.token
@@ -126,10 +127,17 @@ class AdminUserLicense extends Component {
     renderLicenseApproveBtn() {
         if (this.props.userData.user.role === 'admin'
             && this.props.roles
-            && !this.props.roles.includes('admin_access')) {
-            return <button className={style.adminUserBtn} onClick={() => { this.props.approveLicense(this.props.data.ids.driverId) }}>Approve</button>
+            && !this.props.roles.includes('admin_access')
+            && !this.state.licensedata.isApproved) {
+            return <button className={style.adminUserBtn} onClick={() => { this.props.approveLicense(this.state.licensedata.driverId) }}>Approve</button>
         }
         return null;
+    }
+    renderIsAprrove() {
+        if (this.state.licensedata.isApproved) {
+            return <img className={style.approveImg} src={yessvg} alt="Yes"/>
+        }
+        return <img className={style.approveImg} src={nosvg} alt="No"/>
     }
     render() {
         if (this.state.loadlicense) {
@@ -153,11 +161,9 @@ class AdminUserLicense extends Component {
                         </div>
                     </div>
                     <div className={style.adminUserProfileInfo}>
-                        <div className={style.adminUserProfileText}><span>Licensed From:</span> <p>{this.state.licensedata.licensedFrom}</p></div>
-                        <div className={style.adminUserProfileText}><span>Licensed To:</span> <p>{this.state.licensedata.licensedTo}</p></div>
-                        <div className={style.adminUserProfileText}><span>Approved:</span> <p>{(this.state.licensedata.isApproved) ? 'YES' : 'NO'}</p>
-                            {this.renderLicenseApproveBtn()}
-                        </div>
+                        <div className={style.adminUserProfileText}><span>Licensed From:</span> <p>{(new Date(this.state.licensedata.licensedFrom)).toDateString()}</p></div>
+                        <div className={style.adminUserProfileText}><span>Licensed To:</span> <p>{(new Date(this.state.licensedata.licensedTo)).toDateString()}</p></div>
+                        <div className={style.adminUserProfileText}><span>Approved:</span> <p>{this.renderIsAprrove()}</p>{this.renderLicenseApproveBtn()}</div>
                     </div>
                 </div>
             )

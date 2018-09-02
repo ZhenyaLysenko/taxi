@@ -8,12 +8,17 @@ import userstyle from '../AdminUserItem/AdminUserItem.css';
 import style from "./AdminRefundItem.css";
 
 import settingsvg from "../../../assets/settings.svg";
+import yessvg from '../../../assets/yes.svg';
+import nosvg from '../../../assets/no.svg';
+
 import closesvg from '../../../assets/close.svg';
 import AdminUserProfile from '../AdminUserItem/AdminUserProfile';
 import AdminRefundTrip from './AdminRefundTrip';
 
 import { connect } from 'react-redux';
 import { resolveRequest } from '../../../actions/adminaction';
+
+
 
 class AdminRefundItem extends Component {
     constructor(props) {
@@ -66,7 +71,7 @@ class AdminRefundItem extends Component {
         return <button className={userstyle.settingsMainItem}
             onClick={() => { this.setState({ show: 'profile' }) }}>Show profile</button>
     }
-    renderCloseBtn() {
+    /* renderCloseBtn() {
         if (this.state.show !== 'close') {
             return (
                 <div className={userstyle.adminSettingsBtn} onClick={() => this.setState({ show: 'close' })}>
@@ -75,10 +80,27 @@ class AdminRefundItem extends Component {
             );
         }
         return null;
-    }
+    } */
     renderTripBtn() {
         return <button className={userstyle.settingsMainItem}
             onClick={() => { this.setState({ show: 'trip' }) }}>Show trip</button>
+    }
+    renderSettnigsBtn() {
+        if (this.state.show !== 'close') {
+            return (
+                <div className={userstyle.adminSettingsBtn} onClick={() => this.setState({ show: 'close' })}>
+                    <img src={closesvg} alt="photo" />
+                </div>
+            );
+        }
+        return (
+            <div className={userstyle.adminSettingsBtn} onClick={() => { this.setState({ settings: (this.state.settings) ? false : true }) }}>
+                <img src={settingsvg} alt="photo" />
+                <div className={userstyle.settingsContainer}>
+                    {this.renderSettnigs()}
+                </div>
+            </div>
+        );
     }
     renderSettnigs() {
         if (this.state.settings) {
@@ -92,30 +114,31 @@ class AdminRefundItem extends Component {
         }
         return null;
     }
+    renderIsSolved() {
+        if (this.props.data.solved) {
+            return <img src={yessvg} alt='Yes' />
+        } else {
+            return <img src={nosvg} alt='No' />
+        }
+    }
     render() {
         if (this.props.data) {
             return (
                 <div className={userstyle.adminUserContainer}>
-                    <div className={userstyle.adminUserMain}>
-                        <div className={userstyle.adminUserText}
-                            onClick={() => { this.setState({ show: (this.state.show === 'close') ? 'profile' : 'close' }) }}>
-                            <span>Id:</span> {this.props.data.id}
-                        </div>
-                        {this.renderCloseBtn()}
-                        <div className={userstyle.adminSettingsBtn} onClick={() => { this.setState({ settings: (this.state.settings) ? false : true }) }}>
-                            <img src={settingsvg} alt="photo" />
-                            <div className={userstyle.settingsContainer}>
-                                {this.renderSettnigs()}
-                            </div>
-                        </div>
-                    </div>
                     <div className={style.refundMain}>
-                        <div className={userstyle.adminUserProfileInfo}>
-                            <div className={userstyle.adminUserProfileText}><span>CreationTime:</span> <p>{this.props.data.creationTime}</p></div>
-                            <div className={userstyle.adminUserProfileText}><span>Solved:</span> <p>{(this.props.data.solved) ? 'Yes' : 'No'}</p></div>
+                        <div className={style.refundSolve}>
+                            {this.renderIsSolved()}
                         </div>
-                        <div className={style.refundMessage}>
-                            <p>{this.props.data.message}</p>
+                        <div className={style.refundContent}>
+                            <div className={style.refundTopInfo}>
+                                <div className={style.refundTime}>
+                                    {(new Date(this.props.data.creationTime)).toDateString()}
+                                </div>
+                                {this.renderSettnigsBtn()}
+                            </div>
+                            <div className={style.refundMessage}>
+                                <p>{this.props.data.message}</p>
+                            </div>
                         </div>
                     </div>
                     {this.renderResolveMain()}

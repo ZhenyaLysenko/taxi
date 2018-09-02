@@ -21,7 +21,7 @@ class GlobalView extends Component {
                 lat: 59.95,
                 lng: 30.33
             },
-            zoom: 14
+            zoom: 13
         }
     }
     renderLabels(labels) {

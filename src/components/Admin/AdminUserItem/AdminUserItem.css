@@ -33,7 +33,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 5px;
+    padding: 5px;
     width: 48px;
     position: relative;
     transition: background-color .3s ease-out;
@@ -102,7 +102,7 @@
 }
 
 .adminUserProfileInfo {
-    flex-grow: 3;
+    flex-grow: 5;
     padding: 10px;
 }
 
@@ -125,7 +125,11 @@
     align-items: center;
     flex: 1 1 100%;
     margin: 0;
+    flex-grow: 5;
     overflow: hidden;
+}
+.adminUserProfileText > button {
+    flex-grow: 1;
 }
 
 .adminUserLicensePhoto {
@@ -157,12 +161,13 @@
 
 .adminUserResForm > h3 {
     margin: 5px 10px;
-    font-size: 1.2rem;
     font-weight: bold;
 }
 
 .adminUserResForm > textarea {
     border: 1px solid rgba(0,0,0,0.2);
+    font-size: 1rem;
+    border-radius: 5px;
     padding: 10px;
     height: 100px;
     margin-bottom: 10px;
@@ -185,6 +190,11 @@
 .adminUserResForm > input[type=submit]:hover {
     background: #1a1a1a;
     color: #faa71a;
+}
+
+.approveImg {
+    width: 24px;
+    height: 24px;
 }
 
 @media only screen and (max-width: 500px) {

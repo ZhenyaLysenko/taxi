@@ -73,7 +73,7 @@ class AdminUserItem extends Component {
             onClick={() => { this.setState({ show: 'response' }) }}>
             Send response</button>
     }
-    renderCloseBtn() {
+    renderSettnigsBtn() {
         if (this.state.show !== 'close') {
             return (
                 <div className={style.adminSettingsBtn} onClick={() => this.setState({ show: 'close' })}>
@@ -81,7 +81,14 @@ class AdminUserItem extends Component {
                 </div>
             );
         }
-        return null;
+        return (
+            <div className={style.adminSettingsBtn} onClick={() => { this.setState({ settings: (this.state.settings) ? false : true }) }}>
+                <img src={settingsvg} alt="photo" />
+                <div className={style.settingsContainer}>
+                    {this.renderSettnigs()}
+                </div>
+            </div>
+        );
     }
     renderShow() {
         switch (this.state.show) {
@@ -113,13 +120,7 @@ class AdminUserItem extends Component {
                             onClick={() => { this.setState({ show: (this.state.show === 'close') ? 'profile' : 'close' }) }}>
                             <span>Email:</span> {this.props.data.email}
                         </div>
-                        {this.renderCloseBtn()}
-                        <div className={style.adminSettingsBtn} onClick={() => { this.setState({ settings: (this.state.settings) ? false : true }) }}>
-                            <img src={settingsvg} alt="photo" />
-                            <div className={style.settingsContainer}>
-                                {this.renderSettnigs()}
-                            </div>
-                        </div>
+                        {this.renderSettnigsBtn()}
                     </div>
                     {this.renderShow()}
                 </div>

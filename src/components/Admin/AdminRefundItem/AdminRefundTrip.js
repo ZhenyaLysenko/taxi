@@ -90,10 +90,10 @@ class AdminRefundItem extends Component {
             return (
                 <div className={`${userstyle.adminUserContent} ${userstyle.adminUserProfile}`}>
                     <div className={userstyle.adminUserProfileInfo}>
-                        <div className={userstyle.adminUserProfileText}><span>Created:</span> {this.state.trip.creationTime}</div>
-                        <div className={userstyle.adminUserProfileText}><span>Taken:</span> {this.state.trip.driverTakeTripTime}</div>
-                        <div className={userstyle.adminUserProfileText}><span>Started:</span> {this.state.trip.startTime}</div>
-                        <div className={userstyle.adminUserProfileText}><span>Ended:</span> {this.state.trip.finishTime}</div>
+                        <div className={userstyle.adminUserProfileText}><span>Created:</span> {(new Date(this.state.trip.creationTime)).toTimeString()}</div>
+                        <div className={userstyle.adminUserProfileText}><span>Taken:</span> {(new Date(this.state.trip.driverTakeTripTime)).toTimeString()}</div>
+                        <div className={userstyle.adminUserProfileText}><span>Started:</span> {(new Date(this.state.trip.startTime)).toTimeString()}</div>
+                        <div className={userstyle.adminUserProfileText}><span>Ended:</span> {(new Date(this.state.trip.finishTime)).toTimeString()}</div>
                         <div className={userstyle.adminUserProfileText}><span>Distance:</span> {this.state.trip.distance}</div>
                         <div className={userstyle.adminUserProfileText}><span>Price:</span> {this.state.trip.price}</div>
                         <div className={userstyle.adminUserProfileText}><button className={userstyle.adminUserBtn} onClick={this.renderMap.bind(this)}>Open Map</button></div>
