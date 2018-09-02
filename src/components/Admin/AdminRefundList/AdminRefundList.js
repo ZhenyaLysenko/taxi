@@ -79,7 +79,10 @@ class AdminRefundList extends Component {
                     {this.renderAlert()}
                     <h3 className={profilemainstyle.heading}>Refunds List</h3>
                     <div className={style.searchContainer}>
-                        <div><input type="checkbox" value={this.state.issolved} onClick={(e) => { this.setState({ issolved: e.target.checked }) }} />Only solved</div>
+                        <div className={style.checkboxContainer}>
+                            <input type="checkbox" value={this.state.issolved} onClick={(e) => { this.setState({ issolved: e.target.checked }) }} />
+                            <label>Only solved</label>
+                        </div>
                         <div className={profilestyle.refreshBtn} onClick={this.refresh.bind(this)}>
                             <img src={refreshsvg} alt='refresh'/>
                         </div>

@@ -36,7 +36,7 @@ class Vehicle extends Component {
         if (this.props.vehData.veh) {
             return (
                 <div className="container">
-                    <h1>Profile</h1>
+                    <h1>Vehicle</h1>
                     <div className={style.vehPhoto}>
                         {this.renderPhoto()}
                     </div>

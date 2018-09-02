@@ -89,8 +89,8 @@ class AdminUserLicense extends Component {
                     } else if (res.status === 404) {
                         this.setState({
                             licensedata: {
-                                licensedFrom: 'Not set',
-                                licensedTo: 'Not set',
+                                licensedFrom: null,
+                                licensedTo: null,
                                 isApproved: false
                             },
                             licensephotourl: null,
@@ -161,8 +161,8 @@ class AdminUserLicense extends Component {
                         </div>
                     </div>
                     <div className={style.adminUserProfileInfo}>
-                        <div className={style.adminUserProfileText}><span>Licensed From:</span> <p>{(new Date(this.state.licensedata.licensedFrom)).toDateString()}</p></div>
-                        <div className={style.adminUserProfileText}><span>Licensed To:</span> <p>{(new Date(this.state.licensedata.licensedTo)).toDateString()}</p></div>
+                        <div className={style.adminUserProfileText}><span>From:</span> <p>{(this.state.licensedata.licensedFrom) ? (new Date(this.state.licensedata.licensedFrom)).toDateString() : 'Dont set'}</p></div>
+                        <div className={style.adminUserProfileText}><span>To:</span> <p>{(this.state.licensedata.licensedTo) ? (new Date(this.state.licensedata.licensedTo)).toDateString() : 'Dont set'}</p></div>
                         <div className={style.adminUserProfileText}><span>Approved:</span> <p>{this.renderIsAprrove()}</p>{this.renderLicenseApproveBtn()}</div>
                     </div>
                 </div>
