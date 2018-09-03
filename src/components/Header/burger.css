@@ -83,13 +83,6 @@
 #menuToggle input:checked ~ ul {
   transform: translate(-200%, 0);
 }
-#readMore__h2 {
-  color: #fff;
-  font-size: 2rem;
-}
-#yellow_span {
-  color: #faa71a;
-}
 #flexIcons {
   display: flex;
   justify-content: flex-start;

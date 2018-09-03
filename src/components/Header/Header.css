@@ -1,5 +1,4 @@
 .header {
-  min-height: 50px;
   background-color: #2b2929;
   position: fixed;
   top: 0;
@@ -11,6 +10,13 @@
   padding: 0 100px;
   /* max-width: 1140px;
   margin: auto; */
+}
+.readMore__h2 {
+  color: #fff;
+  font-size: 2rem;
+}
+.yellow_span {
+  color: #faa71a;
 }
 .headerFlex {
   display: flex;

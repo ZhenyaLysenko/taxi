@@ -51,19 +51,19 @@ class ChangeDoc extends Component {
                     <div className={style.changePhoto}>
                       <h1>Add Documents</h1>
                       <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseDocPhoto(e) }} />
-                      <label for="pfotoloader" ><span><strong>{this.state.fileName}</strong></span></label>
+                      <label htmlFor="pfotoloader" ><span><strong>{this.state.fileName}</strong></span></label>
                     </div>
                     <div className={style.docForm}>
                         <h1>Date of issue</h1>
                         <div className={style.date}>
                             <input className={style.signInInput} type='text' placeholder="Day" required onChange={(e) => { this.setState({ dayFrom: e.target.value }) }} />
-                            <input className={style.signInInput} type='text' placeholder="Month" required onChange={(e) => { this.setState({ monthFrom: e.target.value }) }} />
+                            <input className={style.signInInput} type='text' placeholder="Mon" required onChange={(e) => { this.setState({ monthFrom: e.target.value }) }} />
                             <input className={style.signInInput} type='text' placeholder="Year" required onChange={(e) => { this.setState({ yearFrom: e.target.value }) }} />
                         </div>
                         <h1>Valid until</h1>
                         <div className={style.date}>
                             <input className={style.signInInput} type='text' placeholder="Day" required onChange={(e) => { this.setState({ dayTo: e.target.value }) }} />
-                            <input className={style.signInInput} type='text' placeholder="Month" required onChange={(e) => { this.setState({ monthTo: e.target.value }) }} />
+                            <input className={style.signInInput} type='text' placeholder="Mon" required onChange={(e) => { this.setState({ monthTo: e.target.value }) }} />
                             <input className={style.signInInput} type='text' placeholder="Year" required onChange={(e) => { this.setState({ yearTo: e.target.value }) }} />
                         </div>
                     </div>

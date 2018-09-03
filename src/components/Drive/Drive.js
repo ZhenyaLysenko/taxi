@@ -83,7 +83,7 @@ class Drive extends Component {
 
             <div className={styleRide.rideBg + ' ' + style.rideBg}>
                 <div className={styleRide.inner2}>
-                    <span className={styleRide.signUpToRideSpan}>Let's do it together with <span className={styleHome.yellow_span}>Taxi</span>Coin</span>
+                    <span className={styleRide.signUpToRideSpan + ' ' + style.signUpToRideSpan2}>Let's do it together with <span className={styleHome.yellow_span}>Taxi</span>Coin</span>
                     <Link to="/sign-up-driver"><button className={styleRide.signUpToRide}>SIGN UP TO DRIVE</button></Link>
                 </div>
             </div>

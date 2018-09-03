@@ -18,7 +18,12 @@ a {
 a:active {
   outline: none;
 }
-
+input, button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0 5px;
+}
 .container {
   width: 100%;
   height: 100%;

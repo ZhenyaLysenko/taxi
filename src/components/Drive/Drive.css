@@ -53,8 +53,8 @@
   align-items: center;
   margin: 50px 0;
 }
-.signUpToRideSpan {
-  padding: 0;
+.signUpToRideSpan2 {
+  margin-top: 0;
 }
 .driveBg__p {
   color: #fff;
@@ -76,9 +76,6 @@
   .driveBg__p {
     float: none;
     width: 100%;
-  }
-  .signUpToRideSpan {
-    padding-top: 30px;
   }
 }
 @media only screen and (max-width: 400px) {

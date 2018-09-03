@@ -1,7 +1,7 @@
 .orangeBackground {
    background-color: #faa71a;
    min-height: 70px;
-   margin-bottom: 50px;
+   margin-bottom: 70px;
 }
 .signInLogo {
    position: absolute;
@@ -17,7 +17,6 @@
   margin-bottom: 5px;
 }
 .signInInner {
-   margin-top: 20px;
    margin: 0 auto;
    padding: 0 30px;
    max-width: 400px;

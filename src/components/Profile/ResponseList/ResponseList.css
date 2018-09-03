@@ -18,3 +18,6 @@
   transition: 0.3s;
   cursor: pointer;
 }
+.text_align_center {
+  text-align: center;
+}

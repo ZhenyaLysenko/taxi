@@ -48,7 +48,7 @@ class ChangeVeh extends Component {
                     <div className={style.changePhoto}>
                         <h1>Add Vehicle</h1>
                         <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseVehPhoto(e) }} />
-                        <label for="pfotoloader"><span><strong>{this.state.fileName}</strong></span></label>
+                        <label htmlFor="pfotoloader"><span><strong>{this.state.fileName}</strong></span></label>
                     </div>
                         <input className={style.signInInput} type='text' placeholder="Number" required onChange={(e) => { this.setState({ number: e.target.value }) }} />
                         <input className={style.signInInput} type='text' placeholder="Model" required onChange={(e) => { this.setState({ model: e.target.value }) }} />

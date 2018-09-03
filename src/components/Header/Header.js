@@ -65,7 +65,7 @@ class Header extends Component {
                         <NavLink to="/sign-in"><li>SIGN IN</li></NavLink>
                         <NavLink to="/ride"><li>RIDE</li></NavLink>
                         <NavLink to="/drive"><li>DRIVE</li></NavLink>
-                        <h2 id={burger.readMore__h2}>Go in <span id="yellow_span">social</span></h2>
+                        <h2 className={style.readMore__h2}>Go in <span className={style.yellow_span}>social</span></h2>
                         {this.renderSocial()}
                     </ul>
                 </div>
@@ -81,7 +81,7 @@ class Header extends Component {
                         <NavLink to="/profile"><li>Profile</li></NavLink>
                         <NavLink to="/ride"><li>RIDE</li></NavLink>
                         <NavLink to="/drive"><li>DRIVE</li></NavLink>
-                        <h2 id="readMore__h2">Go in <span id="yellow_span">social</span></h2>
+                        <h2 className={style.readMore__h2}>Go in <span className={style.yellow_span}>social</span></h2>
                         {this.renderSocial()}
                     </ul>
                 </div>
