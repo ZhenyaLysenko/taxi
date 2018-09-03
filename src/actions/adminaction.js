@@ -278,7 +278,7 @@ export const setComission = (value) => (dispatch, getState) => {
             })
                 .then(res => {
                     if (res.status === 200 || res.status === 201 || res.status === 204) {
-                        dispatch(changeSuccess('Comission was update'));
+                        dispatch(changeSuccess('Comission was updated'));
                     } else if (res.status === 401) {
                         dispatch(refreshToken(token, setComission, value));
                     } else {

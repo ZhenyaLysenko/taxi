@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-//import style from './Admin.css';
+import style from '../Admin.css';
+import profilemainstyle from '../../Profile/ProfileMain/ProfileMain.css'
+import profilestyle from '../../Profile/Profile.css';
 import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
 import LazyLoad from '../../LazyLoad/LazyLoad';
 import AdminRefundItem from '../AdminRefundItem/AdminRefundItem';
+
+import refreshsvg from '../../../assets/refresh.svg';
 
 import { connect } from 'react-redux';
 import { getRefundList, changeClearError, refundListClear } from '../../../actions/adminaction';
@@ -24,7 +28,11 @@ class AdminRefundList extends Component {
     }
     renderList(list) {
         return list.map((item, index) => {
-            return <li key={index}><AdminRefundItem data={item} /></li>
+            return (
+                <div className={profilestyle.contentListItem} key={index}>
+                    <AdminRefundItem data={item} />
+                </div>
+            );
         });
     }
     renderAlert() {
@@ -67,15 +75,20 @@ class AdminRefundList extends Component {
         }
         if (this.props.listData.list) {
             return (
-                <div>
+                <div className={`${profilestyle.profileMain}`}>
                     {this.renderAlert()}
-                    <h3>Refund Requests List</h3>
-                    <button onClick={this.refresh.bind(this)}>Refresh</button>
-                    <div><input type="checkbox" value={this.state.issolved} onClick={(e) => { this.setState({ issolved: e.target.checked }) }} />Only solved</div>
-                    <div>
-                        <ol>
-                            {this.renderList(this.props.listData.list)}
-                        </ol>
+                    <h3 className={profilemainstyle.heading}>Refunds List</h3>
+                    <div className={style.searchContainer}>
+                        <div className={style.checkboxContainer}>
+                            <input type="checkbox" value={this.state.issolved} onClick={(e) => { this.setState({ issolved: e.target.checked }) }} />
+                            <label>Only solved</label>
+                        </div>
+                        <div className={profilestyle.refreshBtn} onClick={this.refresh.bind(this)}>
+                            <img src={refreshsvg} alt='refresh'/>
+                        </div>
+                    </div>
+                    <div className={profilestyle.contentList}>
+                        {this.renderList(this.props.listData.list)}
                     </div>
                     {this.renderLazyLoad()}
                 </div>);

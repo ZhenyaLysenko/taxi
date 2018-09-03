@@ -29,9 +29,6 @@ class LazyLoad extends Component {
             }
         }
     }
-    componentDidUpdate() {
-        // window.onscroll();
-    }
     componentWillUnmount() {
         window.removeEventListener('scroll', this.scroll);
     }

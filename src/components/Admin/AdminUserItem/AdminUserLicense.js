@@ -4,12 +4,15 @@ import PropTypes from 'prop-types';
 import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
 
-import profilestyle from '../../Profile/ProfileMain/ProfileMain.css';
-
+import profilestyle from '../../Profile/Profile.css';
+import style from './AdminUserItem.css';
 import defaultlicense from '../../../assets/default-license.png';
+import yessvg from '../../../assets/yes.svg';
+import nosvg from '../../../assets/no.svg';
 
 import { connect } from 'react-redux';
 import { approveLicense } from '../../../actions/adminaction';
+import { openImage } from '../../../actions/globalviewaction';
 import { apiurl } from '../../../appconfig';
 
 class AdminUserLicense extends Component {
@@ -17,19 +20,27 @@ class AdminUserLicense extends Component {
         super(props);
         this.state = {
             licensephotourl: null,
+            loadphoto: false,
+            photoerror: null,
             licensedata: null,
             loadlicense: false,
             licenseerror: null,
         }
     }
     componentDidMount() {
-        // onsole.log(this.props.data);
+        if (this.props.id) {
+            this.fetchLicense();
+        }
     }
     componentDidUpdate() {
-
     }
-    fetchLicensePhoto(token, id, data) {
-        if (token && id) {
+    fetchLicensePhoto() {
+        if (this.props.tokenData.token
+            && !this.state.loadphoto
+            && !this.state.licensephotourl) {
+            const token = this.props.tokenData.token;
+            const id = this.props.id;
+            this.setState({ loadphoto: true });
             fetch(`${apiurl}/api/admins/driverlicenses/${id}/image`, {
                 method: 'GET',
                 headers: new Headers({
@@ -41,9 +52,8 @@ class AdminUserLicense extends Component {
                         return res.blob();
                     } else if (res.status === 404) {
                         this.setState({
-                            licensedata: data,
                             licensephotourl: null,
-                            loadlicense: false,
+                            loadphoto: false,
                         })
                     } else {
                         throw new Error(res.statusText);
@@ -52,15 +62,18 @@ class AdminUserLicense extends Component {
                 .then(blob => {
                     if (blob) {
                         const url = URL.createObjectURL(blob);
-                        this.setState({ licensedata: data, licensephotourl: url, loadlicense: false });
+                        this.setState({ licensephotourl: url, loadphoto: false });
                     }
                 })
-                .catch(error => this.setState({ licenseerror: error.message, loadlicense: false }));
+                .catch(error => this.setState({ photoerror: error.message, loadphoto: false }));
         }
     }
     fetchLicense() {
-        if (this.props.tokenData.token && this.props.data.ids.driverId) {
-            const id = this.props.data.ids.driverId;
+        if (this.props.tokenData.token
+            && this.props.id
+            && !this.state.loadlicense
+            && !this.state.licensedata) {
+            const id = this.props.id;
             const token = this.props.tokenData.token;
             this.setState({ loadlicense: true });
             fetch(`${apiurl}/api/admins/driverlicenses/${id}`, {
@@ -76,8 +89,8 @@ class AdminUserLicense extends Component {
                     } else if (res.status === 404) {
                         this.setState({
                             licensedata: {
-                                licensedFrom: 'Not set',
-                                licensedTo: 'Not set',
+                                licensedFrom: null,
+                                licensedTo: null,
                                 isApproved: false
                             },
                             licensephotourl: null,
@@ -89,11 +102,9 @@ class AdminUserLicense extends Component {
                 })
                 .then(data => {
                     if (data) {
-                        if (this.state.licensephotourl) {
-                            this.setState({ licensedata: data });
-                        } else {
-                            this.fetchLicensePhoto(token, id, data);
-                        }
+                        this.setState({ licensedata: data, loadlicense: false }, () => {
+                            this.fetchLicensePhoto();
+                        });
                     }
                 })
                 .catch(error => this.setState({ licenseerror: error.message, loadlicense: false }));
@@ -101,16 +112,40 @@ class AdminUserLicense extends Component {
     }
     renderLicensePhoto() {
         if (this.state.licensephotourl) {
-            return <img src={this.state.licensephotourl} alt='photo' />
+            return <img src={this.state.licensephotourl} alt='photo' onClick={() => {this.props.openImage(this.state.licensephotourl)}}/>
         }
-        return <img src={defaultlicense} alt='photo' />
-    }
-    renderLicense() {
-        if (!this.state.licensedata && !this.state.loadlicense) {
-            this.fetchLicense();
-        }
-        if (this.state.loadlicense) {
+        if (this.state.loadphoto) {
             return <Loading />
+        }
+        if (this.state.photoerror) {
+            return <Alert local={true}
+                message={`Photo dont load (${this.state.photoerror})`}
+                click={() => { this.fetchLicensePhoto() }} />
+        }
+        return <img src={defaultlicense} alt='photo' onClick={() => {this.props.openImage(defaultlicense)}}/>
+    }
+    renderLicenseApproveBtn() {
+        if (this.props.userData.user.role === 'admin'
+            && this.props.roles
+            && !this.props.roles.includes('admin_access')
+            && !this.state.licensedata.isApproved) {
+            return <button className={style.adminUserBtn} onClick={() => { this.props.approveLicense(this.state.licensedata.driverId) }}>Approve</button>
+        }
+        return null;
+    }
+    renderIsAprrove() {
+        if (this.state.licensedata.isApproved) {
+            return <img className={style.approveImg} src={yessvg} alt="Yes"/>
+        }
+        return <img className={style.approveImg} src={nosvg} alt="No"/>
+    }
+    render() {
+        if (this.state.loadlicense) {
+            return (
+                <div className={`${style.adminUserContent} ${style.adminUserProfile}`}>
+                    <Loading />
+                </div>
+            )
         }
         if (this.state.licenseerror) {
             return <Alert local={true}
@@ -119,29 +154,19 @@ class AdminUserLicense extends Component {
         }
         if (this.state.licensedata) {
             return (
-                <div>
-                    <div className={profilestyle.profilePhoto}>
-                        {this.renderLicensePhoto()}
+                <div className={`${style.adminUserContent} ${style.adminUserProfile}`}>
+                    <div className={style.adminUserProfilePhoto}>
+                        <div className={`${profilestyle.profilePhoto} ${style.adminUserLicensePhoto}`}>
+                            {this.renderLicensePhoto()}
+                        </div>
                     </div>
-                    <p>Licensed From: {this.state.licensedata.licensedFrom}</p>
-                    <p>Licensed To: {this.state.licensedata.licensedTo}</p>
-                    <p>Approved: {(this.state.licensedata.isApproved) ? 'YES' : 'NO'}</p>
-                    {this.renderLicenseApproveBtn()}
+                    <div className={style.adminUserProfileInfo}>
+                        <div className={style.adminUserProfileText}><span>From:</span> <p>{(this.state.licensedata.licensedFrom) ? (new Date(this.state.licensedata.licensedFrom)).toDateString() : 'Dont set'}</p></div>
+                        <div className={style.adminUserProfileText}><span>To:</span> <p>{(this.state.licensedata.licensedTo) ? (new Date(this.state.licensedata.licensedTo)).toDateString() : 'Dont set'}</p></div>
+                        <div className={style.adminUserProfileText}><span>Approved:</span> <p>{this.renderIsAprrove()}</p>{this.renderLicenseApproveBtn()}</div>
+                    </div>
                 </div>
             )
-        }
-        return null;
-    }
-    renderLicenseApproveBtn() {
-        if (this.props.userData.user.role === 'admin'
-            && !this.props.data.roles.includes('admin_access')) {
-            return <button onClick={() => { this.props.approveLicense(this.props.data.ids.driverId) }}>Approve</button>
-        }
-        return null;
-    }
-    render() {
-        if (this.props.data) {
-            return this.renderLicense();
         }
         return null;
     }
@@ -152,7 +177,8 @@ AdminUserLicense.propTypes = {
     tokenData: PropTypes.object,
     userData: PropTypes.object,
     data: PropTypes.object,
-    approveLicense: PropTypes.func
+    approveLicense: PropTypes.func,
+    openImage: PropTypes.func,
 }
 
 const mapStateToProps = state => ({
@@ -161,7 +187,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchtoProps = dispatch => ({
-    approveLicense: (id) => { dispatch(approveLicense(id)) }
+    approveLicense: (id) => { dispatch(approveLicense(id)) },
+    openImage: (url) => { dispatch(openImage(url)) }
 });
 
 export default connect(mapStateToProps, mapDispatchtoProps)(AdminUserLicense);

@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
 
+import profilestyle from '../../Profile/Profile.css';
+import profilemainstyle from '../../Profile/ProfileMain/ProfileMain.css';
+import style from './AdminComissionTool.css';
 
 import { connect } from 'react-redux';
 import { changeClearError, setComission } from '../../../actions/adminaction';
@@ -36,10 +39,11 @@ class AdminComissionTool extends Component {
     }
     render() {
         return (
-            <div>
+            <div className={`${profilestyle.profileMain}`}>
                 {this.renderAlert()}
-                <form onSubmit={(e) => { e.preventDefault() }}>
-                    <h1>You can set comission</h1>
+                <h3 className={profilemainstyle.heading}>Comission Tool</h3>
+                <form className={style.comissionForm} onSubmit={(e) => { e.preventDefault() }}>
+                    <h3>Set new comission value</h3>
                     <input type="number" onChange={(e) => { this.setState({ comisson: e.target.value }) }} />
                     <input type="submit" onClick={this.submit.bind(this)} value="Submit" onClick={this.submit.bind(this)} />
                 </form>
