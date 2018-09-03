@@ -14,6 +14,8 @@ import { resetData } from "./resetreducer";
 import { userlistData, adminChangeData, refundlistData } from './adminreducer';
 import { globalviewData } from './globalviewreducer';
 import { reslistData } from './reslistreducer';
+import { balanceData } from './ethreducer';
+
 // Here combine custom reducers
 export default combineReducers({
     testData,
@@ -31,4 +33,5 @@ export default combineReducers({
     refundlistData,
     reslistData,
     globalviewData,
+    balanceData,
 });

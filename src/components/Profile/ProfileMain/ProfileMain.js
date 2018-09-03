@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './ProfileMain.css';
 import Alert from '../../Alert/Alert';
+import Balance from '../Balance/Balance';
 
 import { connect } from 'react-redux';
 import { getUser } from '../../../actions/authaction';
@@ -49,6 +50,7 @@ class ProfileMain extends Component {
                 <div className={style.main}>
                     <h1 className={style.heading}>PROFILE</h1>
                     {this.renderProfile()}
+                    <Balance />
                 </div>
             );
         }
