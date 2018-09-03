@@ -27,6 +27,14 @@
     font-size: 1.3rem;
     padding: 15px 20px;
     cursor: pointer;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+.profileToolItem > img{
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
 }
 .active {
     background-color: #faa71a;
