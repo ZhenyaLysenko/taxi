@@ -39,9 +39,16 @@
 }
 
 .checkboxContainer > input[type=checkbox] {
+    width: 16px;
+    height: 16px;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    background: #fa3c1a;
     border-radius: 3px;
-    color: #333333;
+    transition: background .3s ease-out;
+}
+
+.checkboxContainer > input[type=checkbox]:checked {
+    background: #1afa3f;
 }
 
 .checkboxContainer > label {

@@ -6,6 +6,7 @@ import Alert from '../../Alert/Alert';
 
 import userstyle from '../AdminUserItem/AdminUserItem.css';
 import style from "./AdminRefundItem.css";
+import mapssvg from '../../../assets/maps.svg';
 
 import { connect } from 'react-redux';
 import { apiurl } from '../../../appconfig';
@@ -24,9 +25,9 @@ class AdminRefundItem extends Component {
         this.fetchTrip();
     }
     componentDidUpdate() {
-        if (this.state.trip) {
+        /* if (this.state.trip) {
             console.log(this.state.trip);
-        }
+        } */
     }
     fetchTrip() {
         if (this.props.tokenData.token
@@ -54,6 +55,32 @@ class AdminRefundItem extends Component {
                     }
                 })
                 .catch(error => this.setState({ triperror: error.message, loadtrip: false }))
+        }
+    }
+    /* Not work yet*/
+    fetchTripRoute() {
+        if (this.props.tokenData.token
+            && this.props.id) {
+            const token = this.props.tokenData.token;
+            fetch(`${apiurl}/api/tripshistory/admin/triproute/${this.props.id}`, {
+                method: 'GET',
+                headers: new Headers({
+                    'Authorization': `Bearer ${token.auth_token}`
+                })
+            })
+                .then(res => {
+                    if (res.status === 200) {
+                        return res.json();
+                    } else {
+                        throw new Error(res.statusText);
+                    }
+                })
+                .then(data => {
+                    if (data) {
+                       console.log(data);
+                    }
+                })
+                .catch(error => console.log(error));
         }
     }
     renderMap() {
@@ -89,14 +116,32 @@ class AdminRefundItem extends Component {
         if (this.state.trip) {
             return (
                 <div className={`${userstyle.adminUserContent} ${userstyle.adminUserProfile}`}>
-                    <div className={userstyle.adminUserProfileInfo}>
-                        <div className={userstyle.adminUserProfileText}><span>Created:</span> {(new Date(this.state.trip.creationTime)).toTimeString()}</div>
-                        <div className={userstyle.adminUserProfileText}><span>Taken:</span> {(new Date(this.state.trip.driverTakeTripTime)).toTimeString()}</div>
-                        <div className={userstyle.adminUserProfileText}><span>Started:</span> {(new Date(this.state.trip.startTime)).toTimeString()}</div>
-                        <div className={userstyle.adminUserProfileText}><span>Ended:</span> {(new Date(this.state.trip.finishTime)).toTimeString()}</div>
-                        <div className={userstyle.adminUserProfileText}><span>Distance:</span> {this.state.trip.distance}</div>
-                        <div className={userstyle.adminUserProfileText}><span>Price:</span> {this.state.trip.price}</div>
-                        <div className={userstyle.adminUserProfileText}><button className={userstyle.adminUserBtn} onClick={this.renderMap.bind(this)}>Open Map</button></div>
+                    <div className={style.adminTripInfo}>
+                        <div className={style.adminTripTimeInfo}>
+                            <div className={style.adminTripTimeText}>
+                                <span>Created:</span> {(new Date(this.state.trip.creationTime)).toTimeString()}
+                            </div>
+                            <div className={style.adminTripTimeText}>
+                                <span>Taken:</span> {(new Date(this.state.trip.driverTakeTripTime)).toTimeString()}
+                            </div>
+                            <div className={style.adminTripTimeText}>
+                                <span>Started:</span> {(new Date(this.state.trip.startTime)).toTimeString()}
+                            </div>
+                            <div className={style.adminTripTimeText}>
+                                <span>Ended:</span> {(new Date(this.state.trip.finishTime)).toTimeString()}
+                            </div>
+                            <div className={style.adminTripMapBtn} onClick={this.renderMap.bind(this)}>
+                                <img src={mapssvg} alt='Map'/>
+                            </div>
+                        </div>
+                        <div className={style.adminTripMainInfo}>
+                            <div className={style.adminTripPriceInfo}>
+                                <span>Price:</span> {this.state.trip.price}
+                            </div>
+                            <div className={style.adminTripPriceInfo}>
+                                <span>Distance:</span> {this.state.trip.distance}
+                            </div>
+                        </div>
                     </div>
                 </div>
             );
