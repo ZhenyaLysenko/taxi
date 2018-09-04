@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
+import profilestyle from '../../Profile/Profile.css';
+import style from '../Admin.css';
 
 
 import { connect } from 'react-redux';
@@ -36,7 +38,8 @@ class AdminComissionTool extends Component {
     }
     render() {
         return (
-            <div>
+          <div className={`${profilestyle.profileMain}`}>
+            <div className={style.refundList + ' ' + style.comission}>
                 {this.renderAlert()}
                 <form onSubmit={(e) => { e.preventDefault() }}>
                     <h1>You can set comission</h1>
@@ -44,6 +47,7 @@ class AdminComissionTool extends Component {
                     <input type="submit" onClick={this.submit.bind(this)} value="Submit" onClick={this.submit.bind(this)} />
                 </form>
             </div>
+          </div>
         );
     }
 }

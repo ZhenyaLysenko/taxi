@@ -15,7 +15,7 @@
     position: relative;
 }
 .profileToolbar {
-    flex: 1 0 25%;
+    flex: 1 0 41%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: stretch;

@@ -29,7 +29,7 @@ class AdminUserProfile extends Component {
         if (this.props.data) {
             return (
                 <form onSubmit={(e) => { e.preventDefault() }}>
-                    <h3>Please write you response</h3>
+                    <h3>Please write your response</h3>
                     <input type="text" value={this.state.message} onChange={(e) => { this.setState({ message: e.target.value }) }} />
                     <input type="submit" value="Submit" onClick={this.submit.bind(this)} />
                 </form>

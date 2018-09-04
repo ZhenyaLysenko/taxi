@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-//import style from './Admin.css';
+import style from '../Admin.css';
 import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
 import LazyLoad from '../../LazyLoad/LazyLoad';
 import AdminRefundItem from '../AdminRefundItem/AdminRefundItem';
+import profilestyle from '../../Profile/Profile.css';
 
 import { connect } from 'react-redux';
 import { getRefundList, changeClearError, refundListClear } from '../../../actions/adminaction';
@@ -67,17 +68,21 @@ class AdminRefundList extends Component {
         }
         if (this.props.listData.list) {
             return (
-                <div>
-                    {this.renderAlert()}
-                    <h3>Refund Requests List</h3>
-                    <button onClick={this.refresh.bind(this)}>Refresh</button>
-                    <div><input type="checkbox" value={this.state.issolved} onClick={(e) => { this.setState({ issolved: e.target.checked }) }} />Only solved</div>
-                    <div>
-                        <ol>
-                            {this.renderList(this.props.listData.list)}
-                        </ol>
+                <div className={`${profilestyle.profileMain}`}>
+                    <div className={style.refundList}>
+                        {this.renderAlert()}
+                        <div className={style.refresh}>
+                            <h3>Refund Requests List</h3>
+                            <button className={style.searchButton} onClick={this.refresh.bind(this)}>Refresh</button>
+                            <div><input type="checkbox" value={this.state.issolved} onClick={(e) => { this.setState({ issolved: e.target.checked }) }} />Only solved</div>
+                        </div>
+                        <div>
+                            <ol>
+                                {this.renderList(this.props.listData.list)}
+                            </ol>
+                        </div>
+                        {this.renderLazyLoad()}
                     </div>
-                    {this.renderLazyLoad()}
                 </div>);
         }
         return null;

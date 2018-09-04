@@ -62,27 +62,29 @@ class AdminUserList extends Component {
             return <Loading />
         } */
         if (this.props.listData.error) {
-            return <Alert local={true} message={`Data dont load (${this.props.listData.error})`} click={this.getList} />
+            return <Alert local={true} message={`Data don't load (${this.props.listData.error})`} click={this.getList} />
         }
         if (this.props.listData.list) {
             return (
                 <div className={`${profilestyle.profileMain}`}>
+                  <div>
                     {this.renderAlert()}
-                    <h3 className={profilemainstyle.heading}>User List</h3>
+                    <h3 className={profilemainstyle.heading}>USER LIST</h3>
                     {/* <button onClick={() => { this.state.page++; this.props.getUserList(this.state.page, this.state.size) }}>Get More Users</button> */}
                     <div className={style.searchContainer}>
                         <input className={style.searchInput}
                             type="text"
                             value={this.state.search}
-                            placeholder="Search"
+                            placeholder="Search by email"
                             onChange={(e) => { this.setState({ search: e.target.value }) }}
                         />
                         <button className={style.searchButton} onClick={this.searchInList.bind(this)}>Search</button>
                     </div>
-                    <ol>
+                    <ol className={style.users}>
                         {this.renderList(this.props.listData.list)}
                     </ol>
                     {this.renderLazyLoad()}
+                  </div>
                 </div>);
         }
         return null;

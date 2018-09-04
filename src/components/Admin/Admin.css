@@ -1,32 +1,113 @@
 .searchContainer {
     display: flex;
-    margin: 0 20px;
-    padding: 20px 10px;
-    justify-content: flex-end;
-    border-bottom: 2px solid #dedede;
+    padding: 20px 5px;
+    justify-content: center;
 }
-
-.searchInput {
+.searchInput,
+.users form>input[type=text],
+.refundList input[type=text],
+.refundList input[type=number] {
     margin: 0;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid #2b2929;
     border-radius: 0%;
     padding: 5px;
-    font-size: 1rem;
+    padding-left: 10px;
+    font-size: 16px;
     color: rgba(0,0,0,0,0.2);
+    outline: inherit;
+    box-sizing: border-box;
 }
-
-.searchButton {
+.searchInput::placeholder {
+  font-family: 'ProximaNovaThin';
+  color: #2b2929;
+}
+.searchButton,
+.users button,
+.users form>input[type=submit],
+.refundList button,
+.refundList input[type=submit] {
     margin: 0;
-    padding: 5px 10px;
-    background: #2b2929;
-    color: white;
-    font-size: 1rem;
+    padding: 6px 10px;
+    background-color: #2b2929;
+    font: 16px 'ProximaNovaThin';
     border: none;
-    transition: color .3s ease-out;
+    color: #f4f4f4;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
-
-.searchButton:hover {
-    color: #faa71a;
+.searchButton:hover,
+.users button:hover,
+.users form>input[type=submit]:hover,
+.refundList button:hover,
+.refundList input[type=submit]:hover {
+  background-color: #928e8e;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.youAdmin {
+    font-size: 3rem;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 30px 0;
+}
+.users>li>div>div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 40px;
+}
+.users>li>div>div:last-child>div {
+  margin: 0 auto;
+}
+.users>li {
+  margin-bottom: 30px;
+}
+.users p {
+  margin: 0;
+  padding: 0;
+  font: 1.2rem 'ProximaNovaRegular';
+}
+.users button {
+  margin: 3px;
+  display: block;
+}
+.users img {
+  min-width: 150px;
+  min-height: 150px;
+  width: 100%;
+  height: 100%;
+  padding: 20px 0;
+}
+.users form {
+  padding-right: 40px;
+  text-align: center;
+}
+.refresh {
+  text-align: center;
+  margin: 0 auto;
+  padding-bottom: 30px;
+  font: 1.8rem 'ProximaNovaRegular';
+}
+.refresh h3 {
+  margin-bottom: 10px;
+}
+.refresh>div {
+  margin-top: 30px;
+  text-align: left;
+  font: 1.5rem 'ProximaNovaRegular';
+}
+.refundList p {
+  margin: 0;
+  padding: 3px;
+  font: 1rem 'ProximaNovaThin';
+}
+.refundList li {
+  padding-bottom: 40px;
+}
+.comission {
+  text-align: center;
 }

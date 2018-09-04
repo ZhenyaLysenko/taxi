@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './Admin.css';
-import profilestyle from "../Profile/Profile.css";
+import profilestyle from '../Profile/Profile.css';
 import Header from '../Header/Header';
 import AdminUserList from './AdminUserList/AdminUserList';
 import AdminRefundList from './AdminRefundList/AdminRefundList';
@@ -38,7 +38,7 @@ class Profile extends Component {
     renderComissionTool() {
         const rootid = '1eb67299-3eea-400e-a72c-0ef7c1e3246d';
         if (this.props.userData.user.id === rootid) {
-            return <div className={`${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'comission' }) }}>Manage comission</div>
+            return <div className={this.state.show === 'comission' ? `${profilestyle.active} + ${profilestyle.profileToolItem}` : `${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'comission' }) }}>Manage comission</div>
         }
         return null;
     }
@@ -50,12 +50,10 @@ class Profile extends Component {
                         <Header></Header>
                         <div className={`${profilestyle.profileContainer}`}>
                             <div className={`${profilestyle.profileToolbar}`}>
-                                <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
-                                    <div className={`${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
-                                    <div className={`${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'userlist' }) }}>Manage users</div>
-                                    <div className={`${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'refundlist' }) }}>Manage requests</div>
-                                    {this.renderComissionTool()}
-                                </div>
+                                <div className={this.state.show === 'main' ? `${profilestyle.active} + ${profilestyle.profileToolItem}` : `${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
+                                <div className={this.state.show === 'userlist' ? `${profilestyle.active} + ${profilestyle.profileToolItem}` : `${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'userlist' }) }}>Manage users</div>
+                                <div className={this.state.show === 'refundlist' ? `${profilestyle.active} + ${profilestyle.profileToolItem}` : `${profilestyle.profileToolItem}`} onClick={() => { this.setState({ show: 'refundlist' }) }}>Manage requests</div>
+                                {this.renderComissionTool()}
                             </div>
                             {this.renderMain()}
                         </div>
@@ -66,7 +64,7 @@ class Profile extends Component {
                     <div>
                         <Header></Header>
                         <div className={`${profilestyle.profileContainer}`}>
-                            <div className={`${profilestyle.profileMain}`}>
+                            <div className={`${style.youAdmin}`}>
                                 You are not admin
                             </div>
                         </div>
@@ -79,7 +77,9 @@ class Profile extends Component {
 }
 
 const Main = (props) => {
-    return <div className={`${profilestyle.profileMain}`}>'This is admin panel'</div>;
+    return <div className={`${profilestyle.profileMain}`}>
+            <div className={`${style.youAdmin}`}>'This is admin panel'</div>
+        </div>;
 }
 
 // Check props type
