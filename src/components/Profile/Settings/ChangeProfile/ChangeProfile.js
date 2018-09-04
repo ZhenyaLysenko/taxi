@@ -124,7 +124,7 @@ class ChangeProfile extends Component {
                                 <input className={style.signInInput} type='text' placeholder="New password" required onChange={(e) => { this.setState({ newPassword: e.target.value }) }} />
                             </div>
                         </div>
-                        <button className={style.signInInputSubmit} onClick={this.confirmChange.bind(this)}>SUBMIT</button>
+                        <button className={style.signInInputSubmit} onClick={this.confirmChange.bind(this)}>S U B M I T</button>
                     </div>
                 </div>
             );

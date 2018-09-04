@@ -107,7 +107,52 @@
 .refreshBtn > img:hover {
     animation: refreshanim .3s ease-out;
 }
-
+.balanceInput{
+    height: 40px;
+    border: 1px solid black;
+}
+.ethericon{
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+}
+.balanseshop{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.balanseshopform{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.balanceButton {
+    border: none;
+    background: none;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-size: 1.4rem;
+    padding: 8px 56px;
+    text-decoration: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    margin: 15px;
+  }
+  .balanceButton:hover {
+    background-color: #2b2929;
+    color: #fff;
+    transition: 0.5s;
+    cursor: pointer;
+  }
+  .balanseform{
+    font-family: 'ProximaNovaThin';
+    font-size: 130%;
+  }
 @media only screen and (max-width: 1140px) {
     .profileToolbar {
         border-left: none;

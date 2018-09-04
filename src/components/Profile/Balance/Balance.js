@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
+import style from '../Profile.css';
+import etherIMG from '../../../assets/ether.png';
 
 import { connect } from 'react-redux';
 
@@ -65,18 +67,23 @@ class Balance extends Component {
     render() {
         if (this.props.balance) {
             return (
-                <div>
+                <div className={style.balanseform}>
+                    <div className={style.balanseshop}>
+                        <div><img className={style.ethericon} src={etherIMG} /></div>
+                        <div><h1><strong>Financial Information</strong></h1></div>
+                    </div>
                     {this.renderUpdateInfo()}
-                    <div>
-                        <span>Your Ethereum Balance:</span> {this.renderEthbalance()}
+                    <div className={style.balanseshop}>
+                        <span>Your Ethereum Balance: </span> {this.renderEthbalance()}
                     </div>
-                    <div>
-                        <span>Your TaxiCoin Balance</span> {this.renderTaxiBalance()}
+                    <div className={style.balanseshop}>
+                        <span>Your TaxiCoin Balance: </span> {this.renderTaxiBalance()}
                     </div>
-                    <form onSubmit={(e) => { e.preventDefault() }}>
                         <h3>Deposit to TaxiCoin</h3>
-                        <input type="number" placeholder="Your deposit" onChange={(e) => {this.setState({deposit: e.target.value})}}/>
-                        <input type="submit" value="Submit" onClick={() => {this.props.deposit(this.state.deposit)}}/>
+                    <form className={style.balanseshopform} onSubmit={(e) => { e.preventDefault() }}>
+                        
+                        <input type="number" className={style.balanceInput} placeholder="Your deposit" onChange={(e) => {this.setState({deposit: e.target.value})}}/>
+                        <input type="submit" className={style.balanceButton} value="Submit" onClick={() => {this.props.deposit(this.state.deposit)}}/>
                     </form>
                 </div>
             );
