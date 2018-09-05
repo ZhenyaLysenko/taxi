@@ -64,7 +64,7 @@ class ChangeVeh extends Component {
                         <input className={style.signInInput} type='text' placeholder="Color" required onChange={(e) => { this.setState({ color: e.target.value }) }} />
                     </div>
                     <div className={style.docSubmit}>
-                        <button className={style.signInInputSubmit} onClick={this.uploadVeh.bind(this)}>SUBMIT</button>
+                        <button className={style.button} onClick={this.uploadVeh.bind(this)}>SUBMIT</button>
                     </div>
                 </div>
             );

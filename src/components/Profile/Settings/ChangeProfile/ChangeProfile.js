@@ -88,21 +88,20 @@ class ChangeProfile extends Component {
         if (this.props.userData.user) {
             return (
                 <div>
-                    <div onClick={this.formVisibility.bind(this)}>
-                    </div>
-                    {this.formVisibility()}
-                    <div className={style.showForm} hidden={false} >
+                    <div className={style.showForm} >
                         <div className={style.changePhoto}>
                             <div className={style.docPhoto}>
                                 <h1> Add your Photo</h1>
-                                <div className={profilestyle.profilePhoto}>
+                                <div className={style.profilePhotoPreload}>
                                     <img src={(this.state.newphotourl) ? this.state.newphotourl : userdefault} alt='photo' />
                                 </div>
                                 <div className={style.docPhotoInput}>
                                     <input type='file' accept='image/*' onChange={(e) => { this.chooseNewPhoto(e) }} />
                                     <label>Choose</label><input type='text' value={this.state.fileName} placeholder='File' readOnly />
                                 </div>
-                                <button className={style.button} onClick={this.uploadNewPhoto.bind(this)}>SUBMIT</button>
+                                <div className={style.docSubmit}>
+                                    <button className={style.button} onClick={this.uploadNewPhoto.bind(this)}>SUBMIT</button>
+                                </div>
                             </div>
                         </div>
                         <h1>Name</h1>
@@ -131,7 +130,9 @@ class ChangeProfile extends Component {
                                 <input className={style.signInInput} type='text' placeholder="New password" required onChange={(e) => { this.setState({ newPassword: e.target.value }) }} />
                             </div>
                         </div>
-                        <button className={style.signInInputSubmit} onClick={this.confirmChange.bind(this)}>SUBMIT</button>
+                        <div className={style.docSubmit}>
+                            <button className={style.button} onClick={this.confirmChange.bind(this)}>SUBMIT</button>
+                        </div>
                     </div>
                 </div>
             );

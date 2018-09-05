@@ -1,12 +1,17 @@
 
 .resHeading {
+  padding: 0;
+  padding-left: 72px;
   display: flex;
   border-bottom: 2px solid #dedede;
+  align-self:  stretch;
 }
 
 .resHeading > h1 {
+  overflow: hidden;
   margin: 0;
   padding: 0;
+  text-align: center;
   flex-grow: 1;
   color: #2b2929;
   margin: 0;
@@ -32,6 +37,12 @@
   display: flex;
   align-items: center;
 }
+.resListMain {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  padding: 20px;
+}
 
 .resItemInfoEmail {
   overflow: hidden;
@@ -52,5 +63,15 @@
   text-align: left;
   color: #2b2929;
   font-size: 1rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .resHeading {
+    padding-left: 0;
+    flex-flow: column nowrap;
+  }
+  .refreshContainer {
+    align-self: flex-end;
+  }
 }
 

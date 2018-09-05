@@ -49,7 +49,7 @@ class Statistic extends Component {
             return (
                 <div className={stylemain.main}>
                     <div className={resstyle.resHeading}>
-                        <h1>Statistic</h1>
+                        <h1>STATISTIC</h1>
                         <div className={resstyle.refreshContainer}>
                             <div className={profilestyle.refreshBtn} onClick={this.refresh.bind(this)}>
                                 <img src={refreshsvg} alt='refresh' />

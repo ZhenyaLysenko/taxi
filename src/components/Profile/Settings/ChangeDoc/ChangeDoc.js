@@ -87,7 +87,7 @@ class ChangeDoc extends Component {
                         </div>
                     </div>
                     <div className={style.docSubmit}>
-                        <button className={style.signInInputSubmit} onClick={this.uploadDoc.bind(this)}>SUBMIT</button>
+                        <button className={style.button} onClick={this.uploadDoc.bind(this)}>SUBMIT</button>
                     </div>
                 </div>
             );

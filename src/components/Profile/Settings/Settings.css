@@ -5,6 +5,7 @@
   margin: 0;
   padding: 0;
 }
+
 .SettingsToolbar{
     flex: 1 0 25%;
     padding: 20px 20px 0px 20px;
@@ -60,13 +61,14 @@
 .changePhoto {
   display: flex;
   justify-content: flex-start;
-  align-content: center;
+  align-content: stretch;
   align-items: center;
   margin-bottom: 30px;
 }
 .showForm, .changeDoc, .vehForm {
   max-width: 80%;
   margin: 0 auto;
+  margin-bottom: 20px;
 }
 .signInInput {
    display: block;
@@ -75,6 +77,7 @@
    color: #2b2929;
    padding: 5px 20px;
    padding-left: 10px;
+   margin-top: 5px;
    outline: none;
    box-sizing: border-box;
 }
@@ -122,46 +125,18 @@
   margin-top: 20px;
 }
 
-
-@media only screen and (max-width: 700px) {
-  .SettingsToolItem{
-      padding: 5px;
-      font-size: 1.1rem;
-  }
-  .changePhoto {
-    display: block;
-  }
-  .pfotoinput + label {
-    margin-left: 0;
-  }
-  .docForm h1:first-child, .changePhoto h1:first-child {
-    margin-bottom: 10px;
-  }
-}
-@media only screen and (max-width: 500px) {
-    .SettingsToolbar {
-        flex-flow: column nowrap;
-        align-items: stretch;
-    }
-    .SettingsToolItem{
-        padding: 5px 10px;
-        font-size: 1.8rem;
-    }
-    .active {
-      border: 5px solid #faa71a;
-    }
-}
-
 .docContainer {
   display: flex;
   flex-flow: column nowrap;
   align-content: center;
   margin: 0 20px;
+  margin-bottom: 20px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .docPhoto {
+  flex-grow: 1;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -189,6 +164,27 @@
   min-height: 200px;
   min-width: 300px;
   width: 300px;
+  height: auto;
+}
+
+.profilePhotoPreload {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.profilePhotoPreload > img {
+  position: absolute;
+  margin: auto;
+  min-height: 200px;
+  min-width: 200px;
+  width: 200px;
   height: auto;
 }
 
@@ -327,4 +323,42 @@
   display: flex;
   flex-flow: column nowrap;
   align-self: center;
+}
+
+@media only screen and (max-width: 700px) {
+  .SettingsToolItem{
+      padding: 5px;
+      font-size: 1.1rem;
+  }
+  .changePhoto {
+    display: block;
+  }
+  .pfotoinput + label {
+    margin-left: 0;
+  }
+  .docForm h1:first-child, .changePhoto h1:first-child {
+    margin-bottom: 10px;
+  }
+}
+@media only screen and (max-width: 500px) {
+    .SettingsToolbar {
+        flex-flow: column nowrap;
+        align-items: stretch;
+    }
+    .SettingsToolItem{
+        padding: 5px 10px;
+        font-size: 1.8rem;
+    }
+    .active {
+      border: 5px solid #faa71a;
+    }
+    .docMainPhoto {
+      width: 70px;
+      height: 70px;
+    }
+    .docMainPhoto > img {
+      width: 70px;
+      min-height: 70px;
+      min-width: 70px;
+    }
 }

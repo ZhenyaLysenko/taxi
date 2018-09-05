@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import style from './Profile.css';
 import Header from '../Header/Header';
 import Loading from '../Loading/Loading';
+import Alert from '../Alert/Alert';
 import ProfileMain from './ProfileMain/ProfileMain';
 import Settings from './Settings/Settings';
 import Documents from './Documents/Documents';

@@ -1,6 +1,11 @@
 .main {
   width: 100%;
-  text-align: center;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+.mainprof{
+  text-align: left
 }
 .main h3 {
   font-size: 1.6rem;
@@ -9,12 +14,10 @@
   color: #2b2929;
   border-bottom: 2px solid #dedede;
   margin: 0;
+  width: 100%;
   padding: 15px 0;
   letter-spacing: 4px;
   text-align: center;
-}
-.main > div {
-  padding: 20px;
 }
 .main span {
   font-family: 'ProximaNovaRegular';

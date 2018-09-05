@@ -83,7 +83,7 @@ class ResponseList extends Component {
             return (
                 <div className={stylemain.main}>
                     <div className={style.resHeading}>
-                        <h1>Responses list</h1>
+                        <h1>RESPONSES</h1>
                         <div className={style.refreshContainer}>
                             <div className={profilestyle.refreshBtn} onClick={this.refresh.bind(this)}>
                                 <img src={refreshsvg} alt='refresh' />

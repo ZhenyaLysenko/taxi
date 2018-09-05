@@ -39,8 +39,8 @@ class Documents extends Component {
         }
         if (this.props.docData.doc) {
             return (
-                <div className="container">
-                    <h1 className={style.documents__h1}>Documents</h1>
+                <div className={style.main}>
+                    <h1 className={style.heading}>DOCUMENTS</h1>
                     <div className={style.docPhoto}>
                         {this.renderPhoto()}
                     </div>
@@ -51,7 +51,7 @@ class Documents extends Component {
         }
         if (this.props.docData.errordoc) {
             return (
-                <div className="container">
+                <div className={style.main}>
                     {/* <Alert global={true} error={this.props.docData.errordoc} click={this.props.clearErrors} /> */}
                     <Alert local={true} message='Data dont load' click={this.props.getDoc} />
                 </div>
