@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './Statistic.css';
-import Loading from '../../Loading/Loading';
+import resstyle from '../ResponseList/ResponseList.css';
+import stylemain from '../ProfileMain/ProfileMain.css';
+import profilestyle from '../Profile.css';
+import refreshsvg from '../../../assets/refresh.svg';
 import Alert from '../../Alert/Alert';
 import LazyLoad from '../../LazyLoad/LazyLoad';
 
 import { connect } from 'react-redux';
 
-import { getStatistic } from '../../../actions/stataction';
+import { getStatistic, statClear } from '../../../actions/stataction';
 
 class Statistic extends Component {
     constructor(props) {
@@ -19,6 +22,10 @@ class Statistic extends Component {
         // if (!this.props.statData.stat) {
             this.props.getStatistic();
         //}
+    }
+    refresh() {
+        this.props.statClear();
+        this.props.getStatistic();
     }
     renderList() {
         return this.props.statData.stat.map((item, key) => {
@@ -40,12 +47,19 @@ class Statistic extends Component {
         }
         if (this.props.statData.stat) {
             return (
-                <div>
-                    <h1 className={style.text_align_center}>Statistic</h1>
-                    <ul>
+                <div className={stylemain.main}>
+                    <div className={resstyle.resHeading}>
+                        <h1>Statistic</h1>
+                        <div className={resstyle.refreshContainer}>
+                            <div className={profilestyle.refreshBtn} onClick={this.refresh.bind(this)}>
+                                <img src={refreshsvg} alt='refresh' />
+                            </div>
+                        </div>
+                    </div>
+                    <div className={resstyle.resListMain}>
                         {this.renderList()}
-                    </ul>
-                    {this.renderLazyLoad()}
+                        {this.renderLazyLoad()}
+                    </div>
                 </div>
             );
         }
@@ -61,10 +75,11 @@ Statistic.propTypes = {
 
 const mapStateToProps = state => ({
     statData: state.statData,
-})
+});
 
 const mapDispatchtoProps = dispatch => ({
-    getStatistic: () => { dispatch(getStatistic()) }
-})
+    getStatistic: () => { dispatch(getStatistic()) },
+    statClear: () => { dispatch(statClear())}
+});
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Statistic);

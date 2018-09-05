@@ -87,31 +87,31 @@ class Profile extends Component {
             return (
                 <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
                     <Link to='/admin'><div className={`${style.profileToolItem}`}>Admin Panel</div></Link>
-                    <div className={this.state.show === 'main' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}><img src={homeIMG} /> <div><strong>Main</strong></div></div>
-                    <div className={this.state.show === 'response' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}><img src={pointIMG} /> <div><strong>Your responses</strong></div></div>
-                    <div className={this.state.show === 'settings' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}><img src={settingsIMG} /> <div><strong>Settings</strong></div></div>
+                    <div className={this.state.show === 'main' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}><img src={homeIMG} /> <div><strong>Main</strong></div></div>
+                    <div className={this.state.show === 'response' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}><img src={pointIMG} /> <div><strong>Your responses</strong></div></div>
+                    <div className={this.state.show === 'settings' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}><img src={settingsIMG} /> <div><strong>Settings</strong></div></div>
                 </div>
             );
         }
         if (this.props.userData.user.role === 'customer') {
             return (
                 <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
-                    <div className={this.state.show === 'main' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}><img src={homeIMG} /> <div><strong>Main</strong></div></div>
-                    <div className={this.state.show === 'statistic' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}><img src={listIMG} /> <div><strong>Statistic</strong></div></div>
-                    <div className={this.state.show === 'response' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}><img src={pointIMG} /> <div><strong>Your responses</strong></div></div>
-                    <div className={this.state.show === 'settings' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}><img src={settingsIMG} /> <div><strong>Settings</strong></div></div>
+                    <div className={this.state.show === 'main' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}><img src={homeIMG} /> <div><strong>Main</strong></div></div>
+                    <div className={this.state.show === 'statistic' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}><img src={listIMG} /> <div><strong>Statistic</strong></div></div>
+                    <div className={this.state.show === 'response' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}><img src={pointIMG} /> <div><strong>Your responses</strong></div></div>
+                    <div className={this.state.show === 'settings' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}><img src={settingsIMG} /> <div><strong>Settings</strong></div></div>
                 </div>
             );
         }
         if (this.props.userData.user.role === 'driver') {
             return (
                 <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
-                    <div className={this.state.show === 'main' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}><img src={homeIMG} /> <div><strong>Main</strong></div></div>
-                    <div className={this.state.show === 'documents' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}><img src={licenseIMG} /> <div><strong>Documents</strong></div></div>
-                    <div className={this.state.show === 'vehicle' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}><img src={autoIMG} /><div><strong> Vehicle</strong></div></div>
-                    <div className={this.state.show === 'statistic' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}><img src={listIMG} /> <div><strong>Statistic</strong></div></div>
-                    <div className={this.state.show === 'response' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}><img src={pointIMG} /> <div><strong>Your responses</strong></div></div>
-                    <div className={this.state.show === 'settings' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}><img src={settingsIMG} /> <div><strong>Settings</strong></div></div>
+                    <div className={this.state.show === 'main' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}><img src={homeIMG} /> <div><strong>Main</strong></div></div>
+                    <div className={this.state.show === 'documents' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}><img src={licenseIMG} /> <div><strong>Documents</strong></div></div>
+                    <div className={this.state.show === 'vehicle' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}><img src={autoIMG} /><div><strong> Vehicle</strong></div></div>
+                    <div className={this.state.show === 'statistic' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}><img src={listIMG} /> <div><strong>Statistic</strong></div></div>
+                    <div className={this.state.show === 'response' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}><img src={pointIMG} /> <div><strong>Your responses</strong></div></div>
+                    <div className={this.state.show === 'settings' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}><img src={settingsIMG} /> <div><strong>Settings</strong></div></div>
                 </div>
             );
         }

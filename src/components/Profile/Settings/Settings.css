@@ -167,6 +167,10 @@
   align-items: center;
 }
 
+.docPhoto > button {
+  margin-top: 15px;
+}
+
 .docPhotoPreload {
   width: 300px;
   height: 200px;
@@ -317,4 +321,10 @@
 
 .docSubmit > button {
   max-width: 150px;
+}
+
+.vehMain {
+  display: flex;
+  flex-flow: column nowrap;
+  align-self: center;
 }

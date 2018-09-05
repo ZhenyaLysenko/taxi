@@ -1,23 +1,56 @@
-.refresh {
-  border: none;
-  background: none;
-  background-color: #2b2929;
-  color: #fff;
+
+.resHeading {
+  display: flex;
+  border-bottom: 2px solid #dedede;
+}
+
+.resHeading > h1 {
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  color: #2b2929;
+  margin: 0;
+  padding: 15px 0;
+  letter-spacing: 4px;
+}
+
+.refreshContainer > div {
+  margin: 15px;
+}
+
+.resItem {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+.resItemInfo {
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.resItemInfoEmail {
+  overflow: hidden;
+  text-align: left;
+  margin-right: 10px;
   font-size: 1rem;
-  padding: 5px 20px;
-  text-decoration: none;
-  outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  display: block;
-  margin: 0 auto;
+  font-family: 'ProximaNovaBold';
+  color: #2b2929;
 }
-.refresh:hover {
-  background-color: #928e8e;
-  transition: 0.3s;
-  cursor: pointer;
+
+.resItemInfoTime {
+  color: #746f6f;
+  font-size: 0.8rem;
 }
-.text_align_center {
-  text-align: center;
+
+.resItemMessage {
+  font-family: 'ProximaNovaRegular';
+  text-align: left;
+  color: #2b2929;
+  font-size: 1rem;
 }
+

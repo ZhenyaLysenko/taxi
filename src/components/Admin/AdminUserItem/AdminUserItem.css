@@ -24,6 +24,7 @@
 .adminUserText > span {
     font-size: inherit;
     font-weight: bold;
+    margin-right: 5px;
     color: #faa71a;
 }
 
@@ -115,6 +116,7 @@
 
 .adminUserProfileText > span {
     display: flex;
+    margin-right: 5px;
     align-items: center;
     font-weight: bold;
     color: #faa71a;
@@ -147,7 +149,7 @@
     transition: background-color, color .3s ease-out;
 }
 
-.adminUserBtn:hover {
+.adminUserBtn:hover{
     background: #1a1a1a;
     color: #faa71a;
 }
@@ -160,7 +162,7 @@
 }
 
 .adminUserResForm > h3 {
-    margin: 5px 10px;
+    margin: 0 10px;
     font-weight: bold;
 }
 
