@@ -40,8 +40,8 @@ class Statistic extends Component {
         }
         if (this.props.statData.stat) {
             return (
-                <div>
-                    <h1 className={style.text_align_center}>Statistic</h1>
+                <div className={style.main}>
+                    <h1 className={style.heading}>STATISTIC</h1>
                     <ul>
                         {this.renderList()}
                     </ul>

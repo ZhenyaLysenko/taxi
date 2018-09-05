@@ -67,7 +67,7 @@ class ChangeDoc extends Component {
                             <input className={style.signInInput} type='text' placeholder="Year" required onChange={(e) => { this.setState({ yearTo: e.target.value }) }} />
                         </div>
                     </div>
-                    <button className={style.signInInputSubmit} onClick={this.uploadDoc.bind(this)}>SUBMIT</button>
+                    <button className={style.signInInputSubmit} onClick={this.uploadDoc.bind(this)}>S U B M I T</button>
                 </div>
             );
         }

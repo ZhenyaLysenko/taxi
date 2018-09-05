@@ -49,7 +49,9 @@ class ProfileMain extends Component {
             return (
                 <div className={style.main}>
                     <h1 className={style.heading}>PROFILE</h1>
-                    {this.renderProfile()}
+                    <div className={style.mainprof}>
+                        {this.renderProfile()}
+                    </div>
                     <Balance />
                 </div>
             );

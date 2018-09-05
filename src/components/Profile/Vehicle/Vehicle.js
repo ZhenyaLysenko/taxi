@@ -35,15 +35,17 @@ class Vehicle extends Component {
     render() {
         if (this.props.vehData.veh) {
             return (
-                <div className="container">
-                    <h1 className={style.yourCar}>Your car</h1>
+                <div className={style.main}>
+                    <h1 className={style.heading}>YOUR CAR</h1>
                     <div className={style.vehPhoto}>
                         {this.renderPhoto()}
                     </div>
-                    <h3 className={style.vehicle__h3}>Number: {this.props.vehData.veh.number}</h3>
-                    <h3 className={style.vehicle__h3}>Model: {this.props.vehData.veh.model}</h3>
-                    <h3 className={style.vehicle__h3}>Brand: {this.props.vehData.veh.brand}</h3>
-                    <h3 className={style.vehicle__h3}>Color: {this.props.vehData.veh.color}</h3>
+                    <div className={style.vehInfo}>
+                        <h3 className={style.vehicle__h3}>Number: {this.props.vehData.veh.number}</h3>
+                        <h3 className={style.vehicle__h3}>Model: {this.props.vehData.veh.model}</h3>
+                        <h3 className={style.vehicle__h3}>Brand: {this.props.vehData.veh.brand}</h3>
+                        <h3 className={style.vehicle__h3}>Color: {this.props.vehData.veh.color}</h3>
+                    </div>
                 </div>
             );
         }

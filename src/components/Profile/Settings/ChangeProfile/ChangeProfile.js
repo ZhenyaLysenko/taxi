@@ -95,7 +95,7 @@ class ChangeProfile extends Component {
                             <div>
                                 <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseNewPhoto(e)}} />
                                 <label htmlFor="pfotoloader" ><span><strong>{this.state.fileName}</strong></span></label>
-                                <button className={style.button} onClick={this.uploadNewPhoto.bind(this)}>submit</button>
+                                <button className={style.button} onClick={this.uploadNewPhoto.bind(this)}>Submit</button>
                             </div>
                         </div>
                         <h1>Name</h1>

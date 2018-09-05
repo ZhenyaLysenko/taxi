@@ -4,7 +4,7 @@ import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
 import style from '../Profile.css';
 import etherIMG from '../../../assets/ether.png';
-
+ 
 import { connect } from 'react-redux';
 
 import { getEthBalance, getTaxiBalance, depositToTaxiBalance, clearChange } from '../../../actions/ethaction';
@@ -68,16 +68,16 @@ class Balance extends Component {
         if (this.props.balance) {
             return (
                 <div className={style.balanseform}>
-                    <div className={style.balanseshop}>
+                    <div className={`${style.balanseshop} + ${style.balanseHead}`}>
                         <div><img className={style.ethericon} src={etherIMG} /></div>
                         <div><h1><strong>Financial Information</strong></h1></div>
                     </div>
                     {this.renderUpdateInfo()}
                     <div className={style.balanseshop}>
-                        <span>Your Ethereum Balance: </span> {this.renderEthbalance()}
+                        <span>Your Ethereum Balance: </span> <strong>{this.renderEthbalance()}</strong>
                     </div>
                     <div className={style.balanseshop}>
-                        <span>Your TaxiCoin Balance: </span> {this.renderTaxiBalance()}
+                        <span>Your TaxiCoin Balance: </span> <strong>{this.renderTaxiBalance()}</strong>
                     </div>
                         <h3>Deposit to TaxiCoin</h3>
                     <form className={style.balanseshopform} onSubmit={(e) => { e.preventDefault() }}>

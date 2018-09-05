@@ -49,8 +49,8 @@ class ResponseList extends Component {
         }
         if (this.props.listData.ress) {
             return (
-                <div>
-                    <h1 className={style.text_align_center}>Responses list</h1>
+                <div className={style.main}>
+                    <h1 className={style.heading}>RESPONSES LIST</h1>
                     <button className={style.refresh} onClick={this.refresh.bind(this)}>Refresh</button>
                     <ul>
                         {this.renderList()}
