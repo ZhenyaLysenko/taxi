@@ -151,3 +151,170 @@
       border: 5px solid #faa71a;
     }
 }
+
+.docContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  align-content: center;
+  margin: 0 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.docPhoto {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.docPhotoPreload {
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.docPhotoPreload > img {
+  position: absolute;
+  margin: auto;
+  min-height: 200px;
+  min-width: 300px;
+  width: 300px;
+  height: auto;
+}
+
+.docPhotoInput {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+
+.docPhotoInput > input[type=file] {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  z-index: 2;
+}
+
+.docPhotoInput > label {
+  margin: 0;
+  padding: 5px;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #2b2929;
+  transition: opacity .3s ease-out;
+}
+.docPhotoInput > input[type=text] {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  font-size: 1rem;
+  color: #2b2929;
+  max-width: 100px;
+  overflow: hidden;
+}
+
+.docPhotoInput:hover > label {
+  opacity: 0.8;
+} 
+
+.docMain {
+  margin: auto;
+  max-width: 310px;
+  display: flex;
+  flex-flow: row nowrap;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 0 0 3px 5px rgba(0, 0, 0, 0.1);
+  background: #eee9e9;
+}
+
+.docMainPhoto {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.docMainPhoto > img {
+  position: absolute;
+  margin: auto;
+  min-height: 100px;
+  min-width: 100px;
+  width: 100px;
+  height: auto;
+}
+
+.docMainSide {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+.docMainTitle {
+  font-size: 1rem;
+  color: #2b2929;
+  font-weight: bold;
+}
+
+.docInfo {
+  display: flex;
+  flex-flow: column nowrap;
+  align-content: center;
+}
+
+.docInfoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+.docInfoRow > label {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #2b2929;
+}
+
+.docInfoRow > input {
+  margin: 0 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  font-size: 1rem;
+  color: #2b2929;
+  max-width: 50px;
+  overflow: hidden;
+}
+
+.docTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2b2929;
+}
+
+.docSubmit {
+  
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.docSubmit > button {
+  max-width: 150px;
+}
