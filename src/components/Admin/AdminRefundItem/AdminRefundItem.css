@@ -64,7 +64,7 @@
 }
 
 .adminTripTimeText {
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .adminTripTimeText > span {
@@ -78,12 +78,12 @@
 }
 
 .adminTripPriceInfo {
+    font-family: 'ProximaNovaRegular';
     padding: 10px;
     border-radius: 5px;
     border: 3px solid rgba(0,0,0,0.8);
     color: rgba(0,0,0,0.8);
     font-size: 1.2rem;
-  
     margin-bottom: 10px;
 }
 
@@ -104,9 +104,9 @@
     border-radius: 5px;
     width: 32px;
     height: 32px;
-    transition: opacity .3s ease-out;
+    transition: background .3s ease-out;
 }
 
 .adminTripMapBtn > img:hover {
-    opacity: 0.8;
+    background: #faa71a;
 }

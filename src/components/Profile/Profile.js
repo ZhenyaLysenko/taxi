@@ -37,7 +37,6 @@ class Profile extends Component {
         // this.chooseNewPhoto = this.chooseNewPhoto.bind(this);
     }
     componentDidMount() {
-        console.log('Mount');
         if (!this.props.userData.user && !this.props.userData.loading) {
             // this.props.history.replace('/sign-in');
             this.props.getUser();
@@ -45,37 +44,12 @@ class Profile extends Component {
         // window.addEventListener('scroll', this.scrollToolBar);
     }
     componentDidUpdate() {
-        console.log('Update');
         if (!this.props.userData.user && !this.props.userData.loading) {
             this.props.history.replace('/sign-in');
         }
     }
     componentWillUnmount() {
         // window.removeEventListener('scroll', this.scrollToolBar);
-    }
-    scrollToolBar() {
-        // console.log('Scroll');
-        const toolbar = document.getElementById("toolbar");
-        if (toolbar) {
-            const Y = toolbar.offsetTop;
-            const WY = window.pageYOffset;
-            console.log(WY , Y);
-            if (WY > Y) {
-                console.log(true);
-                if (!toolbar.classList.contains(`${style.Toolbarfixed}`)) {
-                    toolbar.classList.add(`${style.Toolbarfixed}`);
-                    console.log('Fixed');
-                }
-            }
-
-            /* if (WY < Y) {
-                console.log(false);
-                if (toolbar.classList.contains(`${style.Toolbarfixed}`)) {
-                    toolbar.classList.remove(`${style.Toolbarfixed}`);
-                    console.log('Remove');
-                }
-            } */
-        }
     }
     renderMain() {
         switch (this.state.show) {

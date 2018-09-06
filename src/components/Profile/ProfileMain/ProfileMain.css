@@ -4,11 +4,8 @@
   flex-flow: column nowrap;
   align-items: center;
 }
-.mainprof{
-  text-align: left
-}
 .main h3 {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
 }
 .heading {
   color: #2b2929;
@@ -25,8 +22,5 @@
 @media only screen and (max-width: 500px) {
   .heading {
     position: static;
-  }
-   .main h3 {
-    text-align: center;
   }
 }

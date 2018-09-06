@@ -91,7 +91,7 @@ class ChangeProfile extends Component {
                     <div className={style.showForm} >
                         <div className={style.changePhoto}>
                             <div className={style.docPhoto}>
-                                <h1> Add your Photo</h1>
+                                <h1 className={style.docTitle}> Add your Photo</h1>
                                 <div className={style.profilePhotoPreload}>
                                     <img src={(this.state.newphotourl) ? this.state.newphotourl : userdefault} alt='photo' />
                                 </div>

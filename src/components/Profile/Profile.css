@@ -112,7 +112,16 @@
 .balanceInput{
     height: 40px;
     border: none;
-    border-bottom: 2px solid black;
+    border-bottom: 4px solid #2b2929;
+    transition: border .3s ease-out;
+}
+
+.balanceInput:hover {
+    border-bottom: 4px solid #faa71a;
+}
+
+.balanceInput:focus {
+    border-bottom: 4px solid #faa71a;
 }
 .ethericon{
     height: 40px;
@@ -146,9 +155,10 @@
     background: none;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
-    border: 2px solid #2b2929; 
-    border-radius: 10%; 
-    font-size: 1.4rem;
+    border: 2px solid #2b2929;
+    box-shadow: 0 3px 3px 2px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    font-size: 1.5rem;
     padding: 8px 56px;
     text-decoration: none;
     outline: none;
@@ -158,11 +168,11 @@
     box-sizing: border-box;
     margin: 15px;
     letter-spacing: 10%;
+    transition: background .5s ease-out, color .5s ease-out;
   }
   .balanceButton:hover {
     background-color: #2b2929;
     color: #fff;
-    transition: 0.5s;
     cursor: pointer;
   }
   .balanseform{

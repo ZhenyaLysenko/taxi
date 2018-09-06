@@ -30,13 +30,20 @@
     letter-spacing: 4px;
     text-align: center;
   }
-.documents__h1 {
-    text-align: center;
+
+.container {
+    display: flex;
+    flex-flow: row wrap;
 }
-.vehicle__h3 {
-    text-align: center;
-    font-size: 1.6rem;
+
+.containerPhoto {
+    flex-grow: 1;
 }
+.containerInfo {
+    flex-grow: 1;
+    padding: 20px;
+}
+
 @media only screen and (max-width: 500px) {
     .docPhoto {
         width: 80%;

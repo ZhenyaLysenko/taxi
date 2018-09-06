@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+.showForm h1 {
+  font-size: 1.5rem;
+}
+
 .SettingsToolbar{
     flex: 1 0 25%;
     padding: 20px 20px 0px 20px;
@@ -88,7 +92,7 @@
 .marginRight {
   margin-right: 10px;
 }
-.signInInputSubmit {
+/* .signInInputSubmit {
    width: 100%;
    margin-bottom: 30px;
    padding: 15px 10px;
@@ -106,7 +110,7 @@
   background-color: #928e8e;
   transition: 0.3s;
   cursor: pointer;
-}
+} */
 .docForm input {
   width: 65px;
 }
@@ -130,6 +134,7 @@
   flex-flow: column nowrap;
   align-content: center;
   margin: 0 20px;
+  padding-bottom: 20px;
   margin-bottom: 20px;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
