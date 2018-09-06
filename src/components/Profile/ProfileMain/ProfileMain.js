@@ -26,7 +26,6 @@ class ProfileMain extends Component {
         if (this.props.userData.user.role === 'driver') {
             return (
                 <div>
-                    
                     <h3>Email: {this.props.userData.user.email}</h3>
                     <h3>Phone: {this.props.userData.user.phoneNumber}</h3>
                     <h3>City: {this.props.userData.user.city}</h3>

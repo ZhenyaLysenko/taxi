@@ -41,9 +41,9 @@ class AdminComissionTool extends Component {
         return (
             <div className={`${profilestyle.profileMain}`}>
                 {this.renderAlert()}
-                <h3 className={profilemainstyle.heading}>Comission Tool</h3>
+                <h3 className={profilemainstyle.heading}>Commission Tool</h3>
                 <form className={style.comissionForm} onSubmit={(e) => { e.preventDefault() }}>
-                    <h3>Set new comission value</h3>
+                    <h3>Set new commission value</h3>
                     <input type="number" onChange={(e) => { this.setState({ comisson: e.target.value }) }} />
                     <input type="submit" onClick={this.submit.bind(this)} value="Submit" onClick={this.submit.bind(this)} />
                 </form>

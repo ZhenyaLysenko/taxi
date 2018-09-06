@@ -6,13 +6,15 @@
 }
 
 .refundSolve {
-    width: 48px;
+    display: flex;
+    align-items: center;
+    width: 32px;
     padding: 5px;
 }
 
 .refundSolve > img {
-    width: 48px;
-    height: 48px;
+    max-width: 48px;
+    max-height: 48px;
 }
 
 .refundContent {
@@ -31,19 +33,22 @@
     padding: 5px 10px;
     display: flex;
     align-items: flex-end;
+    flex-grow: 1;
 }
 
 .refundMessage {
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 5px;
-    margin: 10px 0;
-}
-
-.refundMessage > p {
+    font-family: 'ProximaNovaRegular';
+    text-align: left;
+    color: #2b2929;
     font-size: 1rem;
-    color: #555555;
-    padding: 10px;
-    margin: 0;
+}
+.refundMessageContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    padding: 20px;
+    margin: 10px 0;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 
 .adminTripInfo {

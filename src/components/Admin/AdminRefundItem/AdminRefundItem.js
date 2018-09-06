@@ -126,18 +126,18 @@ class AdminRefundItem extends Component {
             return (
                 <div className={userstyle.adminUserContainer}>
                     <div className={style.refundMain}>
-                        <div className={style.refundSolve}>
-                            {this.renderIsSolved()}
-                        </div>
                         <div className={style.refundContent}>
                             <div className={style.refundTopInfo}>
+                                <div className={style.refundSolve}>
+                                    {this.renderIsSolved()}
+                                </div>
                                 <div className={style.refundTime}>
                                     {(new Date(this.props.data.creationTime)).toDateString()}
                                 </div>
                                 {this.renderSettnigsBtn()}
                             </div>
-                            <div className={style.refundMessage}>
-                                <p>{this.props.data.message}</p>
+                            <div className={style.refundMessageContainer}>
+                                <div className={style.refundMessage}>{this.props.data.message}</div>
                             </div>
                         </div>
                     </div>

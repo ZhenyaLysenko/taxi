@@ -65,7 +65,6 @@ class Settings extends Component {
                     </div>
                     {this.renderUpdateInfo()}
                     {this.renderMain()}
-
                 </div>
             );
         }

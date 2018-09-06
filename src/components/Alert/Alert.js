@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import style from './Alert.css';
 
 import close from '../../assets/close.png';
+import refreshsvg from '../../assets/refresh.svg';
 
 class Alert extends Component {
     constructor(props) {
@@ -63,8 +64,8 @@ class Alert extends Component {
                                 {this.props.message}
                             </div>
                         </div>
-                        <div className={style.alertlocalclose} onClick={this.props.click}>
-                            Try again
+                        <div className={style.refreshBtn} onClick={this.props.click}>
+                            <img src={refreshsvg} alt='Try again'/>
                         </div>
                     </div>
                 );
