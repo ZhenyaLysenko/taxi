@@ -55,7 +55,7 @@ class App extends Component {
         <div>
           {this.renderLoading()}
           <GlobalView />
-          <Switch>
+          <Switch handler={App}>
             <Route exact path="/" component={Home} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/ride" component={Ride} />
@@ -71,7 +71,7 @@ class App extends Component {
             <Route exact path='/profile' component={Profile} />
             <Route exact path='/reset-password' component={ResetPassword} />
             <Route exact path='/admin' component={Admin} />
-            <Route path='*' component={NotFound} />
+            <Route component={NotFound} />
           </Switch>
         </div>
       </Router>);
