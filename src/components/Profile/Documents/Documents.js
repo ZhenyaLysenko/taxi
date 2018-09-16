@@ -17,7 +17,6 @@ class Documents extends Component {
     }
     componentDidMount() {
         if (!this.props.docData.doc) {
-            console.log(this.props.docData.doc);
             this.props.getDoc();
         }
     }
@@ -34,24 +33,32 @@ class Documents extends Component {
         return <img src={defaultphoto} alt='photo' />;
     }
     render() {
+        // console.log(this.props.docData.doc);
         if (this.props.docData.loaddoc) {
             return <Loading />
         }
         if (this.props.docData.doc) {
             return (
-                <div className="container">
-                    <h1 className={style.documents__h1}>Documents</h1>
-                    <div className={style.docPhoto}>
-                        {this.renderPhoto()}
+                <div className={style.main}>
+                    <h1 className={style.heading}>DOCUMENTS</h1>
+                    <div className={style.container}>
+                        <div className={style.containerPhoto}>
+                            <div className={style.docPhoto}>
+                                {this.renderPhoto()}
+                            </div>
+                        </div>
+                        <div className={style.containerInfo}>
+                            <h3>Licensed from: {(new Date(this.props.docData.doc.licensedFrom)).toDateString()}</h3>
+                            <h3>Licensed to: {(new Date(this.props.docData.doc.licensedTo)).toDateString()}</h3>
+                            <h3>Approved: {(this.props.docData.doc.isApproved) ? 'Yes' : 'No'}</h3>
+                        </div>
                     </div>
-                    <p className={style.vehicle__h3}>Licensed from: {this.props.docData.doc.licensedFrom}</p>
-                    <p className={style.vehicle__h3}>Licensed to: {this.props.docData.doc.licensedTo}</p>
                 </div>
             );
         }
         if (this.props.docData.errordoc) {
             return (
-                <div className="container">
+                <div className={style.main}>
                     {/* <Alert global={true} error={this.props.docData.errordoc} click={this.props.clearErrors} /> */}
                     <Alert local={true} message='Data dont load' click={this.props.getDoc} />
                 </div>

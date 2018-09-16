@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './ProfileMain.css';
 import Alert from '../../Alert/Alert';
+import Balance from '../Balance/Balance';
 
 import { connect } from 'react-redux';
 import { getUser } from '../../../actions/authaction';
@@ -16,16 +17,15 @@ class ProfileMain extends Component {
         if (this.props.userData.user.role === 'admin') {
             return (
                 <div>
-                    <h3><span>Name:</span> {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
-                    <h3><span>Status:</span> {this.props.userData.user.role}</h3>
-                    <h3><span>Aprroved:</span> {(this.props.userData.user.isApproved) ? 'Yes' : 'No'}</h3>
+                    <h3>Name: {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
+                    <h3>Status: {this.props.userData.user.role}</h3>
+                    <h3>Aprroved: {(this.props.userData.user.isApproved) ? 'Yes' : 'No'}</h3>
                 </div>
             )
         }
         if (this.props.userData.user.role === 'driver') {
             return (
                 <div>
-                    <h3>Name: {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
                     <h3>Email: {this.props.userData.user.email}</h3>
                     <h3>Phone: {this.props.userData.user.phoneNumber}</h3>
                     <h3>City: {this.props.userData.user.city}</h3>
@@ -35,7 +35,6 @@ class ProfileMain extends Component {
         if (this.props.userData.user.role === 'customer') {
             return (
                 <div>
-                    <h3>Name: {this.props.userData.user.firstName} {this.props.userData.user.lastName}</h3>
                     <h3>Email: {this.props.userData.user.email}</h3>
                     <h3>Phone: {this.props.userData.user.phoneNumber}</h3>
                 </div>
@@ -49,6 +48,7 @@ class ProfileMain extends Component {
                 <div className={style.main}>
                     <h1 className={style.heading}>PROFILE</h1>
                     {this.renderProfile()}
+                    <Balance />
                 </div>
             );
         }

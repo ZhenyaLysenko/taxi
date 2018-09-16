@@ -11,11 +11,8 @@
     border: 1px solid #2b2929;
     border-radius: 0%;
     padding: 5px;
-    padding-left: 10px;
-    font-size: 16px;
-    color: rgba(0,0,0,0,0.2);
-    outline: inherit;
-    box-sizing: border-box;
+    font-size: 1rem;
+    color: #2b2929;
 }
 .searchInput::placeholder {
   font-family: 'ProximaNovaThin';
@@ -110,4 +107,53 @@
 }
 .comission {
   text-align: center;
+}
+
+.searchButton:hover {
+    color: #faa71a;
+}
+
+.checkboxContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+.checkboxContainer > input[type=checkbox] {
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: #fa3c1a;
+    border-radius: 3px;
+    transition: background .3s ease-out;
+}
+
+.checkboxContainer > input[type=checkbox]:checked {
+    background: #1afa3f;
+}
+
+.checkboxContainer > label {
+    background: white;
+    position: absolute;
+    top: -50px;
+    right: -10px;
+    opacity: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 2;
+    padding: 5px;
+    transition: opacity .3s ease-out;
+}
+
+.checkboxContainer:hover > label {
+    opacity: 1;
+}
+
+@media only screen and (max-width: 500px) {
+    .searchInput {
+        width: 75%;
+    }
 }

@@ -40,18 +40,31 @@ class Settings extends Component {
             default: return null;
         }
     }
+    renderDocSettings() {
+        if (this.props.userData.user.role === 'driver') {
+            return (
+                <div className={this.state.show === 'adddoc' ? `${style.active} + ${style.SettingsToolItem}` : `${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'adddoc' }) }}><strong>Add documents</strong></div>
+            );
+        }
+    }
+    renderVehSettings() {
+        if (this.props.userData.user.role === 'driver') {
+            return (
+                <div className={this.state.show === 'addvehicle' ? `${style.active} + ${style.SettingsToolItem}` : `${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'addvehicle' }) }}><strong>Add vehicle</strong></div>
+            );
+        }
+    }
     render() {
         if (this.props.userData.user) {
             return (
                 <div>
                     <div className={`${style.SettingsToolbar}`}>
                         <div className={this.state.show === 'ch-prof' ? `${style.active} + ${style.SettingsToolItem}` : `${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'ch-prof' }) }}><strong>Profile Changes</strong></div>
-                        <div className={this.state.show === 'adddoc' ? `${style.active} + ${style.SettingsToolItem}` : `${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'adddoc' }) }}><strong>Add documents</strong></div>
-                        <div className={this.state.show === 'addvehicle' ? `${style.active} + ${style.SettingsToolItem}` : `${style.SettingsToolItem}`} onClick={() => { this.setState({ show: 'addvehicle' }) }}><strong>Add vehicle</strong></div>
+                        {this.renderDocSettings()}
+                        {this.renderVehSettings()}
                     </div>
                     {this.renderUpdateInfo()}
                     {this.renderMain()}
-
                 </div>
             );
         }

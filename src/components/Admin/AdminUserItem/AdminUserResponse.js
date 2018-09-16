@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Loading from '../../Loading/Loading';
 import Alert from '../../Alert/Alert';
 
-import profilestyle from '../../Profile/ProfileMain/ProfileMain.css';
+import style from './AdminUserItem.css';
 
 import { connect } from 'react-redux';
 import { sendResponse } from "../../../actions/adminaction";
@@ -28,11 +28,14 @@ class AdminUserProfile extends Component {
     render() {
         if (this.props.data) {
             return (
-                <form onSubmit={(e) => { e.preventDefault() }}>
-                    <h3>Please write your response</h3>
-                    <input type="text" value={this.state.message} onChange={(e) => { this.setState({ message: e.target.value }) }} />
-                    <input type="submit" value="Submit" onClick={this.submit.bind(this)} />
-                </form>
+                <div className={`${style.adminUserContent}`}>
+                    <form className={style.adminUserResForm} onSubmit={(e) => { e.preventDefault() }}>
+                        <h3>Please write you response</h3>
+                        <textarea type="text" value={this.state.message} placeholder="You message"
+                            onChange={(e) => { this.setState({ message: e.target.value }) }} />
+                        <input type="submit" value="Submit" onClick={this.submit.bind(this)} />
+                    </form>
+                </div>
             );
         }
         return null;

@@ -4,14 +4,23 @@ import PropTypes from 'prop-types';
 import style from './Profile.css';
 import Header from '../Header/Header';
 import Loading from '../Loading/Loading';
+import Alert from '../Alert/Alert';
 import ProfileMain from './ProfileMain/ProfileMain';
 import Settings from './Settings/Settings';
 import Documents from './Documents/Documents';
 import Vehicle from './Vehicle/Vehicle';
 import Statistic from './Statistic/Statistic';
 import ResponseList from './ResponseList/ResponseList';
+import homeIMG from '../../assets/home.png';
+import autoIMG from '../../assets/auto.png';
+import licenseIMG from '../../assets/lis.png';
+import listIMG from '../../assets/list.png';
+import pointIMG from '../../assets/point.png';
+import settingsIMG from '../../assets/Settings.png';
+import adminIMG from '../../assets/admin.svg';
 
 import { connect } from 'react-redux';
+import { getUser } from '../../actions/authaction';
 
 import defaultphoto from '../../assets/default-user.png';
 
@@ -29,7 +38,8 @@ class Profile extends Component {
     }
     componentDidMount() {
         if (!this.props.userData.user && !this.props.userData.loading) {
-            this.props.history.replace('/sign-in');
+            // this.props.history.replace('/sign-in');
+            this.props.getUser();
         }
         // window.addEventListener('scroll', this.scrollToolBar);
     }
@@ -40,30 +50,6 @@ class Profile extends Component {
     }
     componentWillUnmount() {
         // window.removeEventListener('scroll', this.scrollToolBar);
-    }
-    scrollToolBar() {
-        // console.log('Scroll');
-        const toolbar = document.getElementById("toolbar");
-        if (toolbar) {
-            const Y = toolbar.offsetTop;
-            const WY = window.pageYOffset;
-            console.log(WY , Y);
-            if (WY > Y) {
-                console.log(true);
-                if (!toolbar.classList.contains(`${style.Toolbarfixed}`)) {
-                    toolbar.classList.add(`${style.Toolbarfixed}`);
-                    console.log('Fixed');
-                }
-            }
-
-            /* if (WY < Y) {
-                console.log(false);
-                if (toolbar.classList.contains(`${style.Toolbarfixed}`)) {
-                    toolbar.classList.remove(`${style.Toolbarfixed}`);
-                    console.log('Remove');
-                }
-            } */
-        }
     }
     renderMain() {
         switch (this.state.show) {
@@ -79,33 +65,33 @@ class Profile extends Component {
     renderToolBar() {
         if (this.props.userData.user.role === 'admin') {
             return (
-                <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
-                    <Link to='/admin'><div className={`${style.profileToolItem}`}>Admin Panel</div></Link>
-                    <div className={this.state.show === 'main' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
-                    <div className={this.state.show === 'response' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}>Your responses</div>
-                    <div className={this.state.show === 'settings' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
+                <div className={`${style.profileToolbarMain}`}>
+                    <Link to='/admin'><div className={`${style.profileToolItem}`}><img src={adminIMG} /><div><strong>Admin Panel</strong></div></div></Link>
+                    <div className={this.state.show === 'main' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}><img src={homeIMG} /> <div><strong>Main</strong></div></div>
+                    <div className={this.state.show === 'response' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}><img src={pointIMG} /> <div><strong>Your responses</strong></div></div>
+                    <div className={this.state.show === 'settings' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}><img src={settingsIMG} /> <div><strong>Settings</strong></div></div>
                 </div>
             );
         }
         if (this.props.userData.user.role === 'customer') {
             return (
-                <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
-                    <div className={this.state.show === 'main' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
-                    <div className={this.state.show === 'statistic' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
-                    <div className={this.state.show === 'response' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}>Your responses</div>
-                    <div className={this.state.show === 'settings' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
+                <div className={`${style.profileToolbarMain}`}>
+                    <div className={this.state.show === 'main' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}><img src={homeIMG} /> <div><strong>Main</strong></div></div>
+                    <div className={this.state.show === 'statistic' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}><img src={listIMG} /> <div><strong>Statistic</strong></div></div>
+                    <div className={this.state.show === 'response' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}><img src={pointIMG} /> <div><strong>Your responses</strong></div></div>
+                    <div className={this.state.show === 'settings' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}><img src={settingsIMG} /> <div><strong>Settings</strong></div></div>
                 </div>
             );
         }
         if (this.props.userData.user.role === 'driver') {
             return (
-                <div className={`${style.profileToolbarMain} ${style.Toolbarfixed}`}>
-                    <div className={this.state.show === 'main' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}>Main</div>
-                    <div className={this.state.show === 'documents' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}>Documents</div>
-                    <div className={this.state.show === 'vehicle' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}>Vehicle</div>
-                    <div className={this.state.show === 'statistic' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}>Statistic</div>
-                    <div className={this.state.show === 'response' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}>Your responses</div>
-                    <div className={this.state.show === 'settings' ? `${style.active} + ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}>Settings</div>
+                <div className={`${style.profileToolbarMain}`}>
+                    <div className={this.state.show === 'main' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'main' }) }}><img src={homeIMG} /> <div><strong>Main</strong></div></div>
+                    <div className={this.state.show === 'documents' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'documents' }) }}><img src={licenseIMG} /> <div><strong>Documents</strong></div></div>
+                    <div className={this.state.show === 'vehicle' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'vehicle' }) }}><img src={autoIMG} /><div><strong> Vehicle</strong></div></div>
+                    <div className={this.state.show === 'statistic' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'statistic' }) }}><img src={listIMG} /> <div><strong>Statistic</strong></div></div>
+                    <div className={this.state.show === 'response' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'response' }) }}><img src={pointIMG} /> <div><strong>Your responses</strong></div></div>
+                    <div className={this.state.show === 'settings' ? `${style.active} ${style.profileToolItem}` : `${style.profileToolItem}`} onClick={() => { this.setState({ show: 'settings' }) }}><img src={settingsIMG} /> <div><strong>Settings</strong></div></div>
                 </div>
             );
         }
@@ -152,7 +138,8 @@ class Profile extends Component {
 ProfileMain.propTypes = {
     userData: PropTypes.object,
     photoData: PropTypes.object,
-    getPhoto: PropTypes.func
+    getPhoto: PropTypes.func,
+    getUser: PropTypes.func
 }
 
 const mapStateToProps = state => ({
@@ -162,11 +149,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchtoProps = dispatch => ({
     getPhoto: () => { dispatch(getPhoto()) },
+    getUser: () => { dispatch(getUser())}
 })
-// Check props type
-Profile.propTypes = {
-    history: PropTypes.object,
-    userData: PropTypes.object,
-}
 
 export default connect(mapStateToProps, mapDispatchtoProps)(Profile);

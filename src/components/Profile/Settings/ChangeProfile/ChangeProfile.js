@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from '../Settings.css';
+import profilestyle from '../../Profile.css';
 // import Loading from '../../Loading/Loading';
 import Alert from '../../../Alert/Alert';
 
 import { connect } from 'react-redux';
 import { uploadPhoto } from '../../../../actions/authaction';
 import { changeProfile } from '../../../../actions/chengeaction';
+import userdefault from '../../../../assets/default-user.png';
 
 class ChangeProfile extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             firstName: "",
@@ -26,9 +28,8 @@ class ChangeProfile extends Component {
 
         }
     }
-    formVisibility(){
+    formVisibility() {
         console.log('ok');
-
     }
     chooseNewPhoto(e) {
         const file = e.target.files[0];
@@ -38,8 +39,9 @@ class ChangeProfile extends Component {
                 this.setState({ newphotourl: reader.result });
             };
             reader.readAsDataURL(file);
-            this.setState({ newphoto: file,
-                            fileName: file.name,
+            this.setState({
+                newphoto: file,
+                fileName: file.name,
             });
         }
     }
@@ -82,20 +84,24 @@ class ChangeProfile extends Component {
         }
 
     }
-    render(){
-        if (this.props.userData.user){
+    render() {
+        if (this.props.userData.user) {
             return (
                 <div>
-                    <div onClick={this.formVisibility.bind(this)}>
-                    </div>
-                    {this.formVisibility()}
-                    <div className={style.showForm}  hidden = {false} >
+                    <div className={style.showForm} >
                         <div className={style.changePhoto}>
-                            <h1>Photo</h1>
-                            <div>
-                                <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseNewPhoto(e)}} />
-                                <label htmlFor="pfotoloader" ><span><strong>{this.state.fileName}</strong></span></label>
-                                <button className={style.button} onClick={this.uploadNewPhoto.bind(this)}>submit</button>
+                            <div className={style.docPhoto}>
+                                <h1 className={style.docTitle}> Add your Photo</h1>
+                                <div className={style.profilePhotoPreload}>
+                                    <img src={(this.state.newphotourl) ? this.state.newphotourl : userdefault} alt='photo' />
+                                </div>
+                                <div className={style.docPhotoInput}>
+                                    <input type='file' accept='image/*' onChange={(e) => { this.chooseNewPhoto(e) }} />
+                                    <label>Choose</label><input type='text' value={this.state.fileName} placeholder='File' readOnly />
+                                </div>
+                                <div className={style.docSubmit}>
+                                    <button className={style.button} onClick={this.uploadNewPhoto.bind(this)}>SUBMIT</button>
+                                </div>
                             </div>
                         </div>
                         <h1>Name</h1>
@@ -124,7 +130,9 @@ class ChangeProfile extends Component {
                                 <input className={style.signInInput} type='text' placeholder="New password" required onChange={(e) => { this.setState({ newPassword: e.target.value }) }} />
                             </div>
                         </div>
-                        <button className={style.signInInputSubmit} onClick={this.confirmChange.bind(this)}>SUBMIT</button>
+                        <div className={style.docSubmit}>
+                            <button className={style.button} onClick={this.confirmChange.bind(this)}>SUBMIT</button>
+                        </div>
                     </div>
                 </div>
             );

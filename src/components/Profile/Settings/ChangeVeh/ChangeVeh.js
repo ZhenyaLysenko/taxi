@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from '../Settings.css';
+import vehicledefault from '../../../../assets/default-vehicle.png';
 
 import { connect } from 'react-redux';
 
@@ -44,17 +45,27 @@ class ChangeVeh extends Component {
     render() {
         if (this.props.userData.user) {
             return (
-                <div className={style.vehForm}>
-                    <div className={style.changePhoto}>
-                        <h1>Add Vehicle</h1>
-                        <input type='file' id="pfotoloader" className={style.pfotoinput} accept='image/*' onChange={(e) => { this.chooseVehPhoto(e) }} />
-                        <label htmlFor="pfotoloader"><span><strong>{this.state.fileName}</strong></span></label>
+                <div className={style.docContainer}>
+                    <h2 className={style.docTitle}>Add your vehicle photo</h2>
+                    <div className={style.docPhoto}>
+                        <div className={style.docPhotoPreload}>
+                            <img src={(this.state.vehphotourl) ? this.state.vehphotourl : vehicledefault} alt='photo' />
+                        </div>
+                        <div className={style.docPhotoInput}>
+                            <input type='file' accept='image/*' onChange={(e) => { this.chooseVehPhoto(e) }} />
+                            <label>Choose</label><input type='text' value={this.state.fileName} placeholder='File' readOnly />
+                        </div>
                     </div>
-                        <input className={style.signInInput} type='text' placeholder="Number" required onChange={(e) => { this.setState({ number: e.target.value }) }} />
+                    <h2 className={style.docTitle}>Add your vehicle info</h2>
+                    <div className={style.vehMain}>
+                    <input className={style.signInInput} type='text' placeholder="Number" required onChange={(e) => { this.setState({ number: e.target.value }) }} />
                         <input className={style.signInInput} type='text' placeholder="Model" required onChange={(e) => { this.setState({ model: e.target.value }) }} />
                         <input className={style.signInInput} type='text' placeholder="Brand" required onChange={(e) => { this.setState({ brand: e.target.value }) }} />
                         <input className={style.signInInput} type='text' placeholder="Color" required onChange={(e) => { this.setState({ color: e.target.value }) }} />
-                    <button className={style.signInInputSubmit} onClick={this.uploadVeh.bind(this)}>SUBMIT</button>
+                    </div>
+                    <div className={style.docSubmit}>
+                        <button className={style.button} onClick={this.uploadVeh.bind(this)}>SUBMIT</button>
+                    </div>
                 </div>
             );
         }

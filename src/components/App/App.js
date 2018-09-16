@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { Router, Route, Link } from 'react-router-dom';
-import './App.css';
+import { Router, Route, Link, Switch } from 'react-router-dom';
+// import style from './App.css';
 import Home from '../Home/Home';
 import Ride from '../Ride/Ride';
 import Drive from '../Drive/Drive';
@@ -19,6 +19,9 @@ import Profile from '../Profile/Profile';
 import ResetPassword from '../ResetPassword/ResetPassword';
 import Loading from '../Loading/Loading';
 import Admin from '../Admin/Admin';
+import NotFound from '../NotFound/NotFound';
+
+import GlobalView from '../GlobalView/GlobalView';
 
 // test connect redux to react
 import { connect } from 'react-redux';
@@ -30,7 +33,10 @@ class App extends Component {
   componentDidMount() {
     // we can call mapped actionCreator from props
     this.props.runTest('Test is passed');
-    this.props.getUser();
+    if (!this.props.userData.user && !this.props.userData.loading) {
+      // this.props.history.replace('/sign-in');
+      this.props.getUser();
+    }
   }
   renderLoading() {
     if (this.props.userData.loading || this.props.changeData.loading) {
@@ -42,29 +48,33 @@ class App extends Component {
     // if redux connect and data mapped we can use it in props
     // react reload component when props is changed
     if (this.props.testData) {
-      console.log(this.props.testData.message);
+      // console.log(this.props.testData.message);
     }
     return (
-    <Router history={this.props.history}>
-      <div>
-        {this.renderLoading()}
-        <Route exact path="/" component={Home} />
-        <Route exact path="/home" component={Home} />
-        <Route path="/ride" component={Ride} />
-        <Route path="/drive" component={Drive} />
-        <Route path="/sign-in" component={SignIn} />
-        <Route path="/sign-in-rider" component={SignInRider} />
-        <Route path="/sign-in-driver" component={SignInDriver} />
-        <Route path="/sign-in-admin" component={SignInAdmin}/>
-        <Route path="/sign-up-rider" component={SignUpRider} />
-        <Route path="/sign-up-driver" component={SignUpDriver} />
-        <Route path="/forgot-password" component={ForgotPassword} />
-        <Route path="/policy" component={Policy} />
-        <Route path='/profile' component={Profile} />
-        <Route path='/reset-password' component={ResetPassword} />
-        <Route path='/admin' component={Admin}/>
-      </div>
-    </Router>);
+      <Router history={this.props.history}>
+        <div>
+          {this.renderLoading()}
+          <GlobalView />
+          <Switch handler={App}>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/home" component={Home} />
+            <Route exact path="/ride" component={Ride} />
+            <Route exact path="/drive" component={Drive} />
+            <Route exact path="/sign-in" component={SignIn} />
+            <Route exact path="/sign-in-rider" component={SignInRider} />
+            <Route exact path="/sign-in-driver" component={SignInDriver} />
+            <Route exact path="/sign-in-admin" component={SignInAdmin} />
+            <Route exact path="/sign-up-rider" component={SignUpRider} />
+            <Route exact path="/sign-up-driver" component={SignUpDriver} />
+            <Route exact path="/forgot-password" component={ForgotPassword} />
+            <Route exact path="/policy" component={Policy} />
+            <Route exact path='/profile' component={Profile} />
+            <Route exact path='/reset-password' component={ResetPassword} />
+            <Route exact path='/admin' component={Admin} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </Router>);
   }
 }
 

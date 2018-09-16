@@ -34,7 +34,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js',
-    // publicPath: '/'
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -80,6 +80,7 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     contentBase: './dist',
+    publicPath: '/',
     port: (this.mode === 'production') ? (process.env.PORT || 8080) : 8081,
   },
   plugins: [htmlWebpackPlugin, miniCssExtractPlugin],

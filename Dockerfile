@@ -5,7 +5,7 @@ ENV NPM_CONFIG_LOGLEVEL warn
 ARG app_env
 ENV APP_ENV $app_env
 
-WORKDIR .
+WORKDIR /
 
 COPY . .
 RUN npm install
