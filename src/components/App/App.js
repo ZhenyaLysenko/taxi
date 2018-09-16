@@ -48,7 +48,7 @@ class App extends Component {
     // if redux connect and data mapped we can use it in props
     // react reload component when props is changed
     if (this.props.testData) {
-      console.log(this.props.testData.message);
+      // console.log(this.props.testData.message);
     }
     return (
       <Router history={this.props.history}>

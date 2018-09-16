@@ -44,7 +44,7 @@ class AdminComissionTool extends Component {
                 <h3 className={profilemainstyle.heading}>Commission Tool</h3>
                 <form className={style.comissionForm} onSubmit={(e) => { e.preventDefault() }}>
                     <h3>Set new commission value</h3>
-                    <input type="number" onChange={(e) => { this.setState({ comisson: e.target.value }) }} />
+                    <input type="number" onChange={(e) => { this.setState({ comisson: e.target.value }) }} min="0"/>
                     <input type="submit" onClick={this.submit.bind(this)} value="Submit" onClick={this.submit.bind(this)} />
                 </form>
             </div>

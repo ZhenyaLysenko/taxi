@@ -205,7 +205,30 @@ export const getRefundList = (issolved) => (dispatch, getState) => {
 
 // Not done yet
 export const deleteAdmin = (id) => (dispatch, getState) => {
-    console.log('Delete admin dont done yet');
+    if (id) {
+        const token = checkAndGetToken(dispatch, getState);
+        if (token) {
+            dispatch(changeStart());
+            fetch(`${apiurl}/api/admins/root/removeadmin/${id}`, {
+                method: 'DELETE',
+                headers: new Headers({
+                    'Authorization': `Bearer ${token.auth_token}`
+                })
+            })
+            .then(res => {
+                if (res.status === 200 || res.status === 201 || res.status === 204) {
+                    dispatch(changeSuccess('Admin was removed'));
+                } else if (res.status === 401) {
+                    dispatch(refreshToken(token, deleteAdmin, id));
+                } else {
+                    throw new Error(res.statusText);
+                }
+            })
+            .catch(error => dispatch(changeFailed(error.message)));
+        } else {
+            dispatch(logout());
+        }
+    }
 }
 
 export const deleteUser = (id) => (dispatch, getState) => {

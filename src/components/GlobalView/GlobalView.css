@@ -83,6 +83,18 @@
     transition: opacity .3s ease-out;
 }
 
+.routelabelContainer {
+    position: relative;
+    top: -8px;
+    left: -8px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid #333333;
+    background: #5e6fca;
+    z-index: 2;
+}
+
 @media only screen and (max-width: 500px) {
     .globalContent {
         margin-top: 40px;

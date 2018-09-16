@@ -110,6 +110,18 @@ class AdminUserProfile extends Component {
                 .catch(error => this.setState({ usererror: error.message, loaduser: false }))
         }
     }
+    getRoles(roles = []) {
+        if (Array.isArray(roles)) {
+            return roles.reduce((prev, curr) => {
+                let buff = '';
+                buff += (curr === 'driver_access') ? 'Driver ' : '';
+                buff += (curr === 'admin_access') ? 'Admin ': '';
+                buff += (curr === 'customer_access') ? 'Customer ' : '';
+                return prev + buff;
+            },'');
+        }
+        return 'No roles array';
+    }
     renderProfilePhoto() {
         if (this.state.photourl) {
             return <img src={this.state.photourl} alt='photo' onClick={() => { this.props.openImage(this.state.photourl) }} />
@@ -147,7 +159,7 @@ class AdminUserProfile extends Component {
                     </div>
                     <div className={style.adminUserProfileInfo}>
                         <div className={style.adminUserProfileText}><span>ID:</span> <p>{this.state.userdata.id}</p></div>
-                        <div className={style.adminUserProfileText}><span>Role:</span> <p>{this.state.userdata.roles[0]}</p></div>
+                        <div className={style.adminUserProfileText}><span>Role:</span> <p>{this.getRoles(this.state.userdata.roles)}</p></div>
                         <div className={style.adminUserProfileText}><span>Name:</span> <p>{this.state.userdata.firstName} {this.state.userdata.lastName}</p></div>
                         <div className={style.adminUserProfileText}><span>Email:</span> <p>{this.state.userdata.email}</p></div>
                         <div className={style.adminUserProfileText}><span>EmailConfirmed:</span> <p>{(this.state.userdata.emailConfirmed) ? 'Yes' : 'No'}</p></div>

@@ -12,6 +12,7 @@ import closesvg from '../../../assets/close.svg';
 
 import { connect } from 'react-redux';
 import { setUserToAdmin, deleteAdmin, deleteUser } from '../../../actions/adminaction';
+import { rootid } from '../../../appconfig';
 
 class AdminUserItem extends Component {
     constructor(props) {
@@ -40,7 +41,6 @@ class AdminUserItem extends Component {
             Show profile</button>
     } */
     renderToAdminBtn() {
-        const rootid = '1eb67299-3eea-400e-a72c-0ef7c1e3246d';
         if (this.props.userData.user.id === rootid && this.props.data.id !== rootid) {
             if (!this.props.data.roles.includes('admin_access')) {
                 return <button className={style.settingsMainItem}
@@ -48,7 +48,7 @@ class AdminUserItem extends Component {
                     Up to admin</button>
             } else {
                 return <button className={style.settingsMainItem}
-                    onClick={() => { this.props.deleteAdmin(this.props.data.id) }}>
+                    onClick={() => { this.props.deleteAdmin(this.props.data.ids.adminId) }}>
                     Remove from admin</button>
             }
             return null;

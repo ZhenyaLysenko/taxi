@@ -33,6 +33,16 @@ class GlobalView extends Component {
             );
         })
     }
+    renderRoute(route) {
+        if (route) {
+            if (Array.isArray(route)) {
+                return route.map((item, key) => {
+                    return <RouteLabel key={key} lat={item.latitude} lng={item.longitude} />
+                })
+            }
+        }
+        return null;
+    }
     renderGoogleMap() {
         return (
             <div className={style.globalContentMap}>
@@ -41,6 +51,7 @@ class GlobalView extends Component {
                     defaultCenter={this.props.global.data.center}
                     defaultZoom={this.state.zoom}>
                     {this.renderLabels(this.props.global.data.labels)}
+                    {this.renderRoute(this.props.global.route)}
                 </GoogleMapReact>
             </div>
         );
@@ -73,20 +84,22 @@ class GlobalView extends Component {
     }
 }
 
-class Label extends Component {
-    constructor(props) {
-        super(props);
-    }
-    render() {
-        return (
-            <div key={this.props.key} className={style.labelContainer}>
-                <div className={style.labelText}>
-                    {this.props.text}
-                </div>
-                <img src={drivelabel} alt='label' />
+const Label = (props) => {
+    return (
+        <div key={props.key} className={style.labelContainer}>
+            <div className={style.labelText}>
+                {props.text}
             </div>
-        );
-    }
+            <img src={drivelabel} alt='label' />
+        </div>
+    );
+}
+
+const RouteLabel = (props) => {
+    return (
+        <div key={props.key} className={style.routelabelContainer}>
+        </div>
+    );
 }
 
 

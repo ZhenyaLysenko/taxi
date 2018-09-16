@@ -33,7 +33,7 @@ class Documents extends Component {
         return <img src={defaultphoto} alt='photo' />;
     }
     render() {
-        console.log(this.props.docData.doc);
+        // console.log(this.props.docData.doc);
         if (this.props.docData.loaddoc) {
             return <Loading />
         }

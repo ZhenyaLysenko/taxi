@@ -81,7 +81,7 @@ class Balance extends Component {
                     </div>
                     <h3>Deposit to TaxiCoin</h3>
                     <form className={style.balanseshopform} onSubmit={(e) => { e.preventDefault() }}>
-                        <input type="number" className={style.balanceInput} placeholder="Your deposit" onChange={(e) => {this.setState({deposit: e.target.value})}}/>
+                        <input type="number" className={style.balanceInput} placeholder="Your deposit" onChange={(e) => {this.setState({deposit: e.target.value})}} min="0"/>
                         <input type="submit" className={style.balanceButton} value="Submit" onClick={() => {this.props.deposit(this.state.deposit)}}/>
                     </form>
                 </div>

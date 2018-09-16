@@ -7,6 +7,7 @@ import profilestyle from '../Profile.css';
 import refreshsvg from '../../../assets/refresh.svg';
 import Alert from '../../Alert/Alert';
 import LazyLoad from '../../LazyLoad/LazyLoad';
+import StatisticItem from './StatisticItem';
 
 import { connect } from 'react-redux';
 
@@ -29,7 +30,7 @@ class Statistic extends Component {
     }
     renderList() {
         return this.props.statData.stat.map((item, key) => {
-            return <li key={key}><h1>Item</h1></li>;
+            return <StatisticItem trip={item} key={key}/>;
         });
     }
     renderLazyLoad() {
