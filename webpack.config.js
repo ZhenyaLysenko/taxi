@@ -1,26 +1,33 @@
 var path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const DefinePlugin = require('webpack').DefinePlugin;
 
-const devMode = process.env.NODE_ENV !== 'production';
-
+console.log("SERVER_PORT env variable set as", process.env.SERVER_PORT);
+console.log("PORT env variable set as", process.env.PORT);
+// Need to bind a global variables to code
+const definePlugin = new DefinePlugin({
+  SERVER_PORT: (process.env.SERVER_PORT) ? JSON.stringify(process.env.SERVER_PORT) : undefined,
+});
+// Need to build HTML file
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
   template: path.resolve(__dirname, 'public', 'index.html'),
   filename: "index.html",
   favicon: path.resolve(__dirname, 'public', 'favicon.ico')
 });
-
+// Need to build style.css file
 const miniCssExtractPlugin = new MiniCssExtractPlugin({
-  filename: devMode ? '[name].css' : '[name].[hash].css',
+  filename: 'style.css',
   // chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
 });
 
+// Need to optimisation (I dont know work this or not :) )
 const uglifyJsPlugin = new UglifyJsPlugin({
   cache: true,
   parallel: true,
   uglifyOptions: {
-    compress: false,
+    compress: true,
     ecma: 6,
     mangle: true
   },
@@ -48,15 +55,16 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
+          (this.mode === 'development') ? 'style-loader' : MiniCssExtractPlugin.loader,
+          /* {
             loader: (this.mode === 'development') ? "style-loader" : MiniCssExtractPlugin.loader
-          },
+          }, */
           {
             loader: "css-loader",
             options: {
               modules: true,
               importLoaders: 1,
-              localIdentName: "[name]_[local]_[hash:base64]",
+              // localIdentName: "[name]_[local]_[hash:base64]",
               sourceMap: true,
               minimize: true
             }
@@ -81,9 +89,10 @@ module.exports = {
     historyApiFallback: true,
     contentBase: './dist',
     publicPath: '/',
-    port: (this.mode === 'production') ? (process.env.PORT || 8080) : 8081,
+    port: (process.env.PORT) ? process.env.PORT :
+          (this.mode === 'production') ? 8080 : 8081,
   },
-  plugins: [htmlWebpackPlugin, miniCssExtractPlugin],
+  plugins: [htmlWebpackPlugin, miniCssExtractPlugin, definePlugin],
   optimization: {
     minimizer: [uglifyJsPlugin],
     splitChunks: {
